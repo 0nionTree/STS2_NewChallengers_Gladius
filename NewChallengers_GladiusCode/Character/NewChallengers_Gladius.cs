@@ -16,20 +16,19 @@ public class NewChallengers_Gladius : PlaceholderCharacterModel
     public static readonly Color Color = new("ffffff");
 
     public override Color NameColor => Color;
-    public override CharacterGender Gender => CharacterGender.Neutral;
+    public override CharacterGender Gender => CharacterGender.Masculine;
     public override int StartingHp => 70;
     
     public override IEnumerable<CardModel> StartingDeck => [
-        ModelDb.Card<StrikeIronclad>(),
-        ModelDb.Card<StrikeIronclad>(),
-        ModelDb.Card<StrikeIronclad>(),
-        ModelDb.Card<StrikeIronclad>(),
-        ModelDb.Card<StrikeIronclad>(),
+        ModelDb.Card<StrikeGladius>(),
+        ModelDb.Card<StrikeGladius>(),
+        ModelDb.Card<StrikeGladius>(),
+        ModelDb.Card<StrikeGladius>(),
         ModelDb.Card<DefendIronclad>(),
         ModelDb.Card<DefendIronclad>(),
         ModelDb.Card<DefendIronclad>(),
         ModelDb.Card<DefendIronclad>(),
-        ModelDb.Card<DefendIronclad>()
+        ModelDb.Card<SwordGirding>()
     ];
 
     public override IReadOnlyList<RelicModel> StartingRelics =>

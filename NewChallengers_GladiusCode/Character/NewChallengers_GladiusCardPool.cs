@@ -1,6 +1,8 @@
 ﻿using BaseLib.Abstracts;
 using NewChallengers_Gladius.NewChallengers_GladiusCode.Extensions;
 using Godot;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Cards;
 
 namespace NewChallengers_Gladius.NewChallengers_GladiusCode.Character;
 
@@ -31,4 +33,20 @@ public class NewChallengers_GladiusCardPool : CustomCardPoolModel
     public override Color DeckEntryCardColor => new("ffffff");
     
     public override bool IsColorless => false;
+
+    protected override CardModel[] GenerateAllCards()
+    {
+        return new CardModel[]
+        {
+            ModelDb.Card<BeamCell>(),
+            ModelDb.Card<AllForOne>(),
+            ModelDb.Card<Barrage>(),
+            ModelDb.Card<AdaptiveStrike>(),
+            ModelDb.Card<BiasedCognition>(),
+            ModelDb.Card<BootSequence>(),
+            ModelDb.Card<MegaCrit.Sts2.Core.Models.Cards.Buffer>(),
+            ModelDb.Card<BoostAway>(),
+            ModelDb.Card<SwordGirding>()
+        };
+    }
 }
