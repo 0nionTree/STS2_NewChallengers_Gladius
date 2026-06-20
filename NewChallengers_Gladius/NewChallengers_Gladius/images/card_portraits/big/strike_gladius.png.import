@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3itbjv3w5mky"
-path="res://.godot/imported/strikegladius.png-db2bd75fdc47bd85cb875a93a76c1923.ctex"
+uid="uid://6eqnsdg3oi5f"
+path="res://.godot/imported/strike_gladius.png-d8206b717c565b1be8b3202a5dd121a4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://NewChallengers_Gladius/images/card_portraits/big/strikegladius.png"
-dest_files=["res://.godot/imported/strikegladius.png-db2bd75fdc47bd85cb875a93a76c1923.ctex"]
+source_file="res://NewChallengers_Gladius/images/card_portraits/big/strike_gladius.png"
+dest_files=["res://.godot/imported/strike_gladius.png-d8206b717c565b1be8b3202a5dd121a4.ctex"]
 
 [params]
 

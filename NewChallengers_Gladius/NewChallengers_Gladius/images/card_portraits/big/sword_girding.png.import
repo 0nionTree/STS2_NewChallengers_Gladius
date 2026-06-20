@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0lt4m408fg4w"
-path="res://.godot/imported/strikegladius.png-1072baef4b9c872d28e6479e762cca13.ctex"
+uid="uid://c6r5f602bul5x"
+path="res://.godot/imported/sword_girding.png-dcad95782707b83ed55685929e4085d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://NewChallengers_Gladius/images/card_portraits/strikegladius.png"
-dest_files=["res://.godot/imported/strikegladius.png-1072baef4b9c872d28e6479e762cca13.ctex"]
+source_file="res://NewChallengers_Gladius/images/card_portraits/big/sword_girding.png"
+dest_files=["res://.godot/imported/sword_girding.png-dcad95782707b83ed55685929e4085d5.ctex"]
 
 [params]
 

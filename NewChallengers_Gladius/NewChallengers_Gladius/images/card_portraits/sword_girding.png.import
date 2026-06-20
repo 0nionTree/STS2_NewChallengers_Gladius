@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgr5ejna73382"
-path="res://.godot/imported/hornedsword.png-e0a551a9cd77e67439a33dec73a2b6db.ctex"
+uid="uid://n2q7gv7g8hof"
+path="res://.godot/imported/sword_girding.png-b94531b7b1eadbd29046d0217f92c67a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://NewChallengers_Gladius/images/card_portraits/big/hornedsword.png"
-dest_files=["res://.godot/imported/hornedsword.png-e0a551a9cd77e67439a33dec73a2b6db.ctex"]
+source_file="res://NewChallengers_Gladius/images/card_portraits/sword_girding.png"
+dest_files=["res://.godot/imported/sword_girding.png-b94531b7b1eadbd29046d0217f92c67a.ctex"]
 
 [params]
 
