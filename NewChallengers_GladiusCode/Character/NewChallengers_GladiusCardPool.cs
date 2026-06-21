@@ -38,14 +38,8 @@ public class NewChallengers_GladiusCardPool : CustomCardPoolModel
     {
         return new CardModel[]
         {
-            ModelDb.Card<BeamCell>(),
-            ModelDb.Card<AllForOne>(),
-            ModelDb.Card<Barrage>(),
-            ModelDb.Card<AdaptiveStrike>(),
-            ModelDb.Card<BiasedCognition>(),
-            ModelDb.Card<BootSequence>(),
-            ModelDb.Card<MegaCrit.Sts2.Core.Models.Cards.Buffer>(),
-            ModelDb.Card<BoostAway>(),
+            ModelDb.Card<StrikeGladius>(),
+            ModelDb.Card<DefendGladius>(),
             ModelDb.Card<SwordGirding>()
         };
     }

@@ -14,8 +14,14 @@ namespace NewChallengers_Gladius.NewChallengers_GladiusCode.Cards;
 /// You can also just create the class manually; just make sure to inherit from this class.
 /// </summary>
 [Pool(typeof(NewChallengers_GladiusCardPool))]
-public abstract class NewChallengers_GladiusCard(int cost, CardType type, CardRarity rarity, TargetType target) :
-    CustomCardModel(cost, type, rarity, target)
+public abstract class NewChallengers_GladiusCard(
+    int cost,
+    CardType type,
+    CardRarity rarity,
+    TargetType target,
+    bool showInCardLibrary = true,
+    bool autoAdd = true
+) : CustomCardModel(cost, type, rarity, target, showInCardLibrary, autoAdd)
 {
     //Image size:
     //Normal art: 1000x760 (Using 500x380 should also work, it will simply be scaled.)
@@ -29,4 +35,5 @@ public abstract class NewChallengers_GladiusCard(int cost, CardType type, CardRa
     //Uses card_portraits/card_name.png as image path. These should be smaller images.
     public override string PortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
+    
 }

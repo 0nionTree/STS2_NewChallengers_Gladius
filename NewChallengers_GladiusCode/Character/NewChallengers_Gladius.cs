@@ -24,10 +24,10 @@ public class NewChallengers_Gladius : PlaceholderCharacterModel
         ModelDb.Card<StrikeGladius>(),
         ModelDb.Card<StrikeGladius>(),
         ModelDb.Card<StrikeGladius>(),
-        ModelDb.Card<DefendIronclad>(),
-        ModelDb.Card<DefendIronclad>(),
-        ModelDb.Card<DefendIronclad>(),
-        ModelDb.Card<DefendIronclad>(),
+        ModelDb.Card<DefendGladius>(),
+        ModelDb.Card<DefendGladius>(),
+        ModelDb.Card<DefendGladius>(),
+        ModelDb.Card<DefendGladius>(),
         ModelDb.Card<SwordGirding>()
     ];
 

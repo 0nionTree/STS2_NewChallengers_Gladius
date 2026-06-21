@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using Godot;
 
 namespace NewChallengers_Gladius;
 
@@ -18,6 +19,9 @@ public class HornedSword() : NewChallengers_GladiusCard(1, CardType.Attack, Card
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(8m, DamageProps.card), new DynamicVar("Increase", 2m)];
+
+	public override IEnumerable<CardKeyword> CanonicalKeywords =>
+		[CardKeyword.Exhaust];
 
     private decimal ExtraDamageFromPlays
 	{

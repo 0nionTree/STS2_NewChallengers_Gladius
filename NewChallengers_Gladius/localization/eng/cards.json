@@ -1,6 +1,8 @@
 {
     "NEWCHALLENGERS_GLADIUS-STRIKE_GLADIUS.description": "Deal {Damage:diff()} damage.",
     "NEWCHALLENGERS_GLADIUS-STRIKE_GLADIUS.title": "Strike",
+    "NEWCHALLENGERS_GLADIUS-DEFEND_GLADIUS.description": "Gain {Block:diff()} Block",
+    "NEWCHALLENGERS_GLADIUS-DEFEND_GLADIUS.title": "Defend",
     "NEWCHALLENGERS_GLADIUS-SWORD_GIRDING.description": "Add a [gold]HornedSword[/gold] into your [gold]Hand[/gold].",
     "NEWCHALLENGERS_GLADIUS-SWORD_GIRDING.title": "SwordGirding",
     "NEWCHALLENGERS_GLADIUS-HORNED_SWORD.description": "Deal {Damage:diff()} damage.\nIncrease this card's damage by {Increase:diff()} this combat.",
