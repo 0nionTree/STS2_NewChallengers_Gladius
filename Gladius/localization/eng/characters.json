@@ -1,0 +1,16 @@
+{
+  "NEWCHALLENGERS_GLADIUS-GLADIUS.aromaPrinciple": "Lore",
+  "NEWCHALLENGERS_GLADIUS-GLADIUS.banter.alive.endTurnPing": "Co-op hurry up end turn ping message",
+  "NEWCHALLENGERS_GLADIUS-GLADIUS.banter.dead.endTurnPing": "...",
+  "NEWCHALLENGERS_GLADIUS-GLADIUS.cardsModifierDescription": "__ cards will now appear in rewards and shops.",
+  "NEWCHALLENGERS_GLADIUS-GLADIUS.cardsModifierTitle": "__ Cards",
+  "NEWCHALLENGERS_GLADIUS-GLADIUS.description": "Character Selection\nScreen Description",
+  "NEWCHALLENGERS_GLADIUS-GLADIUS.eventDeathPrevention": "Co-op survival line",
+  "NEWCHALLENGERS_GLADIUS-GLADIUS.goldMonologue": "Line spoken when obtaining a large amount of gold",
+  "NEWCHALLENGERS_GLADIUS-GLADIUS.possessiveAdjective": "his/her/its",
+  "NEWCHALLENGERS_GLADIUS-GLADIUS.pronounObject": "him/her/it",
+  "NEWCHALLENGERS_GLADIUS-GLADIUS.pronounPossessive": "his/hers/its",
+  "NEWCHALLENGERS_GLADIUS-GLADIUS.pronounSubject": "he/she/it",
+  "NEWCHALLENGERS_GLADIUS-GLADIUS.title": "The CharModTest",
+  "NEWCHALLENGERS_GLADIUS-GLADIUS.titleObject": "The CharModTest"
+}

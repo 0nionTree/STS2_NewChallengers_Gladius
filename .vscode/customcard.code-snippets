@@ -4,8 +4,8 @@
     "prefix": "customcard",
     "description": "Custom Card template for STS2 mod",
     "body": [
-      "using NewChallengers_Gladius.NewChallengers_GladiusCode.Character;",
-      "using NewChallengers_Gladius.NewChallengers_GladiusCode.Cards;",
+      "using NewChallengers_Gladius.GladiusCode.Character;",
+      "using NewChallengers_Gladius.GladiusCode.Cards;",
       "using MegaCrit.Sts2.Core.Commands;",
       "using MegaCrit.Sts2.Core.Models;",
       "using MegaCrit.Sts2.Core.Localization.DynamicVars;",
