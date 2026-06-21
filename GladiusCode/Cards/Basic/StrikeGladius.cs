@@ -1,5 +1,5 @@
-using NewChallengers_Gladius.GladiusCode.Cards;
-using NewChallengers_Gladius.GladiusCode.Character;
+using Gladius.GladiusCode.Cards;
+using Gladius.GladiusCode.Character;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 
-namespace NewChallengers_Gladius;
+namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
 public class StrikeGladius() : GladiusCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)

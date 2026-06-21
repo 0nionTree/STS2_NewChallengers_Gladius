@@ -6,6 +6,6 @@ namespace Gladius.GladiusCode;
 public static class GladiusKeywords
 {
 	[CustomEnum("Materialized")]
-	[KeywordProperties(AutoKeywordPosition.After, true)]
+	[KeywordProperties(AutoKeywordPosition.Before, true)]
 	public static CardKeyword Materialized;
 }

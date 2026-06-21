@@ -1,18 +1,16 @@
-using NewChallengers_Gladius.GladiusCode.Character;
-using NewChallengers_Gladius.GladiusCode.Cards;
+using Gladius.GladiusCode.Character;
+using Gladius.GladiusCode.Cards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.HoverTips;
 
-namespace NewChallengers_Gladius;
+namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
 public class SwordGirding() : GladiusCard(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
 {
-    protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
-
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<HornedSword>()];
 

@@ -1,10 +1,10 @@
 ﻿using BaseLib.Abstracts;
-using NewChallengers_Gladius.GladiusCode.Extensions;
+using Gladius.GladiusCode.Extensions;
 using Godot;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 
-namespace NewChallengers_Gladius.GladiusCode.Character;
+namespace Gladius.GladiusCode.Character;
 
 public class GladiusCardPool : CustomCardPoolModel
 {
@@ -25,7 +25,7 @@ public class GladiusCardPool : CustomCardPoolModel
     //Alternatively, leave these values at 1 and provide a custom frame image.
     /*public override Texture2D CustomFrame(CustomCardModel card)
     {
-        //This will attempt to load NewChallengers_Gladius/images/cards/frame.png
+        //This will attempt to load Gladius/images/cards/frame.png
         return PreloadManager.Cache.GetTexture2D("cards/frame.png".ImagePath());
     }*/
 

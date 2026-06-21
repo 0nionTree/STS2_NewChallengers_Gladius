@@ -4,8 +4,8 @@
     "prefix": "customcard",
     "description": "Custom Card template for STS2 mod",
     "body": [
-      "using NewChallengers_Gladius.GladiusCode.Character;",
-      "using NewChallengers_Gladius.GladiusCode.Cards;",
+      "using Gladius.GladiusCode.Character;",
+      "using Gladius.GladiusCode.Cards;",
       "using MegaCrit.Sts2.Core.Commands;",
       "using MegaCrit.Sts2.Core.Models;",
       "using MegaCrit.Sts2.Core.Localization.DynamicVars;",
@@ -17,10 +17,10 @@
       "using MegaCrit.Sts2.Core.Models.CardPools;",
       "using Godot;",
       "",
-      "namespace NewChallengers_Gladius;",
+      "namespace Gladius;",
       "",
-      "[Pool(typeof(NewChallengers_GladiusCardPool))]",
-      "public class StrikeGladius() : NewChallengers_GladiusCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)",
+      "[Pool(typeof(GladiusCardPool))]",
+      "public class StrikeGladius() : GladiusCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)",
       "{",
       "    protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };",
       "",
@@ -81,7 +81,7 @@
     ]
   }
 }
-	// Place your NewChallengers_Gladius 작업 영역 snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// Place your Gladius 작업 영역 snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
 	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
 	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
 	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 

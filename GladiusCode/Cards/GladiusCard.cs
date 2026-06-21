@@ -1,11 +1,11 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
-using NewChallengers_Gladius.GladiusCode.Character;
-using NewChallengers_Gladius.GladiusCode.Extensions;
+using Gladius.GladiusCode.Character;
+using Gladius.GladiusCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
 
-namespace NewChallengers_Gladius.GladiusCode.Cards;
+namespace Gladius.GladiusCode.Cards;
 
 /// <summary>
 /// This is the base class for your mod's cards, which is set up to load the card's images from your mod's resources.

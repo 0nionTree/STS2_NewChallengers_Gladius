@@ -1,9 +1,9 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
-using NewChallengers_Gladius.GladiusCode.Extensions;
+using Gladius.GladiusCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Powers;
 
-namespace NewChallengers_Gladius.GladiusCode.Powers;
+namespace Gladius.GladiusCode.Powers;
 
 /// <summary>
 /// This is the base class for your mod's powers, which is set up to load the power's images from your mod's resources.
@@ -11,9 +11,9 @@ namespace NewChallengers_Gladius.GladiusCode.Powers;
 /// This will generate a class that extends this one.
 /// You can also just create the class manually; just make sure to inherit from this class.
 /// </summary>
-public abstract class NewChallengers_GladiusPower : CustomPowerModel
+public abstract class GladiusPower : CustomPowerModel
 {
-    //Loads from NewChallengers_Gladius/images/powers/your_power.png
+    //Loads from Gladius/images/powers/your_power.png
     public override string CustomPackedIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".PowerImagePath();
     public override string CustomBigIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigPowerImagePath();
 

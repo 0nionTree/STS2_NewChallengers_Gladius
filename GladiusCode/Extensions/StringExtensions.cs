@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace NewChallengers_Gladius.GladiusCode.Extensions;
+namespace Gladius.GladiusCode.Extensions;
 
 //Mostly utilities to get asset paths.
 public static class StringExtensions

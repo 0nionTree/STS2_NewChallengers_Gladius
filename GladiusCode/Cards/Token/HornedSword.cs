@@ -1,4 +1,4 @@
-using NewChallengers_Gladius.GladiusCode.Cards;
+using Gladius.GladiusCode.Cards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -6,12 +6,15 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using Gladius.GladiusCode;
 
-namespace NewChallengers_Gladius;
+namespace Gladius;
 
 [Pool(typeof(TokenCardPool))]
-public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
+public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy), IDurableCard
 {
+    int IDurableCard.Durability { get; set; } = 3;
+
 	private const string _increaseKey = "Increase";
 
 	private decimal _extraDamageFromPlays;
@@ -44,16 +47,6 @@ public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Basic, T
 		base.DynamicVars.Damage.BaseValue += base.DynamicVars["Increase"].BaseValue;
 		ExtraDamageFromPlays += base.DynamicVars["Increase"].BaseValue;
     }
-
-    protected override PileType GetResultPileTypeForCardPlay()
-	{
-		PileType resultPileTypeForCardPlay = base.GetResultPileTypeForCardPlay();
-		if (resultPileTypeForCardPlay != PileType.Discard)
-		{
-			return resultPileTypeForCardPlay;
-		}
-		return PileType.Hand;
-	}
 
     protected override void AfterDowngraded()
 	{

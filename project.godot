@@ -10,9 +10,9 @@ config_version=5
 
 [application]
 
-config/name="NewChallengers_Gladius"
+config/name="Gladius"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
-config/icon="res://NewChallengers_Gladius/mod_image.png"
+config/icon="res://Gladius/mod_image.png"
 
 [display]
 
@@ -24,7 +24,7 @@ window/stretch/aspect="expand"
 
 [dotnet]
 
-project/assembly_name="NewChallengers_Gladius"
+project/assembly_name="Gladius"
 
 [rendering]
 

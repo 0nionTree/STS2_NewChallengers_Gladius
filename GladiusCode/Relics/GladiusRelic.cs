@@ -1,10 +1,10 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
-using NewChallengers_Gladius.GladiusCode.Character;
-using NewChallengers_Gladius.GladiusCode.Extensions;
+using Gladius.GladiusCode.Character;
+using Gladius.GladiusCode.Extensions;
 
-namespace NewChallengers_Gladius.GladiusCode.Relics;
+namespace Gladius.GladiusCode.Relics;
 
 /// <summary>
 /// This is the base class for your mod's relics, which is set up to load the relic's images from your mod's resources.
@@ -15,8 +15,8 @@ namespace NewChallengers_Gladius.GladiusCode.Relics;
 /// The [Pool] annotation marks this relic as being tied to your specific character. Inheriting from this class means
 /// that your relics don't need to invidually say which pool they should be in.
 /// </summary>
-[Pool(typeof(NewChallengers_GladiusRelicPool))]
-public abstract class NewChallengers_GladiusRelic : CustomRelicModel
+[Pool(typeof(GladiusRelicPool))]
+public abstract class GladiusRelic : CustomRelicModel
 {
     public override string PackedIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".RelicImagePath();
     protected override string PackedIconOutlinePath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}_outline.png".RelicImagePath();

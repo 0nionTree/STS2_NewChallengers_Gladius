@@ -1,10 +1,10 @@
 ﻿using BaseLib.Abstracts;
-using NewChallengers_Gladius.GladiusCode.Extensions;
+using Gladius.GladiusCode.Extensions;
 using Godot;
 
-namespace NewChallengers_Gladius.GladiusCode.Character;
+namespace Gladius.GladiusCode.Character;
 
-public class NewChallengers_GladiusPotionPool : CustomPotionPoolModel
+public class GladiusPotionPool : CustomPotionPoolModel
 {
     public override Color LabOutlineColor => Gladius.Color;
     

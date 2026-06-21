@@ -1,15 +1,16 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Utils.NodeFactories;
-using Godot;
+using Gladius.GladiusCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
+using Godot;
 
-namespace NewChallengers_Gladius.GladiusCode.Character;
+namespace Gladius.GladiusCode.Character;
 
 public class Gladius : PlaceholderCharacterModel
 {
-    public const string CharacterId = "NewChallengers_Gladius";
+    public const string CharacterId = "Gladius";
     
     public static readonly Color Color = new("ffffff");
 

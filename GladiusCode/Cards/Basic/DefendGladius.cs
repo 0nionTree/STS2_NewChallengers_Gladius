@@ -1,13 +1,13 @@
-using NewChallengers_Gladius.GladiusCode.Cards;
+using Gladius.GladiusCode.Cards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
-using NewChallengers_Gladius.GladiusCode.Character;
+using Gladius.GladiusCode.Character;
 
-namespace NewChallengers_Gladius;
+namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
 public class DefendGladius() : GladiusCard(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
