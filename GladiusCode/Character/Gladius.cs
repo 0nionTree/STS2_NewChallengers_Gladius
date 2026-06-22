@@ -27,7 +27,8 @@ public class Gladius : PlaceholderCharacterModel
         ModelDb.Card<DefendGladius>(),
         ModelDb.Card<DefendGladius>(),
         ModelDb.Card<DefendGladius>(),
-        ModelDb.Card<SwordGirding>()
+        ModelDb.Card<SwordGirding>(),
+        ModelDb.Card<Reinforce>()
     ];
 
     public override IReadOnlyList<RelicModel> StartingRelics =>

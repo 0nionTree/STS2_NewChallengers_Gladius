@@ -127,9 +127,25 @@ namespace Gladius.GladiusCode.Patches
             }
         }
     }
-
     // =========================================================================
-    // [효과 2] 카드를 사용했을 때 버린 카드 더미로 갈 경우에만 패로 되돌아옴
+    // [효과 2] 카드를 '확정적으로 사용'할 때만 내구도를 1 차감합니다. (멀티플레이 안전!)
+    // =========================================================================
+    // 카드가 사용되는 핵심 래퍼 함수인 OnPlayWrapper가 시작되기 직전에 가로챕니다.
+    [HarmonyPatch(typeof(CardModel), nameof(CardModel.OnPlayWrapper))]
+    public static class DurableCardDeductPatch
+    {
+        [HarmonyPrefix]
+        public static void Prefix(CardModel __instance)
+        {
+            if (__instance is IDurableCard durableCard)
+            {
+                // 다른 모드나 UI가 예측할 때가 아닌, "진짜로 카드를 낼 때"만 깎입니다!
+                durableCard.Durability--;
+            }
+        }
+    }
+    // =========================================================================
+    // [효과 3] 카드의 목적지를 결정합니다. (내구도 차감은 하지 않고 확인만 합니다)
     // =========================================================================
     [HarmonyPatch(typeof(CardModel), "GetResultPileTypeForCardPlay")]
     public static class MaterializedPlayPatch
@@ -137,24 +153,20 @@ namespace Gladius.GladiusCode.Patches
         [HarmonyPostfix]
         public static void Postfix(CardModel __instance, ref PileType __result)
         {
-            // 1. 이 카드가 '내구도' 명찰(IDurableCard)을 달고 있다면?
             if (__instance is IDurableCard durableCard)
             {
-                // 카드를 냈으므로 내구도를 1 깎습니다.
-                durableCard.Durability--;
-
-                // 내구도가 0 이하가 되었다면 무조건 소멸(Exhaust)시킵니다.
+                // 위 Prefix 패치에서 내구도가 이미 깎인 상태이므로, 
+                // 여기서 내구도가 0 이하라면 이번 플레이가 마지막이었다는 뜻입니다!
                 if (durableCard.Durability <= 0)
                 {
-                    __result = PileType.Exhaust;
+                    __result = PileType.Exhaust; // 깔끔하게 소멸
                 }
-                // 내구도가 남았고, 원래 버려질(Discard) 예정이었다면 패(Hand)로 되돌립니다.
                 else if (__result == PileType.Discard)
                 {
-                    __result = PileType.Hand;
+                    __result = PileType.Hand; // 아직 내구도가 남았다면 패로 복귀
                 }
             }
-            // 2. 내구도 시스템은 없지만 구체화 키워드만 있는 '무한 연성물' 카드인 경우 (선택 사항)
+            // 일반적인 '무한 연성물' (내구도 시스템이 없는 경우)
             else if (__instance.Keywords.Contains(GladiusKeywords.Materialized) && __result == PileType.Discard)
             {
                 __result = PileType.Hand;
