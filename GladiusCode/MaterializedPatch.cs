@@ -8,56 +8,84 @@ using Godot;
 
 namespace Gladius.GladiusCode.Patches
 {
-    [HarmonyPatch(typeof(NCard), "UpdateVisuals")] 
+    [HarmonyPatch(typeof(NCard), "UpdateVisuals")]
     public static class DurableCardUIPatch
     {
         [HarmonyPostfix]
         public static void Postfix(NCard __instance)
         {
-            // ⭐ 핵심 수정 부분: __instance.Card 가 아니라 __instance.Model 을 사용합니다!
-            // (GodotObject나 Node의 속성에 맞게 CardModel 데이터를 가져옵니다)
+            Control? cardContainer = __instance.GetNodeOrNull<Control>("CardContainer");
+            if (cardContainer == null) return;
+
             if (__instance.Model is IDurableCard durableCard) 
             {
-                // 라벨 노드를 찾습니다.
-                Label labelNode = __instance.GetNodeOrNull<Label>("DurabilityLabel");
+                TextureRect? durIcon = cardContainer.GetNodeOrNull<TextureRect>("DurabilityIcon");
+                Label? durLabel = null;
 
-                // 라벨이 없으면 최초 1회 생성합니다.
-                if (labelNode == null)
+                if (durIcon == null)
                 {
-                    labelNode = new Label();
-                    labelNode.Name = "DurabilityLabel";
+                    durIcon = new TextureRect();
+                    durIcon.Name = "DurabilityIcon";
                     
-                    // 우측 상단 닻(Anchor) 고정
-                    labelNode.SetAnchorsPreset(Control.LayoutPreset.TopRight);
-                    labelNode.Position = new Vector2(160, -30); 
+                    // ⭐ 핵심: 이 UI가 마우스 클릭/호버를 가로채지 못하게 투명 취급합니다.
+                    durIcon.MouseFilter = Control.MouseFilterEnum.Ignore;
                     
-                    // 시안색(Cyan) 텍스트 디자인
-                    labelNode.AddThemeColorOverride("font_color", new Color("00ffff")); 
-                    labelNode.AddThemeColorOverride("font_outline_color", Colors.Black);
-                    labelNode.AddThemeConstantOverride("outline_size", 4);
-                    labelNode.AddThemeFontSizeOverride("font_size", 45); 
+                    // 기준점을 카드의 좌측 상단으로 단단히 고정합니다.
+                    durIcon.SetAnchorsPreset(Control.LayoutPreset.TopLeft, true);
                     
-                    __instance.AddChild(labelNode); 
+                    // 💡 요청하신 크기와 위치! (크기가 58로 줄었으므로 이제 진정한 좌측 상단에 위치하게 됩니다)
+                    durIcon.Size = new Vector2(58, 58);
+                    durIcon.Position = new Vector2(-125, -230);
+                    
+                    durIcon.ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize;
+                    durIcon.Texture = GD.Load<Texture2D>("res://Gladius/images/durability_icon.png");
+
+                    durLabel = new Label();
+                    durLabel.Name = "DurabilityLabel";
+                    
+                    // 라벨 역시 마우스를 투과하게 만듭니다.
+                    durLabel.MouseFilter = Control.MouseFilterEnum.Ignore;
+                    
+                    // 💡 텍스트를 58x58 아이콘 안에 꽉 채우고 정중앙에 정렬합니다.
+                    durLabel.SetAnchorsPreset(Control.LayoutPreset.FullRect, true);
+                    durLabel.HorizontalAlignment = HorizontalAlignment.Center;
+                    durLabel.VerticalAlignment = VerticalAlignment.Center;
+                    
+                    durLabel.AddThemeColorOverride("font_color", Colors.White);
+                    durLabel.AddThemeColorOverride("font_outline_color", Colors.Black);
+                    durLabel.AddThemeConstantOverride("outline_size", 6);
+                    
+                    // ⭐ 아이콘 크기(58)에 맞춰 폰트 크기를 기존 38에서 28로 줄여서 삐져나오지 않게 합니다.
+                    durLabel.AddThemeFontSizeOverride("font_size", 28);
+                    
+                    durIcon.AddChild(durLabel);
+                    cardContainer.AddChild(durIcon);
+                }
+                else
+                {
+                    durLabel = durIcon.GetNode<Label>("DurabilityLabel");
                 }
 
-                // 내구도 숫자를 업데이트합니다.
                 if (durableCard.Durability > 0)
-                    labelNode.Text = $"★ {durableCard.Durability}";
+                {
+                    durIcon.Visible = true;
+                    durLabel.Text = durableCard.Durability.ToString();
+                }
                 else
-                    labelNode.Text = ""; 
+                {
+                    durIcon.Visible = false;
+                }
             }
             else
             {
-                // 구체화 카드가 아닌 일반 카드인데 라벨이 남아있다면 숨깁니다.
-                // (카드 객체는 게임 내에서 재활용(Pool)되기 때문에 지워주는 처리가 필요합니다)
-                Label labelNode = __instance.GetNodeOrNull<Label>("DurabilityLabel");
-                if (labelNode != null)
+                TextureRect? durIcon = cardContainer.GetNodeOrNull<TextureRect>("DurabilityIcon");
+                if (durIcon != null)
                 {
-                    labelNode.Text = "";
+                    durIcon.Visible = false;
                 }
             }
         }
-    }    
+    }
     // =========================================================================
     // [효과 1] 턴 종료 시 패 유지 (UI 표시 완벽 차단)
     // =========================================================================
