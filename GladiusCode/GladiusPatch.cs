@@ -1,19 +1,42 @@
+using System;
 using HarmonyLib;
+using Godot;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using System.Diagnostics;
-using Gladius.GladiusCode.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Nodes.Cards;
-using Godot;
+using Gladius.GladiusCode.Cards;
 
 namespace Gladius.GladiusCode.Patches
 {
+    // =========================================================================
+    // [효과 1 최적화] UI 렌더링 상태를 추적하는 전역 플래그
+    // =========================================================================
+    public static class CardTextRenderState
+    {
+        // UI가 카드 설명을 생성 중이거나 시각 요소를 그릴 때 true가 됩니다.
+        public static bool IsGeneratingDescription = false;
+    }
+
+    // =========================================================================
+    // [UI 패치] 카드 내구도 아이콘 표시 & 보존 키워드 텍스트 렌더링 방지
+    // =========================================================================
     [HarmonyPatch(typeof(NCard), "UpdateVisuals")]
     public static class DurableCardUIPatch
     {
+        [HarmonyPrefix]
+        public static void Prefix()
+        {
+            // 카드 UI 렌더링 시작 시 시스템이 보존 텍스트/아이콘을 붙이는 것을 막기 위해 플래그 켬
+            CardTextRenderState.IsGeneratingDescription = true;
+        }
+
         [HarmonyPostfix]
         public static void Postfix(NCard __instance)
         {
+            // 카드 UI 렌더링 종료 시 플래그 끔 (원래 상태 복구)
+            CardTextRenderState.IsGeneratingDescription = false;
+
             Control? cardContainer = __instance.GetNodeOrNull<Control>("CardContainer");
             if (cardContainer == null) return;
 
@@ -86,8 +109,33 @@ namespace Gladius.GladiusCode.Patches
             }
         }
     }
+
     // =========================================================================
-    // [효과 1] 턴 종료 시 패 유지 (UI 표시 완벽 차단)
+    // [텍스트 생성 방어 패치] 툴팁 등에서 보존 키워드가 뜨는 것을 차단
+    // =========================================================================
+    // Ambiguous Match 에러 수정을 위해 정확한 매개변수 타입 명시 완료
+    [HarmonyPatch(typeof(CardModel), "GetDescriptionForPile", new Type[] { typeof(PileType), typeof(Creature) })]
+    public static class DescriptionForPilePatch
+    {
+        [HarmonyPrefix]
+        public static void Prefix() { CardTextRenderState.IsGeneratingDescription = true; }
+
+        [HarmonyPostfix]
+        public static void Postfix() { CardTextRenderState.IsGeneratingDescription = false; }
+    }
+
+    [HarmonyPatch(typeof(CardModel), "GetDescriptionForUpgradePreview")]
+    public static class DescriptionForUpgradePreviewPatch
+    {
+        [HarmonyPrefix]
+        public static void Prefix() { CardTextRenderState.IsGeneratingDescription = true; }
+
+        [HarmonyPostfix]
+        public static void Postfix() { CardTextRenderState.IsGeneratingDescription = false; }
+    }
+
+    // =========================================================================
+    // [효과 1] 턴 종료 시 패 유지 (성능 렉 없음!)
     // =========================================================================
     [HarmonyPatch(typeof(CardModel), "get_ShouldRetainThisTurn")]
     public static class MaterializedShouldRetainPatch
@@ -97,40 +145,18 @@ namespace Gladius.GladiusCode.Patches
         {
             if (__instance.Keywords.Contains(GladiusKeywords.Artifact) || __instance.Keywords.Contains(GladiusKeywords.Material))
             {
-                // 1. 현재 이 프로퍼티를 누가 불렀는지 호출 스택을 역추적합니다.
-                StackTrace stackTrace = new StackTrace(false);
-                bool isCalledByUI = false;
-
-                // 2. 나를 호출한 부모 함수들의 이름을 하나하나 검사합니다.
-                foreach (var frame in stackTrace.GetFrames())
-                {
-                    // GetMethod()가 null일 수 있으므로 변수에 먼저 담고 확인합니다.
-                    var method = frame.GetMethod();
-                    if (method == null) continue; // 메서드 정보가 없으면 무시하고 다음 프레임으로 넘어감
-
-                    string methodName = method.Name;
-                    
-                    // 만약 '카드 설명을 가져오는 함수'가 이 프로퍼티를 불렀다면?
-                    if (methodName.Contains("GetDescriptionForPile") || methodName.Contains("GetDescriptionForUpgradePreview"))
-                    {
-                        isCalledByUI = true; // "아, 지금 텍스트 그리는 중이구나!"
-                        break;
-                    }
-                }
-
-                // 3. UI가 텍스트를 그리기 위해 물어본 게 "아닐 때만" true를 줍니다.
-                // 즉, 턴이 끝나서 시스템이 카드를 버릴지 말지 기계적으로 판단할 때만 true가 됩니다!
-                if (!isCalledByUI)
+                // UI가 텍스트를 그리기 위해 물어본 게 "아닐 때만" 실제 엔진상으로 유지(true) 처리합니다.
+                if (!CardTextRenderState.IsGeneratingDescription)
                 {
                     __result = true;
                 }
             }
         }
     }
+
     // =========================================================================
-    // [효과 2] 카드를 '확정적으로 사용'할 때만 내구도를 1 차감합니다. (멀티플레이 안전!)
+    // [효과 2] 카드를 '확정적으로 사용'할 때만 내구도를 1 차감합니다. 
     // =========================================================================
-    // 카드가 사용되는 핵심 래퍼 함수인 OnPlayWrapper가 시작되기 직전에 가로챕니다.
     [HarmonyPatch(typeof(CardModel), nameof(CardModel.OnPlayWrapper))]
     public static class DurableCardDeductPatch
     {
@@ -139,13 +165,13 @@ namespace Gladius.GladiusCode.Patches
         {
             if (__instance is IDurableCard durableCard)
             {
-                // 다른 모드나 UI가 예측할 때가 아닌, "진짜로 카드를 낼 때"만 깎입니다!
                 durableCard.Durability--;
             }
         }
     }
+
     // =========================================================================
-    // [효과 3] 카드의 목적지를 결정합니다. (내구도 차감은 하지 않고 확인만 합니다)
+    // [효과 3] 카드의 목적지를 결정합니다. (Material 조건 추가됨)
     // =========================================================================
     [HarmonyPatch(typeof(CardModel), "GetResultPileTypeForCardPlay")]
     public static class MaterializedPlayPatch
@@ -155,19 +181,18 @@ namespace Gladius.GladiusCode.Patches
         {
             if (__instance is IDurableCard durableCard)
             {
-                // 위 Prefix 패치에서 내구도가 이미 깎인 상태이므로, 
-                // 여기서 내구도가 0 이하라면 이번 플레이가 마지막이었다는 뜻입니다!
                 if (durableCard.Durability <= 0)
                 {
-                    __result = PileType.Exhaust; // 깔끔하게 소멸
+                    __result = PileType.Exhaust; 
                 }
                 else if (__result == PileType.Discard)
                 {
-                    __result = PileType.Hand; // 아직 내구도가 남았다면 패로 복귀
+                    __result = PileType.Hand; 
                 }
             }
             // 일반적인 '무한 연성물' (내구도 시스템이 없는 경우)
-            else if (__instance.Keywords.Contains(GladiusKeywords.Artifact) && __result == PileType.Discard)
+            else if ((__instance.Keywords.Contains(GladiusKeywords.Artifact) || __instance.Keywords.Contains(GladiusKeywords.Material)) 
+                     && __result == PileType.Discard)
             {
                 __result = PileType.Hand;
             }

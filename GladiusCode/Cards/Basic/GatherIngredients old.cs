@@ -1,4 +1,4 @@
-using Gladius.GladiusCode.Cards;
+/*using Gladius.GladiusCode.Cards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -49,4 +49,4 @@ public class Reinforce() : GladiusCard(1, CardType.Skill, CardRarity.Basic, Targ
     {
         DynamicVars.Block.UpgradeValueBy(2m);
     }
-}
+}*/

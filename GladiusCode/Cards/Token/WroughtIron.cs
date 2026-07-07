@@ -8,7 +8,7 @@ using Gladius.GladiusCode;
 namespace Gladius;
 
 [Pool(typeof(TokenCardPool))]
-public class WroughtIron() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
+public class WroughtIron() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.Self)
 {
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[GladiusKeywords.Material];

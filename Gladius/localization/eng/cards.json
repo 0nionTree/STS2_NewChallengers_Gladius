@@ -9,9 +9,9 @@
     "GLADIUS-DEFEND_GLADIUS.title": "Defend",
     "GLADIUS-SWORD_GIRDING.description": "Add a [gold]HornedSword[/gold] into your [gold]Hand[/gold].",
     "GLADIUS-SWORD_GIRDING.title": "SwordGirding",
-    "GLADIUS-REINFORCE.description": "",
-    "GLADIUS-REINFORCE.title": "Reinforce",
-    "GLADIUS-REINFORCE.selectionScreenPrompt": "Select the card",
+    "GLADIUS-GATHER_INGREDIENTS.description": "",
+    "GLADIUS-GATHER_INGREDIENTS.title": "Gather Ingredients",
+    "GLADIUS-GATHER_INGREDIENTS.selectionScreenPrompt": "Select the card",
 
     "GLADIUS-HORNED_SWORD.description": "Deal {Damage:diff()} damage.\nIncrease this card's damage by {Increase:diff()} this combat.",
     "GLADIUS-HORNED_SWORD.title": "HornedSword"

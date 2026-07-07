@@ -14,10 +14,9 @@ public class SwordGirding() : GladiusCard(1, CardType.Skill, CardRarity.Basic, T
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<HornedSword>()];
 
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-		await CardPileCmd.AddGeneratedCardToCombat(CombatState!.CreateCard<HornedSword>(Owner), PileType.Hand, Owner);
-		await Cmd.Wait(0.3f);
     }
 
     protected override void OnUpgrade()
