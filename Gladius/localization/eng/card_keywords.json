@@ -1,4 +1,10 @@
 {
-    "GLADIUS-MATERIALIZED.description": "Tooltip",
-    "GLADIUS-MATERIALIZED.title": "Materialized"
+    "GLADIUS-ARTIFACT.description": "Tooltip",
+    "GLADIUS-ARTIFACT.title": "Artifact",
+    "GLADIUS-DRAGONAURA.description": "Tooltip",
+    "GLADIUS-DRAGONAURA.title": "DragonAura",
+    "GLADIUS-MATERIAL.description": "Tooltip",
+    "GLADIUS-MATERIAL.title": "Material",
+    "GLADIUS-ALCHEMY.description": "Tooltip",
+    "GLADIUS-ALCHEMY.title": "Alchemy"
 }

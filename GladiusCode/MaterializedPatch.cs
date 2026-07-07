@@ -95,7 +95,7 @@ namespace Gladius.GladiusCode.Patches
         [HarmonyPostfix]
         public static void Postfix(CardModel __instance, ref bool __result)
         {
-            if (__instance.Keywords.Contains(GladiusKeywords.Materialized))
+            if (__instance.Keywords.Contains(GladiusKeywords.Artifact) || __instance.Keywords.Contains(GladiusKeywords.Material))
             {
                 // 1. 현재 이 프로퍼티를 누가 불렀는지 호출 스택을 역추적합니다.
                 StackTrace stackTrace = new StackTrace(false);
@@ -167,7 +167,7 @@ namespace Gladius.GladiusCode.Patches
                 }
             }
             // 일반적인 '무한 연성물' (내구도 시스템이 없는 경우)
-            else if (__instance.Keywords.Contains(GladiusKeywords.Materialized) && __result == PileType.Discard)
+            else if (__instance.Keywords.Contains(GladiusKeywords.Artifact) && __result == PileType.Discard)
             {
                 __result = PileType.Hand;
             }

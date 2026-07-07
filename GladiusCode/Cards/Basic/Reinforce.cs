@@ -20,7 +20,7 @@ public class Reinforce() : GladiusCard(1, CardType.Skill, CardRarity.Basic, Targ
         [new BlockVar(3m, BlockProps.card)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Materialized)];
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -32,7 +32,7 @@ public class Reinforce() : GladiusCard(1, CardType.Skill, CardRarity.Basic, Targ
             prefs: new CardSelectorPrefs(base.SelectionScreenPrompt, 1), 
             context: choiceContext, 
             player: base.Owner, 
-            filter: (CardModel card) => card.Keywords.Contains(GladiusKeywords.Materialized) && card is IDurableCard, 
+            filter: (CardModel card) => card.Keywords.Contains(GladiusKeywords.Artifact) && card is IDurableCard, 
             source: this
         )).FirstOrDefault();
 
@@ -41,8 +41,6 @@ public class Reinforce() : GladiusCard(1, CardType.Skill, CardRarity.Basic, Targ
         {
             // 순수하게 데이터(논리) 수치만 올립니다.
             durableCard.Durability += 1;
-            
-            // UI 갱신 코드는 삭제했습니다.
             // 선택 창이 닫히고 패로 돌아오는 과정에서 게임 엔진이 알아서 UI를 한 번 새로고침(Refresh) 해줍니다.
         }
     }

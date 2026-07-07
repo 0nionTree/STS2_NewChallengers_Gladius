@@ -11,7 +11,7 @@ using Gladius.GladiusCode;
 namespace Gladius;
 
 [Pool(typeof(TokenCardPool))]
-public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy), IDurableCard
+public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy), IDurableCard
 {
     int IDurableCard.Durability { get; set; } = 3;
 
@@ -23,7 +23,7 @@ public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Basic, T
         [new DamageVar(8m, DamageProps.card), new DynamicVar("Increase", 2m)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
-		[GladiusKeywords.Materialized];
+		[GladiusKeywords.Artifact];
 
     private decimal ExtraDamageFromPlays
 	{

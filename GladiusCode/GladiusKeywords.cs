@@ -5,7 +5,19 @@ namespace Gladius.GladiusCode;
 
 public static class GladiusKeywords
 {
-	[CustomEnum("Materialized")]
+	[CustomEnum("Artifact")]
 	[KeywordProperties(AutoKeywordPosition.Before, true)]
-	public static CardKeyword Materialized;
+	public static CardKeyword Artifact;
+
+	[CustomEnum("Alchemy")]
+	[KeywordProperties(AutoKeywordPosition.Before, true)]
+	public static CardKeyword Alchemy;
+
+	[CustomEnum("Material")]
+	[KeywordProperties(AutoKeywordPosition.Before, true)]
+	public static CardKeyword Material;
+	
+	[CustomEnum("DragonAura")]
+	[KeywordProperties(AutoKeywordPosition.Before, true)]
+	public static CardKeyword DragonAura;
 }
