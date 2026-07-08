@@ -13,6 +13,7 @@ namespace Gladius;
 [Pool(typeof(GladiusCardPool))]
 public class SwordGirding() : GladiusCard(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
 {
+    // 패검 - 연성
     protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { GladiusTags.Alchemy };
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>

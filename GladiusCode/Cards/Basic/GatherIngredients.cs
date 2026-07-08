@@ -16,6 +16,7 @@ namespace Gladius;
 [Pool(typeof(GladiusCardPool))]
 public class GatherIngredients() : GladiusCard(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
 {
+    // 연성 준비
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new BlockVar(3m, BlockProps.card)];
 

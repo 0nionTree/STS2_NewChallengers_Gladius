@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using Gladius.GladiusCode;
 
 namespace Gladius;
 
@@ -19,7 +20,9 @@ public class MaterialPouch() : GladiusCode.Relics.GladiusRelic {
         [new CardsVar(1)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<WroughtIron>()];
+        [HoverTipFactory.FromCard<WroughtIron>(), 
+		HoverTipFactory.FromKeyword(GladiusKeywords.Material),
+		HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
 
     public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
 	{

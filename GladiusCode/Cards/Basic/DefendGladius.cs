@@ -12,6 +12,7 @@ namespace Gladius;
 [Pool(typeof(GladiusCardPool))]
 public class DefendGladius() : GladiusCard(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
 {
+    // 수비
     protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Defend };
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

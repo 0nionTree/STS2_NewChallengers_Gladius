@@ -2,15 +2,15 @@
   "GLADIUS-GLADIUS.aromaPrinciple": "Lore",
   "GLADIUS-GLADIUS.banter.alive.endTurnPing": "Co-op hurry up end turn ping message",
   "GLADIUS-GLADIUS.banter.dead.endTurnPing": "...",
-  "GLADIUS-GLADIUS.cardsModifierDescription": "__ cards will now appear in rewards and shops.",
-  "GLADIUS-GLADIUS.cardsModifierTitle": "__ Cards",
+  "GLADIUS-GLADIUS.cardsModifierDescription": "Gladius cards will now appear in rewards and shops.",
+  "GLADIUS-GLADIUS.cardsModifierTitle": "Gladius Cards",
   "GLADIUS-GLADIUS.description": "Character Selection\nScreen Description",
   "GLADIUS-GLADIUS.eventDeathPrevention": "Co-op survival line",
   "GLADIUS-GLADIUS.goldMonologue": "Line spoken when obtaining a large amount of gold",
-  "GLADIUS-GLADIUS.possessiveAdjective": "his/her/its",
-  "GLADIUS-GLADIUS.pronounObject": "him/her/it",
-  "GLADIUS-GLADIUS.pronounPossessive": "his/hers/its",
-  "GLADIUS-GLADIUS.pronounSubject": "he/she/it",
-  "GLADIUS-GLADIUS.title": "The CharModTest",
-  "GLADIUS-GLADIUS.titleObject": "The CharModTest"
+  "GLADIUS-GLADIUS.possessiveAdjective": "his",
+  "GLADIUS-GLADIUS.pronounObject": "him",
+  "GLADIUS-GLADIUS.pronounPossessive": "his",
+  "GLADIUS-GLADIUS.pronounSubject": "he",
+  "GLADIUS-GLADIUS.title": "Gladius",
+  "GLADIUS-GLADIUS.titleObject": "Gladius"
 }

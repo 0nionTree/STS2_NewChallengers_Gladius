@@ -4,6 +4,8 @@
 
     "GLADIUS-STRIKE_GLADIUS.description": "Deal {Damage:diff()} damage.",
     "GLADIUS-STRIKE_GLADIUS.title": "Strike",
+    "GLADIUS-BREAKDOWN.description": "Reduce the [gold]Durability[/gold] of an [gold]Artifact[/gold] in your [gold]Hand[/gold] by 1.\nDeal {Damage:diff()} damage.",
+    "GLADIUS-BREAKDOWN.title": "Breakdown",
     
     "GLADIUS-DEFEND_GLADIUS.description": "Gain {Block:diff()} Block",
     "GLADIUS-DEFEND_GLADIUS.title": "Defend",

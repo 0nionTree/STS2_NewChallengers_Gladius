@@ -13,6 +13,7 @@ namespace Gladius;
 [Pool(typeof(TokenCardPool))]
 public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy), IDurableCard
 {
+	// 용각 검 - 연성물
     int IDurableCard.Durability { get; set; } = 3;
 
 	private const string _increaseKey = "Increase";

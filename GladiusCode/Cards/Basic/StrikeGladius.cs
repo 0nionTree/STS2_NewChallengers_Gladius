@@ -12,6 +12,7 @@ namespace Gladius;
 [Pool(typeof(GladiusCardPool))]
 public class StrikeGladius() : GladiusCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
 {
+    // 타격
     protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
