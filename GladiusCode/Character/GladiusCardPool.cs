@@ -41,7 +41,9 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<StrikeGladius>(),
             ModelDb.Card<DefendGladius>(),
             ModelDb.Card<SwordGirding>(),
-            ModelDb.Card<Breakdown>()
+            ModelDb.Card<Breakdown>(),
+            ModelDb.Card<Eradication>(),
+            ModelDb.Card<Downswing>()
         };
     }
 }

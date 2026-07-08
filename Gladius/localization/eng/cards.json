@@ -4,16 +4,19 @@
 
     "GLADIUS-STRIKE_GLADIUS.description": "Deal {Damage:diff()} damage.",
     "GLADIUS-STRIKE_GLADIUS.title": "Strike",
-    "GLADIUS-BREAKDOWN.description": "Reduce the [gold]Durability[/gold] of an [gold]Artifact[/gold] in your [gold]Hand[/gold] by 1.\nDeal {Damage:diff()} damage.",
+    "GLADIUS-BREAKDOWN.description": "Reduce [gold]Durability[/gold] of an [gold]Artifact[/gold] in your [gold]Hand[/gold] by 1.\nDeal {Damage:diff()} damage.",
     "GLADIUS-BREAKDOWN.title": "Breakdown",
+    "GLADIUS-ERADICATION.description": "Deal {Damage:diff()} damage.\nApply {WeakPower:diff()} [gold]Weak[/gold].",
+    "GLADIUS-ERADICATION.title": "Eradication",
+    "GLADIUS-DOWNSWING.description": "Deal {Damage:diff()} damage.\nDiscard {Cards:diff()} {Cards:plural:card|cards} from your [gold]Draw Pile[/gold].\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
+    "GLADIUS-DOWNSWING.title": "Downswing",
     
     "GLADIUS-DEFEND_GLADIUS.description": "Gain {Block:diff()} Block",
     "GLADIUS-DEFEND_GLADIUS.title": "Defend",
-    "GLADIUS-SWORD_GIRDING.description": "Add a [gold]HornedSword[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-SWORD_GIRDING.description": "[gold]Alchemy[/gold] a [gold]HornedSword[/gold] into your [gold]Hand[/gold].",
     "GLADIUS-SWORD_GIRDING.title": "SwordGirding",
-    "GLADIUS-GATHER_INGREDIENTS.description": "",
+    "GLADIUS-GATHER_INGREDIENTS.description": "Gain {Block:diff()} Block\nAdd a [gold]WroughtIron[/gold] into your [gold]Hand[/gold].",
     "GLADIUS-GATHER_INGREDIENTS.title": "Gather Ingredients",
-    "GLADIUS-GATHER_INGREDIENTS.selectionScreenPrompt": "Select the card",
 
     "GLADIUS-HORNED_SWORD.description": "Deal {Damage:diff()} damage.\nIncrease this card's damage by {Increase:diff()} this combat.",
     "GLADIUS-HORNED_SWORD.title": "HornedSword"

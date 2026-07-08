@@ -21,7 +21,7 @@ public class GatherIngredients() : GladiusCard(1, CardType.Skill, CardRarity.Bas
         [new BlockVar(3m, BlockProps.card)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact), HoverTipFactory.FromCard<WroughtIron>()];
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Material), HoverTipFactory.FromCard<WroughtIron>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

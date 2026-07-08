@@ -10,6 +10,8 @@ using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Models;
+using BaseLib.Extensions;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;
 
@@ -17,10 +19,11 @@ namespace Gladius;
 public class Breakdown() : GladiusCard(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     // 깨뜨리기
-    protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
-
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new IntVar("durability", 1), new DamageVar(12m, DamageProps.card)];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact), HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy)];
 
     protected override bool IsPlayable => PileType.Hand.GetPile(base.Owner)?.Cards?.Any(c => c.Keywords.Contains(GladiusKeywords.Artifact)) ?? false;
     
@@ -40,11 +43,7 @@ public class Breakdown() : GladiusCard(0, CardType.Attack, CardRarity.Common, Ta
         {
             if (cardModel is IDurableCard artifectCard)
             {
-                artifectCard.Durability -= 1;
-                if (artifectCard.Durability == 0)
-                {
-                    await CardCmd.Exhaust(choiceContext, cardModel);
-                }
+                artifectCard?.ReduceDur(choiceContext, DynamicVars["durability"].IntValue);
             }
         }
         
