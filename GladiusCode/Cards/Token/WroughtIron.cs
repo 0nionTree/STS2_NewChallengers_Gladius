@@ -7,6 +7,9 @@ using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Enchantments;
+using Godot;
 
 namespace Gladius;
 
@@ -16,9 +19,9 @@ public class WroughtIron() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new CardsVar(1)];
         
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];
 
-    protected override async Task Material(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifectCard)
     {
         await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
     }

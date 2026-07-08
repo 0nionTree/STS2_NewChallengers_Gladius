@@ -1,3 +1,5 @@
 {
-  
+    "GLADIUS-MATERIAL_POUCH.description": "At the start of each combat, add [blue]{Cards}[/blue] [gold]{GladiusCards:plural:WroughtIron|WroughtIrons}[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-MATERIAL_POUCH.flavor": "",
+    "GLADIUS-MATERIAL_POUCH.title": "MaterialPouch"
 }

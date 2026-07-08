@@ -49,9 +49,9 @@
     "prefix": "customcardpub",
     "description": "Custom Card (Publicized) template for STS2 mod",
     "body": [
-      "namespace ${1:CharModTest};",
+      "namespace ${1:Gladius};",
       "",
-      "public class ${2:MyCard}() : CharModTest.CharModTestCode.Cards.CharModTestCard(${3:1}, MegaCrit.Sts2.Core.Entities.Cards.CardType.${4|Attack,Skill,Power,Status,Curse,Quest|}, MegaCrit.Sts2.Core.Entities.Cards.CardRarity.${5|Basic,Common,Uncommon,Rare,Ancient,Event,Token,Status,Curse,Quest|}, MegaCrit.Sts2.Core.Entities.Cards.TargetType.${6|Self,AnyEnemy,AllEnemies,RandomEnemy,AnyPlayer,AnyAlly,AllAllies,Osty|}) {",
+      "public class ${2:GladiusCard}() : CharModTest.CharModTestCode.Cards.CharModTestCard(${3:1}, MegaCrit.Sts2.Core.Entities.Cards.CardType.${4|Attack,Skill,Power,Status,Curse,Quest|}, MegaCrit.Sts2.Core.Entities.Cards.CardRarity.${5|Basic,Common,Uncommon,Rare,Ancient,Event,Token,Status,Curse,Quest|}, MegaCrit.Sts2.Core.Entities.Cards.TargetType.${6|Self,AnyEnemy,AllEnemies,RandomEnemy,AnyPlayer,AnyAlly,AllAllies,Osty|}) {",
       "    public override IEnumerable<MegaCrit.Sts2.Core.Localization.DynamicVars.DynamicVar> CanonicalVars => [];",
       "",
       "    public override async System.Threading.Tasks.Task OnPlay(MegaCrit.Sts2.Core.GameActions.Multiplayer.PlayerChoiceContext choiceContext, MegaCrit.Sts2.Core.Entities.Cards.CardPlay play)",
@@ -70,13 +70,16 @@
     "prefix": "customrelic",
     "description": "Custom Relic template for STS2 mod",
     "body": [
-      "namespace ${1:CharModTest};",
+      "using MegaCrit.Sts2.Core.Entities.Relics;",
+      "using Gladius.GladiusCode.Character;",
       "",
-      "[BaseLib.Utils.Pool(typeof(RelicPool))]",
-      "public class ${2:MyRelic}() : CharModTest.CharModTestCode.Relics.CharModTestRelic {",
-      "    public override MegaCrit.Sts2.Core.Entities.Relics.RelicRarity Rarity => MegaCrit.Sts2.Core.Entities.Relics.RelicRarity.${3|Starter,Common,Uncommon,Rare,Shop,Event,Ancient|};",
+      "namespace Gladius;",
+      "",
+      "[BaseLib.Utils.Pool(typeof(GladiusRelicPool))]",
+      "public class CustomRelic() : GladiusCode.Relics.GladiusRelic {",
+      "    public override RelicRarity Rarity => RelicRarity.Starter;",
       "    ",
-      "    $0",
+      "    ",
       "}"
     ]
   }

@@ -193,7 +193,7 @@ namespace Gladius.GladiusCode.Patches
                 }
             }
             // 일반적인 '무한 연성물' (내구도 시스템이 없는 경우)
-            else if ((__instance.Keywords.Contains(GladiusKeywords.Artifact) || __instance.Keywords.Contains(GladiusKeywords.Material)) 
+            else if (__instance.Keywords.Contains(GladiusKeywords.Artifact) 
                      && __result == PileType.Discard)
             {
                 __result = PileType.Hand;
@@ -203,11 +203,22 @@ namespace Gladius.GladiusCode.Patches
     // =========================================================================
     // CanPlay()함수에 Material이 없을 경우 Alchmy 효과가 있는 카드를 사용할 수 없도록 합니다.
     // =========================================================================
-    [HarmonyPatch(typeof(CardModel), nameof(CardModel.CanPlay))]
+    [HarmonyPatch] // 💡 수정됨: 파라미터를 비우고 클래스 단위 타겟팅을 사용합니다.
     public class CanPlayPatch
     {
+        // 💡 추가됨: CS0182 에러를 피하기 위해 TargetMethod()를 사용하여 메서드를 명시적으로 찾습니다.
+        [HarmonyTargetMethod]
+        public static MethodBase TargetMethod()
+        {
+            return AccessTools.Method(typeof(CardModel), nameof(CardModel.CanPlay), new Type[] 
+            { 
+                typeof(UnplayableReason).MakeByRefType(), 
+                typeof(AbstractModel).MakeByRefType() 
+            });
+        }
+
         [HarmonyPostfix]
-        public static void Postfix(CardModel __instance, ref bool __result, ref UnplayableReason reason)
+        public static void Postfix(CardModel __instance, ref bool __result, ref UnplayableReason reason, ref AbstractModel preventer)
         {
             // 연금 태그가 있는 카드가 아니라면 종료
             if (!__instance.Tags.Contains(GladiusTags.Alchemy)) return;
@@ -225,6 +236,9 @@ namespace Gladius.GladiusCode.Patches
                 // UnplayableReason은 수정 불가하므로, 
                 // 의미적으로 가장 적절한 'BlockedByCardLogic'을 사용합니다.
                 reason |= UnplayableReason.BlockedByCardLogic;
+                
+                // 막은 주체를 지정해줍니다.
+                preventer = __instance;
             }
         }
     }

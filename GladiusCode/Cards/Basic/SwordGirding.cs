@@ -21,6 +21,7 @@ public class SwordGirding() : GladiusCard(1, CardType.Skill, CardRarity.Basic, T
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await Alchemy<HornedSword>(choiceContext);
     }
 
     protected override void OnUpgrade()

@@ -29,12 +29,6 @@ public class GatherIngredients() : GladiusCard(1, CardType.Skill, CardRarity.Bas
 
 		await CardPileCmd.AddGeneratedCardToCombat(CombatState!.CreateCard<WroughtIron>(Owner), PileType.Hand, Owner);
 		await Cmd.Wait(0.3f);
-        CardPile pile = PileType.Hand.GetPile(base.Owner);
-		CardModel cardModel = Owner.RunState.Rng.CombatCardSelection.NextItem(pile.Cards.Where((CardModel c) => c.Tags.Contains(GladiusTags.Alchemy)));
-		if (cardModel != null)
-        {
-            await CardCmd.Exhaust(choiceContext, cardModel);
-        }
     }
 
     protected override void OnUpgrade()

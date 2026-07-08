@@ -3,8 +3,11 @@ using BaseLib.Extensions;
 using BaseLib.Utils;
 using Gladius.GladiusCode.Character;
 using Gladius.GladiusCode.Extensions;
+using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 
 namespace Gladius.GladiusCode.Cards;
@@ -38,22 +41,36 @@ public abstract class GladiusCard(
     public override string PortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
 
-    protected virtual async Task Material(PlayerChoiceContext choiceContext, CardPlay cardPlay){}
+    protected virtual async Task Material(PlayerChoiceContext choiceContext, CardModel artifectCard){}
 
-    protected async Task Alchemy(
-        PlayerChoiceContext choiceContext, 
-        int amountToExhaust, 
-        string targetCardId, 
-        Action<CardModel> onMaterialExhausted)
+    protected async Task Alchemy<T>(PlayerChoiceContext choiceContext) where T : CardModel
     {
-        CardPile pile = PileType.Hand.GetPile(base.Owner);
-        
-        /*
-        var selection = await choiceContext.SelectCardsFromHand(
-            amountToExhaust, 
-            c => c.Tags.Contains(CardTag.Material), // 가정된 태그
-            "재료로 사용할 카드를 선택하세요."
-        );
-        */
+        var promptString = new LocString("combat_messages", "SELECT_MATERIAL");
+		// var를 사용하거나 CardModel?을 사용하여 null 가능성을 명시합니다.
+        var cardModel = (await CardSelectCmd.FromHand(
+            prefs: new CardSelectorPrefs(promptString, 1), 
+            context: choiceContext, 
+            player: base.Owner, 
+            // 필터 조건: Material 키워드가 있는 카드만 선택 가능
+            filter: (CardModel card) => card.Keywords.Contains(GladiusKeywords.Material), 
+            source: this
+        )).FirstOrDefault();
+
+        // 카드가 정상적으로 선택되었는지 확인 (null 체크)
+        if (cardModel != null)
+        {
+            // 1. Artifect(연성물)카드 생성
+            T artifectCard = CombatState!.CreateCard<T>(Owner);
+            await CardPileCmd.AddGeneratedCardToCombat(artifectCard, PileType.Hand, Owner);
+            // 2. 소재 카드를 소멸 (Exhaust) 처리
+            await CardCmd.Exhaust(choiceContext, cardModel);
+            // 3. 선택한 소재 카드의 Material() 함수 실행
+            // CardModel을 Material() 함수가 정의된 커스텀 클래스로 캐스팅 (예: GladiusCard)
+            if (cardModel is GladiusCard gladiusCard)
+            {
+                await gladiusCard.Material(choiceContext, artifectCard); // 형변환에 성공했다면 함수 실행
+            }
+            await Cmd.Wait(0.2f);
+        }
     }
 }
