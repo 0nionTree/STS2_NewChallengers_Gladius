@@ -4,20 +4,32 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using Gladius.GladiusCode;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.Commands;
 
 namespace Gladius;
 
 [Pool(typeof(TokenCardPool))]
 public class WroughtIron() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.Self)
 {
-	public override IEnumerable<CardKeyword> CanonicalKeywords =>
-		[GladiusKeywords.Material];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new CardsVar(1)];
+        
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material];
+
+    protected override async Task Material(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.BaseValue, base.Owner);
+    }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+
     }
 
     protected override void OnUpgrade()
     {
+        
     }
 }

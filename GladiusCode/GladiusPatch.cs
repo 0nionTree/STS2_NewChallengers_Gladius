@@ -6,6 +6,8 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using Gladius.GladiusCode.Cards;
+using System.Reflection;
+using MegaCrit.Sts2.Core.Localization;
 
 namespace Gladius.GladiusCode.Patches
 {
@@ -195,6 +197,59 @@ namespace Gladius.GladiusCode.Patches
                      && __result == PileType.Discard)
             {
                 __result = PileType.Hand;
+            }
+        }
+    }
+    // =========================================================================
+    // CanPlay()함수에 Material이 없을 경우 Alchmy 효과가 있는 카드를 사용할 수 없도록 합니다.
+    // =========================================================================
+    [HarmonyPatch(typeof(CardModel), nameof(CardModel.CanPlay))]
+    public class CanPlayPatch
+    {
+        [HarmonyPostfix]
+        public static void Postfix(CardModel __instance, ref bool __result, ref UnplayableReason reason)
+        {
+            // 연금 태그가 있는 카드가 아니라면 종료
+            if (!__instance.Tags.Contains(GladiusTags.Alchemy)) return;
+            // 1. 이미 다른 이유(에너지 부족 등)로 사용 불가라면 그대로 둡니다.
+            if (!__result) return;
+
+            // 2. 모드 전용 조건 체크: 손에 Material 키워드를 가진 카드가 하나라도 있는지 확인
+            var hand = PileType.Hand.GetPile(__instance.Owner);
+            bool hasMaterial = hand?.Cards?.Any(c => c.Keywords.Contains(GladiusKeywords.Material)) ?? false;
+            
+            // 3. 재료가 없다면 사용 불가 처리
+            if (!hasMaterial)
+            {
+                __result = false;
+                // UnplayableReason은 수정 불가하므로, 
+                // 의미적으로 가장 적절한 'BlockedByCardLogic'을 사용합니다.
+                reason |= UnplayableReason.BlockedByCardLogic;
+            }
+        }
+    }
+    [HarmonyPatch] // 클래스 타입 대신 TargetMethod를 사용
+    public class CustomDialoguePatch
+    {
+        // 리플렉션을 통해 internal 클래스의 메서드를 찾아옵니다.
+        [HarmonyTargetMethod]
+        public static MethodBase TargetMethod()
+        {
+            // 1. internal 클래스 타입을 문자열로 찾음
+            var type = AccessTools.TypeByName("MegaCrit.Sts2.Core.Entities.Cards.UnplayableReasonExtensions");
+            // 2. 그 안의 메서드를 찾음
+            return AccessTools.Method(type, "GetPlayerDialogueLine");
+        }
+
+        [HarmonyPostfix]
+        public static void Postfix(UnplayableReason reason, AbstractModel preventer, ref object __result)
+        {
+            // 1. 우리가 정한 사용 불가 사유(BlockedByCardLogic)이면서
+            // 2. 대상이 우리의 커스텀 카드(GladiusCard)인 경우
+            if (reason.HasFlag(UnplayableReason.BlockedByCardLogic) && preventer is GladiusCard) 
+            {
+                // 메시지를 우리가 원하는 키값의 LocString으로 강제 교체합니다.
+                __result = new LocString("combat_messages", "MATERIALS_MISSING");
             }
         }
     }

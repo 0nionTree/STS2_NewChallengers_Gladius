@@ -4,6 +4,8 @@ using BaseLib.Utils;
 using Gladius.GladiusCode.Character;
 using Gladius.GladiusCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models;
 
 namespace Gladius.GladiusCode.Cards;
 
@@ -35,5 +37,23 @@ public abstract class GladiusCard(
     //Uses card_portraits/card_name.png as image path. These should be smaller images.
     public override string PortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
-    
+
+    protected virtual async Task Material(PlayerChoiceContext choiceContext, CardPlay cardPlay){}
+
+    protected async Task Alchemy(
+        PlayerChoiceContext choiceContext, 
+        int amountToExhaust, 
+        string targetCardId, 
+        Action<CardModel> onMaterialExhausted)
+    {
+        CardPile pile = PileType.Hand.GetPile(base.Owner);
+        
+        /*
+        var selection = await choiceContext.SelectCardsFromHand(
+            amountToExhaust, 
+            c => c.Tags.Contains(CardTag.Material), // 가정된 태그
+            "재료로 사용할 카드를 선택하세요."
+        );
+        */
+    }
 }
