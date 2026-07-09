@@ -24,8 +24,7 @@ public class WindStone() : GladiusCard(1, CardType.Attack, CardRarity.Token, Tar
         [new IntVar("SwiftAmount", 1m), new CardsVar(1)];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<HornedSword>(), 
-        HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 
         HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
         ..HoverTipFactory.FromEnchantment<Swift>(DynamicVars["SwiftAmount"].IntValue)];
 

@@ -18,6 +18,7 @@ using MegaCrit.Sts2.Core.Settings;
 using MegaCrit.Sts2.Core.Saves;
 using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Models.Enchantments;
 
 namespace Gladius;
 
@@ -29,7 +30,11 @@ public class WindGuidance() : GladiusCard(1, CardType.Attack, CardRarity.Common,
         [new DamageVar(10m, DamageProps.card)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<WindStone>(IsUpgraded)];
+        [HoverTipFactory.FromCard<WindStone>(IsUpgraded),
+        HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 
+        HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
+        ..HoverTipFactory.FromEnchantment<Swift>(DynamicVars["SwiftAmount"].IntValue)];
+    
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

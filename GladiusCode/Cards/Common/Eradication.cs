@@ -17,6 +17,7 @@ using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.Settings;
 using MegaCrit.Sts2.Core.Saves;
 using BaseLib.Extensions;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;
 
@@ -28,6 +29,9 @@ public class Eradication() : GladiusCard(1, CardType.Attack, CardRarity.Common, 
         [new DamageVar(5m, DamageProps.card), new PowerVar<WeakPower>(1m)];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromPower<WeakPower>()];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

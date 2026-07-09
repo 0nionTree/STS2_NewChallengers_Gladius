@@ -58,6 +58,6 @@ public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
     protected override void OnUpgrade()
     {
         base.DynamicVars.Damage.UpgradeValueBy(3m);
-        base.DynamicVars["Increase"].UpgradeValueBy(4m);
+        base.DynamicVars["Increase"].UpgradeValueBy(1m);
     }
 }

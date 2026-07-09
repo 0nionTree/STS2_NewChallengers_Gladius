@@ -1,8 +1,8 @@
 {
     "GLADIUS-WROUGHT_IRON.description": "",
     "GLADIUS-WROUGHT_IRON.title": "Wrought Iron",
-    "GLADIUS-WIND_STONE.description": "Draw {Cards:diff()} {Cards:plural:card|cards}.\n[gold]Alchemy[/gold] with this [gold]Enchants[/gold] the [gold]Artifact[/gold] with [purple]Swift[/purple] [blue]1[/blue]",
-    "GLADIUS-WIND_STONE.title": "WindStone",
+    "GLADIUS-WIND_STONE.description": "Draw {Cards:diff()} {Cards:plural:card|cards}.\n[gold]Alchemy[/gold] with this [gold]Enchants[/gold] the [gold]Artifact[/gold] with [purple]Swift[/purple] [blue]1[/blue].",
+    "GLADIUS-WIND_STONE.title": "Wind Stone",
 
     "GLADIUS-STRIKE_GLADIUS.description": "Deal {Damage:diff()} damage.",
     "GLADIUS-STRIKE_GLADIUS.title": "Strike",
