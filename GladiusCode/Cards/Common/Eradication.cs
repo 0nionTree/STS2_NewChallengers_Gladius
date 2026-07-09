@@ -24,7 +24,7 @@ namespace Gladius;
 [Pool(typeof(GladiusCardPool))]
 public class Eradication() : GladiusCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    // 깨뜨리기
+    // 퇴치
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(5m, DamageProps.card), new PowerVar<WeakPower>(1m)];
 

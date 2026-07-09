@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.Localization;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -18,23 +19,23 @@ using MegaCrit.Sts2.Core.Settings;
 using MegaCrit.Sts2.Core.Saves;
 using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Models.Enchantments;
 
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class WindGuidance() : GladiusCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public class AlchemicStrike() : GladiusCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    // 바람의 인도
+    // 연성 타격
+    protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(10m, DamageProps.card)];
+        [new DamageVar(9m, DamageProps.card)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<WindStone>(IsUpgraded),
+        [HoverTipFactory.FromCard<DragonScale>(IsUpgraded), 
         HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 
-        HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
-        ..HoverTipFactory.FromEnchantment<Swift>(DynamicVars["SwiftAmount"].IntValue)];
-    
+        HoverTipFactory.FromKeyword(GladiusKeywords.Artifact), 
+        HoverTipFactory.FromKeyword(GladiusKeywords.Material)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -44,20 +45,24 @@ public class WindGuidance() : GladiusCard(1, CardType.Attack, CardRarity.Common,
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        // 바람 돌 생성
-        CardModel cardModel = CombatState!.CreateCard<WindStone>(Owner);
-        if (IsUpgraded) // 강화된 상태라면 생성한 카드 강화
+        // 손에 Material 키워드를 가진 카드가 하나라도 있는지 확인
+        var hand = PileType.Hand.GetPile(Owner);
+        bool hasMaterial = hand?.Cards?.Any(c => c.Keywords.Contains(GladiusKeywords.Material)) ?? false;
+        if (hasMaterial)
         {
-            CardCmd.Upgrade(cardModel);
+            // Material 키워드를 가진 카드가 있다면 연성
+            await Alchemy<DragonScale>(choiceContext, IsUpgraded);
         }
-        // 생성한 카드 손으로 가져오기
-        await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, Owner);
-		await Cmd.Wait(0.2f);
-
+        else
+        {
+            // Material 키워드를 가진 카드가 없다면 문구 출력
+            LocString locString = new LocString("combat_messages", "MATERIALS_MISSING");
+            TalkCmd.Play(locString, Owner.Creature, VfxColor.White);
+        }
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(3m);
+        DynamicVars.Damage.UpgradeValueBy(2m);
     }
 }
