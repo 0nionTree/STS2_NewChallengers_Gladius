@@ -17,7 +17,7 @@ public class SwordGirding() : GladiusCard(1, CardType.Skill, CardRarity.Basic, T
     protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { GladiusTags.Alchemy };
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<HornedSword>(), 
+        [HoverTipFactory.FromCard<HornedSword>(IsUpgraded), 
         HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 
         HoverTipFactory.FromKeyword(GladiusKeywords.Artifact), 
         HoverTipFactory.FromKeyword(GladiusKeywords.Material)];
@@ -25,7 +25,7 @@ public class SwordGirding() : GladiusCard(1, CardType.Skill, CardRarity.Basic, T
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await Alchemy<HornedSword>(choiceContext);
+        await Alchemy<HornedSword>(choiceContext, IsUpgraded);
     }
 
     protected override void OnUpgrade()

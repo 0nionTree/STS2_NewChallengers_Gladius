@@ -1,6 +1,8 @@
 {
     "GLADIUS-WROUGHT_IRON.description": "",
-    "GLADIUS-WROUGHT_IRON.title": "WroughtIron",
+    "GLADIUS-WROUGHT_IRON.title": "Wrought Iron",
+    "GLADIUS-WIND_STONE.description": "Draw {Cards:diff()} {Cards:plural:card|cards}.\n[gold]Alchemy[/gold] with this [gold]Enchants[/gold] the [gold]Artifact[/gold] with [purple]Swift[/purple] [blue]1[/blue]",
+    "GLADIUS-WIND_STONE.title": "WindStone",
 
     "GLADIUS-STRIKE_GLADIUS.description": "Deal {Damage:diff()} damage.",
     "GLADIUS-STRIKE_GLADIUS.title": "Strike",
@@ -8,14 +10,16 @@
     "GLADIUS-BREAKDOWN.title": "Breakdown",
     "GLADIUS-ERADICATION.description": "Deal {Damage:diff()} damage.\nApply {WeakPower:diff()} [gold]Weak[/gold].",
     "GLADIUS-ERADICATION.title": "Eradication",
-    "GLADIUS-DOWNSWING.description": "Deal {Damage:diff()} damage.\nDiscard {Cards:diff()} {Cards:plural:card|cards} from your [gold]Draw Pile[/gold].\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
-    "GLADIUS-DOWNSWING.title": "Downswing",
+    "GLADIUS-OVERHAND.description": "Deal {Damage:diff()} damage.\nDiscard 1 card from your [gold]Draw Pile[/gold].\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
+    "GLADIUS-OVERHAND.title": "Overhand",
+    "GLADIUS-WIND_GUIDANCE.description": "Deal {Damage:diff()} damage.\nAdd a [gold]Wind Stone[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-WIND_GUIDANCE.title": "Wind Guidance",
     
     "GLADIUS-DEFEND_GLADIUS.description": "Gain {Block:diff()} Block",
     "GLADIUS-DEFEND_GLADIUS.title": "Defend",
     "GLADIUS-SWORD_GIRDING.description": "[gold]Alchemy[/gold] a [gold]HornedSword[/gold] into your [gold]Hand[/gold].",
     "GLADIUS-SWORD_GIRDING.title": "SwordGirding",
-    "GLADIUS-GATHER_INGREDIENTS.description": "Gain {Block:diff()} Block\nAdd a [gold]WroughtIron[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-GATHER_INGREDIENTS.description": "Gain {Block:diff()} Block\nAdd a [gold]Wrought Iron[/gold] into your [gold]Hand[/gold].",
     "GLADIUS-GATHER_INGREDIENTS.title": "Gather Ingredients",
 
     "GLADIUS-HORNED_SWORD.description": "Deal {Damage:diff()} damage.\nIncrease this card's damage by {Increase:diff()} this combat.",

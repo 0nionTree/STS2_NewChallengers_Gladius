@@ -21,15 +21,21 @@ public class GatherIngredients() : GladiusCard(1, CardType.Skill, CardRarity.Bas
         [new BlockVar(3m, BlockProps.card)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Material), HoverTipFactory.FromCard<WroughtIron>()];
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Material), HoverTipFactory.FromCard<WroughtIron>(IsUpgraded)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 1. 방어도 획득
+        // 방어도 획득
         await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-
-		await CardPileCmd.AddGeneratedCardToCombat(CombatState!.CreateCard<WroughtIron>(Owner), PileType.Hand, Owner);
-		await Cmd.Wait(0.3f);
+        // 연철 생성
+        CardModel cardModel = CombatState!.CreateCard<WroughtIron>(Owner);
+        if (IsUpgraded) // 강화된 상태라면 생성한 카드 강화
+        {
+            CardCmd.Upgrade(cardModel);
+        }
+        // 생성한 카드 손으로 가져오기
+        await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, Owner);
+		await Cmd.Wait(0.2f);
     }
 
     protected override void OnUpgrade()

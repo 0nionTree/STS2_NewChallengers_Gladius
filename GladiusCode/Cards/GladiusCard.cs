@@ -43,7 +43,7 @@ public abstract class GladiusCard(
 
     protected virtual async Task Material(PlayerChoiceContext choiceContext, CardModel artifectCard){}
 
-    protected async Task Alchemy<T>(PlayerChoiceContext choiceContext) where T : CardModel
+    protected async Task Alchemy<T>(PlayerChoiceContext choiceContext, bool isUpgraded) where T : CardModel
     {
         var promptString = new LocString("combat_messages", "SELECT_MATERIAL");
 		// var를 사용하거나 CardModel?을 사용하여 null 가능성을 명시합니다.
@@ -59,12 +59,17 @@ public abstract class GladiusCard(
         // 카드가 정상적으로 선택되었는지 확인 (null 체크)
         if (cardModel != null)
         {
-            // 1. Artifect(연성물)카드 생성
+            // Artifect(연성물)카드 생성
             T artifectCard = CombatState!.CreateCard<T>(Owner);
+            if (isUpgraded) // 강화 버전을 생성하는지 확인
+            {
+                CardCmd.Upgrade(artifectCard);
+            }
+            // 손에 연성물 카드 추가
             await CardPileCmd.AddGeneratedCardToCombat(artifectCard, PileType.Hand, Owner);
-            // 2. 소재 카드를 소멸 (Exhaust) 처리
+            // 소재 카드를 소멸 (Exhaust) 처리
             await CardCmd.Exhaust(choiceContext, cardModel);
-            // 3. 선택한 소재 카드의 Material() 함수 실행
+            // 선택한 소재 카드의 Material() 함수 실행
             // CardModel을 Material() 함수가 정의된 커스텀 클래스로 캐스팅 (예: GladiusCard)
             if (cardModel is GladiusCard gladiusCard)
             {

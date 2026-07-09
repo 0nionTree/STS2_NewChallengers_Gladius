@@ -43,7 +43,8 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<SwordGirding>(),
             ModelDb.Card<Breakdown>(),
             ModelDb.Card<Eradication>(),
-            ModelDb.Card<Downswing>()
+            ModelDb.Card<Overhand>(),
+            ModelDb.Card<WindGuidance>()
         };
     }
 }

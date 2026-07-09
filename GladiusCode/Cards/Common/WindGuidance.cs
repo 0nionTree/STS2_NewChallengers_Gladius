@@ -17,15 +17,19 @@ using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.Settings;
 using MegaCrit.Sts2.Core.Saves;
 using BaseLib.Extensions;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class Downswing() : GladiusCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public class WindGuidance() : GladiusCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     // 내려치기
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(9m, DamageProps.card), new CardsVar(1)];
+        [new DamageVar(10m, DamageProps.card)];
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromCard<WindStone>(IsUpgraded)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -35,28 +39,20 @@ public class Downswing() : GladiusCard(1, CardType.Attack, CardRarity.Common, Ta
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        // 뽑을 카드 더미의 n장 선택
-        List<CardModel> selection = (await CardSelectCmd.FromCombatPile(
-            choiceContext, 
-            PileType.Draw.GetPile(base.Owner), 
-            base.Owner, 
-            new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 1)
-        )).ToList();
-        // 선택된 카드가 있다면, 반복문을 통해 하나씩 버리기
-        if (selection != null && selection.Count > 0)
+        // 바람 돌 생성
+        CardModel cardModel = CombatState!.CreateCard<WindStone>(Owner);
+        if (IsUpgraded) // 강화된 상태라면 생성한 카드 강화
         {
-            foreach (CardModel item in selection)
-            {
-                await CardCmd.Discard(choiceContext, item);
-            }
+            CardCmd.Upgrade(cardModel);
         }
-        // 카드 뽑기
-		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, base.Owner);
+        // 생성한 카드 손으로 가져오기
+        await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, Owner);
+		await Cmd.Wait(0.2f);
+
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(3m);
-        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }
