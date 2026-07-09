@@ -1,0 +1,5 @@
+{
+    "GLADIUS-DRAGON_AURA_POWER.description": "용기 1마다 공격 카드의 피해량이 20% 증가합니다.\n공격 카드를 사용하거나 턴 종료 시, 용기가 1 감소합니다.",
+    "GLADIUS-DRAGON_AURA_POWER.smartDescription": "공격 카드의 피해량이 [blue]{TotalBonus}%[/blue] 증가합니다.\n공격 카드를 사용하거나 턴 종료 시, 용기가 1 감소합니다.",
+    "GLADIUS-DRAGON_AURA_POWER.title": "용기"
+}

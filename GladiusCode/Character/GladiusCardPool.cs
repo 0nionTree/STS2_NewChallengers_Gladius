@@ -44,7 +44,9 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<Breakdown>(),
             ModelDb.Card<Eradication>(),
             ModelDb.Card<Overhand>(),
-            ModelDb.Card<WindGuidance>()
+            ModelDb.Card<WindGuidance>(),
+            ModelDb.Card<AlchemicStrike>(),
+            ModelDb.Card<StraightPunch>()
         };
     }
 }

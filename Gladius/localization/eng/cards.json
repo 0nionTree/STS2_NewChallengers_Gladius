@@ -16,6 +16,8 @@
     "GLADIUS-WIND_GUIDANCE.title": "Wind Guidance",
     "GLADIUS-ALCHEMIC_STRIKE.description": "Deal {Damage:diff()} damage.\n[gold]Alchemy[/gold] a [gold]Dragon Scale[/gold] into your [gold]Hand[/gold].",
     "GLADIUS-ALCHEMIC_STRIKE.title": "AlchemicStrike",
+    "GLADIUS-STRAIGHT_PUNCH.description": "Deal {Damage:diff()} damage.\nGain {DragonAuraPower:diff()} [gold]DragonAura[/gold].",
+    "GLADIUS-STRAIGHT_PUNCH.title": "StraightPunch",
     
     "GLADIUS-DEFEND_GLADIUS.description": "Gain {Block:diff()} Block",
     "GLADIUS-DEFEND_GLADIUS.title": "Defend",

@@ -1,3 +1,5 @@
 {
-  
+    "GLADIUS-DRAGON_AURA_POWER.description": "Increases Attack damage by 20% per [gold]Dragon Aura[/gold].\nLose 1 [gold]Dragon Aura[/gold] whenever you play an Attack or at the end of your turn.",
+    "GLADIUS-DRAGON_AURA_POWER.smartDescription": "Increases Attack damage by [blue]{TotalBonus}%[/blue].\nLose 1 [gold]Dragon Aura[/gold] whenever you play an Attack or at the end of your turn.",
+    "GLADIUS-DRAGON_AURA_POWER.title": "Dragon Aura"
 }
