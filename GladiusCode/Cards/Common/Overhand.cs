@@ -6,17 +6,8 @@ using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
-using Gladius.GladiusCode;
-using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Nodes.Rooms;
-using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
-using MegaCrit.Sts2.Core.Settings;
-using MegaCrit.Sts2.Core.Saves;
-using BaseLib.Extensions;
 
 namespace Gladius;
 

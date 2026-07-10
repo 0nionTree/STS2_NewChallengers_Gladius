@@ -9,7 +9,6 @@ using Gladius.GladiusCode.Character;
 using MegaCrit.Sts2.Core.HoverTips;
 using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.CardSelection;
 
 namespace Gladius;
 

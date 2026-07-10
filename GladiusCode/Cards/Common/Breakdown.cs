@@ -10,7 +10,6 @@ using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Models;
-using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;

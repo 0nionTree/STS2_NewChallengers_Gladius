@@ -4,12 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using Gladius.GladiusCode;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Enchantments;
-using Godot;
 
 namespace Gladius;
 

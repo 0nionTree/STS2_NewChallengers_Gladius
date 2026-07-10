@@ -1,12 +1,10 @@
 using Gladius.GladiusCode.Character;
 using Gladius.GladiusCode.Cards;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.HoverTips;
 using Gladius.GladiusCode;
-using MegaCrit.Sts2.Core.Models;
 
 namespace Gladius;
 

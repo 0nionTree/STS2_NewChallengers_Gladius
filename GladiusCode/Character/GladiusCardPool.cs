@@ -36,17 +36,33 @@ public class GladiusCardPool : CustomCardPoolModel
 
     protected override CardModel[] GenerateAllCards()
     {
-        return new CardModel[]
-        {
+        return
+        [
+            // 기본 공격 카드
             ModelDb.Card<StrikeGladius>(),
+            // 기본 스킬 카드
             ModelDb.Card<DefendGladius>(),
             ModelDb.Card<SwordGirding>(),
+            ModelDb.Card<GatherIngredients>(),
+            // 일반 공격 카드
             ModelDb.Card<Breakdown>(),
             ModelDb.Card<Eradication>(),
             ModelDb.Card<Overhand>(),
             ModelDb.Card<WindGuidance>(),
             ModelDb.Card<AlchemicStrike>(),
-            ModelDb.Card<StraightPunch>()
-        };
+            ModelDb.Card<StraightPunch>(),
+            ModelDb.Card<StraightPunch>(),
+            ModelDb.Card<WheelKick>(),
+            ModelDb.Card<Uppercut>(),
+            ModelDb.Card<Pulverize>(),
+            // 일반 스킬 카드
+            ModelDb.Card<Cleanup>()
+            // 고급 공격 카드
+            // 고급 스킬 카드
+            // 고급 파워 카드
+            // 희귀 공격 카드
+            // 희귀 스킬 카드
+            // 희귀 파워 카드
+        ];
     }
 }

@@ -25,6 +25,8 @@
     "GLADIUS-UPPERCUT.description": "Deal {Damage:diff()} damage.\nPut a card from your [gold]Discard Pile[/gold] into your [gold]Hand[/gold].\n[gold]Retain[/gold] it this turn.",
     "GLADIUS-UPPERCUT.selectionScreenPrompt": "Choose a card to put back in your Hand.",
     "GLADIUS-UPPERCUT.title": "Uppercut",
+    "GLADIUS-PULVERIZE.description": "Deal {Damage:diff()} damage.",
+    "GLADIUS-PULVERIZE.title": "Pulverize",
     
     "GLADIUS-DEFEND_GLADIUS.description": "Gain {Block:diff()} Block",
     "GLADIUS-DEFEND_GLADIUS.title": "Defend",
@@ -32,6 +34,8 @@
     "GLADIUS-SWORD_GIRDING.title": "SwordGirding",
     "GLADIUS-GATHER_INGREDIENTS.description": "Gain {Block:diff()} Block\nAdd a [gold]Wrought Iron[/gold] into your [gold]Hand[/gold].",
     "GLADIUS-GATHER_INGREDIENTS.title": "Gather Ingredients",
+    "GLADIUS-CLEANUP.description": "[gold]Exhaust[/gold] a [gold]Material[/gold] card in your [gold]Hand[/gold].\nGain {Block:diff()} Block",
+    "GLADIUS-CLEANUP.title": "Cleanup",
 
     "GLADIUS-HORNED_SWORD.description": "Deal {Damage:diff()} damage.\nIncrease this card's damage by {Increase:diff()} this combat.",
     "GLADIUS-HORNED_SWORD.title": "HornedSword",
