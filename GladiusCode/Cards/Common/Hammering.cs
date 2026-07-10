@@ -23,14 +23,11 @@ using MegaCrit.Sts2.Core.Models.Enchantments;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class StraightPunch() : GladiusCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public class Hammering() : GladiusCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    // 정권 지르기
+    // 망치질
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(8m, DamageProps.card), new IntVar("DragonAuraPower", 1m)];
-
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<DragonAuraPower>()];
+        [new DamageVar(6m, DamageProps.card)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -40,13 +37,24 @@ public class StraightPunch() : GladiusCard(1, CardType.Attack, CardRarity.Common
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        // 용기 획득
-		await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, DynamicVars["DragonAuraPower"].IntValue, Owner.Creature, this);
+        // 카드 강화
+        if (IsUpgraded)
+		{
+			foreach (CardModel item in PileType.Hand.GetPile(Owner).Cards.Where((CardModel c) => c.IsUpgradable))
+			{
+				CardCmd.Upgrade(item);
+			}
+			return;
+		}
+		CardModel? cardModel = await CardSelectCmd.FromHandForUpgrade(choiceContext, Owner, this);
+		if (cardModel != null)
+		{
+			CardCmd.Upgrade(cardModel);
+		}
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
-        DynamicVars["DragonAuraPower"].UpgradeValueBy(1m);
+        DynamicVars.Damage.UpgradeValueBy(3m);
     }
 }

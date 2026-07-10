@@ -23,14 +23,14 @@ using MegaCrit.Sts2.Core.Models.Enchantments;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class StraightPunch() : GladiusCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public class Uppercut() : GladiusCard(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    // 정권 지르기
+    // 올려치기
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(8m, DamageProps.card), new IntVar("DragonAuraPower", 1m)];
+        [new DamageVar(12m, DamageProps.card)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<DragonAuraPower>()];
+        [HoverTipFactory.FromKeyword(CardKeyword.Retain)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -40,13 +40,19 @@ public class StraightPunch() : GladiusCard(1, CardType.Attack, CardRarity.Common
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        // 용기 획득
-		await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, DynamicVars["DragonAuraPower"].IntValue, Owner.Creature, this);
+        // 버린 카드 더미의 카드 선택
+        CardModel? cardModel = (await CardSelectCmd.FromCombatPile(prefs: new CardSelectorPrefs(SelectionScreenPrompt, 1), context: choiceContext, pile: PileType.Discard.GetPile(Owner), player: Owner)).FirstOrDefault();
+		if (cardModel != null)
+		{
+            // 선택한 카드에 이번 턴 보존 추가
+            cardModel.GiveSingleTurnRetain();
+            // 선택한 카드 손에 넣기
+			await CardPileCmd.Add(cardModel, PileType.Hand);
+		}
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
-        DynamicVars["DragonAuraPower"].UpgradeValueBy(1m);
+        DynamicVars.Damage.UpgradeValueBy(4m);
     }
 }

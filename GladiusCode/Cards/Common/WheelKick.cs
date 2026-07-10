@@ -23,30 +23,25 @@ using MegaCrit.Sts2.Core.Models.Enchantments;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class StraightPunch() : GladiusCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public class WheelKick() : GladiusCard(1, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 {
-    // 정권 지르기
+    // 돌려차기
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(8m, DamageProps.card), new IntVar("DragonAuraPower", 1m)];
+        [new DamageVar(9m, DamageProps.card)];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<DragonAuraPower>()];
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+		[CardKeyword.Ethereal];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 대상 확인
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        // 피해량 계산 및 이펙트 출력
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
-        // 용기 획득
-		await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, DynamicVars["DragonAuraPower"].IntValue, Owner.Creature, this);
+        // 여러 적 공격
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!)
+			.WithHitFx("vfx/vfx_attack_blunt", null, "heavy_attack.mp3")
+			.Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
-        DynamicVars["DragonAuraPower"].UpgradeValueBy(1m);
+        DynamicVars.Damage.UpgradeValueBy(4m);
     }
 }
