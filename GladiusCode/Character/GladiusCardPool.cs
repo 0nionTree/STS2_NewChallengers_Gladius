@@ -56,7 +56,11 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<Uppercut>(),
             ModelDb.Card<Pulverize>(),
             // 일반 스킬 카드
-            ModelDb.Card<Cleanup>()
+            ModelDb.Card<Cleanup>(),
+            ModelDb.Card<Sculpting>(),
+            ModelDb.Card<DustOff>(),
+            ModelDb.Card<Guideline>(),
+            ModelDb.Card<GoodSign>()
             // 고급 공격 카드
             // 고급 스킬 카드
             // 고급 파워 카드

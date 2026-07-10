@@ -2,7 +2,6 @@ using Gladius.GladiusCode.Cards;
 using Gladius.GladiusCode.Character;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
@@ -15,11 +14,11 @@ using MegaCrit.Sts2.Core.HoverTips;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class Breakdown() : GladiusCard(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public class Guideline() : GladiusCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    // 깨뜨리기
+    // 길잡이
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new IntVar("durability", 1), new DamageVar(12m, DamageProps.card)];
+        [new IntVar("durability", 1), new CardsVar(2)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact)];
@@ -28,6 +27,7 @@ public class Breakdown() : GladiusCard(0, CardType.Attack, CardRarity.Common, Ta
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        // 손패의 연성물 검색
         var promptString = new LocString("combat_messages", "SELECT_ARTIFECT");
 
         var cardModel = (await CardSelectCmd.FromHand(
@@ -37,7 +37,7 @@ public class Breakdown() : GladiusCard(0, CardType.Attack, CardRarity.Common, Ta
             filter: (CardModel card) => card.Keywords.Contains(GladiusKeywords.Artifact), 
             source: this
         )).FirstOrDefault();
-
+        // 연성물 내구도 감소
         if (cardModel != null)
         {
             cardModel.DynamicVars["CurrentDurability"].BaseValue -= DynamicVars["durability"].IntValue;
@@ -47,15 +47,12 @@ public class Breakdown() : GladiusCard(0, CardType.Attack, CardRarity.Common, Ta
                 cardModel.DynamicVars["CurrentDurabilisy"].BaseValue = cardModel.DynamicVars["BaseDurability"].BaseValue;
             }
         }
-        
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
+        // 카드 뽑기
+		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(3m);
+        EnergyCost.UpgradeBy(-1);
     }
 }

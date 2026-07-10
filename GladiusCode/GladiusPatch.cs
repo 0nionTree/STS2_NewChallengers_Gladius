@@ -42,7 +42,9 @@ namespace Gladius.GladiusCode.Patches
             Control? cardContainer = __instance.GetNodeOrNull<Control>("CardContainer");
             if (cardContainer == null) return;
 
-            if (__instance.Model is IDurableCard durableCard) 
+            CardModel cardModel = __instance.Model!;
+
+            if (cardModel.Keywords.Contains(GladiusKeywords.Artifact)) 
             {
                 TextureRect? durIcon = cardContainer.GetNodeOrNull<TextureRect>("DurabilityIcon");
                 Label? durLabel = null;
@@ -91,14 +93,14 @@ namespace Gladius.GladiusCode.Patches
                     durLabel = durIcon.GetNode<Label>("DurabilityLabel");
                 }
 
-                if (durableCard.Durability > 0)
+                durIcon.Visible = true;
+                if (cardModel.DynamicVars["CurrentDurability"].BaseValue > 0)
                 {
-                    durIcon.Visible = true;
-                    durLabel.Text = durableCard.Durability.ToString();
+                    durLabel.Text = cardModel.DynamicVars["CurrentDurability"].BaseValue.ToString();
                 }
                 else
                 {
-                    durIcon.Visible = false;
+                    durLabel.Text = "X";
                 }
             }
             else
@@ -137,7 +139,7 @@ namespace Gladius.GladiusCode.Patches
     }
 
     // =========================================================================
-    // [효과 1] 턴 종료 시 패 유지 (성능 렉 없음!)
+    // [효과 1] 턴 종료 시 패 유지
     // =========================================================================
     [HarmonyPatch(typeof(CardModel), "get_ShouldRetainThisTurn")]
     public static class MaterializedShouldRetainPatch
@@ -165,15 +167,15 @@ namespace Gladius.GladiusCode.Patches
         [HarmonyPrefix]
         public static void Prefix(CardModel __instance)
         {
-            if (__instance is IDurableCard durableCard)
+            if (__instance.Keywords.Contains(GladiusKeywords.Artifact))
             {
-                durableCard.Durability--;
+                __instance.DynamicVars["CurrentDurability"].BaseValue--;
             }
         }
     }
 
     // =========================================================================
-    // [효과 3] 카드의 목적지를 결정합니다. (Material 조건 추가됨)
+    // [효과 3] 카드의 목적지를 결정합니다.
     // =========================================================================
     [HarmonyPatch(typeof(CardModel), "GetResultPileTypeForCardPlay")]
     public static class MaterializedPlayPatch
@@ -181,22 +183,17 @@ namespace Gladius.GladiusCode.Patches
         [HarmonyPostfix]
         public static void Postfix(CardModel __instance, ref PileType __result)
         {
-            if (__instance is IDurableCard durableCard)
+            if (__instance.Keywords.Contains(GladiusKeywords.Artifact))
             {
-                if (durableCard.Durability <= 0)
+                if (__instance.DynamicVars["CurrentDurability"].BaseValue <= 0)
                 {
                     __result = PileType.Exhaust; 
+                    __instance.DynamicVars["CurrentDurability"].BaseValue = __instance.DynamicVars["BaseDurability"].BaseValue;
                 }
                 else if (__result == PileType.Discard)
                 {
                     __result = PileType.Hand; 
                 }
-            }
-            // 일반적인 '무한 연성물' (내구도 시스템이 없는 경우)
-            else if (__instance.Keywords.Contains(GladiusKeywords.Artifact) 
-                     && __result == PileType.Discard)
-            {
-                __result = PileType.Hand;
             }
         }
     }

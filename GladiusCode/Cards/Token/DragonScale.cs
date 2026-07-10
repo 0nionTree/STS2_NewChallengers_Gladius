@@ -11,28 +11,25 @@ using Gladius.GladiusCode;
 namespace Gladius;
 
 [Pool(typeof(TokenCardPool))]
-public class DragonScale() : GladiusCard(0, CardType.Attack, CardRarity.Token, TargetType.AllEnemies), IDurableCard
+public class DragonScale() : GladiusCard(0, CardType.Attack, CardRarity.Token, TargetType.AllEnemies)
 {
-	// 용 비늘 - 연성물
-    int IDurableCard.Durability { get; set; } = 1;
-
-	private const string _increaseKey = "Increase";
-
+    // 용 비늘 - 연성물
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(5m, DamageProps.card)];
+        [new DamageVar(5m, DamageProps.card), 
+		new DynamicVar("BaseDurability", 1), new DynamicVar("CurrentDurability", 1)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[GladiusKeywords.Artifact];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!)
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!)
 			.WithHitFx("vfx/vfx_attack_blunt", null, "heavy_attack.mp3")
 			.Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars.Damage.UpgradeValueBy(2m);
     }
 }

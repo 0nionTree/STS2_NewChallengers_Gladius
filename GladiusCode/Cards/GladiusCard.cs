@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Cards;
 
 namespace Gladius.GladiusCode.Cards;
 
@@ -43,7 +44,7 @@ public abstract class GladiusCard(
 
     protected virtual async Task Material(PlayerChoiceContext choiceContext, CardModel artifectCard){}
 
-    protected async Task Alchemy<T>(PlayerChoiceContext choiceContext, bool isUpgraded) where T : CardModel
+    protected async Task<T?> Alchemy<T>(PlayerChoiceContext choiceContext, bool isUpgraded, int durability = 0) where T : CardModel
     {
         var promptString = new LocString("combat_messages", "SELECT_MATERIAL");
 		// var를 사용하거나 CardModel?을 사용하여 null 가능성을 명시합니다.
@@ -65,17 +66,33 @@ public abstract class GladiusCard(
             {
                 CardCmd.Upgrade(artifectCard);
             }
-            // 손에 연성물 카드 추가
-            await CardPileCmd.AddGeneratedCardToCombat(artifectCard, PileType.Hand, Owner);
-            // 소재 카드를 소멸 (Exhaust) 처리
-            await CardCmd.Exhaust(choiceContext, cardModel);
+            // 내구도 증감 지정이 있다면 연성물 카드의 내구도 증감
+            if (durability != 0)
+            {
+                artifectCard.DynamicVars["CurrentDurability"].BaseValue += (int)durability;
+            }
             // 선택한 소재 카드의 Material() 함수 실행
             // CardModel을 Material() 함수가 정의된 커스텀 클래스로 캐스팅 (예: GladiusCard)
             if (cardModel is GladiusCard gladiusCard)
             {
                 await gladiusCard.Material(choiceContext, artifectCard); // 형변환에 성공했다면 함수 실행
             }
+            // 소재 카드를 연성물 카드로 변화
+            await CardCmd.Transform(cardModel, artifectCard);
             await Cmd.Wait(0.2f);
+
+            // 최종 연성된 연성물 카드의 내구도가 0 이하라면 소멸
+            if (artifectCard.DynamicVars["CurrentDurability"].BaseValue <= 0)
+            {
+                await CardCmd.Exhaust(choiceContext, artifectCard);
+                await Cmd.Wait(0.2f);
+                artifectCard.DynamicVars["CurrentDurability"].BaseValue = artifectCard.DynamicVars["BaseDurability"].BaseValue;
+
+                return null;
+            }
+
+            return artifectCard;
         }
+        return null;
     }
 }

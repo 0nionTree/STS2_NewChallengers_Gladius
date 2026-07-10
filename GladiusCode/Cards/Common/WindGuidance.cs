@@ -22,10 +22,8 @@ public class WindGuidance() : GladiusCard(1, CardType.Attack, CardRarity.Common,
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<WindStone>(IsUpgraded),
-        HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 
-        HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
-        ..HoverTipFactory.FromEnchantment<Swift>(DynamicVars["SwiftAmount"].IntValue)];
-    
+        HoverTipFactory.FromKeyword(GladiusKeywords.Material),
+        ..HoverTipFactory.FromEnchantment<Swift>(IsUpgradable?1:2)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -44,7 +42,6 @@ public class WindGuidance() : GladiusCard(1, CardType.Attack, CardRarity.Common,
         // 생성한 카드 손으로 가져오기
         await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, Owner);
 		await Cmd.Wait(0.2f);
-
     }
 
     protected override void OnUpgrade()

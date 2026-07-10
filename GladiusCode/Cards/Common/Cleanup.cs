@@ -10,6 +10,7 @@ using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;
 
@@ -22,6 +23,9 @@ public class Cleanup() : GladiusCard(0, CardType.Skill, CardRarity.Common, Targe
 
     protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { GladiusTags.Alchemy };
     
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Material)];
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 카드 선택 안내 문구 지정
