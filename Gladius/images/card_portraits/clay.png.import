@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7nu6c37j4sth"
-path="res://.godot/imported/wrought_iron.png-adea05df06a7bb7578ceadb72d230547.ctex"
+uid="uid://mca01nec6i85"
+path="res://.godot/imported/clay.png-99f1f82ca2800fe08608cd92132774d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Gladius/images/card_portraits/big/wrought_iron.png"
-dest_files=["res://.godot/imported/wrought_iron.png-adea05df06a7bb7578ceadb72d230547.ctex"]
+source_file="res://Gladius/images/card_portraits/clay.png"
+dest_files=["res://.godot/imported/clay.png-99f1f82ca2800fe08608cd92132774d0.ctex"]
 
 [params]
 

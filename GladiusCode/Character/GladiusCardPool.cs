@@ -62,8 +62,12 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<Guideline>(),
             ModelDb.Card<GoodSign>(),
             ModelDb.Card<DuelingStance>(),
-            ModelDb.Card<IngotMaking>()
+            ModelDb.Card<IngotMaking>(),
+            ModelDb.Card<ScoopingUp>(),
+            ModelDb.Card<Prediction>(),
+            ModelDb.Card<DragonsRoar>(),
             // 고급 공격 카드
+            ModelDb.Card<Punishment>()
             // 고급 스킬 카드
             // 고급 파워 카드
             // 희귀 공격 카드

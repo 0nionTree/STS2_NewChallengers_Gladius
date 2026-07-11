@@ -1,4 +1,6 @@
 {
+    "Basic":"Basic",
+
     "GLADIUS-WROUGHT_IRON.description": "{IfUpgraded:show:[gold]Alchemy[/gold] with this Add Add an unupgraded this card into your [gold]Hand[/gold].|}",
     "GLADIUS-WROUGHT_IRON.title": "Wrought Iron",
     "GLADIUS-WIND_STONE.description": "Draw {Cards:diff()} {Cards:plural:card|cards}.\n[gold]Alchemy[/gold] with this [gold]Enchants[/gold] the [gold]Artifact[/gold] with [purple]Swift[/purple] [blue]1[/blue].",
@@ -7,6 +9,10 @@
     "GLADIUS-THUNDERSTRUCK_WOOD.title": "Thunderstruck Wood",
     "GLADIUS-STEEL.description": "Gain {Block:diff()} Block.\n[gold]Alchemy[/gold] with this increases the [gold]Artifect[/gold]'s [gold]Durability[/gold] by {Durability:diff()}",
     "GLADIUS-STEEL.title": "Steel",
+    "GLADIUS-CLAY.description": "Gain {Block:diff()} Block.",
+    "GLADIUS-CLAY.title": "Clay",
+
+    "Common":"Common",
 
     "GLADIUS-STRIKE_GLADIUS.description": "Deal {Damage:diff()} damage.",
     "GLADIUS-STRIKE_GLADIUS.title": "Strike",
@@ -36,7 +42,7 @@
     "GLADIUS-DEFEND_GLADIUS.title": "Defend",
     "GLADIUS-SWORD_GIRDING.description": "[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Horned Sword+|Horned Sword}[/gold] into your [gold]Hand[/gold].",
     "GLADIUS-SWORD_GIRDING.title": "Sword Girding",
-    "GLADIUS-GATHER_INGREDIENTS.description": "Gain {Block:diff()} Block.\nAdd a [gold]{IfUpgraded:show:Wrought Iron+|Wrought Iron}[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-GATHER_INGREDIENTS.description": "Gain {Block:diff()} Block.\nAdd a [gold]{IfUpgraded:show:Wrought Iron|Wrought Iron}[/gold] into your [gold]Hand[/gold].",
     "GLADIUS-GATHER_INGREDIENTS.title": "Gather Ingredients",
     "GLADIUS-CLEANUP.description": "[gold]Exhaust[/gold] a [gold]Material[/gold] card in your [gold]Hand[/gold].\nGain {Block:diff()} Block",
     "GLADIUS-CLEANUP.title": "Cleanup",
@@ -44,7 +50,7 @@
     "GLADIUS-SCULPTING.title": "Sculpting",
     "GLADIUS-DUST_OFF.description": "Gain {Block:diff()} Block.\nDiscard 1 card from your [gold]Draw Pile[/gold].",
     "GLADIUS-DUST_OFF.title": "Dust Off",
-    "GLADIUS-GUIDELINE.description": "Reduce [gold]Durability[/gold] of an [gold]Artifact[/gold] in your [gold]Hand[/gold] by 1.\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
+    "GLADIUS-GUIDELINE.description": "Reduce [gold]Durability[/gold] of an [gold]Artifact[/gold] in your [gold]Hand[/gold] by 1.\nDiscard 1 card from your [gold]Draw Pile[/gold].\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
     "GLADIUS-GUIDELINE.title": "Guideline",
     "GLADIUS-GOOD_SIGN.description": "Choose a card in your [gold]Hand[/gold] to [gold]Transform[/gold] into [gold]{IfUpgraded:show:Thunderstruck Wood+|Thunderstruck Wood}[/gold].",
     "GLADIUS-GOOD_SIGN.title": "Good Sign",
@@ -52,6 +58,21 @@
     "GLADIUS-DUELING_STANCE.title": "Dueling Stance",
     "GLADIUS-INGOT_MAKING.description": "Add a [gold]{IfUpgraded:show:Steel+|Steel}[/gold] into your [gold]Hand[/gold].",
     "GLADIUS-INGOT_MAKING.title": "Ingot Making",
+    "GLADIUS-SCOOPING_UP.description": "Gain {Block:diff()} Block.\nAdd {Cards:diff()} [gold]{Cards:plural:Clay|Clays}[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-SCOOPING_UP.title": "Scooping Up",
+    "GLADIUS-PREDICTION.description": "Next turn, gain {BlockNextTurn:diff()} [gold]Block[/gold].",
+    "GLADIUS-PREDICTION.title": "Prediction",
+    "GLADIUS-DRAGONS_ROAR.description": "Gain {DragonAuraPower:diff()} [gold]DragonAura[/gold].\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
+    "GLADIUS-DRAGONS_ROAR.title": "Dragon's Roar",
+
+    "Uncommon":"Uncommon",
+
+    "GLADIUS-PUNISHMENT.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:diff()} additional damage for each Attack already played this turn.",
+    "GLADIUS-PUNISHMENT.title": "Punishment",
+
+    "Rare":"Rare",
+
+
 
     "GLADIUS-HORNED_SWORD.description": "Deal {Damage:diff()} damage.\nIncrease this card's damage by {Increase:diff()} this combat.",
     "GLADIUS-HORNED_SWORD.title": "Horned Sword",

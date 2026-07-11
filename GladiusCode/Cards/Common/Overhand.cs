@@ -29,8 +29,8 @@ public class Overhand() : GladiusCard(1, CardType.Attack, CardRarity.Common, Tar
         // 뽑을 카드 더미의 n장 선택
         List<CardModel> selection = (await CardSelectCmd.FromCombatPile(
             choiceContext, 
-            PileType.Draw.GetPile(base.Owner), 
-            base.Owner, 
+            PileType.Draw.GetPile(Owner), 
+            Owner, 
             new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 1)
         )).ToList();
         // 선택된 카드가 있다면, 반복문을 통해 하나씩 버리기
@@ -42,7 +42,7 @@ public class Overhand() : GladiusCard(1, CardType.Attack, CardRarity.Common, Tar
             }
         }
         // 카드 뽑기
-		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, base.Owner);
+		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
     }
 
     protected override void OnUpgrade()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7nu6c37j4sth"
-path="res://.godot/imported/wrought_iron.png-adea05df06a7bb7578ceadb72d230547.ctex"
+uid="uid://djoexrmqlf75a"
+path="res://.godot/imported/dragons_roar.png-3af664b721457ad46586fa6f47ef7a4c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Gladius/images/card_portraits/big/wrought_iron.png"
-dest_files=["res://.godot/imported/wrought_iron.png-adea05df06a7bb7578ceadb72d230547.ctex"]
+source_file="res://Gladius/images/card_portraits/big/dragons_roar.png"
+dest_files=["res://.godot/imported/dragons_roar.png-3af664b721457ad46586fa6f47ef7a4c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7nu6c37j4sth"
-path="res://.godot/imported/wrought_iron.png-adea05df06a7bb7578ceadb72d230547.ctex"
+uid="uid://cg815uni258d8"
+path="res://.godot/imported/punishment.png-d8fac7679aac5f7919bd4e56e2eb409a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Gladius/images/card_portraits/big/wrought_iron.png"
-dest_files=["res://.godot/imported/wrought_iron.png-adea05df06a7bb7578ceadb72d230547.ctex"]
+source_file="res://Gladius/images/card_portraits/punishment.png"
+dest_files=["res://.godot/imported/punishment.png-d8fac7679aac5f7919bd4e56e2eb409a.ctex"]
 
 [params]
 
