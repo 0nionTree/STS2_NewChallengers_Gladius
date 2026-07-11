@@ -34,7 +34,7 @@ public class StraightPunch() : GladiusCard(1, CardType.Attack, CardRarity.Common
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars.Damage.UpgradeValueBy(3m);
         DynamicVars["DragonAuraPower"].UpgradeValueBy(1m);
     }
 }

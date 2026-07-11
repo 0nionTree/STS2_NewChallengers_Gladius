@@ -4,46 +4,46 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using Gladius.GladiusCode;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Enchantments;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Gladius;
 
 [Pool(typeof(TokenCardPool))]
-public class ThunderstruckWood() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
+public class Steel() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
-    // 바람 돌 - 소재
+    // 강철 - 소재
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new IntVar("SownAmount", 1m), new EnergyVar(1)];
-        
+        [new BlockVar(6m, BlockProps.card), new IntVar("Durability", 1)];
+    
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 
-        HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
-        EnergyHoverTip,
-        ..HoverTipFactory.FromEnchantment<Sown>(DynamicVars["SownAmount"].IntValue)];
+        HoverTipFactory.FromKeyword(GladiusKeywords.Artifact)];
 
     protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifectCard)
     {
+        // 생성된 카드가 존재할 경우
         if (artifectCard != null)
         {
-            CardCmd.Enchant<Sown>(artifectCard, DynamicVars["SownAmount"].IntValue);
+            // 내구도 증가
+            artifectCard.DynamicVars["CurrentDurability"].BaseValue += DynamicVars["Durability"].BaseValue;
         }
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 에너지 획득
-		await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
+        // 방어도 획득
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["SownAmount"].UpgradeValueBy(1m);
-        DynamicVars.Energy.UpgradeValueBy(1);
+        DynamicVars.Block.UpgradeValueBy(3m);
+        DynamicVars["Durability"].UpgradeValueBy(1);
     }
 }

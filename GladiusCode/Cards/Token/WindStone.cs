@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 namespace Gladius;
 
 [Pool(typeof(TokenCardPool))]
-public class WindStone() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.Self)
+public class WindStone() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     // 바람 돌 - 소재
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];

@@ -60,7 +60,9 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<Sculpting>(),
             ModelDb.Card<DustOff>(),
             ModelDb.Card<Guideline>(),
-            ModelDb.Card<GoodSign>()
+            ModelDb.Card<GoodSign>(),
+            ModelDb.Card<DuelingStance>(),
+            ModelDb.Card<IngotMaking>()
             // 고급 공격 카드
             // 고급 스킬 카드
             // 고급 파워 카드

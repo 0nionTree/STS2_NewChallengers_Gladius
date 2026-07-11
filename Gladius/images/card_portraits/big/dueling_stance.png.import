@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://biti0cmhnegof"
-path="res://.godot/imported/sword_girding copy.png-94e364ce8f5612181517b1e45e62fb01.ctex"
+uid="uid://bvrthk7dngp6n"
+path="res://.godot/imported/dueling_stance.png-d8ccfcf04fad9cd36b076ad5200287cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Gladius/images/card_portraits/big/sword_girding copy.png"
-dest_files=["res://.godot/imported/sword_girding copy.png-94e364ce8f5612181517b1e45e62fb01.ctex"]
+source_file="res://Gladius/images/card_portraits/big/dueling_stance.png"
+dest_files=["res://.godot/imported/dueling_stance.png-d8ccfcf04fad9cd36b076ad5200287cc.ctex"]
 
 [params]
 

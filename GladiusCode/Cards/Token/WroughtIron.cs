@@ -6,18 +6,14 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Commands;
-using HarmonyLib;
-using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;
 
 [Pool(typeof(TokenCardPool))]
-public class WroughtIron() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.Self)
+public class WroughtIron() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     // 연철 - 소재
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];
-
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [];
 
     protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifectCard)
     {
