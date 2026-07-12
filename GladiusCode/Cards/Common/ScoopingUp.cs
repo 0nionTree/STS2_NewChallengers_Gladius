@@ -25,7 +25,7 @@ public class ScoopingUp() : GladiusCard(1, CardType.Skill, CardRarity.Common, Ta
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 방어도 획득
-        await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
         for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
         {
             // 진흙 생성

@@ -6,7 +6,6 @@ using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
-using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -19,8 +18,8 @@ public class Punishment() : GladiusCard(0, CardType.Attack, CardRarity.Uncommon,
 {
     // 응징
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new CalculationBaseVar(5m),
-        new ExtraDamageVar(5m),
+        [new CalculationBaseVar(4m),
+        new ExtraDamageVar(3m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => 
             CombatManager.Instance.History.CardPlaysFinished.Count((CardPlayFinishedEntry e) => 
             e.HappenedThisTurn(card.CombatState) && 

@@ -15,8 +15,9 @@ public class DragonScale() : GladiusCard(0, CardType.Attack, CardRarity.Token, T
 {
     // 용 비늘 - 연성물
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(5m, DamageProps.card), 
-		new DynamicVar("BaseDurability", 1), new DynamicVar("CurrentDurability", 1)];
+        [new DamageVar(5m, DamageProps.card),
+		new DynamicVar("BaseDurability", 1),
+        new DynamicVar("CurrentDurability", 1)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[GladiusKeywords.Artifact];

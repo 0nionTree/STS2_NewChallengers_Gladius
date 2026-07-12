@@ -67,7 +67,13 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<Prediction>(),
             ModelDb.Card<DragonsRoar>(),
             // 고급 공격 카드
-            ModelDb.Card<Punishment>()
+            ModelDb.Card<Punishment>(),
+            ModelDb.Card<FillUp>(),
+            ModelDb.Card<CrossCutting>(),
+            ModelDb.Card<RainforceShock>(),
+            ModelDb.Card<AlchemicBurst>(),
+            ModelDb.Card<LightningBlow>(),
+            ModelDb.Card<ShoulderTackle>()
             // 고급 스킬 카드
             // 고급 파워 카드
             // 희귀 공격 카드

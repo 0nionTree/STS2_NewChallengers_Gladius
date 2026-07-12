@@ -19,8 +19,10 @@ public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
 	private decimal _extraDamageFromPlays;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(8m, DamageProps.card), new DynamicVar("Increase", 2m), 
-		new DynamicVar("BaseDurability", 3), new DynamicVar("CurrentDurability", 3)];
+        [new DamageVar(8m, DamageProps.card),
+		new DynamicVar("Increase", 2m),
+		new DynamicVar("BaseDurability", 3),
+		new DynamicVar("CurrentDurability", 3)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[GladiusKeywords.Artifact];

@@ -16,7 +16,7 @@
 
     "GLADIUS-STRIKE_GLADIUS.description": "Deal {Damage:diff()} damage.",
     "GLADIUS-STRIKE_GLADIUS.title": "Strike",
-    "GLADIUS-BREAKDOWN.description": "Reduce [gold]Durability[/gold] of an [gold]Artifact[/gold] in your [gold]Hand[/gold] by 1.\nDeal {Damage:diff()} damage.",
+    "GLADIUS-BREAKDOWN.description": "Reduce [gold]Durability[/gold] of an [gold]Artifact[/gold] in your [gold]Hand[/gold] by {Durability:diff()}.\nDeal {Damage:diff()} damage.",
     "GLADIUS-BREAKDOWN.title": "Breakdown",
     "GLADIUS-ERADICATION.description": "Deal {Damage:diff()} damage.\nApply {WeakPower:diff()} [gold]Weak[/gold].",
     "GLADIUS-ERADICATION.title": "Eradication",
@@ -25,11 +25,11 @@
     "GLADIUS-WIND_GUIDANCE.description": "Deal {Damage:diff()} damage.\nAdd a [gold]{IfUpgraded:show:Wind Stone+|Wind Stone}[/gold] into your [gold]Hand[/gold].",
     "GLADIUS-WIND_GUIDANCE.title": "Wind Guidance",
     "GLADIUS-ALCHEMIC_STRIKE.description": "Deal {Damage:diff()} damage.\n[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Dragon Scale+|Dragon Scale}[/gold] into your [gold]Hand[/gold].",
-    "GLADIUS-ALCHEMIC_STRIKE.title": "AlchemicStrike",
+    "GLADIUS-ALCHEMIC_STRIKE.title": "Alchemic Strike",
     "GLADIUS-HAMMERING.description": "Deal {Damage:diff()} damage.\n[gold]Upgrade[/gold] {IfUpgraded:show:ALL cards|a card} in your [gold]Hand[/gold].",
     "GLADIUS-HAMMERING.title": "Hammering",
     "GLADIUS-STRAIGHT_PUNCH.description": "Deal {Damage:diff()} damage.\nGain {DragonAuraPower:diff()} [gold]DragonAura[/gold].",
-    "GLADIUS-STRAIGHT_PUNCH.title": "StraightPunch",
+    "GLADIUS-STRAIGHT_PUNCH.title": "Straight Punch",
     "GLADIUS-WHEEL_KICK.description": "Deal {Damage:diff()} damage to ALL enemies.",
     "GLADIUS-WHEEL_KICK.title": "Wheel Kick",
     "GLADIUS-UPPERCUT.description": "Deal {Damage:diff()} damage.\nPut a card from your [gold]Discard Pile[/gold] into your [gold]Hand[/gold].\n[gold]Retain[/gold] it this turn.",
@@ -69,13 +69,26 @@
 
     "GLADIUS-PUNISHMENT.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:diff()} additional damage for each Attack already played this turn.",
     "GLADIUS-PUNISHMENT.title": "Punishment",
+    "GLADIUS-FILL_UP.description": "Deal {Damage:diff()} damage.\nIf you have {HandCards:diff()} or more {HandCards:plural:card|cards} in your [gold]Hand[/gold],\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
+    "GLADIUS-FILL_UP.title": "Fill Up",
+    "GLADIUS-CROSS_CUTTING.description": "Deal {Damage:diff()} damage.\nDeal {AllEnemyDamage:diff()} damage to ALL enemies.",
+    "GLADIUS-CROSS_CUTTING.title": "Cross Cutting",
+    "GLADIUS-RAINFORCE_SHOCK.description": "Deal {Damage:diff()} damage.\nIncrease [gold]Durability[/gold] of an [gold]Artifact[/gold] in your [gold]Hand[/gold] by {Durability:diff()}.",
+    "GLADIUS-RAINFORCE_SHOCK.title": "Rainforce Shock",
+    "GLADIUS-ALCHEMIC_BURST.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:inverseDiff()} additional damage for each [gold]Artifact[/gold] card in your [gold]Hand[/gold].",
+    "GLADIUS-ALCHEMIC_BURST.title": "Alchemic Burst",
+    "GLADIUS-LIGHTNING_BLOW.description": "Deal {Damage:diff()} damage.\nChoose a card in your [gold]Discard Pile[/gold] to [gold]Transform[/gold] into [gold]{IfUpgraded:show:Thunderstruck Wood+|Thunderstruck Wood}[/gold] and put into your [gold]Hand[/gold].",
+    "GLADIUS-LIGHTNING_BLOW.selectionScreenPrompt": "Choose a card to Transform and put into your Hand.",
+    "GLADIUS-LIGHTNING_BLOW.title": "Lightning Blow",
+    "GLADIUS-SHOULDER_TACKLE.description": "Deal {Damage:diff()} damage.\n[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Shoulder Guards+|Shoulder Guards}[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-SHOULDER_TACKLE.title": "ShoulderTackle",
 
     "Rare":"Rare",
-
-
 
     "GLADIUS-HORNED_SWORD.description": "Deal {Damage:diff()} damage.\nIncrease this card's damage by {Increase:diff()} this combat.",
     "GLADIUS-HORNED_SWORD.title": "Horned Sword",
     "GLADIUS-DRAGON_SCALE.description": "Deal {Damage:diff()} damage to ALL enemies.",
-    "GLADIUS-DRAGON_SCALE.title": "Dragon Scale"
+    "GLADIUS-DRAGON_SCALE.title": "Dragon Scale",
+    "GLADIUS-SHOULDER_GUARDS.description": "Deal {Damage:diff()} damage.\nGain {Block:diff()} Block.\nAt the start of your turn, if this is in your [gold]Hand[/gold], it gains {Durability:diff()} [gold]Durability[/gold].",
+    "GLADIUS-SHOULDER_GUARDS.title": "Shoulder Guards"
 }
