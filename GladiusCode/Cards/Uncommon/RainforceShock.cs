@@ -23,7 +23,8 @@ public class RainforceShock() : GladiusCard(1, CardType.Attack, CardRarity.Uncom
         new IntVar("Durability", 1)];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact)];
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
+        HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 

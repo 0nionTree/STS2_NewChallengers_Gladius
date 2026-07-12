@@ -6,5 +6,7 @@
     "GLADIUS-MATERIAL.description": "Tooltip",
     "GLADIUS-MATERIAL.title": "Material",
     "GLADIUS-ALCHEMY.description": "Tooltip",
-    "GLADIUS-ALCHEMY.title": "Alchemy"
+    "GLADIUS-ALCHEMY.title": "Alchemy",
+    "GLADIUS-DURABILITY.description": "Tooltip",
+    "GLADIUS-DURABILITY.title": "Durability"
 }

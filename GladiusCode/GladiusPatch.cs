@@ -44,8 +44,21 @@ namespace Gladius.GladiusCode.Patches
 
             CardModel cardModel = __instance.Model!;
 
-            if (cardModel.Keywords.Contains(GladiusKeywords.Artifact)) 
+            if (cardModel.DynamicVars.ContainsKey("CurrentDurability")) 
             {
+                bool isProtected = false;
+                if (cardModel.Owner?.Creature?.Powers != null)
+                {
+                    foreach (PowerModel powerModel in cardModel.Owner.Creature.Powers)
+                    {
+                        if (powerModel is PreserveDurabilityPower power && power.Amount > 0)
+                        {
+                            isProtected = true;
+                            break;
+                        }
+                    }
+                }
+
                 TextureRect? durIcon = cardContainer.GetNodeOrNull<TextureRect>("DurabilityIcon");
                 Label? durLabel = null;
 
@@ -94,6 +107,19 @@ namespace Gladius.GladiusCode.Patches
                 }
 
                 durIcon.Visible = true;
+
+                // 내구도 감소 면역 상태일 경우
+                if (isProtected)
+                {
+                    // 내구도가 보호받을 때 사용할 새 이미지 경로 (미리 폴더에 넣어두세요)
+                    durIcon.Texture = GD.Load<Texture2D>("res://Gladius/images/durability_icon_protected.png");
+                }
+                else
+                {
+                    // 기존 일반 내구도 이미지
+                    durIcon.Texture = GD.Load<Texture2D>("res://Gladius/images/durability_icon.png");
+                }
+
                 if (cardModel.DynamicVars["CurrentDurability"].BaseValue > 0)
                 {
                     durLabel.Text = cardModel.DynamicVars["CurrentDurability"].BaseValue.ToString();
@@ -167,9 +193,26 @@ namespace Gladius.GladiusCode.Patches
         [HarmonyPrefix]
         public static void Prefix(CardModel __instance)
         {
-            if (__instance.Keywords.Contains(GladiusKeywords.Artifact))
+            // 내구도가 존재하는 카드인지 확인
+            if (__instance.DynamicVars.ContainsKey("CurrentDurability"))
             {
-                __instance.DynamicVars["CurrentDurability"].BaseValue--;
+                // 내구도 감소 체크
+                bool isProtected = true;
+
+                // 보유한 내구도 감소 무효 파워 확인
+                foreach (PowerModel powerModel in __instance.Owner.Creature.Powers)
+                {
+                    // 무효하는 파워가 하나라도 있다면 내구도 감소 불가능 체크 후 반복문 종료
+                    if (powerModel is PreserveDurabilityPower power && power.Amount > 0/* ||
+                    powerModel is */)
+                    {
+                        isProtected = false;
+                        break;
+                    }
+                }
+
+                // 최종적으로 내구도 감소 체크 후 내구도 감소
+                if (isProtected) __instance.DynamicVars["CurrentDurability"].BaseValue--;
             }
         }
     }
@@ -183,7 +226,7 @@ namespace Gladius.GladiusCode.Patches
         [HarmonyPostfix]
         public static void Postfix(CardModel __instance, ref PileType __result)
         {
-            if (__instance.Keywords.Contains(GladiusKeywords.Artifact))
+            if (__instance.DynamicVars.ContainsKey("CurrentDurability"))
             {
                 if (__instance.DynamicVars["CurrentDurability"].BaseValue <= 0)
                 {

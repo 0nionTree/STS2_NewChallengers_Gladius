@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using Gladius.GladiusCode;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;
 
@@ -26,6 +27,9 @@ public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[GladiusKeywords.Artifact];
+		
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
 
     private decimal ExtraDamageFromPlays
 	{

@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using Gladius.GladiusCode;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;
 
@@ -21,6 +22,9 @@ public class DragonScale() : GladiusCard(0, CardType.Attack, CardRarity.Token, T
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[GladiusKeywords.Artifact];
+        
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

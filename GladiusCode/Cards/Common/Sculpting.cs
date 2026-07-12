@@ -22,7 +22,8 @@ public class Sculpting() : GladiusCard(1, CardType.Skill, CardRarity.Common, Tar
         [HoverTipFactory.FromCard<DragonScale>(IsUpgraded), 
         HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 
         HoverTipFactory.FromKeyword(GladiusKeywords.Artifact), 
-        HoverTipFactory.FromKeyword(GladiusKeywords.Material)];
+        HoverTipFactory.FromKeyword(GladiusKeywords.Material),
+        HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

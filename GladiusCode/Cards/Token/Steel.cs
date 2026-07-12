@@ -23,7 +23,8 @@ public class Steel() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetTy
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 
-        HoverTipFactory.FromKeyword(GladiusKeywords.Artifact)];
+        HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
+        HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
 
     protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifectCard)
     {

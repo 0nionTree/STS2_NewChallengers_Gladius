@@ -8,6 +8,7 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;
 
@@ -25,6 +26,9 @@ public class ShoulderGuards() : GladiusCard(0, CardType.Attack, CardRarity.Token
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[GladiusKeywords.Artifact];
 
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
+        
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 대상 확인

@@ -1,5 +1,5 @@
 {
-    "Basic":"Basic",
+    "Material":"Material",
 
     "GLADIUS-WROUGHT_IRON.description": "{IfUpgraded:show:[gold]Alchemy[/gold] with this Add Add an unupgraded this card into your [gold]Hand[/gold].|}",
     "GLADIUS-WROUGHT_IRON.title": "Wrought Iron",
@@ -82,8 +82,14 @@
     "GLADIUS-LIGHTNING_BLOW.title": "Lightning Blow",
     "GLADIUS-SHOULDER_TACKLE.description": "Deal {Damage:diff()} damage.\n[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Shoulder Guards+|Shoulder Guards}[/gold] into your [gold]Hand[/gold].",
     "GLADIUS-SHOULDER_TACKLE.title": "ShoulderTackle",
+    "GLADIUS-PERSISTENT_STRIKE.description": "Deal {Damage:diff()} damage.\nAt the start of your next turn, return this to your [gold]Hand[/gold].",
+    "GLADIUS-PERSISTENT_STRIKE.title": "Persistent Strike",
+    "GLADIUS-MARTIAL_ARTS.description": "Deal {Damage:diff()} damage.\n",
+    "GLADIUS-MARTIAL_ARTS.title": "Martial Arts",
 
     "Rare":"Rare",
+
+    "Artifect":"Artifact",
 
     "GLADIUS-HORNED_SWORD.description": "Deal {Damage:diff()} damage.\nIncrease this card's damage by {Increase:diff()} this combat.",
     "GLADIUS-HORNED_SWORD.title": "Horned Sword",

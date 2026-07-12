@@ -15,11 +15,13 @@ public class IngotMaking() : GladiusCard(1, CardType.Skill, CardRarity.Common, T
 {
     // 조괴
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Material), HoverTipFactory.FromCard<Steel>(IsUpgraded)];
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Material),
+        HoverTipFactory.FromCard<Steel>(IsUpgraded),
+        HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 연철 생성
+        // 강철 생성
         CardModel cardModel = CombatState!.CreateCard<Steel>(Owner);
         if (IsUpgraded) // 강화된 상태라면 생성한 카드 강화
         {

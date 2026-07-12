@@ -21,7 +21,8 @@ public class Guideline() : GladiusCard(0, CardType.Attack, CardRarity.Common, Ta
         [new IntVar("durability", 1), new CardsVar(1)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact)];
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
+        HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
 
     protected override bool IsPlayable => PileType.Hand.GetPile(base.Owner)?.Cards?.Any(c => c.Keywords.Contains(GladiusKeywords.Artifact)) ?? false;
     

@@ -20,4 +20,8 @@ public static class GladiusKeywords
 	[CustomEnum("Alchemy")]
 	[KeywordProperties(AutoKeywordPosition.Before, true)]
 	public static CardKeyword Alchemy;
+
+	[CustomEnum("Durability")]
+	[KeywordProperties(AutoKeywordPosition.Before, true)]
+	public static CardKeyword Durability;
 }

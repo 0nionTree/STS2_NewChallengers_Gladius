@@ -40,24 +40,24 @@ public class DragonAuraPower : GladiusPower
     // 1. 공격이 시작될 때 어떤 공격인지 추적 (수정 없음, 원본 유지)
     public override Task BeforeAttack(AttackCommand command)
     {
-        if (command.Attacker != base.Owner) return Task.CompletedTask;
+        if (command.Attacker != Owner) return Task.CompletedTask;
         if (!command.DamageProps.IsPoweredAttack()) return Task.CompletedTask;
 
         Data internalData = GetInternalData<Data>();
         if (internalData.commandToModify != null) return Task.CompletedTask;
-        if (command.ModelSource != null && !(command.ModelSource is CardModel)) return Task.CompletedTask;
+        if (command.ModelSource != null && command.ModelSource is not CardModel) return Task.CompletedTask;
         if (!command.DamageProps.IsPoweredAttack()) return Task.CompletedTask;
 
         internalData.commandToModify = command;
-        internalData.amountWhenAttackStarted = base.Amount;
+        internalData.amountWhenAttackStarted = Amount;
         return Task.CompletedTask;
     }
 
-    // 2. 대미지 증가 적용 (합연산 -> 곱연산으로 변경)
+    // 대미지 증가 적용
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         // 곱연산이므로 조건에 맞지 않을 때 대미지 변동이 없게 하려면 1m(100%)을 반환해야 합니다.
-        if (base.Owner != dealer) return 1m; 
+        if (Owner != dealer) return 1m; 
         if (!props.IsPoweredAttack()) return 1m;
 
         Data internalData = GetInternalData<Data>();
@@ -70,12 +70,12 @@ public class DragonAuraPower : GladiusPower
             return 1m;
         }
 
-        // 스택(base.Amount) 1당 20%(0.2배) 증가
+        // 스택(Amount) 1당 20%(0.2배) 증가
         // 예: 스택이 3이라면 -> 1m + (3 * 0.2m) = 1.6m (160%)
-        return 1m + ((decimal)base.Amount * 0.2m);
+        return 1m + (Amount * 0.2m);
     }
 
-    // 3. 공격 종료 시 처리 (스택 전체 소모 -> 1 소모로 변경)
+    // 공격 종료 시 처리 (스택 전체 소모 -> 1 소모로 변경)
     public override async Task AfterAttack(PlayerChoiceContext choiceContext, AttackCommand command)
     {
         Data internalData = GetInternalData<Data>();
@@ -92,9 +92,9 @@ public class DragonAuraPower : GladiusPower
     // 4. 턴 종료 시 스택 1 감소 추가
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (participants.Contains(base.Owner))
+        if (participants.Contains(Owner))
 		{
-            await PowerCmd.ModifyAmount(choiceContext, this, -1, null, null);
+            await PowerCmd.Decrement(this);
 		}
     }
 }

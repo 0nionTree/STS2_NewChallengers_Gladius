@@ -22,7 +22,8 @@ public class Breakdown() : GladiusCard(0, CardType.Attack, CardRarity.Common, Ta
         [new IntVar("Durability", 1), new DamageVar(12m, DamageProps.card)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact)];
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
+        HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
 
     protected override bool IsPlayable => PileType.Hand.GetPile(Owner)?.Cards?.Any(c => c.Keywords.Contains(GladiusKeywords.Artifact)) ?? false;
     
