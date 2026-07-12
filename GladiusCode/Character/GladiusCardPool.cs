@@ -75,7 +75,8 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<LightningBlow>(),
             ModelDb.Card<ShoulderTackle>(),
             ModelDb.Card<PersistentStrike>(),
-            ModelDb.Card<MartialArts>()
+            ModelDb.Card<MartialArts>(),
+            ModelDb.Card<Byproduct>()
             // 고급 스킬 카드
             // 고급 파워 카드
             // 희귀 공격 카드

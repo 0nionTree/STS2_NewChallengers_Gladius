@@ -14,7 +14,8 @@ public class CrossCutting() : GladiusCard(1, CardType.Attack, CardRarity.Uncommo
 {
     // 십자 가르기
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(4m, DamageProps.card), new DamageVar("AllEnemyDamage", 6m, DamageProps.card)];
+        [new DamageVar(4m, DamageProps.card),
+        new DamageVar("AllEnemyDamage", 6m, DamageProps.card)];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Sly];
 

@@ -81,11 +81,13 @@
     "GLADIUS-LIGHTNING_BLOW.selectionScreenPrompt": "Choose a card to Transform and put into your Hand.",
     "GLADIUS-LIGHTNING_BLOW.title": "Lightning Blow",
     "GLADIUS-SHOULDER_TACKLE.description": "Deal {Damage:diff()} damage.\n[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Shoulder Guards+|Shoulder Guards}[/gold] into your [gold]Hand[/gold].",
-    "GLADIUS-SHOULDER_TACKLE.title": "ShoulderTackle",
+    "GLADIUS-SHOULDER_TACKLE.title": "Shoulder Tackle",
     "GLADIUS-PERSISTENT_STRIKE.description": "Deal {Damage:diff()} damage.\nAt the start of your next turn, return this to your [gold]Hand[/gold].",
     "GLADIUS-PERSISTENT_STRIKE.title": "Persistent Strike",
     "GLADIUS-MARTIAL_ARTS.description": "Deal {Damage:diff()} damage.\n",
     "GLADIUS-MARTIAL_ARTS.title": "Martial Arts",
+    "GLADIUS-BYPRODUCT.description": "Deal {Damage:diff()} damage.\nDraw {Cards:diff()} {Cards:plural:card|cards}.\nWhenever you [gold]Alchemy[/gold], reduce this card's cost by 1 {energyPrefix:energyIcons(1)} until played.",
+    "GLADIUS-BYPRODUCT.title": "Byproduct",
 
     "Rare":"Rare",
 

@@ -42,6 +42,13 @@ public abstract class GladiusCard(
     public override string PortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
 
+    public virtual Task OnAlchemyTriggered()
+    {
+        // 기본적으로는 아무 일도 하지 않음
+        // 생성 카드 정보 등 전송하도록 수정
+        return Task.CompletedTask; 
+    }
+
     protected virtual async Task Material(PlayerChoiceContext choiceContext, CardModel artifectCard){}
 
     protected async Task<T?> Alchemy<T>(PlayerChoiceContext choiceContext, bool isUpgraded, int durability = 0) where T : CardModel
@@ -80,6 +87,23 @@ public abstract class GladiusCard(
             // 소재 카드를 연성물 카드로 변화
             await CardCmd.Transform(cardModel, artifectCard);
             await Cmd.Wait(0.2f);
+            
+            // 모든 카드에 연성 종료 훅 보내기
+            foreach (var pileType in new[] { PileType.Hand, PileType.Draw, PileType.Discard })
+            {
+                var pile = pileType.GetPile(Owner);
+                if (pile != null)
+                {
+                    foreach (var card in pile.Cards)
+                    {
+                        // 카드가 GladiusCard 타입이라면, 아까 만든 훅을 실행시킵니다.
+                        if (card is GladiusCard gCard)
+                        {
+                            await gCard.OnAlchemyTriggered();
+                        }
+                    }
+                }
+            }
 
             // 최종 연성된 연성물 카드의 내구도가 0 이하라면 소멸
             if (artifectCard.DynamicVars["CurrentDurability"].BaseValue <= 0)
