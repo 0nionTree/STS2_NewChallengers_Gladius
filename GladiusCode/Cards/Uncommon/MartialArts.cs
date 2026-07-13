@@ -20,7 +20,8 @@ public class MartialArts() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon
         new IntVar("PreserveDurability", 1m)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact)];
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
+        HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

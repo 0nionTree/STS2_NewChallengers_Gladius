@@ -84,10 +84,14 @@
     "GLADIUS-SHOULDER_TACKLE.title": "Shoulder Tackle",
     "GLADIUS-PERSISTENT_STRIKE.description": "Deal {Damage:diff()} damage.\nAt the start of your next turn, return this to your [gold]Hand[/gold].",
     "GLADIUS-PERSISTENT_STRIKE.title": "Persistent Strike",
-    "GLADIUS-MARTIAL_ARTS.description": "Deal {Damage:diff()} damage.\n",
+    "GLADIUS-MARTIAL_ARTS.description": "Deal {Damage:diff()} damage.\nThe next [gold]Artifact[/gold]] you play [gold]Durability[/gold] is not consumed.",
     "GLADIUS-MARTIAL_ARTS.title": "Martial Arts",
     "GLADIUS-BYPRODUCT.description": "Deal {Damage:diff()} damage.\nDraw {Cards:diff()} {Cards:plural:card|cards}.\nWhenever you [gold]Alchemy[/gold], reduce this card's cost by 1 {energyPrefix:energyIcons(1)} until played.",
     "GLADIUS-BYPRODUCT.title": "Byproduct",
+    "GLADIUS-WALLOP.description": "Deal {Damage:diff()} damage.\nGain [gold]Block[/gold] equal to damage dealt.",
+    "GLADIUS-WALLOP.title": "Wallop",
+    "GLADIUS-FORCE_PALM.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:inverseDiff()} additional damage for each X",
+    "GLADIUS-FORCE_PALM.title": "ForcePalm",
 
     "Rare":"Rare",
 
