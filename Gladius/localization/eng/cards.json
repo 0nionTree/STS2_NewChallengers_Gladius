@@ -12,10 +12,20 @@
     "GLADIUS-CLAY.description": "Gain {Block:diff()} Block.",
     "GLADIUS-CLAY.title": "Clay",
 
-    "Common":"Common",
+    "Basic":"Basic",
 
     "GLADIUS-STRIKE_GLADIUS.description": "Deal {Damage:diff()} damage.",
     "GLADIUS-STRIKE_GLADIUS.title": "Strike",
+
+    "GLADIUS-DEFEND_GLADIUS.description": "Gain {Block:diff()} Block.",
+    "GLADIUS-DEFEND_GLADIUS.title": "Defend",
+    "GLADIUS-SWORD_GIRDING.description": "[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Horned Sword+|Horned Sword}[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-SWORD_GIRDING.title": "Sword Girding",
+    "GLADIUS-GATHER_INGREDIENTS.description": "Gain {Block:diff()} Block.\nAdd a [gold]{IfUpgraded:show:Wrought Iron|Wrought Iron}[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-GATHER_INGREDIENTS.title": "Gather Ingredients",
+
+    "Common":"Common",
+
     "GLADIUS-BREAKDOWN.description": "Reduce [gold]Durability[/gold] of an [gold]Artifact[/gold] in your [gold]Hand[/gold] by {Durability:diff()}.\nDeal {Damage:diff()} damage.",
     "GLADIUS-BREAKDOWN.title": "Breakdown",
     "GLADIUS-ERADICATION.description": "Deal {Damage:diff()} damage.\nApply {WeakPower:diff()} [gold]Weak[/gold].",
@@ -38,12 +48,6 @@
     "GLADIUS-PULVERIZE.description": "Deal {Damage:diff()} damage.",
     "GLADIUS-PULVERIZE.title": "Pulverize",
     
-    "GLADIUS-DEFEND_GLADIUS.description": "Gain {Block:diff()} Block.",
-    "GLADIUS-DEFEND_GLADIUS.title": "Defend",
-    "GLADIUS-SWORD_GIRDING.description": "[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Horned Sword+|Horned Sword}[/gold] into your [gold]Hand[/gold].",
-    "GLADIUS-SWORD_GIRDING.title": "Sword Girding",
-    "GLADIUS-GATHER_INGREDIENTS.description": "Gain {Block:diff()} Block.\nAdd a [gold]{IfUpgraded:show:Wrought Iron|Wrought Iron}[/gold] into your [gold]Hand[/gold].",
-    "GLADIUS-GATHER_INGREDIENTS.title": "Gather Ingredients",
     "GLADIUS-CLEANUP.description": "[gold]Exhaust[/gold] a [gold]Material[/gold] card in your [gold]Hand[/gold].\nGain {Block:diff()} Block",
     "GLADIUS-CLEANUP.title": "Cleanup",
     "GLADIUS-SCULPTING.description": "[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Dragon Scale+|Dragon Scale}[/gold] into your [gold]Hand[/gold].\nIncrease its durability by {Durability:diff()}.",
@@ -91,9 +95,16 @@
     "GLADIUS-WALLOP.description": "Deal {Damage:diff()} damage.\nGain [gold]Block[/gold] equal to damage dealt.",
     "GLADIUS-WALLOP.title": "Wallop",
     "GLADIUS-FORCE_PALM.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:inverseDiff()} additional damage for each X",
-    "GLADIUS-FORCE_PALM.title": "ForcePalm",
+    "GLADIUS-FORCE_PALM.title": "Force Palm",
 
     "Rare":"Rare",
+
+    "GLADIUS-FALLING_PETALS.description": "Deal {Damage:diff()} damage.\nPut this card on bottom of your [gold]Draw Pile[/gold].",
+    "GLADIUS-FALLING_PETALS.title": "Falling Petals",
+    "GLADIUS-DRAGONS_FANG.description": "Deal {Damage:diff()} damage.\nGain {DragonAuraPower:diff()} [gold]DragonAura[/gold].\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
+    "GLADIUS-DRAGONS_FANG.title": "Dragon's Fang",
+    "GLADIUS-BATTLE_DRUM.description": "Deal {Damage:diff()} damage.\n[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Ritual Plumb+|Ritual Plumb}[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-BATTLE_DRUM.title": "BattleDrum",
 
     "Artifect":"Artifact",
 
@@ -102,5 +113,7 @@
     "GLADIUS-DRAGON_SCALE.description": "Deal {Damage:diff()} damage to ALL enemies.",
     "GLADIUS-DRAGON_SCALE.title": "Dragon Scale",
     "GLADIUS-SHOULDER_GUARDS.description": "Deal {Damage:diff()} damage.\nGain {Block:diff()} Block.\nAt the start of your turn, if this is in your [gold]Hand[/gold], it gains {Durability:diff()} [gold]Durability[/gold].",
-    "GLADIUS-SHOULDER_GUARDS.title": "Shoulder Guards"
+    "GLADIUS-SHOULDER_GUARDS.title": "Shoulder Guards",
+    "GLADIUS-RITUAL_PLUMB.description": "Deal {Damage:diff()} damage.\nIf [gold]Durability[/gold] is 1, deal double damage.",
+    "GLADIUS-RITUAL_PLUMB.title": "Ritual Plumb"
 }

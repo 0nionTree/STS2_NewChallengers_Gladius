@@ -6,37 +6,37 @@ using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
-using MegaCrit.Sts2.Core.HoverTips;
 using BaseLib.Extensions;
 
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class StraightPunch() : GladiusCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public class DragonsFang() : GladiusCard(0, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
-    // 정권 지르기
+    // 용의 이빨
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(8m, DamageProps.card),
-        new PowerVar<DragonAuraPower>(1)];
+        [new DamageVar(12m, DamageProps.card),
+        new PowerVar<DragonAuraPower>(2),
+        new CardsVar(1)];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<DragonAuraPower>()];
-    
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 대상 확인
+        // 대상 확인 후 단일 공격
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        // 피해량 계산 및 이펙트 출력
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         // 용기 획득
-		await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, DynamicVars.Power<DragonAuraPower>().BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, DynamicVars.Power<DragonAuraPower>().BaseValue, Owner.Creature, this);
+        // 카드 뽑기
+		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(3m);
-        DynamicVars["DragonAuraPower"].UpgradeValueBy(1m);
+        DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars.Power<DragonAuraPower>().UpgradeValueBy(1);
     }
 }

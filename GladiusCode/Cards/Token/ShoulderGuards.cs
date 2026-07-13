@@ -15,13 +15,14 @@ namespace Gladius;
 [Pool(typeof(TokenCardPool))]
 public class ShoulderGuards() : GladiusCard(0, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
-    // 용 비늘 - 연성물
+    // 견갑 - 연성물
+    public override bool isDurable => true;
+    public override int BaseDurability => 1;
+    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(2m, DamageProps.card),
         new BlockVar(2m, BlockProps.card),
-		new IntVar("Durability", 1),
-		new DynamicVar("BaseDurability", 1),
-        new DynamicVar("CurrentDurability", 1)];
+		new IntVar("Durability", 1)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[GladiusKeywords.Artifact];
@@ -46,12 +47,7 @@ public class ShoulderGuards() : GladiusCard(0, CardType.Attack, CardRarity.Token
         if (Pile?.Type == PileType.Hand)
         {
             // 현재 내구도 증가
-            DynamicVars["CurrentDurability"].BaseValue += DynamicVars["Durability"].IntValue;
-            if (DynamicVars["CurrentDurability"].BaseValue <= 0)
-            {
-                await CardCmd.Exhaust(choiceContext, this);
-                DynamicVars["CurrentDurability"].BaseValue = DynamicVars["BaseDurability"].BaseValue;
-            }
+            this.GetCustomData().CurrentDurability += DynamicVars["Durability"].IntValue;
         }
     }
 

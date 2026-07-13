@@ -78,10 +78,13 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<MartialArts>(),
             ModelDb.Card<Byproduct>(),
             ModelDb.Card<Wallop>(),
-            ModelDb.Card<ForcePalm>()
+            ModelDb.Card<ForcePalm>(),
             // 고급 스킬 카드
             // 고급 파워 카드
             // 희귀 공격 카드
+            ModelDb.Card<FallingPetals>(),
+            ModelDb.Card<DragonsFang>(),
+            ModelDb.Card<BattleDrum>()
             // 희귀 스킬 카드
             // 희귀 파워 카드
         ];

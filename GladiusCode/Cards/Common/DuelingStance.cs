@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.HoverTips;
 using Gladius.GladiusCode;
+using BaseLib.Extensions;
 
 namespace Gladius;
 
@@ -16,7 +17,8 @@ public class DuelingStance() : GladiusCard(1, CardType.Skill, CardRarity.Common,
 {
     // 털어내기
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(7m, BlockProps.card), new IntVar("DragonAuraPower", 1m)];
+        [new BlockVar(7m, BlockProps.card),
+        new PowerVar<DragonAuraPower>(1)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.DragonAura)];
@@ -26,7 +28,7 @@ public class DuelingStance() : GladiusCard(1, CardType.Skill, CardRarity.Common,
         // 방어도 획득
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
         // 용기 획득
-		await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, DynamicVars["DragonAuraPower"].IntValue, Owner.Creature, this);
+		await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, DynamicVars.Power<DragonAuraPower>().BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

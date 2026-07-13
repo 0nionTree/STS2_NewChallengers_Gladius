@@ -44,10 +44,10 @@ namespace Gladius.GladiusCode.Patches
 
             CardModel cardModel = __instance.Model!;
 
-            if (cardModel.DynamicVars.ContainsKey("CurrentDurability")) 
+            if (cardModel.GetCustomData().isDurable) 
             {
                 bool isProtected = false;
-                if (cardModel.Owner?.Creature?.Powers != null)
+                if (!__instance.Model!.IsCanonical && cardModel.Owner?.Creature?.Powers != null)
                 {
                     foreach (PowerModel powerModel in cardModel.Owner.Creature.Powers)
                     {
@@ -120,9 +120,9 @@ namespace Gladius.GladiusCode.Patches
                     durIcon.Texture = GD.Load<Texture2D>("res://Gladius/images/durability_icon.png");
                 }
 
-                if (cardModel.DynamicVars["CurrentDurability"].BaseValue > 0)
+                if (cardModel.GetCustomData().CurrentDurability > 0)
                 {
-                    durLabel.Text = cardModel.DynamicVars["CurrentDurability"].BaseValue.ToString();
+                    durLabel.Text = cardModel.GetCustomData().CurrentDurability.ToString();
                 }
                 else
                 {
@@ -194,10 +194,13 @@ namespace Gladius.GladiusCode.Patches
         public static void Prefix(CardModel __instance)
         {
             // 내구도가 존재하는 카드인지 확인
-            if (__instance.DynamicVars.ContainsKey("CurrentDurability"))
+            if (__instance.GetCustomData().isDurable)
             {
+                // 사용 전 내구도 저장
+                __instance.GetCustomData().WasDurability = __instance.GetCustomData().CurrentDurability;
+
                 // 내구도 감소 체크
-                bool isProtected = true;
+                bool isProtected = false;
 
                 // 보유한 내구도 감소 무효 파워 확인
                 foreach (PowerModel powerModel in __instance.Owner.Creature.Powers)
@@ -206,13 +209,13 @@ namespace Gladius.GladiusCode.Patches
                     if (powerModel is PreserveDurabilityPower power && power.Amount > 0/* ||
                     powerModel is */)
                     {
-                        isProtected = false;
+                        isProtected = true;
                         break;
                     }
                 }
 
                 // 최종적으로 내구도 감소 체크 후 내구도 감소
-                if (isProtected) __instance.DynamicVars["CurrentDurability"].BaseValue--;
+                if (!isProtected) DurabilityExtensions.VarianceDurability(__instance, -1);
             }
         }
     }
@@ -226,17 +229,30 @@ namespace Gladius.GladiusCode.Patches
         [HarmonyPostfix]
         public static void Postfix(CardModel __instance, ref PileType __result)
         {
-            if (__instance.DynamicVars.ContainsKey("CurrentDurability"))
+            // 카드 사용이 끝난 뒤 내구도가 존재하는 카드라면
+            if (__instance.GetCustomData().isDurable)
             {
-                if (__instance.DynamicVars["CurrentDurability"].BaseValue <= 0)
+                // 현재 내구도에 따라 보낼 카드 더미 변경
+                // 현재 내구도가 0이라면 소멸 후 내구도 복구
+                if (__instance.GetCustomData().CurrentDurability <= 0)
                 {
-                    __result = PileType.Exhaust; 
-                    __instance.DynamicVars["CurrentDurability"].BaseValue = __instance.DynamicVars["BaseDurability"].BaseValue;
+                    __result = PileType.Exhaust;
+                    // 연성물 카드라면 
+                    if (__instance.Keywords.Contains(GladiusKeywords.Artifact))
+                        __instance.GetCustomData().CurrentDurability = __instance.GetCustomData().BaseDurability;
+                    // 연성물 카드가 아니라면(별도의 효과로 내구도를 부여받았다면)
+                    else
+                    {
+                        DurabilityExtensions.ResetDurability(__instance);
+                    }
                 }
+                // 현재 내구도가 0이 아니라면 버리지 않고 손으로 다시 가져옴
                 else if (__result == PileType.Discard)
                 {
                     __result = PileType.Hand; 
                 }
+                // 사용 전 내구도 초기화
+                __instance.GetCustomData().WasDurability = __instance.GetCustomData().CurrentDurability;
             }
         }
     }

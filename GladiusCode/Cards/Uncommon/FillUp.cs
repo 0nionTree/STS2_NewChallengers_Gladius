@@ -14,7 +14,7 @@ public class FillUp() : GladiusCard(0, CardType.Attack, CardRarity.Uncommon, Tar
 {
     // 메우기
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(5m, DamageProps.card),
+        [new DamageVar(4m, DamageProps.card),
         new IntVar("HandCards", 8),
         new CardsVar(2)];
         

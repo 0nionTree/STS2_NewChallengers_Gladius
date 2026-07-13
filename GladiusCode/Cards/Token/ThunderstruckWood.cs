@@ -15,7 +15,7 @@ namespace Gladius;
 [Pool(typeof(TokenCardPool))]
 public class ThunderstruckWood() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
-    // 바람 돌 - 소재
+    // 벽조목 - 소재
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

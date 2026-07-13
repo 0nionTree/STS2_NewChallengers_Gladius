@@ -19,7 +19,8 @@ public class Steel() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetTy
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(6m, BlockProps.card), new IntVar("Durability", 1)];
+        [new BlockVar(6m, BlockProps.card),
+        new IntVar("Durability", 1)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 
@@ -32,7 +33,7 @@ public class Steel() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetTy
         if (artifectCard != null)
         {
             // 내구도 증가
-            artifectCard.DynamicVars["CurrentDurability"].BaseValue += DynamicVars["Durability"].BaseValue;
+            artifectCard.GetCustomData().CurrentDurability += DynamicVars["Durability"].IntValue;
         }
     }
 

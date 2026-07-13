@@ -31,6 +31,8 @@ public abstract class GladiusCard(
     bool autoAdd = true
 ) : CustomCardModel(cost, type, rarity, target, showInCardLibrary, autoAdd)
 {
+    public virtual bool isDurable => false;
+    public virtual int BaseDurability => 0;
     //Image size:
     //Normal art: 1000x760 (Using 500x380 should also work, it will simply be scaled.)
     //Full art: 606x852
@@ -78,7 +80,7 @@ public abstract class GladiusCard(
             // 내구도 증감 지정이 있다면 연성물 카드의 내구도 증감
             if (durability != 0)
             {
-                artifect.DynamicVars["CurrentDurability"].BaseValue += (int)durability;
+                DurabilityExtensions.VarianceDurability(artifect, durability);
             }
             // 선택한 소재 카드의 Material() 함수 실행
             // CardModel을 Material() 함수가 정의된 커스텀 클래스로 캐스팅 (예: GladiusCard)
@@ -97,11 +99,10 @@ public abstract class GladiusCard(
             }
 
             // 최종 연성된 연성물 카드의 내구도가 0 이하라면 소멸
-            if (artifect.DynamicVars["CurrentDurability"].BaseValue <= 0)
+            if (artifect.GetCustomData().CurrentDurability <= 0)
             {
-                await CardCmd.Exhaust(choiceContext, artifect);
+                await DurabilityExtensions.ExhaustArtifect(choiceContext, artifect);
                 await Cmd.Wait(0.2f);
-                artifect.DynamicVars["CurrentDurability"].BaseValue = artifect.DynamicVars["BaseDurability"].BaseValue;
 
                 return null;
             }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dca3ud0e0yvwn"
-path="res://.godot/imported/power copy.png-dc5ed79270c1db0c49ae7bc7457708c3.ctex"
+uid="uid://b4wpfexbyqx32"
+path="res://.godot/imported/force_palm.png-718caef0caf71dba1012150bc0f30acb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Gladius/images/powers/big/power copy.png"
-dest_files=["res://.godot/imported/power copy.png-dc5ed79270c1db0c49ae7bc7457708c3.ctex"]
+source_file="res://Gladius/images/card_portraits/big/force_palm.png"
+dest_files=["res://.godot/imported/force_palm.png-718caef0caf71dba1012150bc0f30acb.ctex"]
 
 [params]
 

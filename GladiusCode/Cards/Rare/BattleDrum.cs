@@ -6,31 +6,31 @@ using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
+using BaseLib.Extensions;
+using MegaCrit.Sts2.Core.HoverTips;
+using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
-using Gladius.GladiusCode;
-using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class ShoulderTackle() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+public class BattleDrum() : GladiusCard(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
-    // 철산고
+    // 개전의 북
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(5m, DamageProps.card)];
-
+        [new DamageVar(6m, DamageProps.card)];
+        
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<ShoulderGuards>(IsUpgraded), 
+        [HoverTipFactory.FromCard<RitualPlumb>(IsUpgraded), 
         HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 
         HoverTipFactory.FromKeyword(GladiusKeywords.Artifact), 
         HoverTipFactory.FromKeyword(GladiusKeywords.Material)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 대상 확인
+        // 대상 확인 후 단일 공격
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        // 피해량 계산 및 이펙트 출력
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
@@ -40,7 +40,7 @@ public class ShoulderTackle() : GladiusCard(1, CardType.Attack, CardRarity.Uncom
         if (hasMaterial)
         {
             // Material 키워드를 가진 카드가 있다면 연성
-            await Alchemy<ShoulderGuards>(choiceContext, IsUpgraded);
+            await Alchemy<RitualPlumb>(choiceContext, IsUpgraded);
         }
         else
         {
@@ -52,6 +52,6 @@ public class ShoulderTackle() : GladiusCard(1, CardType.Attack, CardRarity.Uncom
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars.Damage.UpgradeValueBy(1m);
     }
 }

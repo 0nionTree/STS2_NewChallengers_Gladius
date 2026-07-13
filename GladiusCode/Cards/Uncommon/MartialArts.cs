@@ -8,16 +8,17 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.HoverTips;
 using Gladius.GladiusCode;
+using BaseLib.Extensions;
 
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
 public class MartialArts() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
-    // 정권 지르기
+    // 연계 무술
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(5m, DamageProps.card),
-        new IntVar("PreserveDurability", 1m)];
+        new PowerVar<PreserveDurabilityPower>(1m)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
@@ -32,7 +33,7 @@ public class MartialArts() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         // 내구도 감소 무시 버프 획득
-		await PowerCmd.Apply<PreserveDurabilityPower>(choiceContext, Owner.Creature, DynamicVars["PreserveDurability"].IntValue, Owner.Creature, this);
+		await PowerCmd.Apply<PreserveDurabilityPower>(choiceContext, Owner.Creature, DynamicVars.Power<PreserveDurabilityPower>().BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

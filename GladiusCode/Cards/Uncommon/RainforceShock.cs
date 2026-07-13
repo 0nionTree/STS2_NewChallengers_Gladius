@@ -50,12 +50,7 @@ public class RainforceShock() : GladiusCard(1, CardType.Attack, CardRarity.Uncom
         if (cardModel != null)
         {
             // 현재 내구도 증가
-            cardModel.DynamicVars["CurrentDurability"].BaseValue += DynamicVars["Durability"].IntValue;
-            if (cardModel.DynamicVars["CurrentDurability"].BaseValue <= 0)
-            {
-                await CardCmd.Exhaust(choiceContext, cardModel);
-                cardModel.DynamicVars["CurrentDurability"].BaseValue = cardModel.DynamicVars["BaseDurability"].BaseValue;
-            }
+            DurabilityExtensions.VarianceDurability(cardModel, DynamicVars["Durability"].IntValue);
         }
     }
 

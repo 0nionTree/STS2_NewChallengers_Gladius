@@ -18,7 +18,7 @@ public class Guideline() : GladiusCard(0, CardType.Attack, CardRarity.Common, Ta
 {
     // 길잡이
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new IntVar("durability", 1), new CardsVar(1)];
+        [new IntVar("Durability", 1), new CardsVar(1)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
@@ -40,14 +40,8 @@ public class Guideline() : GladiusCard(0, CardType.Attack, CardRarity.Common, Ta
         )).FirstOrDefault();
         // 연성물 내구도 감소
         if (cardModel != null)
-        {
-            cardModel.DynamicVars["CurrentDurability"].BaseValue -= DynamicVars["durability"].IntValue;
-            if (cardModel.DynamicVars["CurrentDurabilisy"].BaseValue <= 0)
-            {
-                await CardCmd.Exhaust(choiceContext, cardModel);
-                cardModel.DynamicVars["CurrentDurabilisy"].BaseValue = cardModel.DynamicVars["BaseDurability"].BaseValue;
-            }
-        }
+            await DurabilityExtensions.VarianceDurability(cardModel, DynamicVars["Durability"].IntValue, choiceContext);
+
         // 뽑을 카드 더미의 1장 선택
         List<CardModel> selection = (await CardSelectCmd.FromCombatPile(
             choiceContext, 
