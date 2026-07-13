@@ -36,28 +36,17 @@ public class Byproduct() : GladiusCard(2, CardType.Attack, CardRarity.Uncommon, 
 		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
     }
 
-    public override Task AfterCardGeneratedForCombat(CardModel card, Player? creator)
-	{
-        
-		if (creator != Owner)
-		{
-			return Task.CompletedTask;
-		}
-		if (card.Owner != Owner)
-		{
-			return Task.CompletedTask;
-		}
-		if (!card.Keywords.Contains(GladiusKeywords.Artifact))
-		{
-			return Task.CompletedTask;
-		}
-        EnergyCost.AddUntilPlayed(-1);
-		return Task.CompletedTask;
-	}
-
-    public override Task OnAlchemyTriggered()
-    {   // 연성 시 실행되는 함수 (생성 카드 등의 정보 받아오도록 수정 필요)
+    public override Task OnAlchemyTriggered(CardModel artifect, CardModel metarial, Player? creator)
+    {
         // 사용하기 전까지 비용 1 감소
+        if (creator != Owner)
+		{
+			return Task.CompletedTask;
+		}
+		if (artifect.Owner != Owner)
+		{
+			return Task.CompletedTask;
+		}
         EnergyCost.AddUntilPlayed(-1);
         
         return Task.CompletedTask; 
