@@ -17,14 +17,15 @@ namespace Gladius;
 public class Guideline() : GladiusCard(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     // 길잡이
+    public override bool IsRequiredDurable => true;
+    public override int RequiredDurableCards => 1;
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new IntVar("Durability", 1), new CardsVar(1)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
         HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
-
-    protected override bool IsPlayable => PileType.Hand.GetPile(base.Owner)?.Cards?.Any(c => c.Keywords.Contains(GladiusKeywords.Artifact)) ?? false;
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

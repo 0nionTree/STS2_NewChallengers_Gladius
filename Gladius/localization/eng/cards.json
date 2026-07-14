@@ -26,7 +26,7 @@
 
     "Common":"Common",
 
-    "GLADIUS-BREAKDOWN.description": "Reduce [gold]Durability[/gold] of an [gold]Artifact[/gold] in your [gold]Hand[/gold] by {Durability:diff()}.\nDeal {Damage:diff()} damage.",
+    "GLADIUS-BREAKDOWN.description": "Reduce [gold]Durability[/gold] of an [gold]Durable[/gold] card in your [gold]Hand[/gold] by {Durability:diff()}.\nDeal {Damage:diff()} damage.",
     "GLADIUS-BREAKDOWN.title": "Breakdown",
     "GLADIUS-ERADICATION.description": "Deal {Damage:diff()} damage.\nApply {WeakPower:diff()} [gold]Weak[/gold].",
     "GLADIUS-ERADICATION.title": "Eradication",
@@ -96,6 +96,9 @@
     "GLADIUS-WALLOP.title": "Wallop",
     "GLADIUS-FORCE_PALM.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:inverseDiff()} additional damage for each X",
     "GLADIUS-FORCE_PALM.title": "Force Palm",
+
+    "GLADIUS-WELDING.description": "Choose a [gold]Durable[/gold] card to lose {Durability:diff()} [gold]Durability[/gold].\nGrant that much [gold]Durability[/gold] to another [gold]Durable[/gold] card.",
+    "GLADIUS-WELDING.title": "Welding",
 
     "Rare":"Rare",
 

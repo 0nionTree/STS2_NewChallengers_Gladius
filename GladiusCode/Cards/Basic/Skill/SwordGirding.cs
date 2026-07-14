@@ -12,7 +12,7 @@ namespace Gladius;
 public class SwordGirding() : GladiusCard(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
 {
     // 패검 - 연성
-    protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { GladiusTags.Alchemy };
+    public override bool IsRequiredMaterial => true;
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<HornedSword>(IsUpgraded), 

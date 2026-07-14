@@ -18,10 +18,10 @@ namespace Gladius;
 public class Cleanup() : GladiusCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     // 정리
+    public override bool IsRequiredMaterial => true;
+    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new BlockVar(9m, BlockProps.card)];
-
-    protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { GladiusTags.Alchemy };
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Material)];
@@ -34,7 +34,7 @@ public class Cleanup() : GladiusCard(0, CardType.Skill, CardRarity.Common, Targe
         var cardModel = (await CardSelectCmd.FromHand(
             prefs: new CardSelectorPrefs(promptString, 1), 
             context: choiceContext, 
-            player: base.Owner, 
+            player: Owner, 
             // 필터 조건: Material 키워드가 있는 카드만 선택 가능
             filter: (CardModel card) => card.Keywords.Contains(GladiusKeywords.Material), 
             source: this

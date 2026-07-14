@@ -17,14 +17,14 @@ namespace Gladius;
 public class RitualPlumb() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
     // 의례 추 - 연성물
-    public override bool isDurable => true;
+    public override bool IsDurable => true;
     public override int BaseDurability => 2;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(12m, DamageProps.card)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
-		[GladiusKeywords.Artifact];
+		[GladiusKeywords.Artifact, GladiusKeywords.Durability];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];

@@ -15,14 +15,14 @@ namespace Gladius;
 public class DragonScale() : GladiusCard(0, CardType.Attack, CardRarity.Token, TargetType.AllEnemies)
 {
     // 용 비늘 - 연성물
-    public override bool isDurable => true;
+    public override bool IsDurable => true;
     public override int BaseDurability => 1;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(5m, DamageProps.card)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
-		[GladiusKeywords.Artifact];
+		[GladiusKeywords.Artifact, GladiusKeywords.Durability];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];

@@ -31,8 +31,11 @@ public abstract class GladiusCard(
     bool autoAdd = true
 ) : CustomCardModel(cost, type, rarity, target, showInCardLibrary, autoAdd)
 {
-    public virtual bool isDurable => false;
+    public virtual bool IsDurable => false;
     public virtual int BaseDurability => 0;
+    public virtual bool IsRequiredMaterial => false;
+    public virtual bool IsRequiredDurable => false;
+    public virtual int RequiredDurableCards => 0;
     //Image size:
     //Normal art: 1000x760 (Using 500x380 should also work, it will simply be scaled.)
     //Full art: 606x852
@@ -46,10 +49,9 @@ public abstract class GladiusCard(
     public override string PortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
 
+    // 연성 함수 실행 시 수신받아 자동으로 실행되는 함수
     public virtual Task OnAlchemyTriggered(CardModel artifect, CardModel metarial, Player? creator)
     {
-        // 기본적으로는 아무 일도 하지 않음
-        // 생성 카드 정보 등 전송하도록 수정
         return Task.CompletedTask; 
     }
 
@@ -92,7 +94,7 @@ public abstract class GladiusCard(
             await CardCmd.Transform(metarial, artifect);
             await Cmd.Wait(0.2f);
 
-            // 3. 전투 중이라면 (전투 상태가 존재한다면) 글로벌 이벤트를 발송합니다.
+            // 전투 중이라면 (전투 상태가 존재한다면) 글로벌 이벤트를 발송
             if (CombatState != null)
             {
                 await AlchemyEventDispatcher.DispatchAlchemyTriggered(CombatState, artifect, metarial, Owner);

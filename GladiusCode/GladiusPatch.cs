@@ -257,12 +257,11 @@ namespace Gladius.GladiusCode.Patches
         }
     }
     // =========================================================================
-    // CanPlay()함수에 Material이 없을 경우 Alchmy 효과가 있는 카드를 사용할 수 없도록 합니다.
+    // CanPlay()함수에 Material/Durable 카드가 없을 경우 isRequiredMaterial/isRequiredDurable 이 true인 카드를 사용 불가로 변경
     // =========================================================================
-    [HarmonyPatch] // 💡 수정됨: 파라미터를 비우고 클래스 단위 타겟팅을 사용합니다.
+    [HarmonyPatch]
     public class CanPlayPatch
     {
-        // 💡 추가됨: CS0182 에러를 피하기 위해 TargetMethod()를 사용하여 메서드를 명시적으로 찾습니다.
         [HarmonyTargetMethod]
         public static MethodBase TargetMethod()
         {
@@ -276,24 +275,41 @@ namespace Gladius.GladiusCode.Patches
         [HarmonyPostfix]
         public static void Postfix(CardModel __instance, ref bool __result, ref UnplayableReason reason, ref AbstractModel preventer)
         {
-            // 연금 태그가 있는 카드가 아니라면 종료
-            if (!__instance.Tags.Contains(GladiusTags.Alchemy)) return;
-            // 1. 이미 다른 이유(에너지 부족 등)로 사용 불가라면 그대로 둡니다.
+            // 이미 다른 사유로 사용 불가라면 종료
             if (!__result) return;
 
-            // 2. 모드 전용 조건 체크: 손에 Material 키워드를 가진 카드가 하나라도 있는지 확인
-            var hand = PileType.Hand.GetPile(__instance.Owner);
-            bool hasMaterial = hand?.Cards?.Any(c => c.Keywords.Contains(GladiusKeywords.Material)) ?? false;
+            // CustomData를 호출하여 지역 변수에 저장
+            var customData = __instance.GetCustomData();
+            bool requiresMaterial = customData.isRequiredMaterial;
+            bool requiresDurable = customData.isRequiredDurable;
+
+            // isRequiredMaterial/isRequiredDurable 이 true가 아니라면 종료
+            if (!requiresMaterial && !requiresDurable) return;
+
+            // 모드 전용 조건 체크
+            var handCards = PileType.Hand.GetPile(__instance.Owner)?.Cards;
+            bool hasConditionMet = false;
+
+            // 손패가 존재할 경우에만 검사
+            if (handCards != null)
+            {
+                if (requiresMaterial)
+                {
+                    hasConditionMet = handCards.Any(c => c.Keywords.Contains(GladiusKeywords.Material));
+                }
+                else if (requiresDurable) 
+                {
+                    // 내구도 카드는 필요한 수량(requiredDurableCards) 이상 있는지 개수를 확인(.Count)
+                    int durableCount = handCards.Count(c => c.GetCustomData().isDurable);
+                    hasConditionMet = durableCount >= customData.requiredDurableCards;
+                }
+            }
             
-            // 3. 재료가 없다면 사용 불가 처리
-            if (!hasMaterial)
+            // 요구하는 카드가 손에 없다면 사용 불가 처리
+            if (!hasConditionMet)
             {
                 __result = false;
-                // UnplayableReason은 수정 불가하므로, 
-                // 의미적으로 가장 적절한 'BlockedByCardLogic'을 사용합니다.
                 reason |= UnplayableReason.BlockedByCardLogic;
-                
-                // 막은 주체를 지정해줍니다.
                 preventer = __instance;
             }
         }
@@ -314,12 +330,15 @@ namespace Gladius.GladiusCode.Patches
         [HarmonyPostfix]
         public static void Postfix(UnplayableReason reason, AbstractModel preventer, ref object __result)
         {
-            // 1. 우리가 정한 사용 불가 사유(BlockedByCardLogic)이면서
-            // 2. 대상이 우리의 커스텀 카드(GladiusCard)인 경우
-            if (reason.HasFlag(UnplayableReason.BlockedByCardLogic) && preventer is GladiusCard) 
+            // 지정한 사용 불가 사유이면서 GladiusCard 라면
+            if (reason.HasFlag(UnplayableReason.BlockedByCardLogic) && preventer is GladiusCard gladiusCard) 
             {
-                // 메시지를 우리가 원하는 키값의 LocString으로 강제 교체합니다.
-                __result = new LocString("combat_messages", "MATERIALS_MISSING");
+                // 해당 카드가 Material 또는 Durable 을 필요로 한다면
+                // 메시지를 원하는 키값의 LocString으로 강제 교체
+                if (gladiusCard.GetCustomData().isRequiredMaterial)
+                    __result = new LocString("combat_messages", "MATERIALS_MISSING");
+                if (gladiusCard.GetCustomData().isRequiredDurable)
+                    __result = new LocString("combat_messages", "DURABLES_MISSING");
             }
         }
     }

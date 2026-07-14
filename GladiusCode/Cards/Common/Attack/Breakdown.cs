@@ -18,14 +18,14 @@ namespace Gladius;
 public class Breakdown() : GladiusCard(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     // 깨뜨리기
+    public override bool IsRequiredDurable => true;
+    public override int RequiredDurableCards => 1;
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new IntVar("Durability", 1), new DamageVar(12m, DamageProps.card)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
-        HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
-
-    protected override bool IsPlayable => PileType.Hand.GetPile(Owner)?.Cards?.Any(c => c.Keywords.Contains(GladiusKeywords.Artifact)) ?? false;
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -37,7 +37,7 @@ public class Breakdown() : GladiusCard(0, CardType.Attack, CardRarity.Common, Ta
             prefs: new CardSelectorPrefs(promptString, 1), 
             context: choiceContext, 
             player: Owner, 
-            filter: (CardModel card) => card.Keywords.Contains(GladiusKeywords.Artifact), 
+            filter: (CardModel card) => card.GetCustomData().isDurable, 
             source: this
         )).FirstOrDefault();
 

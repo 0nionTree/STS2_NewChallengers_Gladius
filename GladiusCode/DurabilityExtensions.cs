@@ -15,6 +15,9 @@ public static class DurabilityExtensions
         public int BaseDurability = 0;
         public int CurrentDurability = 0;
         public int WasDurability = 0;
+        public bool isRequiredMaterial = false;
+        public bool isRequiredDurable = false;
+        public int requiredDurableCards = 0;
     }
 
     // CardModel에 Durability를 연결
@@ -30,12 +33,15 @@ public static class DurabilityExtensions
             data = new Durability();
 
             // 호출한 카드가 내구도가 지정된 GladiusCard라면 수치 초기화 진행
-            if (card is GladiusCard gCard && gCard.isDurable)
+            if (card is GladiusCard gCard)
             {
-                data.isDurable = true;
+                data.isDurable = gCard.IsDurable;
                 data.BaseDurability = gCard.BaseDurability;
                 data.CurrentDurability = gCard.BaseDurability;
                 data.WasDurability = gCard.BaseDurability;
+                data.isRequiredMaterial = gCard.IsRequiredMaterial;
+                data.isRequiredDurable = gCard.IsRequiredDurable;
+                data.requiredDurableCards = gCard.RequiredDurableCards;
             }
 
             // 새로 생성된 내구도 데이터 등록
@@ -58,8 +64,8 @@ public static class DurabilityExtensions
     {
         // 내구도가 없는 카드라면 즉시 종료
         if (!cardModel.GetCustomData().isDurable) return;
-        // 현재 내구도를 index만큼 감소(0 미만으로 감소하지 않음)
-        cardModel.GetCustomData().CurrentDurability = Math.Max(0, cardModel.GetCustomData().CurrentDurability - index);
+        // 현재 내구도를 index만큼 증감(0 미만으로 감소하지 않음)
+        cardModel.GetCustomData().CurrentDurability = Math.Max(0, cardModel.GetCustomData().CurrentDurability + index);
 
         // 내구도가 0 이하라면 소멸 진행
         if (cardModel.GetCustomData().CurrentDurability > 0) return;

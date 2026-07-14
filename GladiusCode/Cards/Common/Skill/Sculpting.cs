@@ -13,7 +13,7 @@ namespace Gladius;
 public class Sculpting() : GladiusCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     // 조형 - 연성
-    protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { GladiusTags.Alchemy };
+    public override bool IsRequiredMaterial => true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new IntVar("Durability", 1)];

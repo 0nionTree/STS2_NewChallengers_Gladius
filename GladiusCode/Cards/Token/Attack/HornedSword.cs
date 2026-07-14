@@ -19,7 +19,7 @@ public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
 
 	private decimal _extraDamageFromPlays;
 
-    public override bool isDurable => true;
+    public override bool IsDurable => true;
     public override int BaseDurability => 3;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -27,7 +27,7 @@ public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
 		new DynamicVar("Increase", 2m)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
-		[GladiusKeywords.Artifact];
+		[GladiusKeywords.Artifact, GladiusKeywords.Durability];
 		
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];

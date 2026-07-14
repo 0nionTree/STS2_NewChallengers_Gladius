@@ -16,7 +16,7 @@ namespace Gladius;
 public class ShoulderGuards() : GladiusCard(0, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
     // 견갑 - 연성물
-    public override bool isDurable => true;
+    public override bool IsDurable => true;
     public override int BaseDurability => 1;
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -25,7 +25,7 @@ public class ShoulderGuards() : GladiusCard(0, CardType.Attack, CardRarity.Token
 		new IntVar("Durability", 1)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
-		[GladiusKeywords.Artifact];
+		[GladiusKeywords.Artifact, GladiusKeywords.Durability];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];

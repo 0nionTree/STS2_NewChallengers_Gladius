@@ -1,4 +1,7 @@
 {
     "MATERIALS_MISSING": "noting Material Card",
-    "SELECT_MATERIAL": "choice Material Card"
+    "DURABLES_MISSING": "noting Durable Card",
+    "SELECT_MATERIAL": "choice Material Card",
+    "SELECT_DURABLE": "choice Durable Card",
+    "SELECT_ANOTHER_DURABLE": "choice Another Durable Card"
 }
