@@ -90,7 +90,7 @@
     "GLADIUS-PERSISTENT_STRIKE.title": "Persistent Strike",
     "GLADIUS-MARTIAL_ARTS.description": "Deal {Damage:diff()} damage.\nThe next [gold]Artifact[/gold]] you play [gold]Durability[/gold] is not consumed.",
     "GLADIUS-MARTIAL_ARTS.title": "Martial Arts",
-    "GLADIUS-BYPRODUCT.description": "Deal {Damage:diff()} damage.\nDraw {Cards:diff()} {Cards:plural:card|cards}.\nWhenever you [gold]Alchemy[/gold], reduce this card's cost by 1 {energyPrefix:energyIcons(1)} until played.",
+    "GLADIUS-BYPRODUCT.description": "Deal {Damage:diff()} damage.\nDraw {Cards:diff()} {Cards:plural:card|cards}.\nWhenever you [gold]Alchemy[/gold], reduce this card's cost by {energyPrefix:energyIcons(1)} until played.",
     "GLADIUS-BYPRODUCT.title": "Byproduct",
     "GLADIUS-WALLOP.description": "Deal {Damage:diff()} damage.\nGain [gold]Block[/gold] equal to damage dealt.",
     "GLADIUS-WALLOP.title": "Wallop",
@@ -105,6 +105,10 @@
     "GLADIUS-DRAGONS_FANG.title": "Dragon's Fang",
     "GLADIUS-BATTLE_DRUM.description": "Deal {Damage:diff()} damage.\n[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Ritual Plumb+|Ritual Plumb}[/gold] into your [gold]Hand[/gold].",
     "GLADIUS-BATTLE_DRUM.title": "BattleDrum",
+    "GLADIUS-GOLDEN_PATH.description": "Deal {Damage:diff()} damage to ALL enemies.\nCosts {energyPrefix:energyIcons(2)} less for each card you [gold]Alchemy[/gold] this combat.",
+    "GLADIUS-GOLDEN_PATH.title": "GoldenPath",
+    "GLADIUS-ORDAIN.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:diff()} additional damage for each card in your [gold]Discard Pile[/gold].\nShuffle your [gold]Discard Pile[/gold] into your [gold]Draw Pile[/gold].",
+    "GLADIUS-ORDAIN.title": "Ordain",
 
     "Artifect":"Artifact",
 

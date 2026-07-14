@@ -84,7 +84,9 @@ public class GladiusCardPool : CustomCardPoolModel
             // 희귀 공격 카드
             ModelDb.Card<FallingPetals>(),
             ModelDb.Card<DragonsFang>(),
-            ModelDb.Card<BattleDrum>()
+            ModelDb.Card<BattleDrum>(),
+            ModelDb.Card<GoldenPath>(),
+            ModelDb.Card<Ordain>()
             // 희귀 스킬 카드
             // 희귀 파워 카드
         ];
