@@ -18,6 +18,8 @@ namespace Gladius;
 public class BattleDrum() : GladiusCard(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
     // 개전의 북
+    public override bool IsRequiredMaterial => true;
+    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(6m, DamageProps.card)];
         

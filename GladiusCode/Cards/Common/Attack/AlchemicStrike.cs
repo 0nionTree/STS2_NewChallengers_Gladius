@@ -17,6 +17,8 @@ namespace Gladius;
 public class AlchemicStrike() : GladiusCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     // 연성 타격
+    public override bool IsRequiredMaterial => true;
+
     protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

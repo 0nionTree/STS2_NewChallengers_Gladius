@@ -54,7 +54,7 @@
     "GLADIUS-SCULPTING.title": "Sculpting",
     "GLADIUS-DUST_OFF.description": "Gain {Block:diff()} Block.\nDiscard 1 card from your [gold]Draw Pile[/gold].",
     "GLADIUS-DUST_OFF.title": "Dust Off",
-    "GLADIUS-GUIDELINE.description": "Reduce [gold]Durability[/gold] of an [gold]Artifact[/gold] in your [gold]Hand[/gold] by 1.\nDiscard 1 card from your [gold]Draw Pile[/gold].\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
+    "GLADIUS-GUIDELINE.description": "Reduce [gold]Durability[/gold] of an [gold]Durable[/gold] card in your [gold]Hand[/gold] by 1.\nDiscard 1 card from your [gold]Draw Pile[/gold].\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
     "GLADIUS-GUIDELINE.title": "Guideline",
     "GLADIUS-GOOD_SIGN.description": "Choose a card in your [gold]Hand[/gold] to [gold]Transform[/gold] into [gold]{IfUpgraded:show:Thunderstruck Wood+|Thunderstruck Wood}[/gold].",
     "GLADIUS-GOOD_SIGN.title": "Good Sign",
@@ -77,7 +77,7 @@
     "GLADIUS-FILL_UP.title": "Fill Up",
     "GLADIUS-CROSS_CUTTING.description": "Deal {Damage:diff()} damage.\nDeal {AllEnemyDamage:diff()} damage to ALL enemies.",
     "GLADIUS-CROSS_CUTTING.title": "Cross Cutting",
-    "GLADIUS-RAINFORCE_SHOCK.description": "Deal {Damage:diff()} damage.\nIncrease [gold]Durability[/gold] of an [gold]Artifact[/gold] in your [gold]Hand[/gold] by {Durability:diff()}.",
+    "GLADIUS-RAINFORCE_SHOCK.description": "Deal {Damage:diff()} damage.\nIncrease [gold]Durability[/gold] of an [gold]Durable[/gold] card in your [gold]Hand[/gold] by {Durability:diff()}.",
     "GLADIUS-RAINFORCE_SHOCK.title": "Rainforce Shock",
     "GLADIUS-ALCHEMIC_BURST.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:inverseDiff()} additional damage for each [gold]Artifact[/gold] card in your [gold]Hand[/gold].",
     "GLADIUS-ALCHEMIC_BURST.title": "Alchemic Burst",
@@ -99,6 +99,8 @@
 
     "GLADIUS-WELDING.description": "Choose a [gold]Durable[/gold] card to lose {Durability:diff()} [gold]Durability[/gold].\nGrant that much [gold]Durability[/gold] to another [gold]Durable[/gold] card.",
     "GLADIUS-WELDING.title": "Welding",
+    "GLADIUS-ECDYSIS.description": "[gold]Alchemy[/gold] all [gold]Material[/gold] cards in your hand into [gold]{IfUpgraded:show:Dragon Scale+|Dragon Scale}[/gold].",
+    "GLADIUS-ECDYSIS.title": "Ecdysis",
 
     "Rare":"Rare",
 
@@ -107,13 +109,13 @@
     "GLADIUS-DRAGONS_FANG.description": "Deal {Damage:diff()} damage.\nGain {DragonAuraPower:diff()} [gold]DragonAura[/gold].\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
     "GLADIUS-DRAGONS_FANG.title": "Dragon's Fang",
     "GLADIUS-BATTLE_DRUM.description": "Deal {Damage:diff()} damage.\n[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Ritual Plumb+|Ritual Plumb}[/gold] into your [gold]Hand[/gold].",
-    "GLADIUS-BATTLE_DRUM.title": "BattleDrum",
+    "GLADIUS-BATTLE_DRUM.title": "Battle Drum",
     "GLADIUS-GOLDEN_PATH.description": "Deal {Damage:diff()} damage to ALL enemies.\nCosts {energyPrefix:energyIcons(2)} less for each card you [gold]Alchemy[/gold] this combat.",
-    "GLADIUS-GOLDEN_PATH.title": "GoldenPath",
+    "GLADIUS-GOLDEN_PATH.title": "Golden Path",
     "GLADIUS-ORDAIN.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:diff()} additional damage for each card in your [gold]Discard Pile[/gold].\nShuffle your [gold]Discard Pile[/gold] into your [gold]Draw Pile[/gold].",
     "GLADIUS-ORDAIN.title": "Ordain",
 
-    "Artifect":"Artifact",
+    "Artifect":"Artifect",
 
     "GLADIUS-HORNED_SWORD.description": "Deal {Damage:diff()} damage.\nIncrease this card's damage by {Increase:diff()} this combat.",
     "GLADIUS-HORNED_SWORD.title": "Horned Sword",

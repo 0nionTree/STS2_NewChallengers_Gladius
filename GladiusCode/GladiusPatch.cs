@@ -8,6 +8,8 @@ using MegaCrit.Sts2.Core.Nodes.Cards;
 using Gladius.GladiusCode.Cards;
 using System.Reflection;
 using MegaCrit.Sts2.Core.Localization;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models.Events;
 
 namespace Gladius.GladiusCode.Patches
 {
@@ -218,6 +220,32 @@ namespace Gladius.GladiusCode.Patches
                 if (!isProtected) DurabilityExtensions.VarianceDurability(__instance, -1);
             }
         }
+        [HarmonyPostfix]
+        public static void Postfix(CardModel __instance, ref Task __result)
+        {
+            // 1. 원본 OnPlayWrapper가 생성한 비동기 작업(Task)을 가져옵니다.
+            Task originalTask = __result;
+
+            // 2. __result를 "원본 작업을 끝까지 기다렸다가 내구도를 동기화하는 새로운 작업"으로 교체합니다.
+            __result = WaitForTaskAndSyncDurability(__instance, originalTask);
+        }
+
+        // 실제 비동기 대기 및 사후 처리를 담당할 도우미 함수
+        private static async Task WaitForTaskAndSyncDurability(CardModel __instance, Task originalTask)
+        {
+            // 3. 카드의 발동 로직(데미지 계산 등)이 완전히 끝날 때까지 대기합니다.
+            await originalTask;
+
+            // 4. 모든 작업이 끝난 후(카드 효과 발동 완료 후) 표기용 내구도를 동기화합니다.
+            var customData = __instance.GetCustomData();
+            if (customData != null && customData.isDurable)
+            {
+                if (customData.CurrentDurability == 0)
+                    customData.WasDurability = customData.BaseDurability;
+                else
+                    customData.WasDurability = customData.CurrentDurability;
+            }
+        }
     }
 
     // =========================================================================
@@ -252,10 +280,11 @@ namespace Gladius.GladiusCode.Patches
                     __result = PileType.Hand; 
                 }
                 // 사용 전 내구도 초기화
-                __instance.GetCustomData().WasDurability = __instance.GetCustomData().CurrentDurability;
+                //__instance.GetCustomData().WasDurability = __instance.GetCustomData().CurrentDurability;
             }
         }
     }
+    /*
     // =========================================================================
     // CanPlay()함수에 Material/Durable 카드가 없을 경우 isRequiredMaterial/isRequiredDurable 이 true인 카드를 사용 불가로 변경
     // =========================================================================
@@ -342,4 +371,5 @@ namespace Gladius.GladiusCode.Patches
             }
         }
     }
+    */
 }

@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace Gladius.GladiusCode.Cards;
 
@@ -35,7 +36,33 @@ public abstract class GladiusCard(
     public virtual int BaseDurability => 0;
     public virtual bool IsRequiredMaterial => false;
     public virtual bool IsRequiredDurable => false;
-    public virtual int RequiredDurableCards => 0;
+
+    // 카드 사용에 소재 또는 내구도가 존재하는 카드가 필요하다면, 조건 불만족 시 붉은 테두리로 표시
+    protected override bool ShouldGlowRedInternal
+    {
+        get
+        {
+            // 손에 있는 카드 목록 확인
+            bool result = false;
+            var cards = PileType.Hand.GetPile(Owner).Cards;
+            // 사용에 소재 카드가 필요할 경우
+            if (IsRequiredMaterial)
+            {
+                // 카드 목록에 소재 카드가 있다면 false 반환
+                result = !cards.Any(c => c.Keywords.Contains(GladiusKeywords.Material));
+            }
+            // 사용에 내구도가 존재하는 카드가 필요할 경우
+            if (IsRequiredDurable)
+            {
+                // 카드 목록에 내구도가 있는 카드가 있다면 false 반환
+                result = !cards.Any(c => c.GetCustomData().isDurable);
+            }
+            // 사용 조건이 부족하다면 true(붉게 발광), 아니라면 false(기본 상태) 반환
+            return result;
+        }
+    }
+
+
     //Image size:
     //Normal art: 1000x760 (Using 500x380 should also work, it will simply be scaled.)
     //Full art: 606x852
@@ -57,21 +84,35 @@ public abstract class GladiusCard(
 
     protected virtual async Task Material(PlayerChoiceContext choiceContext, CardModel artifectCard){}
 
-    protected async Task<T?> Alchemy<T>(PlayerChoiceContext choiceContext, bool isUpgraded, int durability = 0) where T : CardModel
+    /// <summary>
+    /// 연성 : 소재(Material) 키워드가 존재하는 카드를 선택하여 지정된 연성물(Artifect) 카드로 변환(Transform) 시킨다.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="choiceContext">실행중인 PlayerChoiceContext</param>
+    /// <param name="isUpgraded">생성할 연성물의 강화 유무</param>
+    /// <param name="durability">생성할 연성물의 내구도 증감 (없거나 0이어도 무방)</param>
+    /// <param name="material">소재 카드의 사전 지정(지정해둘 경우 선택창이 나오지 않는다)</param>
+    /// <returns></returns>
+    protected async Task<T?> Alchemy<T>(PlayerChoiceContext choiceContext, bool isUpgraded, int durability = 0, CardModel? material = null) where T : CardModel
     {
+        // 소재 선택 메시지를 지정
         var promptString = new LocString("combat_messages", "SELECT_MATERIAL");
-		// var를 사용하거나 CardModel?을 사용하여 null 가능성을 명시합니다.
-        var metarial = (await CardSelectCmd.FromHand(
-            prefs: new CardSelectorPrefs(promptString, 1), 
-            context: choiceContext, 
-            player: Owner, 
-            // 필터 조건: Material 키워드가 있는 카드만 선택 가능
-            filter: (CardModel card) => card.Keywords.Contains(GladiusKeywords.Material), 
-            source: this
-        )).FirstOrDefault();
 
-        // 카드가 정상적으로 선택되었는지 확인 (null 체크)
-        if (metarial != null)
+        // 지정된 소재(Material)이 있다면 사용하고, 없다면 손에서 선택
+        if (material == null)
+        {
+            material = (await CardSelectCmd.FromHand(
+                prefs: new CardSelectorPrefs(promptString, 1), 
+                context: choiceContext, 
+                player: Owner, 
+                // 필터 조건: Material 키워드가 있는 카드만 선택 가능
+                filter: (CardModel card) => card.Keywords.Contains(GladiusKeywords.Material), 
+                source: this
+            )).FirstOrDefault();
+        }
+
+        // 선택된 소재가 존재하며, 소재 키워드를 가지고있다면 계속
+        if (material != null && material.Keywords.Contains(GladiusKeywords.Material))
         {
             // Artifect(연성물)카드 생성
             T artifect = CombatState!.CreateCard<T>(Owner);
@@ -86,18 +127,18 @@ public abstract class GladiusCard(
             }
             // 선택한 소재 카드의 Material() 함수 실행
             // CardModel을 Material() 함수가 정의된 커스텀 클래스로 캐스팅 (예: GladiusCard)
-            if (metarial is GladiusCard gladiusCard)
+            if (material is GladiusCard gladiusCard)
             {
                 await gladiusCard.Material(choiceContext, artifect); // 형변환에 성공했다면 함수 실행
             }
             // 소재 카드를 연성물 카드로 변화
-            await CardCmd.Transform(metarial, artifect);
+            await CardCmd.Transform(material, artifect);
             await Cmd.Wait(0.2f);
 
             // 전투 중이라면 (전투 상태가 존재한다면) 글로벌 이벤트를 발송
             if (CombatState != null)
             {
-                await AlchemyEventDispatcher.DispatchAlchemyTriggered(CombatState, artifect, metarial, Owner);
+                await AlchemyEventDispatcher.DispatchAlchemyTriggered(CombatState, artifect, material, Owner);
             }
 
             // 최종 연성된 연성물 카드의 내구도가 0 이하라면 소멸
@@ -111,6 +152,14 @@ public abstract class GladiusCard(
 
             return artifect;
         }
+        // 소재가 없다면
+        else
+        {
+            // 소재가 없다고 안내 문구 출력
+            LocString locString = new LocString("combat_messages", "MATERIALS_MISSING");
+            TalkCmd.Play(locString, Owner.Creature, VfxColor.White);
+        }
+        
         return null;
     }
 }

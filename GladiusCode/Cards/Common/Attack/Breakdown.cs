@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace Gladius;
 
@@ -19,7 +20,6 @@ public class Breakdown() : GladiusCard(0, CardType.Attack, CardRarity.Common, Ta
 {
     // 깨뜨리기
     public override bool IsRequiredDurable => true;
-    public override int RequiredDurableCards => 1;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new IntVar("Durability", 1), new DamageVar(12m, DamageProps.card)];
@@ -41,15 +41,23 @@ public class Breakdown() : GladiusCard(0, CardType.Attack, CardRarity.Common, Ta
             source: this
         )).FirstOrDefault();
 
-        // 선택된 연성물 카드가 존재한다면 내구도 감소
         if (cardModel != null)
-            await DurabilityExtensions.VarianceDurability(cardModel, DynamicVars["Durability"].IntValue, choiceContext);
-        
-        // 타겟 확인 후 대미지
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
+        {
+            // 선택된 연성물 카드가 존재한다면 내구도 감소
+            await DurabilityExtensions.VarianceDurability(cardModel, -DynamicVars["Durability"].IntValue, choiceContext);
+            // 타겟 확인 후 대미지
+            ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+            await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+                .WithHitFx("vfx/vfx_attack_slash")
+                .Execute(choiceContext);
+        }
+        // 연성물 카드가 없다면 
+        else
+        {
+            // 내구도 카드가 없다고 안내 문구 출력
+            LocString locString = new LocString("combat_messages", "DURABLES_MISSING");
+            TalkCmd.Play(locString, Owner.Creature, VfxColor.White);
+        }
     }
 
     protected override void OnUpgrade()

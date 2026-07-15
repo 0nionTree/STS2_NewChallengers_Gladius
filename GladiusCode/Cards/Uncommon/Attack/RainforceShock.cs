@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Models;
 using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace Gladius;
 
@@ -18,13 +19,14 @@ namespace Gladius;
 public class RainforceShock() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     // 충격요법
+    public override bool IsRequiredDurable => true;
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(10m, DamageProps.card),
         new IntVar("Durability", 1)];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
-        HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
@@ -37,20 +39,26 @@ public class RainforceShock() : GladiusCard(1, CardType.Attack, CardRarity.Uncom
             .Execute(choiceContext);
         
         // 연성물 선택 문구 생성
-        var promptString = new LocString("combat_messages", "SELECT_ARTIFECT");
-        // 연성물 카드 선택
+        var promptString = new LocString("combat_messages", "SELECT_DURABLE");
+        // 내구도가 존재하는 카드 선택
         var cardModel = (await CardSelectCmd.FromHand(
             prefs: new CardSelectorPrefs(promptString, 1), 
             context: choiceContext, 
-            player: base.Owner, 
-            filter: (CardModel card) => card.Keywords.Contains(GladiusKeywords.Artifact), 
+            player: Owner, 
+            filter: (CardModel card) => card.GetCustomData().isDurable, 
             source: this
         )).FirstOrDefault();
-        // 연성물 카드가 있다면
+        // 선택된 내구도 카드가 있다면
         if (cardModel != null)
         {
             // 현재 내구도 증가
             DurabilityExtensions.VarianceDurability(cardModel, DynamicVars["Durability"].IntValue);
+        }
+        else
+        {
+            // 내구도 카드가 없다고 안내 문구 출력
+            LocString locString = new LocString("combat_messages", "DURABLES_MISSING");
+            TalkCmd.Play(locString, Owner.Creature, VfxColor.White);
         }
     }
 

@@ -17,7 +17,6 @@ public static class DurabilityExtensions
         public int WasDurability = 0;
         public bool isRequiredMaterial = false;
         public bool isRequiredDurable = false;
-        public int requiredDurableCards = 0;
     }
 
     // CardModel에 Durability를 연결
@@ -41,7 +40,6 @@ public static class DurabilityExtensions
                 data.WasDurability = gCard.BaseDurability;
                 data.isRequiredMaterial = gCard.IsRequiredMaterial;
                 data.isRequiredDurable = gCard.IsRequiredDurable;
-                data.requiredDurableCards = gCard.RequiredDurableCards;
             }
 
             // 새로 생성된 내구도 데이터 등록
@@ -105,6 +103,5 @@ public static class DurabilityExtensions
         cardModel.GetCustomData().isDurable = false;
         cardModel.GetCustomData().BaseDurability = 0;
         cardModel.GetCustomData().CurrentDurability = 0;
-        cardModel.GetCustomData().WasDurability = 0;
     }
 }

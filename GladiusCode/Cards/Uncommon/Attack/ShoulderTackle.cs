@@ -17,6 +17,8 @@ namespace Gladius;
 public class ShoulderTackle() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     // 철산고
+    public override bool IsRequiredMaterial => true;
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(5m, DamageProps.card)];
 

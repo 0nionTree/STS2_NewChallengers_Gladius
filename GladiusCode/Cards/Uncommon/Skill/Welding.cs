@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace Gladius;
 
@@ -19,7 +20,17 @@ public class Welding() : GladiusCard(0, CardType.Skill, CardRarity.Uncommon, Tar
 {
     // 용접
     public override bool IsRequiredDurable => true;
-    public override int RequiredDurableCards => 2;
+
+    protected override bool ShouldGlowGoldInternal
+    {
+        get
+        {
+            var cards = PileType.Hand.GetPile(Owner).Cards;
+            int count = cards.Count(c => c.GetCustomData().isDurable);
+            if (count >= 2) return true;
+            return false;
+        }
+    }
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new IntVar("Durability", 3)];
@@ -72,6 +83,18 @@ public class Welding() : GladiusCard(0, CardType.Skill, CardRarity.Uncommon, Tar
                 // 두 번째로 선택한 카드의 내구도를 저장된 수치만큼 증가
                 await DurabilityExtensions.VarianceDurability(cardModel2, durability, choiceContext);
             }
+            else
+            {
+                // 두 번째 소재가 없다고 안내 문구 출력
+                LocString locString = new LocString("combat_messages", "ANOTHER_DURABLES_MISSING");
+                TalkCmd.Play(locString, Owner.Creature, VfxColor.White);
+            }
+        }
+        else
+        {
+            // 소재가 없다고 안내 문구 출력
+            LocString locString = new LocString("combat_messages", "DURABLES_MISSING");
+            TalkCmd.Play(locString, Owner.Creature, VfxColor.White);
         }
     }
 
