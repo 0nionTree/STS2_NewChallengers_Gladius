@@ -77,15 +77,15 @@ public abstract class GladiusCard(
     public override string BetaPortraitPath => $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
 
     // 연성 함수 실행 시 수신받아 자동으로 실행되는 함수
-    public virtual Task OnAlchemyTriggered(CardModel artifect, CardModel metarial, Player? creator)
+    public virtual Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator)
     {
         return Task.CompletedTask; 
     }
 
-    protected virtual async Task Material(PlayerChoiceContext choiceContext, CardModel artifectCard){}
+    protected virtual async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard){}
 
     /// <summary>
-    /// 연성 : 소재(Material) 키워드가 존재하는 카드를 선택하여 지정된 연성물(Artifect) 카드로 변환(Transform) 시킨다.
+    /// 연성 : 소재(Material) 키워드가 존재하는 카드를 선택하여 지정된 연성물(Artifact) 카드로 변환(Transform) 시킨다.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="choiceContext">실행중인 PlayerChoiceContext</param>
@@ -114,43 +114,43 @@ public abstract class GladiusCard(
         // 선택된 소재가 존재하며, 소재 키워드를 가지고있다면 계속
         if (material != null && material.Keywords.Contains(GladiusKeywords.Material))
         {
-            // Artifect(연성물)카드 생성
-            T artifect = CombatState!.CreateCard<T>(Owner);
+            // Artifact(연성물)카드 생성
+            T artifact = CombatState!.CreateCard<T>(Owner);
             if (isUpgraded) // 강화 버전을 생성하는지 확인
             {
-                CardCmd.Upgrade(artifect);
+                CardCmd.Upgrade(artifact);
             }
             // 내구도 증감 지정이 있다면 연성물 카드의 내구도 증감
             if (durability != 0)
             {
-                DurabilityExtensions.VarianceDurability(artifect, durability);
+                DurabilityExtensions.VarianceDurability(artifact, durability);
             }
             // 선택한 소재 카드의 Material() 함수 실행
             // CardModel을 Material() 함수가 정의된 커스텀 클래스로 캐스팅 (예: GladiusCard)
             if (material is GladiusCard gladiusCard)
             {
-                await gladiusCard.Material(choiceContext, artifect); // 형변환에 성공했다면 함수 실행
+                await gladiusCard.Material(choiceContext, artifact); // 형변환에 성공했다면 함수 실행
             }
             // 소재 카드를 연성물 카드로 변화
-            await CardCmd.Transform(material, artifect);
+            await CardCmd.Transform(material, artifact);
             await Cmd.Wait(0.2f);
 
             // 전투 중이라면 (전투 상태가 존재한다면) 글로벌 이벤트를 발송
             if (CombatState != null)
             {
-                await AlchemyEventDispatcher.DispatchAlchemyTriggered(CombatState, artifect, material, Owner);
+                await AlchemyEventDispatcher.DispatchAlchemyTriggered(CombatState, artifact, material, Owner);
             }
 
             // 최종 연성된 연성물 카드의 내구도가 0 이하라면 소멸
-            if (artifect.GetCustomData().CurrentDurability <= 0)
+            if (artifact.GetCustomData().CurrentDurability <= 0)
             {
-                await DurabilityExtensions.ExhaustArtifect(choiceContext, artifect);
+                await DurabilityExtensions.ExhaustArtifact(choiceContext, artifact);
                 await Cmd.Wait(0.2f);
 
                 return null;
             }
 
-            return artifect;
+            return artifact;
         }
         // 소재가 없다면
         else

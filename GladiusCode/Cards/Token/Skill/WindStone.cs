@@ -26,18 +26,18 @@ public class WindStone() : GladiusCard(1, CardType.Skill, CardRarity.Token, Targ
         HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
         ..HoverTipFactory.FromEnchantment<Swift>(DynamicVars["SwiftAmount"].IntValue)];
 
-    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifectCard)
+    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
     {
-        if (artifectCard != null)
+        if (artifactCard != null)
         {
-            CardCmd.Enchant<Swift>(artifectCard, DynamicVars["SwiftAmount"].IntValue);
+            CardCmd.Enchant<Swift>(artifactCard, DynamicVars["SwiftAmount"].IntValue);
         }
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 카드 뽑기
-		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, base.Owner);
+		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
     }
 
     protected override void OnUpgrade()

@@ -22,10 +22,8 @@ public class DragonScale() : GladiusCard(0, CardType.Attack, CardRarity.Token, T
         [new DamageVar(5m, DamageProps.card)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
-		[GladiusKeywords.Artifact, GladiusKeywords.Durability];
-        
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
+		[GladiusKeywords.Artifact,
+        GladiusKeywords.Durability];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

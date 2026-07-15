@@ -15,7 +15,7 @@ public class WroughtIron() : GladiusCard(1, CardType.Skill, CardRarity.Token, Ta
     // 연철 - 소재
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];
 
-    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifectCard)
+    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
     {
         // 강화된 상태일 경우
         if (IsUpgraded)

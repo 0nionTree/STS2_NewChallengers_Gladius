@@ -7,7 +7,7 @@
     "GLADIUS-WIND_STONE.title": "Wind Stone",
     "GLADIUS-THUNDERSTRUCK_WOOD.description": "Gain {Energy:energyIcons()}.\n[gold]Alchemy[/gold] with this [gold]Enchants[/gold] the [gold]Artifact[/gold] with [purple]Sown[/purple] [blue]1[/blue].",
     "GLADIUS-THUNDERSTRUCK_WOOD.title": "Thunderstruck Wood",
-    "GLADIUS-STEEL.description": "Gain {Block:diff()} Block.\n[gold]Alchemy[/gold] with this increases the [gold]Artifect[/gold]'s [gold]Durability[/gold] by {Durability:diff()}",
+    "GLADIUS-STEEL.description": "Gain {Block:diff()} Block.\n[gold]Alchemy[/gold] with this increases the [gold]Artifact[/gold]'s [gold]Durability[/gold] by {Durability:diff()}",
     "GLADIUS-STEEL.title": "Steel",
     "GLADIUS-CLAY.description": "Gain {Block:diff()} Block.",
     "GLADIUS-CLAY.title": "Clay",
@@ -101,6 +101,8 @@
     "GLADIUS-WELDING.title": "Welding",
     "GLADIUS-ECDYSIS.description": "[gold]Alchemy[/gold] all [gold]Material[/gold] cards in your hand into [gold]{IfUpgraded:show:Dragon Scale+|Dragon Scale}[/gold].",
     "GLADIUS-ECDYSIS.title": "Ecdysis",
+    "GLADIUS-POSSESSION.description": "[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Dragon Claw+|Dragon Claw}[/gold] into your [gold]Hand[/gold].\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
+    "GLADIUS-POSSESSION.title": "Possession",
 
     "Rare":"Rare",
 
@@ -115,7 +117,7 @@
     "GLADIUS-ORDAIN.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:diff()} additional damage for each card in your [gold]Discard Pile[/gold].\nShuffle your [gold]Discard Pile[/gold] into your [gold]Draw Pile[/gold].",
     "GLADIUS-ORDAIN.title": "Ordain",
 
-    "Artifect":"Artifect",
+    "Artifact":"Artifact",
 
     "GLADIUS-HORNED_SWORD.description": "Deal {Damage:diff()} damage.\nIncrease this card's damage by {Increase:diff()} this combat.",
     "GLADIUS-HORNED_SWORD.title": "Horned Sword",
@@ -124,5 +126,11 @@
     "GLADIUS-SHOULDER_GUARDS.description": "Deal {Damage:diff()} damage.\nGain {Block:diff()} Block.\nAt the start of your turn, if this is in your [gold]Hand[/gold], it gains {Durability:diff()} [gold]Durability[/gold].",
     "GLADIUS-SHOULDER_GUARDS.title": "Shoulder Guards",
     "GLADIUS-RITUAL_PLUMB.description": "Deal {Damage:diff()} damage.\nIf [gold]Durability[/gold] is 1, deal double damage.",
-    "GLADIUS-RITUAL_PLUMB.title": "Ritual Plumb"
+    "GLADIUS-RITUAL_PLUMB.title": "Ritual Plumb",
+    "GLADIUS-DRAGON_CLAW.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:diff()} additional damage for each [gold]DragonAura[/gold] you have.",
+    "GLADIUS-DRAGON_CLAW.title": "DragonClaw",
+    "GLADIUS-VORTEX_SPEAR.description": "Deal {Damage:diff()} damage.\nWhenever you play another [gold]Artifact[/gold] card, increase this card's damage by {Increase:diff()}",
+    "GLADIUS-VORTEX_SPEAR.title": "VortexSpear",
+    "GLADIUS-SERRATED_DAGGER.description": "Deal {Damage:diff()} damage for each Durability on this card.{InCombat:\n(Hits {CalculatedHits:diff()} {CalculatedHits:plural:time|times})|}",
+    "GLADIUS-SERRATED_DAGGER.title": "SerratedDagger"
 }

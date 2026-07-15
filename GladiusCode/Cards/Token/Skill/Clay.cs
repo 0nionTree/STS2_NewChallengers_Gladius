@@ -20,7 +20,7 @@ public class Clay() : GladiusCard(0, CardType.Skill, CardRarity.Token, TargetTyp
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new BlockVar(2, BlockProps.card)];
         
-    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifectCard)
+    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
     {
         
     }

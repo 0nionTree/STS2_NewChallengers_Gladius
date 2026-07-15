@@ -67,7 +67,7 @@ public static class DurabilityExtensions
 
         // 내구도가 0 이하라면 소멸 진행
         if (cardModel.GetCustomData().CurrentDurability > 0) return;
-        await ExhaustArtifect(choiceContext, cardModel);
+        await ExhaustArtifact(choiceContext, cardModel);
     }
     // 내구도 지정만, 소멸은 하지 않음(별도 소멸 매커니즘 구현 필요)
     public static async Task SetDurability(CardModel cardModel, int index)
@@ -87,9 +87,9 @@ public static class DurabilityExtensions
 
         // 내구도가 0 이하라면 소멸 진행
         if (cardModel.GetCustomData().CurrentDurability > 0) return;
-        await ExhaustArtifect(choiceContext, cardModel);
+        await ExhaustArtifact(choiceContext, cardModel);
     }
-    public static async Task ExhaustArtifect(PlayerChoiceContext choiceContext, CardModel cardModel)
+    public static async Task ExhaustArtifact(PlayerChoiceContext choiceContext, CardModel cardModel)
     {
         // 카드 소멸 후 내구도 복구
         await CardCmd.Exhaust(choiceContext, cardModel);

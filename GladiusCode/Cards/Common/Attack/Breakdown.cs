@@ -30,7 +30,7 @@ public class Breakdown() : GladiusCard(0, CardType.Attack, CardRarity.Common, Ta
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 카드 선택 메시지 초기화
-        var promptString = new LocString("combat_messages", "SELECT_ARTIFECT");
+        var promptString = new LocString("combat_messages", "SELECT_ARTIFACT");
 
         // 연성물 카드 선택
         var cardModel = (await CardSelectCmd.FromHand(

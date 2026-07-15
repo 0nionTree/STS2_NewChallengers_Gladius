@@ -15,7 +15,7 @@ namespace Gladius;
 public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
 	// 용각 검 - 연성물
-	private const string _increaseKey = "Increase";
+	//private const string _increaseKey = "Increase";
 
 	private decimal _extraDamageFromPlays;
 
@@ -27,10 +27,8 @@ public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
 		new DynamicVar("Increase", 2m)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
-		[GladiusKeywords.Artifact, GladiusKeywords.Durability];
-		
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
+		[GladiusKeywords.Artifact,
+		GladiusKeywords.Durability];
 
     private decimal ExtraDamageFromPlays
 	{

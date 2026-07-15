@@ -30,7 +30,7 @@ public class Guideline() : GladiusCard(0, CardType.Skill, CardRarity.Common, Tar
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 손의 내구도가 있는 카드 검색
-        var promptString = new LocString("combat_messages", "SELECT_ARTIFECT");
+        var promptString = new LocString("combat_messages", "SELECT_ARTIFACT");
 
         var cardModel = (await CardSelectCmd.FromHand(
             prefs: new CardSelectorPrefs(promptString, 1), 

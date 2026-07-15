@@ -27,13 +27,13 @@ public class Steel() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetTy
         HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
         HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
 
-    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifectCard)
+    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
     {
         // 생성된 카드가 존재할 경우
-        if (artifectCard != null)
+        if (artifactCard != null)
         {
             // 내구도 증가
-            artifectCard.GetCustomData().CurrentDurability += DynamicVars["Durability"].IntValue;
+            artifactCard.GetCustomData().CurrentDurability += DynamicVars["Durability"].IntValue;
         }
     }
 

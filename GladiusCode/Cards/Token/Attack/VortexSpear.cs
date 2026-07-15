@@ -7,27 +7,43 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using Gladius.GladiusCode;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;
 
 [Pool(typeof(TokenCardPool))]
-public class ShoulderGuards() : GladiusCard(0, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
+public class VortexSpear() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
-    // 견갑 - 연성물
+    // 나선 투창 - 연성물
     public override bool IsDurable => true;
     public override int BaseDurability => 1;
-    
+
+	private decimal _extraDamageFromPlays;
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(2m, DamageProps.card),
-        new BlockVar(2m, BlockProps.card),
-		new IntVar("Durability", 1)];
+        [new DamageVar(8m, DamageProps.card),
+        new DynamicVar("Increase", 3)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[GladiusKeywords.Artifact,
         GladiusKeywords.Durability];
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
         
+    private decimal ExtraDamageFromPlays
+	{
+		get
+		{
+			return _extraDamageFromPlays;
+		}
+		set
+		{
+			AssertMutable();
+			_extraDamageFromPlays = value;
+		}
+	}
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 대상 확인
@@ -36,22 +52,32 @@ public class ShoulderGuards() : GladiusCard(0, CardType.Attack, CardRarity.Token
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        // 방어도 획득
-        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
     }
 
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
-    {
-        if (Pile?.Type == PileType.Hand)
-        {
-            // 현재 내구도 증가
-            this.GetCustomData().CurrentDurability += DynamicVars["Durability"].IntValue;
-        }
-    }
+    public override Task BeforeCardPlayed(CardPlay cardPlay)
+	{
+		if (cardPlay.Card.Owner != Owner)
+			return Task.CompletedTask;
+        if (!cardPlay.Card.Keywords.Contains(GladiusKeywords.Artifact))
+            return Task.CompletedTask;
+        if (cardPlay.Card == this)
+            return Task.CompletedTask;
+
+		DynamicVars.Damage.BaseValue += DynamicVars["Increase"].BaseValue;
+		ExtraDamageFromPlays += DynamicVars["Increase"].BaseValue;
+
+		return Task.CompletedTask;
+	}
+
+    protected override void AfterDowngraded()
+	{
+		AfterDowngraded();
+		DynamicVars.Damage.BaseValue += ExtraDamageFromPlays;
+	}
 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2m);
-        DynamicVars.Block.UpgradeValueBy(1m);
+        DynamicVars["Increase"].UpgradeValueBy(1m);
     }
 }
