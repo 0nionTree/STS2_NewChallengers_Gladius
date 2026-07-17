@@ -4,5 +4,8 @@
     "GLADIUS-DRAGON_AURA_POWER.title": "Dragon Aura",
     "GLADIUS-PRESERVE_DURABILITY_POWER.description": "Your next Artifact does not decrease Durability this turn.",
     "GLADIUS-PRESERVE_DURABILITY_POWER.smartDescription": "Your next {Amount:plural:Artifact is|[blue]{}[/blue] Artifacts are} does not decrease Durability this turn.",
-    "GLADIUS-PRESERVE_DURABILITY_POWER.title": "Preserve Durability"
+    "GLADIUS-PRESERVE_DURABILITY_POWER.title": "Preserve Durability",
+    "GLADIUS-ERUPTION_POWER.description": "Lose All [gold]Dragon Aura[/gold] at the end of your turn.",
+    "GLADIUS-ERUPTION_POWER.smartDescription": "Lose All [gold]Dragon Aura[/gold] at the end of your turn.",
+    "GLADIUS-ERUPTION_POWER.title": "Eruption"
 }

@@ -195,11 +195,13 @@ namespace Gladius.GladiusCode.Patches
         [HarmonyPrefix]
         public static void Prefix(CardModel __instance)
         {
+            var customData = __instance.GetCustomData();
+
             // 내구도가 존재하는 카드인지 확인
-            if (__instance.GetCustomData().isDurable)
+            if (customData.isDurable)
             {
                 // 사용 전 내구도 저장
-                __instance.GetCustomData().WasDurability = __instance.GetCustomData().CurrentDurability;
+                customData.WasDurability = customData.CurrentDurability;
 
                 // 내구도 감소 체크
                 bool isProtected = false;
@@ -217,7 +219,8 @@ namespace Gladius.GladiusCode.Patches
                 }
 
                 // 최종적으로 내구도 감소 체크 후 내구도 감소
-                if (!isProtected) DurabilityExtensions.VarianceDurability(__instance, -1);
+                if (!isProtected)
+                    customData.CurrentDurability = Math.Max(0, customData.CurrentDurability - 1);
             }
         }
         [HarmonyPostfix]
