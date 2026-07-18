@@ -2,10 +2,13 @@
     "GLADIUS-DRAGON_AURA_POWER.description": "Increases Attack damage by 20% per [gold]Dragon Aura[/gold].\nLose 1 [gold]Dragon Aura[/gold] whenever you play an Attack or at the end of your turn.",
     "GLADIUS-DRAGON_AURA_POWER.smartDescription": "Increases Attack damage by [blue]{TotalBonus}%[/blue].\nLose 1 [gold]Dragon Aura[/gold] whenever you play an Attack or at the end of your turn.",
     "GLADIUS-DRAGON_AURA_POWER.title": "Dragon Aura",
-    "GLADIUS-PRESERVE_DURABILITY_POWER.description": "Your next Artifact does not decrease Durability this turn.",
-    "GLADIUS-PRESERVE_DURABILITY_POWER.smartDescription": "Your next {Amount:plural:Artifact is|[blue]{}[/blue] Artifacts are} does not decrease Durability this turn.",
-    "GLADIUS-PRESERVE_DURABILITY_POWER.title": "Preserve Durability",
+    "GLADIUS-DRAGON_AURA_NEXT_TURN_POWER.description": "At the start of your next turn, Gain [gold]Dragon Aura[/gold].",
+    "GLADIUS-DRAGON_AURA_NEXT_TURN_POWER.smartDescription": "At the start of your next turn, Gain [blue]{Amount}[/blue] [gold]Dragon Aura[/gold].",
+    "GLADIUS-DRAGON_AURA_NEXT_TURN_POWER.title": "DragonAuraNextTurnPower",
     "GLADIUS-ERUPTION_POWER.description": "Lose All [gold]Dragon Aura[/gold] at the end of your turn.",
     "GLADIUS-ERUPTION_POWER.smartDescription": "Lose All [gold]Dragon Aura[/gold] at the end of your turn.",
-    "GLADIUS-ERUPTION_POWER.title": "Eruption"
+    "GLADIUS-ERUPTION_POWER.title": "Eruption",
+    "GLADIUS-PRESERVE_DURABILITY_POWER.description": "Your next Artifact does not decrease Durability this turn.",
+    "GLADIUS-PRESERVE_DURABILITY_POWER.smartDescription": "Your next {Amount:plural:Artifact is|[blue]{}[/blue] Artifacts are} does not decrease Durability this turn.",
+    "GLADIUS-PRESERVE_DURABILITY_POWER.title": "Preserve Durability"
 }

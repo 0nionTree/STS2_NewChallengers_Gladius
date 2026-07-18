@@ -21,7 +21,8 @@ public class Eradication() : GladiusCard(1, CardType.Attack, CardRarity.Common, 
 {
     // 퇴치
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(5m, DamageProps.card), new PowerVar<WeakPower>(1m)];
+        [new DamageVar(5m, DamageProps.card),
+        new PowerVar<WeakPower>(1m)];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 

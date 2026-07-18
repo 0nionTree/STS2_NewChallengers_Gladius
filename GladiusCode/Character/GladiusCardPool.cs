@@ -87,6 +87,9 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<DismantlingTool>(),
             ModelDb.Card<WeaponAbsorption>(),
             ModelDb.Card<Consecrate>(),
+            ModelDb.Card<Replica>(),
+            ModelDb.Card<Miner>(),
+            ModelDb.Card<ExorcismRitual>(),
             // 고급 파워 카드
             // 희귀 공격 카드
             ModelDb.Card<FallingPetals>(),

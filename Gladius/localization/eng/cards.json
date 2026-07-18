@@ -15,6 +15,8 @@
     "GLADIUS-DRAGON_ORB.title": "Dragon Orb",
     "GLADIUS-DIAMOND.description": "Gain {Block:diff()} Block.\n[gold]Alchemy[/gold] with this [gold]Enchants[/gold] the [gold]Artifact[/gold] with [purple]Adroit[/purple] [blue]{AdroitAmount:diff()}[/blue].",
     "GLADIUS-DIAMOND.title": "Diamond",
+    "GLADIUS-TUNING_SHARD.description": "Deal {Damage:diff()} damage a random enemy.\n[gold]Alchemy[/gold] with this [gold]Enchants[/gold] the [gold]Artifact[/gold] with [purple]Shrapnel[/purple] [blue]{ShrapnelAmount:diff()}[/blue].",
+    "GLADIUS-TUNING_SHARD.title": "Tuning Shard",
 
     "Basic":"Basic",
 
@@ -115,6 +117,14 @@
     "GLADIUS-WEAPON_ABSORPTION.title": "Weapon Absorption",
     "GLADIUS-CONSECRATE.description": "Put 1 card from your [gold]Hand[/gold] on bottom of your [gold]Draw Pile[/gold].\nAdd a [gold]{IfUpgraded:show:Dragon Orb+|Dragon Orb}[/gold] into your [gold]Hand[/gold].",
     "GLADIUS-CONSECRATE.title": "Consecrate",
+    "GLADIUS-REPLICA.description": "Choose an [gold]Artifact[/gold] card. Add a copy into your [gold]Hand[/gold] with {Durability:diff()} [gold]Durability[/gold] and [gold]Ethereal[/gold].",
+    "GLADIUS-REPLICA.title": "Replica",
+    "GLADIUS-MINER.description": "Gain {Block:diff()} Block.\nAdd 1 random{IfUpgraded:show: [gold]Upgraded[/gold]} [gold]Material[/gold] card into your [gold]Hand[/gold].",
+    "GLADIUS-MINER.title": "Miner",
+    "GLADIUS-EXORCISM_RITUAL.description": "[gold]Alchemy[/gold] a [gold]Purifying Lantern[/gold] into your [gold]Hand[/gold].{IfUpgraded:show:\nIncrease its [gold]Durability[/gold] by {Durability:diff()}}.",
+    "GLADIUS-EXORCISM_RITUAL.title": "Exorcism Ritual",
+    "GLADIUS-CONDENSATION.description": "Next turn,\ngain {DragonAuraPower:diff()} [gold]Dragon Aura[/gold] and {Energy:energyIcons()}.",
+    "GLADIUS-CONDENSATION.title": "Condensation",
 
     "Rare":"Rare",
 
@@ -144,5 +154,7 @@
     "GLADIUS-VORTEX_SPEAR.description": "Deal {Damage:diff()} damage.\nWhenever you play another [gold]Artifact[/gold] card, increase this card's damage by {Increase:diff()}",
     "GLADIUS-VORTEX_SPEAR.title": "Vortex Spear",
     "GLADIUS-SERRATED_DAGGER.description": "Deal {Damage:diff()} damage for each Durability on this card.{InCombat:\n(Hits {CalculatedHits:diff()} {CalculatedHits:plural:time|times})|}",
-    "GLADIUS-SERRATED_DAGGER.title": "Serrated Dagger"
+    "GLADIUS-SERRATED_DAGGER.title": "Serrated Dagger",
+    "GLADIUS-PURIFYING_LANTERN.description": "Deal {Damage:diff()} damage.\nApply {VulnerablePower:diff()} [gold]Vulnerable[/gold].",
+    "GLADIUS-PURIFYING_LANTERN.title": "Purifying Lantern"
 }

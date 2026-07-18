@@ -1,8 +1,10 @@
 {
     "MATERIALS_MISSING": "noting [gold]Material[/gold] card",
     "DURABLES_MISSING": "noting [gold]Durable[/gold] card",
+    "ARTIFACTS_MISSING": "noting [gold]Artifact[/gold] card",
     "ANOTHER_DURABLES_MISSING": "noting another [gold]Durable[/gold] card",
     "SELECT_MATERIAL": "choice [gold]Material[/gold] card",
     "SELECT_DURABLE": "choice [gold]Durable[/gold] card",
-    "SELECT_ANOTHER_DURABLE": "choice another [gold]Durable[/gold] card"
+    "SELECT_ANOTHER_DURABLE": "choice another [gold]Durable[/gold] card",
+    "SELECT_ARTIFACT": "choice [gold]Artifact[/gold] card"
 }

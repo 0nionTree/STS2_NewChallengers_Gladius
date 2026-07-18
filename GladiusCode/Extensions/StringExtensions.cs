@@ -68,4 +68,17 @@ public static class StringExtensions
     {
         return Path.Join(MainFile.ResPath, "images", "charui", path);
     }
+
+    public static string EnchantmentImagePath(this string path)
+    {
+        // 1. 기본 리소스 경로(ResPath)를 기반으로 인챈트 이미지 경로 생성
+        path = Path.Join(MainFile.ResPath, "images", "enchantments", path);
+        
+        // 2. 해당 경로에 파일이 실제로 존재하는지 확인
+        if (ResourceLoader.Exists(path)) return path;
+        
+        // 3. 파일이 없다면 로그를 남기고 기본(Fallback) 이미지 반환
+        MainFile.Logger.Info("Could not find enchantment image path: " + path);
+        return Path.Join(MainFile.ResPath, "images", "enchantments", "enchantment.png");
+    }
 }

@@ -74,7 +74,7 @@ public static class DurabilityExtensions
         await ExhaustArtifact(choiceContext, cardModel);
     }
     // 내구도 지정만, 소멸은 하지 않음(별도 소멸 매커니즘 구현 필요)
-    public static async Task SetDurability(CardModel cardModel, int index)
+    public static void SetDurability(CardModel cardModel, int index)
     {
         var customData = cardModel.GetCustomData();
         // 내구도가 없는 카드라면 즉시 종료
