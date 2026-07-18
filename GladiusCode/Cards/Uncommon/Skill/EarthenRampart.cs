@@ -13,26 +13,26 @@ using MegaCrit.Sts2.Core.Models;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class GatherIngredients() : GladiusCard(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
+public class EarthenRampart() : GladiusCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
-    // 연성 준비
+    // 대지 연성
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(3m, BlockProps.card)];
+        [new BlockVar(12m, BlockProps.card)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Material),
-        HoverTipFactory.FromCard<WroughtIron>()];
+        HoverTipFactory.FromCard<Diamond>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 방어도 획득
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        // 연철 생성
-        CardModel cardModel = CombatState!.CreateCard<WroughtIron>(Owner);
-        /*if (IsUpgraded) // 강화된 상태라면 생성한 카드 강화 - 강화 안함 -
+        // 금강석 생성
+        CardModel cardModel = CombatState!.CreateCard<Diamond>(Owner);
+        if (IsUpgraded) // 강화된 상태라면 생성한 카드 강화
         {
             CardCmd.Upgrade(cardModel);
-        }*/
+        }
         // 생성한 카드 손으로 가져오기
         await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, Owner);
 		await Cmd.Wait(0.2f);
@@ -40,6 +40,6 @@ public class GatherIngredients() : GladiusCard(1, CardType.Skill, CardRarity.Bas
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(4m);
+        DynamicVars.Block.UpgradeValueBy(1m);
     }
 }

@@ -15,7 +15,10 @@ namespace Gladius;
 public class Clay() : GladiusCard(0, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     // 진흙 - 소재
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Ethereal, CardKeyword.Exhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+        [GladiusKeywords.Material,
+        CardKeyword.Ethereal,
+        CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new BlockVar(2, BlockProps.card)];

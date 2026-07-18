@@ -4,11 +4,14 @@
     "GLADIUS-DRAGON_AURA_POWER.title": "Dragon Aura",
     "GLADIUS-DRAGON_AURA_NEXT_TURN_POWER.description": "At the start of your next turn, Gain [gold]Dragon Aura[/gold].",
     "GLADIUS-DRAGON_AURA_NEXT_TURN_POWER.smartDescription": "At the start of your next turn, Gain [blue]{Amount}[/blue] [gold]Dragon Aura[/gold].",
-    "GLADIUS-DRAGON_AURA_NEXT_TURN_POWER.title": "DragonAuraNextTurnPower",
+    "GLADIUS-DRAGON_AURA_NEXT_TURN_POWER.title": "Dragon Aura Next Turn",
     "GLADIUS-ERUPTION_POWER.description": "Lose All [gold]Dragon Aura[/gold] at the end of your turn.",
     "GLADIUS-ERUPTION_POWER.smartDescription": "Lose All [gold]Dragon Aura[/gold] at the end of your turn.",
     "GLADIUS-ERUPTION_POWER.title": "Eruption",
     "GLADIUS-PRESERVE_DURABILITY_POWER.description": "Your next Artifact does not decrease Durability this turn.",
     "GLADIUS-PRESERVE_DURABILITY_POWER.smartDescription": "Your next {Amount:plural:Artifact is|[blue]{}[/blue] Artifacts are} does not decrease Durability this turn.",
-    "GLADIUS-PRESERVE_DURABILITY_POWER.title": "Preserve Durability"
+    "GLADIUS-PRESERVE_DURABILITY_POWER.title": "Preserve Durability",
+    "GLADIUS-UNITY_POWER.description": "The next time you gain [gold]Block[/gold] from a card, increase the amount gained.",
+    "GLADIUS-UNITY_POWER.smartDescription": "The next time {OnPlayer:you gain|[gold]{OwnerName}[/gold] gains} [gold]Block[/gold] from a card, increase the amount gained by [blue]{Amount}[/blue]%.",
+    "GLADIUS-UNITY_POWER.title": "Unity"
 }

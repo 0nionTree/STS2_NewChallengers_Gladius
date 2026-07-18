@@ -125,6 +125,14 @@
     "GLADIUS-EXORCISM_RITUAL.title": "Exorcism Ritual",
     "GLADIUS-CONDENSATION.description": "Next turn,\ngain {DragonAuraPower:diff()} [gold]Dragon Aura[/gold] and {Energy:energyIcons()}.",
     "GLADIUS-CONDENSATION.title": "Condensation",
+    "GLADIUS-DRAGONS_MIRROR.description": "Discard {Discard:diff()} card from your [gold]Draw Pile[/gold].\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
+    "GLADIUS-DRAGONS_MIRROR.title": "Dragon's Mirror",
+    "GLADIUS-UNITY.description": "The next time you gain [gold]Block[/gold] from a card, increase the amount gained by {UnityPower:diff()}%",
+    "GLADIUS-UNITY.title": "Unity",
+    "GLADIUS-EARTHEN_RAMPART.description": "Gain {Block:diff()} Block.\nAdd a [gold]{IfUpgraded:show:Diamond+|Diamond}[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-EARTHEN_RAMPART.title": "Earthen Rampart",
+    "GLADIUS-ADVERSITY.description": "Gain {Block:diff()} Block for each enemy.",
+    "GLADIUS-ADVERSITY.title": "Adversity",
 
     "Rare":"Rare",
 
@@ -138,6 +146,9 @@
     "GLADIUS-GOLDEN_PATH.title": "Golden Path",
     "GLADIUS-ORDAIN.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:diff()} additional damage for each card in your [gold]Discard Pile[/gold].\nShuffle your [gold]Discard Pile[/gold] into your [gold]Draw Pile[/gold].",
     "GLADIUS-ORDAIN.title": "Ordain",
+
+    "GLADIUS-EXTREME_SPEED.description": "Gain {Block:diff()} Block.\nDiscard {Cards:diff()} card from your [gold]Draw Pile[/gold].",
+    "GLADIUS-EXTREME_SPEED.title": "Extreme Speed",
 
     "Artifact":"Artifact",
 
