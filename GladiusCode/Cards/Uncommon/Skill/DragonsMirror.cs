@@ -13,9 +13,7 @@ namespace Gladius;
 [Pool(typeof(GladiusCardPool))]
 public class DragonsMirror() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
-    // 길잡이
-    public override bool IsRequiredDurable => true;
-
+    // 용의 거울
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new IntVar("Discard", 1),
         new CardsVar(2)];
