@@ -35,14 +35,14 @@ public class WeaponAbsorption() : GladiusCard(1, CardType.Skill, CardRarity.Unco
             prefs: new CardSelectorPrefs(promptString, 1), 
             context: choiceContext, 
             player: Owner, 
-            filter: (CardModel card) => card.GetCustomData().isDurable, 
+            filter: (CardModel card) => card.GetDurability().isDurable, 
             source: this
         )).FirstOrDefault();
 
         if (cardModel != null)
         {
             // 선택한 카드의 내구도만큼 에너지 획득
-		    await PlayerCmd.GainEnergy(cardModel.GetCustomData().CurrentDurability, Owner);
+		    await PlayerCmd.GainEnergy(cardModel.GetDurability().CurrentDurability, Owner);
             // 선택한 카드 소멸
             await CardCmd.Exhaust(choiceContext, cardModel);
         }

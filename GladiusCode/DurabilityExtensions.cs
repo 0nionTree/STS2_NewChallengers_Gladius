@@ -23,7 +23,7 @@ public static class DurabilityExtensions
     private static readonly ConditionalWeakTable<CardModel, Durability> DurabilityDataMap = new();
 
     // 내구도 데이터 호출
-    public static Durability GetCustomData(this CardModel card)
+    public static Durability GetDurability(this CardModel card)
     {
         // 호출한 카드의 내구도 데이터가 없다면
         if (!DurabilityDataMap.TryGetValue(card, out var data))
@@ -52,67 +52,67 @@ public static class DurabilityExtensions
     // 내구도 증감만, 소멸은 하지 않음(별도 소멸 매커니즘 구현 필요)
     public static void VarianceDurability(CardModel cardModel, int index)
     {   // 소멸 불가
-        var customData = cardModel.GetCustomData();
+        var durabilityData = cardModel.GetDurability();
         // 내구도가 없는 카드라면 즉시 종료
-        if (!customData.isDurable) return;
+        if (!durabilityData.isDurable) return;
         // 현재 내구도를 index만큼 증감(0 미만으로 감소하지 않음)
-        customData.CurrentDurability = Math.Max(0, customData.CurrentDurability + index);
-        customData.WasDurability = customData.CurrentDurability;
+        durabilityData.CurrentDurability = Math.Max(0, durabilityData.CurrentDurability + index);
+        durabilityData.WasDurability = durabilityData.CurrentDurability;
     }
     // 내구도 증감 뒤 자동 소멸
     public static async Task VarianceDurability(CardModel cardModel, int index, PlayerChoiceContext choiceContext)
     {
-        var customData = cardModel.GetCustomData();
+        var durabilityData = cardModel.GetDurability();
         // 내구도가 없는 카드라면 즉시 종료
-        if (!customData.isDurable) return;
+        if (!durabilityData.isDurable) return;
         // 현재 내구도를 index만큼 증감(0 미만으로 감소하지 않음)
-        customData.CurrentDurability = Math.Max(0, customData.CurrentDurability + index);
-        customData.WasDurability = customData.CurrentDurability;
+        durabilityData.CurrentDurability = Math.Max(0, durabilityData.CurrentDurability + index);
+        durabilityData.WasDurability = durabilityData.CurrentDurability;
 
         // 내구도가 0 이하라면 소멸 진행
-        if (customData.CurrentDurability > 0) return;
+        if (durabilityData.CurrentDurability > 0) return;
         await ExhaustArtifact(choiceContext, cardModel);
     }
     // 내구도 지정만, 소멸은 하지 않음(별도 소멸 매커니즘 구현 필요)
     public static void SetDurability(CardModel cardModel, int index)
     {
-        var customData = cardModel.GetCustomData();
+        var durabilityData = cardModel.GetDurability();
         // 내구도가 없는 카드라면 즉시 종료
-        if (!customData.isDurable) return;
+        if (!durabilityData.isDurable) return;
         // 현재 내구도를 index와 같게 변경
-        customData.CurrentDurability = index;
-        customData.WasDurability = customData.CurrentDurability;
+        durabilityData.CurrentDurability = index;
+        durabilityData.WasDurability = durabilityData.CurrentDurability;
     }
     // 내구도 지정 후 0일 경우 소멸
     public static async Task SetDurability(CardModel cardModel, int index, PlayerChoiceContext choiceContext)
     {
-        var customData = cardModel.GetCustomData();
+        var durabilityData = cardModel.GetDurability();
         // 내구도가 없는 카드라면 즉시 종료
-        if (!customData.isDurable) return;
+        if (!durabilityData.isDurable) return;
         // 현재 내구도를 index와 같게 변경
-        customData.CurrentDurability = index;
-        customData.WasDurability = customData.CurrentDurability;
+        durabilityData.CurrentDurability = index;
+        durabilityData.WasDurability = durabilityData.CurrentDurability;
 
         // 내구도가 0 이하라면 소멸 진행
-        if (customData.CurrentDurability > 0) return;
+        if (durabilityData.CurrentDurability > 0) return;
         await ExhaustArtifact(choiceContext, cardModel);
     }
     public static async Task ExhaustArtifact(PlayerChoiceContext choiceContext, CardModel cardModel)
     {
-        var customData = cardModel.GetCustomData();
+        var durabilityData = cardModel.GetDurability();
         // 카드 소멸 후 내구도 복구
         await CardCmd.Exhaust(choiceContext, cardModel);
-        customData.CurrentDurability = customData.BaseDurability;
+        durabilityData.CurrentDurability = durabilityData.BaseDurability;
         
         // 사용 전 내구도를 현재 내구도로 변경
-        customData.WasDurability = customData.CurrentDurability;
+        durabilityData.WasDurability = durabilityData.CurrentDurability;
     }
     public static void ResetDurability(CardModel cardModel)
     {
-        var customData = cardModel.GetCustomData();
+        var durabilityData = cardModel.GetDurability();
 
-        customData.isDurable = false;
-        customData.BaseDurability = 0;
-        customData.CurrentDurability = 0;
+        durabilityData.isDurable = false;
+        durabilityData.BaseDurability = 0;
+        durabilityData.CurrentDurability = 0;
     }
 }

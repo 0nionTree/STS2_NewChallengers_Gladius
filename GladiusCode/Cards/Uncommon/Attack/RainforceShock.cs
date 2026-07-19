@@ -45,7 +45,7 @@ public class RainforceShock() : GladiusCard(1, CardType.Attack, CardRarity.Uncom
             prefs: new CardSelectorPrefs(promptString, 1), 
             context: choiceContext, 
             player: Owner, 
-            filter: (CardModel card) => card.GetCustomData().isDurable, 
+            filter: (CardModel card) => card.GetDurability().isDurable, 
             source: this
         )).FirstOrDefault();
         // 선택된 내구도 카드가 있다면

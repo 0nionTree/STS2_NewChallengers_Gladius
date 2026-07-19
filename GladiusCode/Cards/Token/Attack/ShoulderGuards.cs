@@ -45,7 +45,7 @@ public class ShoulderGuards() : GladiusCard(0, CardType.Attack, CardRarity.Token
         if (Pile?.Type == PileType.Hand)
         {
             // 현재 내구도 증가
-            this.GetCustomData().CurrentDurability += DynamicVars["Durability"].IntValue;
+            this.GetDurability().CurrentDurability += DynamicVars["Durability"].IntValue;
         }
     }
 

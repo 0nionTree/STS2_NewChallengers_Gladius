@@ -28,7 +28,7 @@ public class GoldenHammer() : GladiusCard(2, CardType.Skill, CardRarity.Rare, Ta
         foreach (CardModel cardModel in PileType.Hand.GetPile(Owner).Cards)
         {
             // 검색한 카드가 소모품 카드라면 내구도 증가
-            var durabilityData = cardModel.GetCustomData();
+            var durabilityData = cardModel.GetDurability();
             if (durabilityData.isDurable)
             {
                 DurabilityExtensions.VarianceDurability(cardModel, DynamicVars["Durability"].IntValue);

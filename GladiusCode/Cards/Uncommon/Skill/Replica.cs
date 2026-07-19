@@ -45,7 +45,7 @@ public class Replica() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, Tar
 
         if (cardModel != null)
         {
-            var customData = cardModel.GetCustomData();
+            var durabilityData = cardModel.GetDurability();
 
             for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
 			{

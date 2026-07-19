@@ -160,6 +160,9 @@
     "GLADIUS-KEYBOARD.title": "Keyboard",
     "GLADIUS-STORM_EERTH_AND_FIRE.description": "Add a [gold]{IfUpgraded:show:Wind Stone+|Wind Stone}[/gold], [gold]{IfUpgraded:show:Diamond+|Diamond}[/gold], and [gold]{IfUpgraded:show:Dragon Orb+|Dragon Orb}[/gold] into your [gold]Hand[/gold]. They cost 0{energyPrefix:energyIcons(1)} until played.",
     "GLADIUS-STORM_EERTH_AND_FIRE.title": "Storm, Eerth and Fire",
+    "GLADIUS-FAMILIAR.description": "Add [gold]Artifact[/gold] and {Durability:diff} [gold]Durability[/gold] to {Cards:diff()} non-Durable {Cards:plural:card|cards} in your [gold]Hand[/gold].",
+    "GLADIUS-FAMILIAR.selectionScreenPrompt": "Choose {Amount} {Amount:plural:card|cards} to add [gold]Artifact[/gold] and [gold]Durability[/gold].",
+    "GLADIUS-FAMILIAR.title": "Familiar",
 
     "Artifact":"Artifact",
 

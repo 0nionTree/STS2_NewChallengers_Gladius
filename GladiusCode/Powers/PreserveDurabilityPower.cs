@@ -20,7 +20,7 @@ public class PreserveDurabilityPower : GladiusPower
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card.GetCustomData().isDurable)
+        if (cardPlay.Card.GetDurability().isDurable)
         {
             await PowerCmd.Decrement(this);
         }

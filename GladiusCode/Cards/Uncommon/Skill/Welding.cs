@@ -26,7 +26,7 @@ public class Welding() : GladiusCard(0, CardType.Skill, CardRarity.Uncommon, Tar
         get
         {
             var cards = PileType.Hand.GetPile(Owner).Cards;
-            int count = cards.Count(c => c.GetCustomData().isDurable);
+            int count = cards.Count(c => c.GetDurability().isDurable);
             if (count >= 2) return true;
             return false;
         }
@@ -48,22 +48,22 @@ public class Welding() : GladiusCard(0, CardType.Skill, CardRarity.Uncommon, Tar
             prefs: new CardSelectorPrefs(promptString1, 1), 
             context: choiceContext, 
             player: Owner, 
-            filter: (CardModel card) => card.GetCustomData().isDurable, 
+            filter: (CardModel card) => card.GetDurability().isDurable, 
             source: this
         )).FirstOrDefault();
 
         if (cardModel1 != null)
         {
             int durability;
-            var customData = cardModel1.GetCustomData();
+            var durabilityData = cardModel1.GetDurability();
 
             // 선택한 카드의 내구도가 n 이상인지 확인
-            if (customData.CurrentDurability >= DynamicVars["Durability"].IntValue)
+            if (durabilityData.CurrentDurability >= DynamicVars["Durability"].IntValue)
                 // 내구도 n 이상이면 n 저장
                 durability = DynamicVars["Durability"].IntValue;
             else
                 // 내구도 n 미만이면 현재 수치만큼 저장
-                durability = customData.CurrentDurability;
+                durability = durabilityData.CurrentDurability;
             
             // 저장된 수치만큼 내구도 감소
             await DurabilityExtensions.VarianceDurability(cardModel1, -durability, choiceContext);
@@ -74,7 +74,7 @@ public class Welding() : GladiusCard(0, CardType.Skill, CardRarity.Uncommon, Tar
                 context: choiceContext, 
                 player: Owner, 
                 // 핵심: 내구도가 존재하면서(isDurable) AND 첫 번째 카드(cardModel)가 아닌 카드만 필터링
-                filter: (CardModel card) => card.GetCustomData().isDurable && card != cardModel1, 
+                filter: (CardModel card) => card.GetDurability().isDurable && card != cardModel1, 
                 source: this
             )).FirstOrDefault();
 

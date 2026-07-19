@@ -108,7 +108,8 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<GoldenHammer>(),
             ModelDb.Card<ConvergingSwirl>(),
             ModelDb.Card<Keyboard>(),
-            ModelDb.Card<StormEerthAndFire>()
+            ModelDb.Card<StormEerthAndFire>(),
+            ModelDb.Card<Familiar>()
             // 희귀 파워 카드
         ];
     }

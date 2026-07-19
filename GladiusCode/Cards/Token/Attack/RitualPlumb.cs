@@ -43,7 +43,7 @@ public class RitualPlumb() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
 		{
 			return 1m;
 		}
-        if (this.GetCustomData().WasDurability != 1)
+        if (this.GetDurability().WasDurability != 1)
 		{
 			return 1m;
 		}

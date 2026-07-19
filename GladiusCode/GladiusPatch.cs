@@ -46,7 +46,7 @@ namespace Gladius.GladiusCode.Patches
 
             CardModel cardModel = __instance.Model!;
 
-            if (cardModel.GetCustomData().isDurable) 
+            if (cardModel.GetDurability().isDurable) 
             {
                 bool isProtected = false;
                 if (!__instance.Model!.IsCanonical && cardModel.Owner?.Creature?.Powers != null)
@@ -122,9 +122,9 @@ namespace Gladius.GladiusCode.Patches
                     durIcon.Texture = GD.Load<Texture2D>("res://Gladius/images/durability_icon.png");
                 }
 
-                if (cardModel.GetCustomData().CurrentDurability > 0)
+                if (cardModel.GetDurability().CurrentDurability > 0)
                 {
-                    durLabel.Text = cardModel.GetCustomData().CurrentDurability.ToString();
+                    durLabel.Text = cardModel.GetDurability().CurrentDurability.ToString();
                 }
                 else
                 {
@@ -195,13 +195,13 @@ namespace Gladius.GladiusCode.Patches
         [HarmonyPrefix]
         public static void Prefix(CardModel __instance)
         {
-            var customData = __instance.GetCustomData();
+            var durabilityData = __instance.GetDurability();
 
             // 내구도가 존재하는 카드인지 확인
-            if (customData.isDurable)
+            if (durabilityData.isDurable)
             {
                 // 사용 전 내구도 저장
-                customData.WasDurability = customData.CurrentDurability;
+                durabilityData.WasDurability = durabilityData.CurrentDurability;
 
                 // 내구도 감소 체크
                 bool isProtected = false;
@@ -220,7 +220,7 @@ namespace Gladius.GladiusCode.Patches
 
                 // 최종적으로 내구도 감소 체크 후 내구도 감소
                 if (!isProtected)
-                    customData.CurrentDurability = Math.Max(0, customData.CurrentDurability - 1);
+                    durabilityData.CurrentDurability = Math.Max(0, durabilityData.CurrentDurability - 1);
             }
         }
         [HarmonyPostfix]
@@ -240,13 +240,13 @@ namespace Gladius.GladiusCode.Patches
             await originalTask;
 
             // 4. 모든 작업이 끝난 후(카드 효과 발동 완료 후) 표기용 내구도를 동기화합니다.
-            var customData = __instance.GetCustomData();
-            if (customData != null && customData.isDurable)
+            var durabilityData = __instance.GetDurability();
+            if (durabilityData != null && durabilityData.isDurable)
             {
-                if (customData.CurrentDurability == 0)
-                    customData.WasDurability = customData.BaseDurability;
+                if (durabilityData.CurrentDurability == 0)
+                    durabilityData.WasDurability = durabilityData.BaseDurability;
                 else
-                    customData.WasDurability = customData.CurrentDurability;
+                    durabilityData.WasDurability = durabilityData.CurrentDurability;
             }
         }
     }
@@ -261,16 +261,16 @@ namespace Gladius.GladiusCode.Patches
         public static void Postfix(CardModel __instance, ref PileType __result)
         {
             // 카드 사용이 끝난 뒤 내구도가 존재하는 카드라면
-            if (__instance.GetCustomData().isDurable)
+            if (__instance.GetDurability().isDurable)
             {
                 // 현재 내구도에 따라 보낼 카드 더미 변경
                 // 현재 내구도가 0이라면 소멸 후 내구도 복구
-                if (__instance.GetCustomData().CurrentDurability <= 0)
+                if (__instance.GetDurability().CurrentDurability <= 0)
                 {
                     __result = PileType.Exhaust;
                     // 연성물 카드라면 
                     if (__instance.Keywords.Contains(GladiusKeywords.Artifact))
-                        __instance.GetCustomData().CurrentDurability = __instance.GetCustomData().BaseDurability;
+                        __instance.GetDurability().CurrentDurability = __instance.GetDurability().BaseDurability;
                     // 연성물 카드가 아니라면(별도의 효과로 내구도를 부여받았다면)
                     else
                     {
@@ -283,7 +283,7 @@ namespace Gladius.GladiusCode.Patches
                     __result = PileType.Hand; 
                 }
                 // 사용 전 내구도 초기화
-                //__instance.GetCustomData().WasDurability = __instance.GetCustomData().CurrentDurability;
+                //__instance.GetDurability().WasDurability = __instance.GetDurability().CurrentDurability;
             }
         }
     }
@@ -310,10 +310,10 @@ namespace Gladius.GladiusCode.Patches
             // 이미 다른 사유로 사용 불가라면 종료
             if (!__result) return;
 
-            // CustomData를 호출하여 지역 변수에 저장
-            var customData = __instance.GetCustomData();
-            bool requiresMaterial = customData.isRequiredMaterial;
-            bool requiresDurable = customData.isRequiredDurable;
+            // durabilityData를 호출하여 지역 변수에 저장
+            var durabilityData = __instance.GetDurability();
+            bool requiresMaterial = durabilityData.isRequiredMaterial;
+            bool requiresDurable = durabilityData.isRequiredDurable;
 
             // isRequiredMaterial/isRequiredDurable 이 true가 아니라면 종료
             if (!requiresMaterial && !requiresDurable) return;
@@ -332,8 +332,8 @@ namespace Gladius.GladiusCode.Patches
                 else if (requiresDurable) 
                 {
                     // 내구도 카드는 필요한 수량(requiredDurableCards) 이상 있는지 개수를 확인(.Count)
-                    int durableCount = handCards.Count(c => c.GetCustomData().isDurable);
-                    hasConditionMet = durableCount >= customData.requiredDurableCards;
+                    int durableCount = handCards.Count(c => c.GetDurability().isDurable);
+                    hasConditionMet = durableCount >= durabilityData.requiredDurableCards;
                 }
             }
             
@@ -367,9 +367,9 @@ namespace Gladius.GladiusCode.Patches
             {
                 // 해당 카드가 Material 또는 Durable 을 필요로 한다면
                 // 메시지를 원하는 키값의 LocString으로 강제 교체
-                if (gladiusCard.GetCustomData().isRequiredMaterial)
+                if (gladiusCard.GetDurability().isRequiredMaterial)
                     __result = new LocString("combat_messages", "MATERIALS_MISSING");
-                if (gladiusCard.GetCustomData().isRequiredDurable)
+                if (gladiusCard.GetDurability().isRequiredDurable)
                     __result = new LocString("combat_messages", "DURABLES_MISSING");
             }
         }

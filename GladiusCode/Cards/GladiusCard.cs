@@ -55,7 +55,7 @@ public abstract class GladiusCard(
             if (IsRequiredDurable)
             {
                 // 카드 목록에 내구도가 있는 카드가 있다면 false 반환
-                result = !cards.Any(c => c.GetCustomData().isDurable);
+                result = !cards.Any(c => c.GetDurability().isDurable);
             }
             // 사용 조건이 부족하다면 true(붉게 발광), 아니라면 false(기본 상태) 반환
             return result;
@@ -142,7 +142,7 @@ public abstract class GladiusCard(
             }
 
             // 최종 연성된 연성물 카드의 내구도가 0 이하라면 소멸
-            if (artifact.GetCustomData().CurrentDurability <= 0)
+            if (artifact.GetDurability().CurrentDurability <= 0)
             {
                 await DurabilityExtensions.ExhaustArtifact(choiceContext, artifact);
                 await Cmd.Wait(0.2f);

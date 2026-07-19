@@ -37,7 +37,7 @@ public class Breakdown() : GladiusCard(0, CardType.Attack, CardRarity.Common, Ta
             prefs: new CardSelectorPrefs(promptString, 1), 
             context: choiceContext, 
             player: Owner, 
-            filter: (CardModel card) => card.GetCustomData().isDurable, 
+            filter: (CardModel card) => card.GetDurability().isDurable, 
             source: this
         )).FirstOrDefault();
 
