@@ -103,7 +103,12 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<GoldenPath>(),
             ModelDb.Card<Ordain>(),
             // 희귀 스킬 카드
-            ModelDb.Card<ExtremeSpeed>()
+            ModelDb.Card<DragonsWrath>(),
+            ModelDb.Card<ExtremeSpeed>(),
+            ModelDb.Card<GoldenHammer>(),
+            ModelDb.Card<ConvergingSwirl>(),
+            ModelDb.Card<Keyboard>(),
+            ModelDb.Card<StormEerthAndFire>()
             // 희귀 파워 카드
         ];
     }

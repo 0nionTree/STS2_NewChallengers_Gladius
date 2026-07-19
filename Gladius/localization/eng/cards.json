@@ -147,8 +147,19 @@
     "GLADIUS-ORDAIN.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:diff()} additional damage for each card in your [gold]Discard Pile[/gold].\nShuffle your [gold]Discard Pile[/gold] into your [gold]Draw Pile[/gold].",
     "GLADIUS-ORDAIN.title": "Ordain",
 
+    "GLADIUS-DRAGONS_WRATH.description": "Gain [gold]Dragon Aura[/gold] equal to your current [gold]Dragon Aura[/gold].",
+    "GLADIUS-DRAGONS_WRATH.title": "Dragon's Wrath",
     "GLADIUS-EXTREME_SPEED.description": "Gain {Block:diff()} Block.\nDiscard {Cards:diff()} card from your [gold]Draw Pile[/gold].",
     "GLADIUS-EXTREME_SPEED.title": "Extreme Speed",
+    "GLADIUS-GOLDEN_HAMMER.description": "Increase {Durability:diff()} [gold]Durability[/gold] All [gold]Durable[/gold] cards in your [gold]Hand[/gold].",
+    "GLADIUS-GOLDEN_HAMMER.title": "GoldenHammer",
+    "GLADIUS-CONVERGING_SWIRL.description": "[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Vortex Spear+|Vortex Spear}[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-CONVERGING_SWIRL.title": "ConvergingSwirl",
+    "GLADIUS-KEYBOARD.description": "Discard up to {Cards} {Cards:plural:card|cards}.\nFor each card discarded, add a [gold]{IfUpgraded:show:Tuning Shard|Tuning Shard}[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-KEYBOARD.selectionScreenPrompt": "Choose up to {Cards:diff()} cards to [gold]Discard[/gold].",
+    "GLADIUS-KEYBOARD.title": "Keyboard",
+    "GLADIUS-STORM_EERTH_AND_FIRE.description": "Add a [gold]{IfUpgraded:show:Wind Stone+|Wind Stone}[/gold], [gold]{IfUpgraded:show:Diamond+|Diamond}[/gold], and [gold]{IfUpgraded:show:Dragon Orb+|Dragon Orb}[/gold] into your [gold]Hand[/gold]. They cost 0{energyPrefix:energyIcons(1)} until played.",
+    "GLADIUS-STORM_EERTH_AND_FIRE.title": "Storm, Eerth and Fire",
 
     "Artifact":"Artifact",
 
