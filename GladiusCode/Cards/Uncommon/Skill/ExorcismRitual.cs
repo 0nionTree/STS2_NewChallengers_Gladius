@@ -21,7 +21,7 @@ public class ExorcismRitual() : GladiusCard(1, CardType.Skill, CardRarity.Uncomm
         [new DynamicVar("Durability", 0)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<PurifyingLantern>(IsUpgraded), 
+        [HoverTipFactory.FromCard<PurifyingLantern>(), 
         HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 
         HoverTipFactory.FromKeyword(GladiusKeywords.Artifact), 
         HoverTipFactory.FromKeyword(GladiusKeywords.Material),

@@ -122,9 +122,15 @@ namespace Gladius.GladiusCode.Patches
                     durIcon.Texture = GD.Load<Texture2D>("res://Gladius/images/durability_icon.png");
                 }
 
-                if (cardModel.GetDurability().CurrentDurability > 0)
+                // 표시할 내구도 : 기본적으론 현재 내구도
+                int displayDurability = cardModel.GetDurability().CurrentDurability;
+                // 카드가 사용 중인 카드 파일에 있다면 사용 전 내구도 표시
+                if (cardModel.Pile != null && cardModel.Pile!.Type == PileType.Play)
+                    displayDurability = cardModel.GetDurability().WasDurability;
+
+                if (displayDurability > 0)
                 {
-                    durLabel.Text = cardModel.GetDurability().CurrentDurability.ToString();
+                    durLabel.Text = displayDurability.ToString();
                 }
                 else
                 {

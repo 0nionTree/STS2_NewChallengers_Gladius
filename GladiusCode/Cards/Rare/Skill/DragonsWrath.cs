@@ -30,6 +30,6 @@ public class DragonsWrath() : GladiusCard(1, CardType.Skill, CardRarity.Rare, Ta
 
     protected override void OnUpgrade()
     {
-        Keywords.Append(CardKeyword.Retain);
+        AddKeyword(CardKeyword.Retain);
     }
 }

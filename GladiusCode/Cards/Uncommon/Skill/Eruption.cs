@@ -30,6 +30,6 @@ public class Eruption() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, Ta
 
     protected override void OnUpgrade()
     {
-        Keywords.Append(CardKeyword.Retain);
+        AddKeyword(CardKeyword.Retain);
     }
 }

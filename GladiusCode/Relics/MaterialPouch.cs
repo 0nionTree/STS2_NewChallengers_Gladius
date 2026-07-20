@@ -26,14 +26,14 @@ public class MaterialPouch() : GladiusCode.Relics.GladiusRelic {
 
     public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
 	{
-		if (player == base.Owner && Owner.PlayerCombatState!.TurnNumber == 1)
+		if (player == Owner && Owner.PlayerCombatState!.TurnNumber == 1)
 		{
 			List<CardModel> list = new List<CardModel>();
-			for (int i = 0; i < base.DynamicVars.Cards.IntValue; i++)
+			for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
 			{
-				list.Add(base.Owner.Creature.CombatState!.CreateCard<WroughtIron>(base.Owner));
+				list.Add(Owner.Creature.CombatState!.CreateCard<WroughtIron>(Owner));
 			}
-			await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, base.Owner);
+			await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, Owner);
 		}
 	}
 }

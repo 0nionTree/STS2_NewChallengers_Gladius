@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Models;
+using Gladius.GladiusCode;
 
 namespace Gladius;
 
@@ -14,7 +15,9 @@ namespace Gladius;
 public class GoodSign() : GladiusCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     // 길조
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<ThunderstruckWood>(IsUpgraded)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromCard<ThunderstruckWood>(IsUpgraded),
+        HoverTipFactory.FromKeyword(GladiusKeywords.Material)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

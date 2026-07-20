@@ -34,8 +34,5 @@ public class ConvergingSwirl() : GladiusCard(1, CardType.Skill, CardRarity.Rare,
         await Alchemy<VortexSpear>(choiceContext, IsUpgraded, 0);
     }
 
-    protected override void OnUpgrade()
-    {
-        Keywords.Append(CardKeyword.Retain);
-    }
+    //protected override void OnUpgrade()
 }

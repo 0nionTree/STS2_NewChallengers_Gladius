@@ -109,7 +109,10 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<ConvergingSwirl>(),
             ModelDb.Card<Keyboard>(),
             ModelDb.Card<StormEerthAndFire>(),
-            ModelDb.Card<Familiar>()
+            ModelDb.Card<Familiar>(),
+            ModelDb.Card<StrangeMass>(),
+            ModelDb.Card<Asura>(),
+            ModelDb.Card<DragonsDescent>()
             // 희귀 파워 카드
         ];
     }
