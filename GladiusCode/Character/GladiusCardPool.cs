@@ -96,6 +96,10 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<EarthenRampart>(),
             ModelDb.Card<Adversity>(),
             // 고급 파워 카드
+            ModelDb.Card<Collection>(),
+            ModelDb.Card<SlagExplosion>(),
+            ModelDb.Card<Grinding>(),
+            ModelDb.Card<DragonsProtection>(),
             // 희귀 공격 카드
             ModelDb.Card<FallingPetals>(),
             ModelDb.Card<DragonsFang>(),

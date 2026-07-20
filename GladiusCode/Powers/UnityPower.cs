@@ -25,6 +25,7 @@ public class UnityPower : GladiusPower
         
     public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props, CardModel? cardSource, CardPlay? cardPlay)
     {
+        // 합일 - 파워
         // 플레이어가 얻는 방어도가 아니면 무시
         if (target.IsMonster)
             return 1m;

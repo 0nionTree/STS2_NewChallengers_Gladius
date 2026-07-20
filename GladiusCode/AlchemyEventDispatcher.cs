@@ -4,7 +4,9 @@ using Gladius.GladiusCode.Cards;
 using MegaCrit.Sts2.Core.Hooks;
 using HarmonyLib;
 using System.Reflection;
-using MegaCrit.Sts2.Core.Entities.Players; // IterateCombatHookListeners가 있는 네임스페이스 (경로에 맞게 수정 필요)
+using MegaCrit.Sts2.Core.Entities.Players;
+using Gladius.GladiusCode.Powers;
+using Gladius.GladiusCode.Relics; // IterateCombatHookListeners가 있는 네임스페이스 (경로에 맞게 수정 필요)
 
 namespace Gladius;
 
@@ -36,8 +38,24 @@ public static class AlchemyEventDispatcher
                 // 순회 중인 객체가 우리가 만든 커스텀 카드(GladiusCard) 타입인지 확인합니다.
                 if (model is GladiusCard gCard)
                 {
-                    // 카드 내부에 정의된 연성 발동 시 작동할 훅(OnAlchemyTriggered)을 비동기로 실행합니다.
+                    // 내부에 정의된 연성 발동 시 작동할 훅(OnAlchemyTriggered)을 비동기로 실행합니다.
                     await gCard.OnAlchemyTriggered(artifact, metarial, creator);
+                    
+                    // 엔진의 정상적인 훅 처리 흐름에 맞춰 해당 객체의 이벤트 실행이 끝났음을 게임 시스템에 알립니다.
+                    model.InvokeExecutionFinished();
+                }
+                else if (model is GladiusPower gPower)
+                {
+                    // 내부에 정의된 연성 발동 시 작동할 훅(OnAlchemyTriggered)을 비동기로 실행합니다.
+                    await gPower.OnAlchemyTriggered(artifact, metarial, creator);
+                    
+                    // 엔진의 정상적인 훅 처리 흐름에 맞춰 해당 객체의 이벤트 실행이 끝났음을 게임 시스템에 알립니다.
+                    model.InvokeExecutionFinished();
+                }
+                else if (model is GladiusRelic gRelic)
+                {
+                    // 내부에 정의된 연성 발동 시 작동할 훅(OnAlchemyTriggered)을 비동기로 실행합니다.
+                    await gRelic.OnAlchemyTriggered(artifact, metarial, creator);
                     
                     // 엔진의 정상적인 훅 처리 흐름에 맞춰 해당 객체의 이벤트 실행이 끝났음을 게임 시스템에 알립니다.
                     model.InvokeExecutionFinished();

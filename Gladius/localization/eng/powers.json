@@ -13,5 +13,17 @@
     "GLADIUS-PRESERVE_DURABILITY_POWER.title": "Preserve Durability",
     "GLADIUS-UNITY_POWER.description": "The next time you gain [gold]Block[/gold] from a card, increase the amount gained.",
     "GLADIUS-UNITY_POWER.smartDescription": "The next time {OnPlayer:you gain|[gold]{OwnerName}[/gold] gains} [gold]Block[/gold] from a card, increase the amount gained by [blue]{Amount}[/blue]%.",
-    "GLADIUS-UNITY_POWER.title": "Unity"
+    "GLADIUS-UNITY_POWER.title": "Unity",
+    "GLADIUS-COLLECTION_POWER.description": "Whenever you discard a card, gain [blue]2[/blue] [gold]Block[/gold].",
+    "GLADIUS-COLLECTION_POWER.smartDescription": "Whenever you discard a card, gain [blue]{Amount}[/blue] [gold]Block[/gold].",
+    "GLADIUS-COLLECTION_POWER.title": "Collection",
+    "GLADIUS-SLAG_EXPLOSION_POWER.description": "Whenever you [gold]Alchemy[/gold], deal [blue]6[/blue] damage a random enemy.",
+    "GLADIUS-SLAG_EXPLOSION_POWER.smartDescription": "Whenever you [gold]Alchemy[/gold], deal [blue]{Amount}[/blue] damage a random enemy.",
+    "GLADIUS-SLAG_EXPLOSION_POWER.title": "Slag Explosion",
+    "GLADIUS-GRINDING_POWER.description": "Whenever you [gold]Alchemy[/gold] an unenchanted [gold]Artifact[/gold] card, Enchant it with [blue]3[/blue] [purple]Sharp[/purple].",
+    "GLADIUS-GRINDING_POWER.smartDescription": "Whenever you [gold]Alchemy[/gold] an unenchanted [gold]Artifact[/gold] card, Enchant it with [blue]{Amount}[/blue] [purple]Sharp[/purple].",
+    "GLADIUS-GRINDING_POWER.title": "Grinding",
+    "GLADIUS-DRAGONS_PROTECTION_POWER.description": "Whenever you play an Attack card, gain 2 Block for each [gold]Dragon Aura[/gold].",
+    "GLADIUS-DRAGONS_PROTECTION_POWER.smartDescription": "Whenever you play an Attack card, gain {Amount} Block for each [gold]Dragon Aura[/gold].",
+    "GLADIUS-DRAGONS_PROTECTION_POWER.title": "Dragon's Protection"
 }

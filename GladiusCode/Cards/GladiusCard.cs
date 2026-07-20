@@ -115,7 +115,7 @@ public abstract class GladiusCard(
         if (material != null && material.Keywords.Contains(GladiusKeywords.Material))
         {
             // Artifact(연성물)카드 생성
-            T artifact = CombatState!.CreateCard<T>(Owner);
+            T? artifact = CombatState!.CreateCard<T>(Owner);
             if (isUpgraded) // 강화 버전을 생성하는지 확인
             {
                 CardCmd.Upgrade(artifact);
@@ -131,15 +131,16 @@ public abstract class GladiusCard(
             {
                 await gladiusCard.Material(choiceContext, artifact); // 형변환에 성공했다면 함수 실행
             }
-            // 소재 카드를 연성물 카드로 변화
-            await CardCmd.Transform(material, artifact);
-            await Cmd.Wait(0.2f);
 
             // 전투 중이라면 (전투 상태가 존재한다면) 글로벌 이벤트를 발송
             if (CombatState != null)
             {
                 await AlchemyEventDispatcher.DispatchAlchemyTriggered(CombatState, artifact, material, Owner);
             }
+            
+            // 소재 카드를 연성물 카드로 변화
+            await CardCmd.Transform(material, artifact);
+            await Cmd.Wait(0.2f);
 
             // 최종 연성된 연성물 카드의 내구도가 0 이하라면 소멸
             if (artifact.GetDurability().CurrentDurability <= 0)
@@ -147,8 +148,10 @@ public abstract class GladiusCard(
                 await DurabilityExtensions.ExhaustArtifact(choiceContext, artifact);
                 await Cmd.Wait(0.2f);
 
-                return null;
+                artifact = null;
             }
+
+            
 
             return artifact;
         }

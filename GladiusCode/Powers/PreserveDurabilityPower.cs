@@ -15,6 +15,7 @@ namespace Gladius;
 
 public class PreserveDurabilityPower : GladiusPower
 {
+    // 이번 턴 내구도 보호
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 

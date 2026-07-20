@@ -15,6 +15,7 @@ namespace Gladius;
 
 public class DragonAuraNextTurnPower : GladiusPower
 {
+    // 다음 턴 용기 획득
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     

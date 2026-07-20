@@ -27,8 +27,10 @@ public class DragonsDescent() : GladiusCard(0, CardType.Skill, CardRarity.Rare, 
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        int value = ResolveEnergyXValue() * DynamicVars.Power<DragonAuraPower>().IntValue;
-        if (IsUpgraded) value += 1;
+        int value = ResolveEnergyXValue();
+        int count = DynamicVars.Power<DragonAuraPower>().IntValue;
+        if (IsUpgraded) count += 1;
+        value *= count;
         await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, value, Owner.Creature, this);
     }
 

@@ -13,7 +13,7 @@ namespace Gladius;
 
 public class DragonAuraPower : GladiusPower
 {
-    
+    // 용기
     private class Data
     {
         public AttackCommand? commandToModify;
@@ -37,7 +37,7 @@ public class DragonAuraPower : GladiusPower
         return base.AfterPowerAmountChanged(choiceContext, power, amount, applier, cardSource);
     }
 
-    // 1. 공격이 시작될 때 어떤 공격인지 추적 (수정 없음, 원본 유지)
+    // 공격이 시작될 때 어떤 공격인지 추적
     public override Task BeforeAttack(AttackCommand command)
     {
         if (command.Attacker != Owner) return Task.CompletedTask;

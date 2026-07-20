@@ -1,7 +1,9 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using Gladius.GladiusCode.Extensions;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Models;
 
 namespace Gladius.GladiusCode.Powers;
 
@@ -28,4 +30,16 @@ public abstract class GladiusPower : CustomPowerModel
     /// Single, but you're suggested to use Single as it is more explicit about how it will work.
     /// </summary>
     public abstract override PowerStackType StackType { get; }
+
+    /// <summary>
+    /// 연성 시 작동
+    /// </summary>
+    /// <param name="artifact"></param>
+    /// <param name="metarial"></param>
+    /// <param name="creator"></param>
+    /// <returns></returns>
+    public virtual Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator)
+    {
+        return Task.CompletedTask; 
+    }
 }
