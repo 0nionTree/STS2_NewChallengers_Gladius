@@ -10,14 +10,15 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class DragonsProtection() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public class DragonsProtection() : GladiusCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    // 응축
+    // 용의 수호
     protected override IEnumerable<DynamicVar> CanonicalVars => 
         [new PowerVar<DragonsProtectionPower>(2)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<DragonsProtectionPower>()];
+        [HoverTipFactory.FromPower<DragonAuraPower>(),
+        HoverTipFactory.Static(StaticHoverTip.Block)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

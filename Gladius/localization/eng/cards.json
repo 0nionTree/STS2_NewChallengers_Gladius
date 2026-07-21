@@ -137,11 +137,17 @@
     "GLADIUS-COLLECTION.description": "Whenever you discard a card, gain [blue]{CollectionPower:diff()}[/blue] [gold]Block[/gold].",
     "GLADIUS-COLLECTION.title": "Collection",
     "GLADIUS-SLAG_EXPLOSION.description": "Whenever you [gold]Alchemy[/gold], deal {SlagExplosionPower:diff()} damage a random enemy.",
-    "GLADIUS-SLAG_EXPLOSION.title": "SlagExplosion",
+    "GLADIUS-SLAG_EXPLOSION.title": "Slag Explosion",
     "GLADIUS-GRINDING.description": "Whenever you [gold]Alchemy[/gold] an unenchanted [gold]Artifact[/gold] card, Enchant it with [blue]{GrindingPower:diff()}[/blue] [purple]Sharp[/purple].",
     "GLADIUS-GRINDING.title": "Grinding",
     "GLADIUS-DRAGONS_PROTECTION.description": "Whenever you play an Attack card, gain {DragonsProtectionPower:diff()} Block for each [gold]Dragon Aura[/gold].",
     "GLADIUS-DRAGONS_PROTECTION.title": "Dragon's Protection",
+    "GLADIUS-BREATH_OF_FIRE.description": "Gain {DragonAuraPower:diff()} [gold]Dragon Aura[/gold].\nAt the start of your turn, gain {BreathOfFirePower:diff()} [gold]Dragon Aura[/gold].",
+    "GLADIUS-BREATH_OF_FIRE.title": "Breath of Fire",
+    "GLADIUS-THUNDER_CLOUD.description": "At the end of your turn, [gold]Transform[/gold] up to {ThunderCloudPower:diff()} {ThunderCloudPower:plural:card|cards} into [gold]{IfUpgraded:show:Thunderstruck Wood+|Thunderstruck Wood}[/gold] in your [gold]Hand[/gold].",
+    "GLADIUS-THUNDER_CLOUD.title": "Thunder Cloud",
+    "GLADIUS-KNEAD.description": "At the start of your turn, Add a [gold]Clay[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-KNEAD.title": "Knead",
 
     "Rare":"Rare",
 

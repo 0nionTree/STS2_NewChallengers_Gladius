@@ -11,15 +11,14 @@ using MegaCrit.Sts2.Core.Models.Enchantments;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class Grinding() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public class Grinding() : GladiusCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    // 응축
+    // 연마
     protected override IEnumerable<DynamicVar> CanonicalVars => 
         [new PowerVar<GrindingPower>(3)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<GrindingPower>(),
-        ..HoverTipFactory.FromEnchantment<Sharp>(DynamicVars["GrindingPower"].IntValue)];
+        [..HoverTipFactory.FromEnchantment<Sharp>(DynamicVars["GrindingPower"].IntValue)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
