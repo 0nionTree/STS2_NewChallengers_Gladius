@@ -192,6 +192,8 @@
     "GLADIUS-CONCUSSION.title": "Concussion",
     "GLADIUS-CULLING.description": "At the start of your turn, discard {CullingPower:diff()} {CullingPower:plural:card|cards} from your [gold]Draw Pile[/gold] and draw cards equal to their cost.",
     "GLADIUS-CULLING.title": "Culling",
+    "GLADIUS-AURA_CIRCULATION.description": "Whenever you play an Attack, if you have [gold]Dragon Aura[/gold], gain {AuraCirculationPower:diff()} [gold]Strength[/gold].",
+    "GLADIUS-AURA_CIRCULATION.title": "Aura Circulation",
 
     "Artifact":"Artifact",
 
