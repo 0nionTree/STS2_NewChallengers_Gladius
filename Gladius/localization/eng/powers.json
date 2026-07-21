@@ -40,5 +40,11 @@
     "GLADIUS-KNEAD_POWER.title": "Knead",
     "GLADIUS-MASTERS_REACH_POWER.description": "The first [gold]Durable[/gold] card you play each turn [gold]Durability[/gold] is not consumed.",
     "GLADIUS-MASTERS_REACH_POWER.smartDescription": "The first [gold]Durable[/gold] card you play each turn [gold]Durability[/gold] is not consumed.",
-    "GLADIUS-MASTERS_REACH_POWER.title": "Master's Reach"
+    "GLADIUS-MASTERS_REACH_POWER.title": "Master's Reach",
+    "GLADIUS-CONCUSSION_POWER.description": "The first time you attack an enemy each turn, if it intends to attack, apply 1 [gold]Weak[/gold].\nOtherwise, apply 1 [gold]Vulnerable[/gold].",
+    "GLADIUS-CONCUSSION_POWER.smartDescription": "The first time you attack an enemy each turn, if it intends to attack, apply {Amount} [gold]Weak[/gold].\nOtherwise, apply {Amount} [gold]Vulnerable[/gold].",
+    "GLADIUS-CONCUSSION_POWER.title": "Concussion",
+    "GLADIUS-CULLING_POWER.description": "At the start of your turn, discard 1 card from your [gold]Draw Pile[/gold] and draw cards equal to their cost.",
+    "GLADIUS-CULLING_POWER.smartDescription": "At the start of your turn, discard {Amount} {Amount:plural:card|cards} from your [gold]Draw Pile[/gold] and draw cards equal to their cost.",
+    "GLADIUS-CULLING_POWER.title": "Culling"
 }

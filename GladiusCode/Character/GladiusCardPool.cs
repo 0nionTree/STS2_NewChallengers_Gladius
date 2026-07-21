@@ -100,6 +100,9 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<SlagExplosion>(),
             ModelDb.Card<Grinding>(),
             ModelDb.Card<DragonsProtection>(),
+            ModelDb.Card<BreathOfFire>(),
+            ModelDb.Card<ThunderCloud>(),
+            ModelDb.Card<Knead>(),
             // 희귀 공격 카드
             ModelDb.Card<FallingPetals>(),
             ModelDb.Card<DragonsFang>(),
@@ -116,8 +119,10 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<Familiar>(),
             ModelDb.Card<StrangeMass>(),
             ModelDb.Card<Asura>(),
-            ModelDb.Card<DragonsDescent>()
+            ModelDb.Card<DragonsDescent>(),
             // 희귀 파워 카드
+            ModelDb.Card<MastersReach>(),
+            ModelDb.Card<Concussion>()
         ];
     }
 }

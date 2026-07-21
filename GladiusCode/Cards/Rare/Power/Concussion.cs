@@ -6,25 +6,26 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using Gladius.GladiusCode;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class MastersReach() : GladiusCard(2, CardType.Power, CardRarity.Rare, TargetType.Self)
+public class Concussion() : GladiusCard(2, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
-    // 달인의 간격
+    // 뒤흔들기
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-        [new PowerVar<MastersReachPower>(1)];
+        [new PowerVar<ConcussionPower>(1)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
+        [HoverTipFactory.FromPower<WeakPower>(),
+        HoverTipFactory.FromPower<VulnerablePower>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 파워 획득
 		await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-		await PowerCmd.Apply<MastersReachPower>(choiceContext, Owner.Creature, DynamicVars["MastersReachPower"].BaseValue, Owner.Creature, this);
+		await PowerCmd.Apply<ConcussionPower>(choiceContext, Owner.Creature, DynamicVars["ConcussionPower"].BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

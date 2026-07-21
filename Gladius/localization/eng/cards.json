@@ -76,7 +76,7 @@
     "GLADIUS-DRAGONS_ROAR.title": "Dragon's Roar",
 
     "Uncommon":"Uncommon",
-        "attack":"attack",
+    
     "GLADIUS-PUNISHMENT.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:diff()} additional damage for each Attack already played this turn.",
     "GLADIUS-PUNISHMENT.title": "Punishment",
     "GLADIUS-FILL_UP.description": "Deal {Damage:diff()} damage.\nIf you have {HandCards:diff()} or more {HandCards:plural:card|cards} in your [gold]Hand[/gold],\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
@@ -102,7 +102,7 @@
     "GLADIUS-WALLOP.title": "Wallop",
     "GLADIUS-FORCE_PALM.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:inverseDiff()} additional damage for each X",
     "GLADIUS-FORCE_PALM.title": "Force Palm",
-        "skill":"skill",
+    
     "GLADIUS-WELDING.description": "Choose a [gold]Durable[/gold] card to lose {Durability:diff()} [gold]Durability[/gold].\nGrant that much [gold]Durability[/gold] to another [gold]Durable[/gold] card.",
     "GLADIUS-WELDING.title": "Welding",
     "GLADIUS-ECDYSIS.description": "[gold]Alchemy[/gold] all [gold]Material[/gold] cards in your hand into [gold]{IfUpgraded:show:Dragon Scale+|Dragon Scale}[/gold].",
@@ -133,7 +133,7 @@
     "GLADIUS-EARTHEN_RAMPART.title": "Earthen Rampart",
     "GLADIUS-ADVERSITY.description": "Gain {Block:diff()} Block for each enemy.",
     "GLADIUS-ADVERSITY.title": "Adversity",
-        "power":"power",
+    
     "GLADIUS-COLLECTION.description": "Whenever you discard a card, gain [blue]{CollectionPower:diff()}[/blue] [gold]Block[/gold].",
     "GLADIUS-COLLECTION.title": "Collection",
     "GLADIUS-SLAG_EXPLOSION.description": "Whenever you [gold]Alchemy[/gold], deal {SlagExplosionPower:diff()} damage a random enemy.",
@@ -188,6 +188,10 @@
 
     "GLADIUS-MASTERS_REACH.description": "The first [gold]Durable[/gold] card you play each turn [gold]Durability[/gold] is not consumed.",
     "GLADIUS-MASTERS_REACH.title": "Master's Reach",
+    "GLADIUS-CONCUSSION.description": "The first time you attack an enemy each turn, if it intends to attack, apply {ConcussionPower:diff()} [gold]Weak[/gold].\nOtherwise, apply {ConcussionPower:diff()} [gold]Vulnerable[/gold].",
+    "GLADIUS-CONCUSSION.title": "Concussion",
+    "GLADIUS-CULLING.description": "At the start of your turn, discard {CullingPower:diff()} {CullingPower:plural:card|cards} from your [gold]Draw Pile[/gold] and draw cards equal to their cost.",
+    "GLADIUS-CULLING.title": "Culling",
 
     "Artifact":"Artifact",
 
