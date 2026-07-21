@@ -35,7 +35,10 @@
     "GLADIUS-THUNDER_CLOUD_POWER_UPGRADED.description": "At the end of your turn, [gold]Transform[/gold] up to 1 card into [gold]Thunderstruck Wood+[/gold] in your [gold]Hand[/gold].",
     "GLADIUS-THUNDER_CLOUD_POWER_UPGRADED.smartDescription": "At the end of your turn, [gold]Transform[/gold] up to {Amount} {Amount:plural:card|cards} into [gold]Thunderstruck Wood+[/gold] in your [gold]Hand[/gold].",
     "GLADIUS-THUNDER_CLOUD_POWER_UPGRADED.title": "Thunder Cloud",
-    "GLADIUS-KNEAD_POWER.description": "At the start of your turn, ",
-    "GLADIUS-KNEAD_POWER.smartDescription": "At the start of your turn, ",
-    "GLADIUS-KNEAD_POWER.title": "KneadPower"
+    "GLADIUS-KNEAD_POWER.description": "At the start of your turn, Add a [gold]Clay[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-KNEAD_POWER.smartDescription": "At the start of your turn, Add a [gold]Clay[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-KNEAD_POWER.title": "Knead",
+    "GLADIUS-MASTERS_REACH_POWER.description": "The first [gold]Durable[/gold] card you play each turn [gold]Durability[/gold] is not consumed.",
+    "GLADIUS-MASTERS_REACH_POWER.smartDescription": "The first [gold]Durable[/gold] card you play each turn [gold]Durability[/gold] is not consumed.",
+    "GLADIUS-MASTERS_REACH_POWER.title": "Master's Reach"
 }

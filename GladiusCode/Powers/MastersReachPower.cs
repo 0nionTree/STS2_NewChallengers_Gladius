@@ -1,4 +1,4 @@
-using Gladius.GladiusCode;
+using Gladius.GladiusCode.History;
 using Gladius.GladiusCode.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -13,13 +13,11 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Gladius;
 
-public class PreserveDurabilityPower : GladiusPower, IDurabilityProtector
+public class MastersReachPower : GladiusPower, IDurabilityProtector
 {
-    // 이번 턴 내구도 보호
+    // 달인의 간격 - 파워
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-
-    public bool IsProtectionActive() => true;
 
     // 파워 획득 시
     public override Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
@@ -37,20 +35,12 @@ public class PreserveDurabilityPower : GladiusPower, IDurabilityProtector
         return Task.CompletedTask;
     }
 
-    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    // 인터페이스 구현: 이번 턴 사용한 소모품 카드 수가 스택 미만이라면 활성화
+    public bool IsProtectionActive()
     {
-        if (cardPlay.Card.GetDurability().isDurable)
-        {
-            await PowerCmd.Decrement(this);
-        }
+        int num = GladiusHistory.GetDurableCardsPlayedThisTurn(CombatState, Owner);
+        if (num < Amount) return true; 
+        return false;
     }
-
-    // 턴 종료 시 제거
-    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
-    {
-        if (participants.Contains(Owner))
-		{
-            await PowerCmd.Remove(this);
-		}
-    }
+    
 }

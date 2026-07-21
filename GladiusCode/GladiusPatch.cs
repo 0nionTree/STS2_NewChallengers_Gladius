@@ -51,14 +51,7 @@ namespace Gladius.GladiusCode.Patches
                 bool isProtected = false;
                 if (!__instance.Model!.IsCanonical && cardModel.Owner?.Creature?.Powers != null)
                 {
-                    foreach (PowerModel powerModel in cardModel.Owner.Creature.Powers)
-                    {
-                        if (powerModel is PreserveDurabilityPower power && power.Amount > 0)
-                        {
-                            isProtected = true;
-                            break;
-                        }
-                    }
+                    isProtected = DurabilityProtectionManager.IsProtected(cardModel.Owner.Creature);
                 }
 
                 TextureRect? durIcon = cardContainer.GetNodeOrNull<TextureRect>("DurabilityIcon");
@@ -213,15 +206,9 @@ namespace Gladius.GladiusCode.Patches
                 bool isProtected = false;
 
                 // 보유한 내구도 감소 무효 파워 확인
-                foreach (PowerModel powerModel in __instance.Owner.Creature.Powers)
+                if (__instance.Owner?.Creature != null)
                 {
-                    // 무효하는 파워가 하나라도 있다면 내구도 감소 불가능 체크 후 반복문 종료
-                    if (powerModel is PreserveDurabilityPower power && power.Amount > 0/* ||
-                    powerModel is */)
-                    {
-                        isProtected = true;
-                        break;
-                    }
+                    isProtected = DurabilityProtectionManager.IsProtected(__instance.Owner.Creature);
                 }
 
                 // 최종적으로 내구도 감소 체크 후 내구도 감소

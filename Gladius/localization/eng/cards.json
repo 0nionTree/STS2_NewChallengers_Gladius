@@ -94,7 +94,7 @@
     "GLADIUS-SHOULDER_TACKLE.title": "Shoulder Tackle",
     "GLADIUS-PERSISTENT_STRIKE.description": "Deal {Damage:diff()} damage.\nAt the start of your next turn, return this to your [gold]Hand[/gold].",
     "GLADIUS-PERSISTENT_STRIKE.title": "Persistent Strike",
-    "GLADIUS-MARTIAL_ARTS.description": "Deal {Damage:diff()} damage.\nThe next [gold]Artifact[/gold] you play [gold]Durability[/gold] is not consumed.",
+    "GLADIUS-MARTIAL_ARTS.description": "Deal {Damage:diff()} damage.\nThe next [gold]Durable[/gold] card you play [gold]Durability[/gold] is not consumed.",
     "GLADIUS-MARTIAL_ARTS.title": "Martial Arts",
     "GLADIUS-BYPRODUCT.description": "Deal {Damage:diff()} damage.\nDraw {Cards:diff()} {Cards:plural:card|cards}.\nWhenever you [gold]Alchemy[/gold], reduce this card's cost by {energyPrefix:energyIcons(1)} until played.",
     "GLADIUS-BYPRODUCT.title": "Byproduct",
@@ -185,6 +185,9 @@
     "GLADIUS-ASURA.title": "Asura",
     "GLADIUS-DRAGONS_DESCENT.description": "Gain {DragonAuraPower:diff()} [gold]DragonAura[/gold] X{IfUpgraded:show:+1} times.",
     "GLADIUS-DRAGONS_DESCENT.title": "Dragon's Descent",
+
+    "GLADIUS-MASTERS_REACH.description": "The first [gold]Durable[/gold] card you play each turn [gold]Durability[/gold] is not consumed.",
+    "GLADIUS-MASTERS_REACH.title": "Master's Reach",
 
     "Artifact":"Artifact",
 
