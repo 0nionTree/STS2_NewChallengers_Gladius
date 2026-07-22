@@ -122,7 +122,14 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<DragonsDescent>(),
             // 희귀 파워 카드
             ModelDb.Card<MastersReach>(),
-            ModelDb.Card<Concussion>()
+            ModelDb.Card<Concussion>(),
+            ModelDb.Card<Culling>(),
+            ModelDb.Card<AuraCirculation>(),
+            ModelDb.Card<ImperialScale>(),
+            ModelDb.Card<Contemplation>(),
+            ModelDb.Card<Reshape>(),
+            ModelDb.Card<Samsara>(),
+            ModelDb.Card<DivineDragonForm>()
         ];
     }
 }
