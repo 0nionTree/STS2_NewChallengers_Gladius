@@ -33,7 +33,7 @@ public class Gladius : PlaceholderCharacterModel
 
     public override IReadOnlyList<RelicModel> StartingRelics =>
     [
-        ModelDb.Relic<MaterialPouch>()
+        ModelDb.Relic<MineralPouch>()
     ];
     
     public override CardPoolModel CardPool => ModelDb.CardPool<GladiusCardPool>();

@@ -13,7 +13,7 @@ using Gladius.GladiusCode;
 namespace Gladius;
 
 [BaseLib.Utils.Pool(typeof(GladiusRelicPool))]
-public class MaterialPouch() : GladiusCode.Relics.GladiusRelic {
+public class MineralPouch() : GladiusCode.Relics.GladiusRelic {
     public override RelicRarity Rarity => RelicRarity.Starter;
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>

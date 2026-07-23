@@ -35,7 +35,10 @@ public class DragonAuraPower : GladiusPower
 
     public override Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
-        DynamicVars["TotalBonus"].BaseValue = Amount * 20m;
+        if (!Owner.Player!.Relics.OfType<PaperDragon>().Any())
+            DynamicVars["TotalBonus"].BaseValue = Amount * 20m;
+        else
+            DynamicVars["TotalBonus"].BaseValue = Amount * 25m;
         return base.AfterPowerAmountChanged(choiceContext, power, amount, applier, cardSource);
     }
 
@@ -74,7 +77,10 @@ public class DragonAuraPower : GladiusPower
 
         // 스택(Amount) 1당 20%(0.2배) 증가
         // 예: 스택이 3이라면 -> 1m + (3 * 0.2m) = 1.6m (160%)
-        return 1m + (Amount * 0.2m);
+        if (!Owner.Player!.Relics.OfType<PaperDragon>().Any())
+            return 1m + (Amount * 0.2m);
+        else
+            return 1m + (Amount * 0.25m);
     }
 
     // 공격 종료 시 처리

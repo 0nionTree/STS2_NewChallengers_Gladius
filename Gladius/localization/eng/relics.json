@@ -1,5 +1,17 @@
 {
-    "GLADIUS-MATERIAL_POUCH.description": "At the start of each combat, add [blue]{Cards}[/blue] [gold]{Cards:plural:Wrought Iron|WroughtIrons}[/gold] into your [gold]Hand[/gold].",
-    "GLADIUS-MATERIAL_POUCH.flavor": "",
-    "GLADIUS-MATERIAL_POUCH.title": "MaterialPouch"
+    "GLADIUS-MINERAL_POUCH.description": "At the start of each combat, add [blue]{Cards}[/blue] [gold]Wrought Iron[/gold]{Cards:plural:|s} into your [gold]Hand[/gold].",
+    "GLADIUS-MINERAL_POUCH.flavor": "",
+    "GLADIUS-MINERAL_POUCH.title": "Mineral Pouch",
+    "GLADIUS-INGOT_CASE.description": "At the start of each combat, add [blue]{Cards}[/blue] [gold]Steel[/gold]{Cards:plural:|s} into your [gold]Hand[/gold].",
+    "GLADIUS-INGOT_CASE.flavor": "",
+    "GLADIUS-INGOT_CASE.title": "Ingot Case",
+    "GLADIUS-DRAGON_SCROLL.description": "Start each combat with [blue]{DragonAuraPower}[/blue] [gold]Dragon Aura[/gold].",
+    "GLADIUS-DRAGON_SCROLL.flavor": "",
+    "GLADIUS-DRAGON_SCROLL.title": "Dragon Scroll",
+    "GLADIUS-PAPER_DRAGON.description": "Damage increases by [blue]25%[/blue] per [gold]Dragon Aura[/gold] rather than [blue]20%[/blue].",
+    "GLADIUS-PAPER_DRAGON.flavor": "",
+    "GLADIUS-PAPER_DRAGON.title": "Paper Dragon",
+    "GLADIUS-HARDENER.description": "Whenever you [gold]Alchemy[/gold], gain {Block} Block.",
+    "GLADIUS-HARDENER.flavor": "",
+    "GLADIUS-HARDENER.title": "Hardener"
 }
