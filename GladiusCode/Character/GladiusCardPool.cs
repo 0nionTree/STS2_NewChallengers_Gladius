@@ -51,7 +51,6 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<WindGuidance>(),
             ModelDb.Card<AlchemicStrike>(),
             ModelDb.Card<StraightPunch>(),
-            ModelDb.Card<StraightPunch>(),
             ModelDb.Card<WheelKick>(),
             ModelDb.Card<Uppercut>(),
             ModelDb.Card<Pulverize>(),
@@ -134,7 +133,12 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<Glassblowing>(),
             // 고대 카드
             ModelDb.Card<Engraving>(),
-            ModelDb.Card<MidasTouch>()
+            ModelDb.Card<MidasTouch>(),
+            // 멀티플레이 카드
+            ModelDb.Card<WeaponSupply>(),
+            ModelDb.Card<OverInput>(),
+            ModelDb.Card<Vanguard>(),
+            ModelDb.Card<Bestow>()
         ];
     }
 }
