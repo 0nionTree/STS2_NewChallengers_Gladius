@@ -67,5 +67,11 @@
     "GLADIUS-SAMSARA_POWER_UPGRADED.title": "Samsara",
     "GLADIUS-DIVINE_DRAGON_FORM_POWER.description": "Whenever you lose [gold]Dragon Aura[/gold], gain 1 [gold]Dragon Aura[/gold].",
     "GLADIUS-DIVINE_DRAGON_FORM_POWER.smartDescription": "Whenever you lose [gold]Dragon Aura[/gold], gain {Amount} [gold]Dragon Aura[/gold].",
-    "GLADIUS-DIVINE_DRAGON_FORM_POWER.title": "DivineDragonForm"
+    "GLADIUS-DIVINE_DRAGON_FORM_POWER.title": "DivineDragonForm",
+    "GLADIUS-GLASSBLOWING_POWER.description": "Whenever you discard a card, Add a [gold]Tuning Shard[/gold] into your [gold]Hand[/gold] with [gold]Ethereal[/gold]. That cost 0 until played.",
+    "GLADIUS-GLASSBLOWING_POWER.smartDescription": "Whenever you discard a card, Add {Amount} [gold]Tuning Shard[/gold] into your [gold]Hand[/gold] with [gold]Ethereal[/gold]. That cost 0 until played.",
+    "GLADIUS-GLASSBLOWING_POWER.title": "Glassblowing",
+    "GLADIUS-GLASSBLOWING_POWER_UPGRADED.description": "Whenever you discard a card, Add a [gold]Tuning Shard+[/gold] into your [gold]Hand[/gold] with [gold]Ethereal[/gold]. That cost 0 until played.",
+    "GLADIUS-GLASSBLOWING_POWER_UPGRADED.smartDescription": "Whenever you discard a card, Add {Amount} [gold]Tuning Shard+[/gold] into your [gold]Hand[/gold] with [gold]Ethereal[/gold]. That cost 0 until played.",
+    "GLADIUS-GLASSBLOWING_POWER_UPGRADED.title": "Glassblowing"
 }

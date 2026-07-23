@@ -21,7 +21,7 @@ public class Diamond() : GladiusCard(1, CardType.Skill, CardRarity.Token, Target
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new IntVar("AdroitAmount", 3m),
-        new BlockVar(4m, BlockProps.card)];
+        new BlockVar(5m, BlockProps.card)];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 

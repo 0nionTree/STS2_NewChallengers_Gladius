@@ -16,7 +16,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class Miner() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public class WhatIsThis() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     // 털어내기
     protected override IEnumerable<DynamicVar> CanonicalVars =>

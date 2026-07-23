@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.Models;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class GatherIngredients() : GladiusCard(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
+public class Mine() : GladiusCard(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
 {
     // 연성 준비
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -29,10 +29,10 @@ public class GatherIngredients() : GladiusCard(1, CardType.Skill, CardRarity.Bas
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
         // 연철 생성
         CardModel cardModel = CombatState!.CreateCard<WroughtIron>(Owner);
-        /*if (IsUpgraded) // 강화된 상태라면 생성한 카드 강화 - 강화 안함 -
+        if (IsUpgraded) // 강화된 상태라면 생성한 카드 강화
         {
             CardCmd.Upgrade(cardModel);
-        }*/
+        }
         // 생성한 카드 손으로 가져오기
         await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, Owner);
 		await Cmd.Wait(0.2f);
@@ -40,6 +40,6 @@ public class GatherIngredients() : GladiusCard(1, CardType.Skill, CardRarity.Bas
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(4m);
+        DynamicVars.Block.UpgradeValueBy(2m);
     }
 }

@@ -43,7 +43,7 @@ public class GladiusCardPool : CustomCardPoolModel
             // 기본 스킬 카드
             ModelDb.Card<DefendGladius>(),
             ModelDb.Card<SwordGirding>(),
-            ModelDb.Card<GatherIngredients>(),
+            ModelDb.Card<Mine>(),
             // 일반 공격 카드
             ModelDb.Card<Breakdown>(),
             ModelDb.Card<Eradication>(),
@@ -88,7 +88,7 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<WeaponAbsorption>(),
             ModelDb.Card<Consecrate>(),
             ModelDb.Card<Replica>(),
-            ModelDb.Card<Miner>(),
+            ModelDb.Card<WhatIsThis>(),
             ModelDb.Card<ExorcismRitual>(),
             ModelDb.Card<Condensation>(),
             ModelDb.Card<DragonsMirror>(),

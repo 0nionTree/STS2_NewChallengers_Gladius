@@ -1,7 +1,7 @@
 {
     "Material":"Material",
 
-    "GLADIUS-WROUGHT_IRON.description": "{IfUpgraded:show:[gold]Alchemy[/gold] with this Add Add an unupgraded this card into your [gold]Hand[/gold].|}",
+    "GLADIUS-WROUGHT_IRON.description": "Gain {Block:diff()} Block.\n[gold]Alchemy[/gold] with this Gain {AlchemyBlock:diff()} Block.",
     "GLADIUS-WROUGHT_IRON.title": "Wrought Iron",
     "GLADIUS-WIND_STONE.description": "Draw {Cards:diff()} {Cards:plural:card|cards}.\n[gold]Alchemy[/gold] with this [gold]Enchants[/gold] the [gold]Artifact[/gold] with [purple]Swift[/purple] [blue]{SwiftAmount:diff()}[/blue].",
     "GLADIUS-WIND_STONE.title": "Wind Stone",
@@ -27,8 +27,8 @@
     "GLADIUS-DEFEND_GLADIUS.title": "Defend",
     "GLADIUS-SWORD_GIRDING.description": "[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Horned Sword+|Horned Sword}[/gold] into your [gold]Hand[/gold].",
     "GLADIUS-SWORD_GIRDING.title": "Sword Girding",
-    "GLADIUS-GATHER_INGREDIENTS.description": "Gain {Block:diff()} Block.\nAdd a [gold]{IfUpgraded:show:Wrought Iron|Wrought Iron}[/gold] into your [gold]Hand[/gold].",
-    "GLADIUS-GATHER_INGREDIENTS.title": "Gather Ingredients",
+    "GLADIUS-MINE.description": "Gain {Block:diff()} Block.\nAdd a [gold]{IfUpgraded:show:Wrought Iron|Wrought Iron}[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-MINE.title": "Mine",
 
     "Common":"Common",
 
@@ -119,8 +119,8 @@
     "GLADIUS-CONSECRATE.title": "Consecrate",
     "GLADIUS-REPLICA.description": "Choose an [gold]Artifact[/gold] card.\nAdd {Cards:plural:a copy|{Cards:diff()} copies} into your [gold]Hand[/gold] with {Durability:diff()} [gold]Durability[/gold] and [gold]Ethereal[/gold].",
     "GLADIUS-REPLICA.title": "Replica",
-    "GLADIUS-MINER.description": "Gain {Block:diff()} Block.\nAdd 1 random{IfUpgraded:show: [gold]Upgraded[/gold]} [gold]Material[/gold] card into your [gold]Hand[/gold].",
-    "GLADIUS-MINER.title": "Miner",
+    "GLADIUS-WHAT_IS_THIS.description": "Gain {Block:diff()} Block.\nAdd 1 random{IfUpgraded:show: [gold]Upgraded[/gold]} [gold]Material[/gold] card into your [gold]Hand[/gold].",
+    "GLADIUS-WHAT_IS_THIS.title": "What is This??",
     "GLADIUS-EXORCISM_RITUAL.description": "[gold]Alchemy[/gold] a [gold]Purifying Lantern[/gold] into your [gold]Hand[/gold].{IfUpgraded:show:\nIncrease its [gold]Durability[/gold] by {Durability:diff()}.}",
     "GLADIUS-EXORCISM_RITUAL.title": "Exorcism Ritual",
     "GLADIUS-CONDENSATION.description": "Next turn,\ngain {DragonAuraPower:diff()} [gold]Dragon Aura[/gold] and {Energy:energyIcons()}.",
@@ -204,6 +204,8 @@
     "GLADIUS-SAMSARA.title": "Samsara",
     "GLADIUS-DIVINE_DRAGON_FORM.description": "{IfUpgraded:show:Gain {DragonAuraPower:diff()} [gold]Dragon Aura[/gold].\n|}Whenever you lose [gold]Dragon Aura[/gold], gain {DivineDragonFormPower:diff()} [gold]Dragon Aura[/gold].",
     "GLADIUS-DIVINE_DRAGON_FORM.title": "Divine Dragon Form",
+    "GLADIUS-GLASSBLOWING.description": "Whenever you discard a card, Add a [gold]{IfUpgraded:show:Tuning Shard+|Tuning Shard}[/gold] into your [gold]Hand[/gold] with [gold]Ethereal[/gold].\nThat cost 0 until played.",
+    "GLADIUS-GLASSBLOWING.title": "Glassblowing",
 
     "Artifact":"Artifact",
 

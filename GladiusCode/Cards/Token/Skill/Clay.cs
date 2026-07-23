@@ -15,13 +15,13 @@ namespace Gladius;
 public class Clay() : GladiusCard(0, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     // 진흙 - 소재
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new BlockVar(2, BlockProps.card)];
+
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [GladiusKeywords.Material,
         CardKeyword.Ethereal,
         CardKeyword.Exhaust];
-
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(2, BlockProps.card)];
         
     protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
     {
@@ -36,6 +36,7 @@ public class Clay() : GladiusCard(0, CardType.Skill, CardRarity.Token, TargetTyp
 
     protected override void OnUpgrade()
     {
+        DynamicVars.Block.UpgradeValueBy(1);
         RemoveKeyword(CardKeyword.Ethereal);
     }
 }
