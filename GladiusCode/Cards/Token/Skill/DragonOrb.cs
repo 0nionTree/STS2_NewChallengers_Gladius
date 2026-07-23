@@ -26,7 +26,7 @@ public class DragonOrb() : GladiusCard(1, CardType.Skill, CardRarity.Token, Targ
         HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
         HoverTipFactory.FromPower<DragonAuraPower>()];
 
-    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
+    public override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
     {
         // 용기 획득
 		await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, DynamicVars["AlchemyDragonAuraPower"].IntValue, Owner.Creature, this);

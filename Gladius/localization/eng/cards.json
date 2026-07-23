@@ -140,6 +140,8 @@
     "GLADIUS-SLAG_EXPLOSION.title": "Slag Explosion",
     "GLADIUS-GRINDING.description": "Whenever you [gold]Alchemy[/gold] an unenchanted [gold]Artifact[/gold] card, Enchant it with [blue]{GrindingPower:diff()}[/blue] [purple]Sharp[/purple].",
     "GLADIUS-GRINDING.title": "Grinding",
+    "GLADIUS-REACTOR.description": "Whenever you [gold]Alchemy[/gold], draw {ReactorPower:diff()} {ReactorPower:plural:card|cards}.",
+    "GLADIUS-REACTOR.title": "Reactor",
     "GLADIUS-DRAGONS_PROTECTION.description": "Whenever you play an Attack card, gain {DragonsProtectionPower:diff()} Block for each [gold]Dragon Aura[/gold].",
     "GLADIUS-DRAGONS_PROTECTION.title": "Dragon's Protection",
     "GLADIUS-BREATH_OF_FIRE.description": "Gain {DragonAuraPower:diff()} [gold]Dragon Aura[/gold].\nAt the start of your turn, gain {BreathOfFirePower:diff()} [gold]Dragon Aura[/gold].",
@@ -206,6 +208,26 @@
     "GLADIUS-DIVINE_DRAGON_FORM.title": "Divine Dragon Form",
     "GLADIUS-GLASSBLOWING.description": "Whenever you discard a card, Add a [gold]{IfUpgraded:show:Tuning Shard+|Tuning Shard}[/gold] into your [gold]Hand[/gold] with [gold]Ethereal[/gold].\nThat cost 0 until played.",
     "GLADIUS-GLASSBLOWING.title": "Glassblowing",
+
+    "Ancient":"Ancient",
+
+    "GLADIUS-ENGRAVING.description": "Gain {Block:diff()} Block.\nAdd a [gold]{IfUpgraded:show:Tuning Shard+|Tuning Shard}[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-ENGRAVING.title": "Engraving",
+    "GLADIUS-MIDAS_TOUCH.description": "Whenever you draw a non-[gold]Durable[/gold] Attack, reduce its cost by 1 and [gold]Alchemy[/gold] it into a [gold]Durable[/gold] card with {MidasTouchPower:diff()} [gold]Durability[/gold]",
+    "GLADIUS-MIDAS_TOUCH.title": "Midas Touch",
+
+    "MultyPlay":"MultyPlay",
+
+    "GLADIUS-VANGUARD.description": "Deal {Damage:diff()} damage.\nAll players gain [gold]Block[/gold] equal to half the damage dealt.",
+    "GLADIUS-VANGUARD.title": "Vanguard",
+
+    "GLADIUS-WEAPON_SUPPLY.description": "[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Horned Sword+|Horned Sword}[/gold] into your [gold]Hand[/gold].\nIncrease its [gold]Durability[/gold] by {Durability:diff()}.\nAnother player adds a copy of that card into their [gold]Hand[/gold].",
+    "GLADIUS-WEAPON_SUPPLY.title": "Weapon Supply",
+    "GLADIUS-BESTOW.description": "Another player gain {DragonAuraPower:diff()} [gold]Dragon Aura[/gold].",
+    "GLADIUS-BESTOW.title": "Bestow",
+
+    "GLADIUS-OVER_INPUT.description": "The first time you [gold]Alchemy[/gold] each turn, ALL other players add a [gold]Dragon Scale[/gold] [gold]Alchemy[/gold]'d from the same [gold]Material[/gold] into their [gold]Hand[/gold].",
+    "GLADIUS-OVER_INPUT.title": "Over-input",
 
     "Artifact":"Artifact",
 

@@ -99,6 +99,7 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<Collection>(),
             ModelDb.Card<SlagExplosion>(),
             ModelDb.Card<Grinding>(),
+            ModelDb.Card<Reactor>(),
             ModelDb.Card<DragonsProtection>(),
             ModelDb.Card<BreathOfFire>(),
             ModelDb.Card<ThunderCloud>(),
@@ -129,7 +130,11 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<Contemplation>(),
             ModelDb.Card<Reshape>(),
             ModelDb.Card<Samsara>(),
-            ModelDb.Card<DivineDragonForm>()
+            ModelDb.Card<DivineDragonForm>(),
+            ModelDb.Card<Glassblowing>(),
+            // 고대 카드
+            ModelDb.Card<Engraving>(),
+            ModelDb.Card<MidasTouch>()
         ];
     }
 }

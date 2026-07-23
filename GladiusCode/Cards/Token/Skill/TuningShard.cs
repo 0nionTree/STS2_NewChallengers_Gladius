@@ -28,7 +28,7 @@ public class TuningShard() : GladiusCard(1, CardType.Skill, CardRarity.Token, Ta
         HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
         ..HoverTipFactory.FromEnchantment<Shrapnel>(DynamicVars["ShrapnelAmount"].IntValue)];
 
-    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
+    public override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
     {
         if (artifactCard != null)
         {

@@ -27,7 +27,7 @@ public class Steel() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetTy
         HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
         HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
 
-    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
+    public override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
     {
         // 생성된 카드가 존재할 경우
         if (artifactCard != null)

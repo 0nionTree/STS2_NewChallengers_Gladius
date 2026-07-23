@@ -1,43 +1,36 @@
 using Gladius.GladiusCode;
+using Gladius.GladiusCode.Cards;
 using Gladius.GladiusCode.Powers;
+using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Potions;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Rewards;
-using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Gladius;
 
-public class SamsaraPower : GladiusPower
+public class ReactorPower : GladiusPower
 {
-    // 윤회 - 파워
+    // 초과 투입 - 파워
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy)];
-
-    // 연성 시 복사본 생성
+        
+    // 연성 시 드로우
 	public override async Task OnAlchemyTriggered(CardModel artifact, CardModel material, Player? creator, PlayerChoiceContext choiceContext, bool isFirstThisTurn)
     {
-		// 연성 실행자가 파워 보유자가 아니라면 종료
-		if (creator != Owner.Player) return;
-
-        for (int i = 0; i < Amount; i++)
-		{
-            CardModel card = artifact.CreateClone();
-			DurabilityExtensions.SetDurability(card, 1);
-			card.AddKeyword(CardKeyword.Ethereal);
-			await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner.Player);
-		}
+        if (Owner.Player == null || Owner.Player != creator) return;
+        // 카드 뽑기
+		await CardPileCmd.Draw(choiceContext, Amount, Owner.Player);
     }
 }

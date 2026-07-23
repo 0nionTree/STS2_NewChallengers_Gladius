@@ -38,7 +38,7 @@ public class MastersReachPower : GladiusPower, IDurabilityProtector
     // 인터페이스 구현: 이번 턴 사용한 소모품 카드 수가 스택 미만이라면 활성화
     public bool IsProtectionActive()
     {
-        int num = GladiusHistory.GetDurableCardsPlayedThisTurn(CombatState, Owner);
+        int num = DurabilityHistory.GetDurableCardsPlayedThisTurn(CombatState, Owner);
         if (num < Amount) return true; 
         return false;
     }

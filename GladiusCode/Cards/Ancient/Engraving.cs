@@ -13,22 +13,23 @@ using MegaCrit.Sts2.Core.Models;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class Mine() : GladiusCard(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
+public class Engraving() : GladiusCard(1, CardType.Skill, CardRarity.Ancient, TargetType.Self)
 {
-    // 채굴
+    // 세공
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(3m, BlockProps.card)];
+        [new BlockVar(9m, BlockProps.card)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Material),
-        HoverTipFactory.FromCard<WroughtIron>(IsUpgraded)];
+        HoverTipFactory.FromCard<TuningShard>(IsUpgraded),
+        ..HoverTipFactory.FromEnchantment<Shrapnel>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 방어도 획득
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        // 연철 생성
-        CardModel cardModel = CombatState!.CreateCard<WroughtIron>(Owner);
+        // 청음편 생성
+        CardModel cardModel = CombatState!.CreateCard<TuningShard>(Owner);
         if (IsUpgraded) // 강화된 상태라면 생성한 카드 강화
         {
             CardCmd.Upgrade(cardModel);
@@ -40,6 +41,6 @@ public class Mine() : GladiusCard(1, CardType.Skill, CardRarity.Basic, TargetTyp
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(2m);
+        DynamicVars.Block.UpgradeValueBy(5m);
     }
 }

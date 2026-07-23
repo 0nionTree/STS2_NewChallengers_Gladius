@@ -33,7 +33,7 @@ public class GoldenPath() : GladiusCard(8, CardType.Attack, CardRarity.Rare, Tar
 			.Execute(choiceContext);
     }
 
-    public override Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator)
+    public override Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator, PlayerChoiceContext choiceContext, bool isFirstThisTurn)
     {
         // 이번 전투동안 비용 2 감소
         if (creator != Owner)

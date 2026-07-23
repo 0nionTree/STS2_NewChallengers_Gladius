@@ -27,7 +27,7 @@ public class SamsaraPowerUpgraded : GladiusPower
         [HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy)];
 
     // 연성 시 복사본 생성
-	public override async Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator)
+	public override async Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator, PlayerChoiceContext choiceContext, bool isFirstThisTurn)
     {
 		// 연성 실행자가 파워 보유자가 아니라면 종료
 		if (creator != Owner.Player) return;

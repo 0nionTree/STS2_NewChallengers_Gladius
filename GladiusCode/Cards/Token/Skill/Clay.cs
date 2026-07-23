@@ -23,7 +23,7 @@ public class Clay() : GladiusCard(0, CardType.Skill, CardRarity.Token, TargetTyp
         CardKeyword.Ethereal,
         CardKeyword.Exhaust];
         
-    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
+    public override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
     {
         
     }

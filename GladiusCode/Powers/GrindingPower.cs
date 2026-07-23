@@ -2,6 +2,7 @@ using Gladius.GladiusCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Enchantments;
 
@@ -14,7 +15,7 @@ public class GrindingPower : GladiusPower
     public override PowerStackType StackType => PowerStackType.Counter;
 
     // 연성한 카드가 인챈트되어있지 않다면 예리 인챈트
-    public override async Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator)
+    public override async Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator, PlayerChoiceContext choiceContext, bool isFirstThisTurn)
     {
 		// 연성 실행자가 파워 보유자가 아니라면 종료
 		if (creator != Owner.Player) return;

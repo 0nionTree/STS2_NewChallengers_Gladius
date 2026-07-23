@@ -22,7 +22,7 @@ public class WroughtIron() : GladiusCard(1, CardType.Skill, CardRarity.Token, Ta
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];
 
-    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
+    public override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
     {
         // 방어도 획득
         await CreatureCmd.GainBlock(Owner.Creature, (BlockVar)DynamicVars["AlchemyBlock"], null);

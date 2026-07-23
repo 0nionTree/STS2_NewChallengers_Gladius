@@ -23,6 +23,9 @@
     "GLADIUS-GRINDING_POWER.description": "Whenever you [gold]Alchemy[/gold] an unenchanted [gold]Artifact[/gold] card, Enchant it with [blue]3[/blue] [purple]Sharp[/purple].",
     "GLADIUS-GRINDING_POWER.smartDescription": "Whenever you [gold]Alchemy[/gold] an unenchanted [gold]Artifact[/gold] card, Enchant it with [blue]{Amount}[/blue] [purple]Sharp[/purple].",
     "GLADIUS-GRINDING_POWER.title": "Grinding",
+    "GLADIUS-REACTOR_POWER.description": "Whenever you [gold]Alchemy[/gold], draw 1 card.",
+    "GLADIUS-REACTOR_POWER.smartDescription": "Whenever you [gold]Alchemy[/gold], draw {Amount} {Amount:plural:card|cards}.",
+    "GLADIUS-REACTOR_POWER.title": "ReactorPower",
     "GLADIUS-DRAGONS_PROTECTION_POWER.description": "Whenever you play an Attack card, gain 2 Block for each [gold]Dragon Aura[/gold].",
     "GLADIUS-DRAGONS_PROTECTION_POWER.smartDescription": "Whenever you play an Attack card, gain {Amount} Block for each [gold]Dragon Aura[/gold].",
     "GLADIUS-DRAGONS_PROTECTION_POWER.title": "Dragon's Protection",
@@ -73,5 +76,11 @@
     "GLADIUS-GLASSBLOWING_POWER.title": "Glassblowing",
     "GLADIUS-GLASSBLOWING_POWER_UPGRADED.description": "Whenever you discard a card, Add a [gold]Tuning Shard+[/gold] into your [gold]Hand[/gold] with [gold]Ethereal[/gold]. That cost 0 until played.",
     "GLADIUS-GLASSBLOWING_POWER_UPGRADED.smartDescription": "Whenever you discard a card, Add {Amount} [gold]Tuning Shard+[/gold] into your [gold]Hand[/gold] with [gold]Ethereal[/gold]. That cost 0 until played.",
-    "GLADIUS-GLASSBLOWING_POWER_UPGRADED.title": "Glassblowing"
+    "GLADIUS-GLASSBLOWING_POWER_UPGRADED.title": "Glassblowing",
+    "GLADIUS-MIDAS_TOUCH_POWER.description": "Whenever you draw a non-[gold]Durable[/gold] Attack, reduce its cost by 1 and [gold]Alchemy[/gold] it into a [gold]Durable[/gold] card with 1 [gold]Durability[/gold]",
+    "GLADIUS-MIDAS_TOUCH_POWER.smartDescription": "Whenever you draw a non-[gold]Durable[/gold] Attack, reduce its cost by 1 and [gold]Alchemy[/gold] it into a [gold]Durable[/gold] card with {Amount} [gold]Durability[/gold]",
+    "GLADIUS-MIDAS_TOUCH_POWER.title": "Midas Touch",
+    "GLADIUS-OVER_INPUT_POWER.description": "The first time you [gold]Alchemy[/gold] each turn, ALL other players add a [gold]Dragon Scale[/gold] [gold]Alchemy[/gold]'d from the same [gold]Material[/gold] into their [gold]Hand[/gold].",
+    "GLADIUS-OVER_INPUT_POWER.smartDescription": "The first time you [gold]Alchemy[/gold] each turn, ALL other players add a [gold]Dragon Scale[/gold] [gold]Alchemy[/gold]'d from the same [gold]Material[/gold] into their [gold]Hand[/gold].",
+    "GLADIUS-OVER_INPUT_POWER.title": "Over-input"
 }

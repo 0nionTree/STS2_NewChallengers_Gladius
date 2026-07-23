@@ -30,7 +30,7 @@ public class StrangeMass() : GladiusCard(-1, CardType.Skill, CardRarity.Rare, Ta
 		[GladiusKeywords.Material,
         CardKeyword.Unplayable];
 
-    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
+    public override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
     {
         if (artifactCard != null)
         {

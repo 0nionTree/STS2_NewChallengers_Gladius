@@ -36,7 +36,7 @@ public class Byproduct() : GladiusCard(2, CardType.Attack, CardRarity.Uncommon, 
 		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
     }
 
-    public override Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator)
+    public override Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator, PlayerChoiceContext choiceContext, bool isFirstThisTurn)
     {
         // 사용하기 전까지 비용 1 감소
         if (creator != Owner)

@@ -27,7 +27,7 @@ public class ThunderstruckWood() : GladiusCard(1, CardType.Skill, CardRarity.Tok
         EnergyHoverTip,
         ..HoverTipFactory.FromEnchantment<Sown>(DynamicVars["SownAmount"].IntValue)];
 
-    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
+    public override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
     {
         if (artifactCard != null)
         {

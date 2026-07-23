@@ -6,7 +6,8 @@ using HarmonyLib;
 using System.Reflection;
 using MegaCrit.Sts2.Core.Entities.Players;
 using Gladius.GladiusCode.Powers;
-using Gladius.GladiusCode.Relics; // IterateCombatHookListeners가 있는 네임스페이스 (경로에 맞게 수정 필요)
+using Gladius.GladiusCode.Relics;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer; // IterateCombatHookListeners가 있는 네임스페이스 (경로에 맞게 수정 필요)
 
 namespace Gladius;
 
@@ -18,7 +19,7 @@ public static class AlchemyEventDispatcher
         AccessTools.Method(typeof(Hook), "IterateCombatHookListeners");
 
     // 전투 중에 연성(Alchemy)이 실행되었을 때 호출할 비동기 이벤트 전달 함수입니다.
-    public static async Task DispatchAlchemyTriggered(ICombatState combatState, CardModel artifact, CardModel metarial, Player? creator)
+    public static async Task DispatchAlchemyTriggered(ICombatState combatState, CardModel artifact, CardModel? metarial, Player? creator, PlayerChoiceContext choiceContext, bool isFirstThisTurn)
     {
         // 찾고자 하는 메서드가 정상적으로 로드되지 않았을 경우, 튕김 방지(안전 장치)를 위해 함수를 즉시 종료합니다.
         if (IterateHooksMethod == null) 
@@ -39,7 +40,7 @@ public static class AlchemyEventDispatcher
                 if (model is GladiusCard gCard)
                 {
                     // 내부에 정의된 연성 발동 시 작동할 훅(OnAlchemyTriggered)을 비동기로 실행합니다.
-                    await gCard.OnAlchemyTriggered(artifact, metarial, creator);
+                    await gCard.OnAlchemyTriggered(artifact, metarial!, creator, choiceContext, isFirstThisTurn);
                     
                     // 엔진의 정상적인 훅 처리 흐름에 맞춰 해당 객체의 이벤트 실행이 끝났음을 게임 시스템에 알립니다.
                     model.InvokeExecutionFinished();
@@ -47,7 +48,7 @@ public static class AlchemyEventDispatcher
                 else if (model is GladiusPower gPower)
                 {
                     // 내부에 정의된 연성 발동 시 작동할 훅(OnAlchemyTriggered)을 비동기로 실행합니다.
-                    await gPower.OnAlchemyTriggered(artifact, metarial, creator);
+                    await gPower.OnAlchemyTriggered(artifact, metarial!, creator, choiceContext, isFirstThisTurn);
                     
                     // 엔진의 정상적인 훅 처리 흐름에 맞춰 해당 객체의 이벤트 실행이 끝났음을 게임 시스템에 알립니다.
                     model.InvokeExecutionFinished();
@@ -55,7 +56,7 @@ public static class AlchemyEventDispatcher
                 else if (model is GladiusRelic gRelic)
                 {
                     // 내부에 정의된 연성 발동 시 작동할 훅(OnAlchemyTriggered)을 비동기로 실행합니다.
-                    await gRelic.OnAlchemyTriggered(artifact, metarial, creator);
+                    await gRelic.OnAlchemyTriggered(artifact, metarial!, creator, choiceContext, isFirstThisTurn);
                     
                     // 엔진의 정상적인 훅 처리 흐름에 맞춰 해당 객체의 이벤트 실행이 끝났음을 게임 시스템에 알립니다.
                     model.InvokeExecutionFinished();

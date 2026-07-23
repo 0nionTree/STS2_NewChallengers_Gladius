@@ -4,6 +4,7 @@ using BaseLib.Utils;
 using Gladius.GladiusCode.Character;
 using Gladius.GladiusCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 
 namespace Gladius.GladiusCode.Relics;
@@ -24,7 +25,7 @@ public abstract class GladiusRelic : CustomRelicModel
     protected override string PackedIconOutlinePath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}_outline.png".RelicImagePath();
     protected override string BigIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigRelicImagePath();
 
-    public virtual Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator)
+    public virtual Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator, PlayerChoiceContext choiceContext, bool isFirstThisTurn)
     {
         return Task.CompletedTask; 
     }

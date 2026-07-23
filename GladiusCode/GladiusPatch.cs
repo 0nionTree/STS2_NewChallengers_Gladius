@@ -10,6 +10,7 @@ using System.Reflection;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models.Events;
+using MegaCrit.Sts2.Core.Models.Relics;
 
 namespace Gladius.GladiusCode.Patches
 {
@@ -280,92 +281,18 @@ namespace Gladius.GladiusCode.Patches
             }
         }
     }
-    /*
-    // =========================================================================
-    // CanPlay()함수에 Material/Durable 카드가 없을 경우 isRequiredMaterial/isRequiredDurable 이 true인 카드를 사용 불가로 변경
-    // =========================================================================
-    [HarmonyPatch]
-    public class CanPlayPatch
+    // 오로바스의 ArchaicTooth 클래스의 TranscendenceUpgrades 프로퍼티의 Getter를 패치 타겟으로 지정합니다.
+    [HarmonyPatch(typeof(ArchaicTooth), "get_TranscendenceUpgrades")]
+    public static class ArchaicToothTranscendencePatch
     {
-        [HarmonyTargetMethod]
-        public static MethodBase TargetMethod()
-        {
-            return AccessTools.Method(typeof(CardModel), nameof(CardModel.CanPlay), new Type[] 
-            { 
-                typeof(UnplayableReason).MakeByRefType(), 
-                typeof(AbstractModel).MakeByRefType() 
-            });
-        }
-
         [HarmonyPostfix]
-        public static void Postfix(CardModel __instance, ref bool __result, ref UnplayableReason reason, ref AbstractModel preventer)
+        public static void Postfix(ref Dictionary<ModelId, CardModel> __result)
         {
-            // 이미 다른 사유로 사용 불가라면 종료
-            if (!__result) return;
+            // __result는 원본 엔진이 반환하려는 딕셔너리입니다.
+            // 여기에 Gladius의 타격/수비 카드와 이에 대응하는 고대 카드 매핑을 추가합니다.
 
-            // durabilityData를 호출하여 지역 변수에 저장
-            var durabilityData = __instance.GetDurability();
-            bool requiresMaterial = durabilityData.isRequiredMaterial;
-            bool requiresDurable = durabilityData.isRequiredDurable;
-
-            // isRequiredMaterial/isRequiredDurable 이 true가 아니라면 종료
-            if (!requiresMaterial && !requiresDurable) return;
-
-            // 모드 전용 조건 체크
-            var handCards = PileType.Hand.GetPile(__instance.Owner)?.Cards;
-            bool hasConditionMet = false;
-
-            // 손패가 존재할 경우에만 검사
-            if (handCards != null)
-            {
-                if (requiresMaterial)
-                {
-                    hasConditionMet = handCards.Any(c => c.Keywords.Contains(GladiusKeywords.Material));
-                }
-                else if (requiresDurable) 
-                {
-                    // 내구도 카드는 필요한 수량(requiredDurableCards) 이상 있는지 개수를 확인(.Count)
-                    int durableCount = handCards.Count(c => c.GetDurability().isDurable);
-                    hasConditionMet = durableCount >= durabilityData.requiredDurableCards;
-                }
-            }
-            
-            // 요구하는 카드가 손에 없다면 사용 불가 처리
-            if (!hasConditionMet)
-            {
-                __result = false;
-                reason |= UnplayableReason.BlockedByCardLogic;
-                preventer = __instance;
-            }
+            // 채굴 -> 세공
+            __result.Add(ModelDb.Card<Mine>().Id, ModelDb.Card<Engraving>());
         }
     }
-    [HarmonyPatch] // 클래스 타입 대신 TargetMethod를 사용
-    public class CustomDialoguePatch
-    {
-        // 리플렉션을 통해 internal 클래스의 메서드를 찾아옵니다.
-        [HarmonyTargetMethod]
-        public static MethodBase TargetMethod()
-        {
-            // 1. internal 클래스 타입을 문자열로 찾음
-            var type = AccessTools.TypeByName("MegaCrit.Sts2.Core.Entities.Cards.UnplayableReasonExtensions");
-            // 2. 그 안의 메서드를 찾음
-            return AccessTools.Method(type, "GetPlayerDialogueLine");
-        }
-
-        [HarmonyPostfix]
-        public static void Postfix(UnplayableReason reason, AbstractModel preventer, ref object __result)
-        {
-            // 지정한 사용 불가 사유이면서 GladiusCard 라면
-            if (reason.HasFlag(UnplayableReason.BlockedByCardLogic) && preventer is GladiusCard gladiusCard) 
-            {
-                // 해당 카드가 Material 또는 Durable 을 필요로 한다면
-                // 메시지를 원하는 키값의 LocString으로 강제 교체
-                if (gladiusCard.GetDurability().isRequiredMaterial)
-                    __result = new LocString("combat_messages", "MATERIALS_MISSING");
-                if (gladiusCard.GetDurability().isRequiredDurable)
-                    __result = new LocString("combat_messages", "DURABLES_MISSING");
-            }
-        }
-    }
-    */
 }

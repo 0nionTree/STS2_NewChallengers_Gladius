@@ -28,7 +28,7 @@ public class Diamond() : GladiusCard(1, CardType.Skill, CardRarity.Token, Target
         HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
         ..HoverTipFactory.FromEnchantment<Adroit>(DynamicVars["AdroitAmount"].IntValue)];
 
-    protected override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
+    public override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
     {
         if (artifactCard != null)
         {

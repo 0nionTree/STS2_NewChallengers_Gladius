@@ -3,6 +3,7 @@ using BaseLib.Extensions;
 using Gladius.GladiusCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 
 namespace Gladius.GladiusCode.Powers;
@@ -38,7 +39,7 @@ public abstract class GladiusPower : CustomPowerModel
     /// <param name="metarial"></param>
     /// <param name="creator"></param>
     /// <returns></returns>
-    public virtual Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator)
+    public virtual Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator, PlayerChoiceContext choiceContext, bool isFirstThisTurn)
     {
         return Task.CompletedTask; 
     }

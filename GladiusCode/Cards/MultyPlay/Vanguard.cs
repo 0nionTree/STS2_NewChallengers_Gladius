@@ -13,11 +13,13 @@ using MegaCrit.Sts2.Core.HoverTips;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class Wallop() : GladiusCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+public class Vanguard() : GladiusCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     // 맹공
+    public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(10m, DamageProps.card)];
+        [new DamageVar(8m, DamageProps.card)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(StaticHoverTip.Block)];
@@ -30,8 +32,14 @@ public class Wallop() : GladiusCard(2, CardType.Attack, CardRarity.Uncommon, Tar
 		AttackCommand attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(choiceContext);
-        // 준 피해만큼 방어력 획득
-		await CreatureCmd.GainBlock(Owner.Creature, attackCommand.Results.SelectMany((List<DamageResult> r) => r).Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage), ValueProp.Move, cardPlay);
+        // 준 피해의 절반만큼 모든 아군 방어력 획득
+        IEnumerable<Creature> enumerable = from c in CombatState!.GetTeammatesOf(Owner.Creature)
+			where c != null && c.IsAlive && c.IsPlayer
+			select c;
+		foreach (Creature item in enumerable)
+		{
+            await CreatureCmd.GainBlock(item, attackCommand.Results.SelectMany((List<DamageResult> r) => r).Sum((DamageResult r) => (r.TotalDamage + r.OverkillDamage)/2), ValueProp.Move, cardPlay);
+		}
 	}
 
     protected override void OnUpgrade()

@@ -3,6 +3,7 @@ using BaseLib.Extensions;
 using BaseLib.Utils;
 using Gladius.GladiusCode.Character;
 using Gladius.GladiusCode.Extensions;
+using Gladius.GladiusCode.History;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -77,12 +78,12 @@ public abstract class GladiusCard(
     public override string BetaPortraitPath => $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
 
     // 연성 함수 실행 시 수신받아 자동으로 실행되는 함수
-    public virtual Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator)
+    public virtual Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator, PlayerChoiceContext choiceContext, bool isFirstThisTurn)
     {
         return Task.CompletedTask; 
     }
 
-    protected virtual async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard){}
+    public virtual async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard){}
 
     /// <summary>
     /// 연성 : 소재(Material) 키워드가 존재하는 카드를 선택하여 지정된 연성물(Artifact) 카드로 변환(Transform) 시킨다.
@@ -93,7 +94,7 @@ public abstract class GladiusCard(
     /// <param name="durability">생성할 연성물의 내구도 증감 (없거나 0이어도 무방)</param>
     /// <param name="material">소재 카드의 사전 지정(지정해둘 경우 선택창이 나오지 않는다)</param>
     /// <returns></returns>
-    protected async Task<T?> Alchemy<T>(PlayerChoiceContext choiceContext, bool isUpgraded, int durability = 0, CardModel? material = null) where T : CardModel
+    public async Task<T?> Alchemy<T>(PlayerChoiceContext choiceContext, bool isUpgraded, int durability = 0, CardModel? material = null, Player? creator = null) where T : CardModel
     {
         // 소재 선택 메시지를 지정
         var promptString = new LocString("combat_messages", "SELECT_MATERIAL");
@@ -132,10 +133,19 @@ public abstract class GladiusCard(
                 await gladiusCard.Material(choiceContext, artifact); // 형변환에 성공했다면 함수 실행
             }
 
+            // 연성이 완료되었다면 장부에 기록
+            AlchemyHistory.RecordAlchemy(Owner);
+
+            // 기록 직후, 방금 한 연성이 이번 턴의 첫 연성인지 확인
+            bool isFirstAlchemyThisTurn = AlchemyHistory.GetAlchemiesThisTurn(Owner) == 1;
+
             // 전투 중이라면 (전투 상태가 존재한다면) 글로벌 이벤트를 발송
             if (CombatState != null)
             {
-                await AlchemyEventDispatcher.DispatchAlchemyTriggered(CombatState, artifact, material, Owner);
+                if (creator != null)
+                    await AlchemyEventDispatcher.DispatchAlchemyTriggered(CombatState, artifact, material, creator, choiceContext, isFirstAlchemyThisTurn);
+                else
+                    await AlchemyEventDispatcher.DispatchAlchemyTriggered(CombatState, artifact, material, Owner, choiceContext, isFirstAlchemyThisTurn);
             }
             
             // 소재 카드를 연성물 카드로 변화
