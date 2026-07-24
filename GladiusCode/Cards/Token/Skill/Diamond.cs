@@ -21,7 +21,7 @@ public class Diamond() : GladiusCard(1, CardType.Skill, CardRarity.Token, Target
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new IntVar("AdroitAmount", 3m),
-        new BlockVar(5m, BlockProps.card)];
+        new BlockVar(6m, BlockProps.card)];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 
@@ -45,6 +45,6 @@ public class Diamond() : GladiusCard(1, CardType.Skill, CardRarity.Token, Target
     protected override void OnUpgrade()
     {
         DynamicVars["AdroitAmount"].UpgradeValueBy(1m);
-        DynamicVars.Block.UpgradeValueBy(2);
+        DynamicVars.Block.UpgradeValueBy(3m);
     }
 }

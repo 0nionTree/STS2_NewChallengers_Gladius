@@ -42,4 +42,9 @@ public class DivineDragonFormPower : GladiusPower
 			await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner, Amount, Owner, null);
 		}
     }
+
+    public void Flashing()
+    {
+        Flash();
+    }
 }

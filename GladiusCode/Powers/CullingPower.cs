@@ -40,7 +40,9 @@ public class CullingPower : GladiusPower
 				foreach (CardModel item in selection)
 				{
 					await CardCmd.Discard(choiceContext, item);
-					drawCardBonus += item.EnergyCost.GetAmountToSpend();
+					int cost = item.EnergyCost.GetAmountToSpend();
+					if (cost > 0)
+						drawCardBonus += cost;
 				}
 			}
 		}
@@ -50,6 +52,11 @@ public class CullingPower : GladiusPower
 	{
 		if (player != Owner.Player)
 		{
+			return count;
+		}
+		if (drawCardBonus <= 0)
+		{
+			drawCardBonus = 0;
 			return count;
 		}
 		decimal value = count + drawCardBonus;

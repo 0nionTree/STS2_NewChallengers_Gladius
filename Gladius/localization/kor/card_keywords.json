@@ -1,0 +1,10 @@
+{
+    "GLADIUS-ARTIFACT.description": "[gold]소모품[/gold]이며, 턴 종료 시 버려지지 않습니다.",
+    "GLADIUS-ARTIFACT.title": "연성물",
+    "GLADIUS-MATERIAL.description": "턴 종료 시 버려지지 않습니다.\n[gold]연성[/gold] 시 선택할 수 있습니다.",
+    "GLADIUS-MATERIAL.title": "소재",
+    "GLADIUS-ALCHEMY.description": "[gold]손[/gold]에 있는 [gold]소재[/gold] 카드를 선택하여 [gold]연성물[/gold] 카드로 [gold]변화[/gold]시킵니다.",
+    "GLADIUS-ALCHEMY.title": "연성",
+    "GLADIUS-DURABILITY.description": "사용 시 [gold]내구도[/gold]가 1 감소하고 이 카드를 다시 [gold]손[/gold]으로 가져옵니다.\n[gold]내구도[/gold]가 0이 되면 [gold]소멸[/gold]합니다.",
+    "GLADIUS-DURABILITY.title": "소모품"
+}

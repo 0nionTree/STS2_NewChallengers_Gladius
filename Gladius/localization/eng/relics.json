@@ -13,5 +13,17 @@
     "GLADIUS-PAPER_DRAGON.title": "Paper Dragon",
     "GLADIUS-HARDENER.description": "Whenever you [gold]Alchemy[/gold], gain {Block} Block.",
     "GLADIUS-HARDENER.flavor": "",
-    "GLADIUS-HARDENER.title": "Hardener"
+    "GLADIUS-HARDENER.title": "Hardener",
+    "GLADIUS-CINNAMON_GUM.description": "Whenever you discard a card, Add a [gold]Clay[/gold] into your [gold]Hand[/gold].",
+    "GLADIUS-CINNAMON_GUM.flavor": "",
+    "GLADIUS-CINNAMON_GUM.title": "Cinnamon Gum",
+    "GLADIUS-MAGATAMA.description": "Whenever you play a Power, Gain [blue]{DragonAuraPower}[/blue] [gold]Dragon Aura[/gold].",
+    "GLADIUS-MAGATAMA.flavor": "",
+    "GLADIUS-MAGATAMA.title": "Magatama",
+    "GLADIUS-PEN_FOR_SIGNING.description": "The first time you [gold]Alchemy[/gold] each combat, increase that [gold]Durable[/gold] card [gold]Durability[/gold] by [blue]{Durability}[/blue].",
+    "GLADIUS-PEN_FOR_SIGNING.flavor": "",
+    "GLADIUS-PEN_FOR_SIGNING.title": "Pen for Signing",
+    "GLADIUS-CARVING_KNIFE.description": "At the start of each combat, discard {Cards} card from your [gold]Draw Pile[/gold].",
+    "GLADIUS-CARVING_KNIFE.flavor": "",
+    "GLADIUS-CARVING_KNIFE.title": "Carving Knife"
 }

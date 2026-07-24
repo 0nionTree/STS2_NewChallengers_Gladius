@@ -58,7 +58,7 @@ public class VortexSpear() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
 	{
 		if (cardPlay.Card.Owner != Owner)
 			return Task.CompletedTask;
-        if (!cardPlay.Card.Keywords.Contains(GladiusKeywords.Artifact))
+        if (!cardPlay.Card.GetDurability().isDurable)
             return Task.CompletedTask;
         if (cardPlay.Card == this)
             return Task.CompletedTask;

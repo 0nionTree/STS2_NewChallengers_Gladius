@@ -17,11 +17,18 @@ public class Ordain() : GladiusCard(2, CardType.Attack, CardRarity.Rare, TargetT
     // 점지
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new CalculationBaseVar(4m),
-		new ExtraDamageVar(2m),
-		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => PileType.Discard.GetPile(card.Owner).Cards.Count)
+		new ExtraDamageVar(6m),
+		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) =>
+        {
+            int num = PileType.Hand.GetPile(card.Owner).Cards.Count;
+            CardPile? pile = card.Pile;
+            if (pile != null && pile.Type == PileType.Hand)
+                num--;
+            return num;
+        })
 	    ];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate];
+    //public override IEnumerable<CardKeyword> CanonicalKeywords => [];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -31,13 +38,13 @@ public class Ordain() : GladiusCard(2, CardType.Attack, CardRarity.Rare, TargetT
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         
-        // 카드 섞기
-        await CardPileCmd.Shuffle(choiceContext, Owner);
+        // 손의 모든 카드 버리기
+		await CardCmd.Discard(choiceContext, PileType.Hand.GetPile(Owner).Cards);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.CalculationBase.UpgradeValueBy(4m);
-        RemoveKeyword(CardKeyword.Innate);
+        DynamicVars.CalculationBase.UpgradeValueBy(3m);
+        DynamicVars.ExtraDamage.UpgradeValueBy(2m);
     }
 }

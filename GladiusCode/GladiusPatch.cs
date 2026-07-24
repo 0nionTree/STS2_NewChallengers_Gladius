@@ -289,10 +289,25 @@ namespace Gladius.GladiusCode.Patches
         public static void Postfix(ref Dictionary<ModelId, CardModel> __result)
         {
             // __result는 원본 엔진이 반환하려는 딕셔너리입니다.
-            // 여기에 Gladius의 타격/수비 카드와 이에 대응하는 고대 카드 매핑을 추가합니다.
+            // 여기에 Gladius의 기본 카드와 이에 대응하는 고대 카드 매핑을 추가합니다.
 
             // 채굴 -> 세공
             __result.Add(ModelDb.Card<Mine>().Id, ModelDb.Card<Engraving>());
+        }
+    }
+
+    // 오로바스의 TouchOfOrobas 클래스의 TranscendenceUpgrades 프로퍼티의 Getter를 패치 타겟으로 지정합니다.
+    [HarmonyPatch(typeof(TouchOfOrobas), "get_RefinementUpgrades")]
+    public static class TouchOfOrobasTranscendencePatch
+    {
+        [HarmonyPostfix]
+        public static void Postfix(ref Dictionary<ModelId, RelicModel> __result)
+        {
+            // __result는 원본 엔진이 반환하려는 딕셔너리입니다.
+            // 여기에 Gladius의 기본 유물과 이에 대응하는 고대 유물 매핑을 추가합니다.
+
+            // 채굴 -> 세공
+            __result.Add(ModelDb.Relic<MineralPouch>().Id, ModelDb.Relic<IngotCase>());
         }
     }
 }

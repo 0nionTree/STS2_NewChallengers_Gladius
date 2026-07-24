@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.CardSelection;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class StormEerthAndFire() : GladiusCard(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
+public class StormEarthAndFire() : GladiusCard(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     // 폭풍, 대지, 불꽃
     //protected override IEnumerable<DynamicVar> CanonicalVars => 
@@ -25,8 +25,8 @@ public class StormEerthAndFire() : GladiusCard(2, CardType.Skill, CardRarity.Rar
         HoverTipFactory.FromCard<DragonOrb>(IsUpgraded),
         HoverTipFactory.FromKeyword(GladiusKeywords.Material)];
         
-	//public override IEnumerable<CardKeyword> CanonicalKeywords =>
-	//	[];
+	public override IEnumerable<CardKeyword> CanonicalKeywords =>
+		[CardKeyword.Exhaust];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

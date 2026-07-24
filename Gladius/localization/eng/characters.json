@@ -1,16 +1,16 @@
 {
-  "GLADIUS-GLADIUS.aromaPrinciple": "Lore",
-  "GLADIUS-GLADIUS.banter.alive.endTurnPing": "Co-op hurry up end turn ping message",
+  "GLADIUS-GLADIUS.aromaPrinciple": "[sine][gold]Fighting... fighting... and fighting... When will this duty end?[/gold][/sine]",
+  "GLADIUS-GLADIUS.banter.alive.endTurnPing": "Not done yet?",
   "GLADIUS-GLADIUS.banter.dead.endTurnPing": "...",
   "GLADIUS-GLADIUS.cardsModifierDescription": "Gladius cards will now appear in rewards and shops.",
   "GLADIUS-GLADIUS.cardsModifierTitle": "Gladius Cards",
-  "GLADIUS-GLADIUS.description": "Character Selection\nScreen Description",
-  "GLADIUS-GLADIUS.eventDeathPrevention": "Co-op survival line",
-  "GLADIUS-GLADIUS.goldMonologue": "Line spoken when obtaining a large amount of gold",
+  "GLADIUS-GLADIUS.description": "A wandering martial artist guided by the Divine Dragons revelation.\nOverwhelms enemies with alchemized weapons.",
+  "GLADIUS-GLADIUS.eventDeathPrevention": "Even alone on a narrow bridge, there is always a way forward.",
+  "GLADIUS-GLADIUS.goldMonologue": "[sine]Greed is a sin, but one need not refuse wealth that presents itself...[/sine]",
   "GLADIUS-GLADIUS.possessiveAdjective": "his",
   "GLADIUS-GLADIUS.pronounObject": "him",
   "GLADIUS-GLADIUS.pronounPossessive": "his",
   "GLADIUS-GLADIUS.pronounSubject": "he",
-  "GLADIUS-GLADIUS.title": "Gladius",
-  "GLADIUS-GLADIUS.titleObject": "Gladius"
+  "GLADIUS-GLADIUS.title": "The Gladius",
+  "GLADIUS-GLADIUS.titleObject": "The Gladius"
 }

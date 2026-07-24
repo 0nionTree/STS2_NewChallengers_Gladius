@@ -26,7 +26,7 @@ public class OverInputPower : GladiusPower
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy)];
         
-    // 연성 시 모든 아군에게 용 비늘 생성
+    // 매 턴 처음으로 연성 시 모든 아군에게 용 비늘 생성
 	public override async Task OnAlchemyTriggered(CardModel artifact, CardModel material, Player? creator, PlayerChoiceContext choiceContext, bool isFirstThisTurn)
     {
 		// 연성 실행자가 파워 보유자가 아니라면 종료

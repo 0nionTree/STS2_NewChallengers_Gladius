@@ -40,6 +40,6 @@ public class EarthenRampart() : GladiusCard(2, CardType.Skill, CardRarity.Uncomm
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(1m);
+        DynamicVars.Block.UpgradeValueBy(4m);
     }
 }

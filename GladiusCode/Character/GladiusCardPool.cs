@@ -115,7 +115,7 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<GoldenHammer>(),
             ModelDb.Card<ConvergingSwirl>(),
             ModelDb.Card<Keyboard>(),
-            ModelDb.Card<StormEerthAndFire>(),
+            ModelDb.Card<StormEarthAndFire>(),
             ModelDb.Card<Familiar>(),
             ModelDb.Card<StrangeMass>(),
             ModelDb.Card<Asura>(),

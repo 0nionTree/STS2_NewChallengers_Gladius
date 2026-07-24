@@ -57,8 +57,12 @@ namespace Gladius.GladiusCode.History
     {
         // 마지막으로 연성했을 때의 턴 번호를 기억
         private static int _lastAlchemyTurnNumber = -1;
+        // 마지막으로 연성한 전투를 기억
+        private static PlayerCombatState? _lastAlchemyPlayerCombat = null;
         // 이번 턴에 진행한 연성 횟수
         private static int _alchemiesThisTurn = 0;
+        // 이번 전투동안 진행한 연성 횟수
+        private static int _alchemiesThisCombat = 0;
 
         /// <summary>
         /// 연성을 실행할 때마다 호출하여 기록합니다.
@@ -68,6 +72,7 @@ namespace Gladius.GladiusCode.History
             if (player?.PlayerCombatState == null) return;
 
             int currentTurn = player.PlayerCombatState.TurnNumber;
+            PlayerCombatState playerCombatState = player.PlayerCombatState;
 
             // 마지막으로 연성했던 턴과 현재 턴이 다르면 (즉, 턴이 바뀌었다면) 카운트 초기화
             if (currentTurn != _lastAlchemyTurnNumber)
@@ -75,9 +80,17 @@ namespace Gladius.GladiusCode.History
                 _lastAlchemyTurnNumber = currentTurn;
                 _alchemiesThisTurn = 0;
             }
+            // 마지막으로 연성했던 전투와 현재 전투가 다르면 카운트 초기화
+            if (_lastAlchemyPlayerCombat == null || _lastAlchemyPlayerCombat != playerCombatState)
+            {
+                _lastAlchemyPlayerCombat = playerCombatState;
+                _alchemiesThisCombat = 0;
+            }
 
             // 이번 턴 연성 횟수 1 증가
             _alchemiesThisTurn++;
+            // 이번 전투 연성 횟수 1 증가
+            _alchemiesThisCombat++;
         }
 
         /// <summary>

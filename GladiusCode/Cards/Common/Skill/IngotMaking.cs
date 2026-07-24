@@ -19,6 +19,9 @@ public class IngotMaking() : GladiusCard(1, CardType.Skill, CardRarity.Common, T
         HoverTipFactory.FromCard<Steel>(IsUpgraded),
         HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
 
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+        [CardKeyword.Sly];
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 강철 생성
