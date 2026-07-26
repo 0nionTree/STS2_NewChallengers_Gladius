@@ -21,7 +21,7 @@ public class DuelingStance() : GladiusCard(1, CardType.Skill, CardRarity.Common,
         new PowerVar<DragonAuraPower>(1)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.DragonAura)];
+        [HoverTipFactory.FromPower<DragonAuraPower>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

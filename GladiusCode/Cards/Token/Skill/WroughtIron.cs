@@ -12,13 +12,13 @@ using MegaCrit.Sts2.Core.Hooks;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(MaterialCardPool))]
 public class WroughtIron() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     // 연철 - 소재
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(4, BlockProps.card),
-        new BlockVar("AlchemyBlock", 2, BlockProps.card)];
+        [new BlockVar(5, BlockProps.card),
+        new BlockVar("AlchemyBlock", 3, ValueProp.Unpowered)];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];
 
@@ -36,7 +36,7 @@ public class WroughtIron() : GladiusCard(1, CardType.Skill, CardRarity.Token, Ta
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(2);
-        DynamicVars["AlchemyBlock"].UpgradeValueBy(1);
+        DynamicVars.Block.UpgradeValueBy(3);
+        DynamicVars["AlchemyBlock"].UpgradeValueBy(2);
     }
 }

@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(MaterialCardPool))]
 public class TuningShard() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     // 청음편 - 소재

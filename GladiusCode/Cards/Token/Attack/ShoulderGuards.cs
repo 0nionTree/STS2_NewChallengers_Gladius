@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(ArtifactCardPool))]
 public class ShoulderGuards() : GladiusCard(0, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
     // 견갑 - 연성물

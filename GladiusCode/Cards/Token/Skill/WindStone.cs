@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(MaterialCardPool))]
 public class WindStone() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     // 바람 돌 - 소재

@@ -67,6 +67,7 @@ public class Welding() : GladiusCard(0, CardType.Skill, CardRarity.Uncommon, Tar
             
             // 저장된 수치만큼 내구도 감소
             await DurabilityExtensions.VarianceDurability(cardModel1, -durability, choiceContext);
+		    await Cmd.Wait(0.2f);
 
             // 선택한 카드 이외의 내구도가 존재하는 카드 선택
             var cardModel2 = (await CardSelectCmd.FromHand(

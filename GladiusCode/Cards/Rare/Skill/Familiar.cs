@@ -40,13 +40,8 @@ public class Familiar() : GladiusCard(1, CardType.Skill, CardRarity.Rare, Target
             ))
 		{
             // 선택된 카드에 소모성 및 내구도 부여
-            item.AddKeyword(GladiusKeywords.Artifact);
-            item.AddKeyword(GladiusKeywords.Durability);
-            var durabilityData = item.GetDurability();
-            durabilityData.isDurable = true;
-            durabilityData.BaseDurability = DynamicVars["Durability"].IntValue;
-            durabilityData.CurrentDurability = durabilityData.BaseDurability;
-            durabilityData.WasDurability = durabilityData.BaseDurability;
+            if (CombatState != null)
+                await DurabilityExtensions.MakeDurable(choiceContext, CombatState!, item, DynamicVars["Durability"].IntValue, Owner, true);
 		}
     }
 

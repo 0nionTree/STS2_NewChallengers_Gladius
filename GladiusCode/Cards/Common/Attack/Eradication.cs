@@ -22,7 +22,7 @@ public class Eradication() : GladiusCard(1, CardType.Attack, CardRarity.Common, 
     // 퇴치
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(5m, DamageProps.card),
-        new PowerVar<WeakPower>(1m)];
+        new PowerVar<WeakPower>(2m)];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
@@ -35,17 +35,17 @@ public class Eradication() : GladiusCard(1, CardType.Attack, CardRarity.Common, 
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         // 무력화와 동일한 이펙트 딜레이
 		NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NThinSliceVfx.Create(cardPlay.Target));
-		float num = base.Owner.Character.AttackAnimDelay;
+		float num = Owner.Character.AttackAnimDelay;
 		if (SaveManager.Instance.PrefsSave.FastMode == FastModeType.Normal)
 		{
 			num += 0.2f;
 		}
         // 피해량 계산
-		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
 			.WithAttackerAnim("Attack", num)
 			.Execute(choiceContext);
         // 약화 부여
-		await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, base.DynamicVars.Weak.BaseValue, base.Owner.Creature, this);
+		await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, DynamicVars.Weak.BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(ArtifactCardPool))]
 public class VortexSpear() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
     // 나선 투창 - 연성물

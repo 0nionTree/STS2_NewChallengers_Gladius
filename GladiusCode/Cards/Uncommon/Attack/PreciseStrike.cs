@@ -9,17 +9,28 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.HoverTips;
+using Gladius.GladiusCode;
 
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class PersistentStrike() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+public class PreciseStrike() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
-    // 집념의 타격
+    // 정확한 타격
+    private bool _AlchemyComplet = false;
+
     protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(8m, DamageProps.card)];
+        [new DamageVar(9m, DamageProps.card),
+        new IntVar("Durability", 3)];
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
+        HoverTipFactory.FromKeyword(GladiusKeywords.Durability),
+        HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -29,16 +40,13 @@ public class PersistentStrike() : GladiusCard(1, CardType.Attack, CardRarity.Unc
             .Execute(choiceContext);
     }
 
-    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
+    public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
 	{
-		if (player == Owner && CombatManager.Instance.History.CardPlaysFinished.Any((CardPlayFinishedEntry e) => e.HappenedLastPlayerTurn(Owner) && e.CardPlay.Card == this))
-		{
-			CardPile? pile = Pile;
-			if (pile == null || pile.Type != PileType.Hand)
-			{
-				await CardPileCmd.Add(this, PileType.Hand);
-			}
-		}
+        if (CombatState != null && card == this && !_AlchemyComplet)
+        {
+            _AlchemyComplet = true;
+            await DurabilityExtensions.MakeDurable(choiceContext, CombatState, this, DynamicVars["Durability"].IntValue, Owner, true);
+        }
 	}
 
     protected override void OnUpgrade()

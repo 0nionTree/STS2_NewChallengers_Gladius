@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(ArtifactCardPool))]
 public class SerratedDagger() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
     // 톱날 단검 - 연성물

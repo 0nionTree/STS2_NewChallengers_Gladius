@@ -1,6 +1,10 @@
 using System.Runtime.CompilerServices;
+using Gladius.GladiusCode;
 using Gladius.GladiusCode.Cards;
+using Gladius.GladiusCode.History;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 
@@ -107,12 +111,54 @@ public static class DurabilityExtensions
         // 사용 전 내구도를 현재 내구도로 변경
         durabilityData.WasDurability = durabilityData.CurrentDurability;
     }
+    // 소모품이 아니도록 초기화
     public static void ResetDurability(CardModel cardModel)
     {
         var durabilityData = cardModel.GetDurability();
+
+        if (cardModel.Keywords.Contains(GladiusKeywords.Artifact))
+        {
+            cardModel.RemoveKeyword(GladiusKeywords.Artifact);
+        }
+        
+        if (cardModel.Keywords.Contains(GladiusKeywords.Durability))
+        {
+            cardModel.RemoveKeyword(GladiusKeywords.Durability);
+        }
 
         durabilityData.isDurable = false;
         durabilityData.BaseDurability = 0;
         durabilityData.CurrentDurability = 0;
     }
+    // 소모품 카드로 변경 및 연성 시너지
+    public static async Task MakeDurable(PlayerChoiceContext choiceContext, ICombatState combatState, CardModel targetCard, int durability, Player creater, bool addArtifactKeyword = false)
+    {
+        var durabilityData = targetCard.GetDurability();
+
+        if (!durabilityData.isDurable)
+        {
+            durabilityData.isDurable = true;
+        }
+        durabilityData.BaseDurability = durability;
+        durabilityData.CurrentDurability = durabilityData.BaseDurability;
+        durabilityData.WasDurability = durabilityData.BaseDurability;
+
+        if (addArtifactKeyword && !targetCard.Keywords.Contains(GladiusKeywords.Durability))
+        {
+            targetCard.AddKeyword(GladiusKeywords.Durability);
+        }
+
+        if (!targetCard.Keywords.Contains(GladiusKeywords.Artifact))
+        {
+            targetCard.AddKeyword(GladiusKeywords.Artifact);
+        }
+        
+        bool isFirstAlchemyThisTurn = AlchemyHistory.GetAlchemiesThisTurn(creater) == 1;
+
+        // 연성 훅 보내기
+        if (combatState != null)
+        {
+            await AlchemyEventDispatcher.DispatchAlchemyTriggered(combatState, targetCard, null, creater, choiceContext, isFirstAlchemyThisTurn);
+        }
+    } 
 }

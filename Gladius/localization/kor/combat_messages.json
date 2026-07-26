@@ -1,0 +1,10 @@
+{
+    "MATERIALS_MISSING": "[gold]소재[/gold] 카드가 없어.",
+    "DURABLES_MISSING": "[gold]소모품[/gold] 카드가 없어.",
+    "ARTIFACTS_MISSING": "[gold]연성물[/gold] 카드가 없어.",
+    "ANOTHER_DURABLES_MISSING": "다른 [gold]소모품[/gold] 카드가 없어.",
+    "SELECT_MATERIAL": "[gold]소재[/gold] 카드를 선택하세요.",
+    "SELECT_DURABLE": "[gold]소모품[/gold] 카드를 선택하세요.",
+    "SELECT_ANOTHER_DURABLE": "다른 [gold]소모품[/gold] 카드를 선택하세요.",
+    "SELECT_ARTIFACT": "[gold]연성물[/gold] 카드를 선택하세요."
+}

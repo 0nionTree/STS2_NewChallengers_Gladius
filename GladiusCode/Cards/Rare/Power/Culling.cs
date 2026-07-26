@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class Culling() : GladiusCard(2, CardType.Power, CardRarity.Rare, TargetType.Self)
+public class Culling() : GladiusCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     // 선별
     protected override IEnumerable<DynamicVar> CanonicalVars => 

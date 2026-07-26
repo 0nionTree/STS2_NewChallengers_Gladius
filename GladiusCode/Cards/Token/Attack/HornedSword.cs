@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(ArtifactCardPool))]
 public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
 	// 용각 검 - 연성물

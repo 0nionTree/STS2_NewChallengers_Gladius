@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Gladius;
@@ -34,6 +35,14 @@ public class MastersReachPower : GladiusPower, IDurabilityProtector
 
         return Task.CompletedTask;
     }
+
+    // 방에서 떠날 시
+    public override Task AfterCombatEnd(CombatRoom room)
+	{
+        DurabilityProtectionManager.Unregister(Owner, this); // 매니저 해제
+
+		return Task.CompletedTask;
+	}
 
     // 인터페이스 구현: 이번 턴 사용한 소모품 카드 수가 스택 미만이라면 활성화
     public bool IsProtectionActive()

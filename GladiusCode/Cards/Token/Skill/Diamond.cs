@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(MaterialCardPool))]
 public class Diamond() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     // 금강석 - 소재

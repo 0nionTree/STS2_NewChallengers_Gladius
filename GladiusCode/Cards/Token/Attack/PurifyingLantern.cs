@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(ArtifactCardPool))]
 public class PurifyingLantern() : GladiusCard(0, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
     // 정화의 등불 - 연성물

@@ -1,0 +1,5 @@
+{
+  "GLADIUS-SHRAPNEL.description": "무작위 적에게 피해를 [blue]{Damage:diff()}[/blue] 줍니다.",
+  "GLADIUS-SHRAPNEL.extraCardText": "무작위 적에게 피해를 {Damage:diff()} 줍니다.",
+  "GLADIUS-SHRAPNEL.title": "파편"
+}

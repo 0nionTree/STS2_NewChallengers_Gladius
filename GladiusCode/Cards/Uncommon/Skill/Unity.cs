@@ -15,7 +15,7 @@ public class Unity() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, Targe
 {
     // 합일
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-        [new PowerVar<UnityPower>(75)];
+        [new PowerVar<UnityPower>(100)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(StaticHoverTip.Block)];
@@ -29,6 +29,6 @@ public class Unity() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, Targe
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Power<UnityPower>().UpgradeValueBy(25);
+        DynamicVars.Power<UnityPower>().UpgradeValueBy(50);
     }
 }

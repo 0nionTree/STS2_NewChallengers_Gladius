@@ -21,7 +21,7 @@ public class ForcePalm() : GladiusCard(0, CardType.Attack, CardRarity.Uncommon, 
 	protected override bool HasEnergyCostX => true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new CalculationBaseVar(0m),
+        [new CalculationBaseVar(2m),
         new ExtraDamageVar(8m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) =>
             {
@@ -47,6 +47,7 @@ public class ForcePalm() : GladiusCard(0, CardType.Attack, CardRarity.Uncommon, 
 
     protected override void OnUpgrade()
     {
+        DynamicVars.CalculationBase.UpgradeValueBy(2m);
         DynamicVars.ExtraDamage.UpgradeValueBy(2m);
     }
 }

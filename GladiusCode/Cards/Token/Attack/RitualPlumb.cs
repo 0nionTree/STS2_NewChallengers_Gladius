@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(ArtifactCardPool))]
 public class RitualPlumb() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
     // 의례 추 - 연성물
@@ -21,7 +21,7 @@ public class RitualPlumb() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
     public override int BaseDurability => 2;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(12m, DamageProps.card)];
+        [new DamageVar(10m, DamageProps.card)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[GladiusKeywords.Artifact,

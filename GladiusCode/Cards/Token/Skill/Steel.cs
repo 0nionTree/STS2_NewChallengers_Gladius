@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(MaterialCardPool))]
 public class Steel() : GladiusCard(2, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     // 강철 - 소재
@@ -45,7 +45,7 @@ public class Steel() : GladiusCard(2, CardType.Skill, CardRarity.Token, TargetTy
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(5m);
+        DynamicVars.Block.UpgradeValueBy(6m);
         DynamicVars["Durability"].UpgradeValueBy(1);
     }
 }

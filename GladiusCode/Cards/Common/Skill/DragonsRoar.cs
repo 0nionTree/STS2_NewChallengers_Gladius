@@ -19,7 +19,7 @@ public class DragonsRoar() : GladiusCard(1, CardType.Skill, CardRarity.Common, T
         new CardsVar(1)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.DragonAura)];
+        [HoverTipFactory.FromPower<DragonAuraPower>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

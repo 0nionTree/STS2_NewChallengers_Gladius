@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Commands;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(MaterialCardPool))]
 public class Clay() : GladiusCard(0, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     // 진흙 - 소재

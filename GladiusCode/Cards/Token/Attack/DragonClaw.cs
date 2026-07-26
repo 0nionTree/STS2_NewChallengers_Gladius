@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(ArtifactCardPool))]
 public class DragonClaw() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
     // 용 발톱 - 연성물

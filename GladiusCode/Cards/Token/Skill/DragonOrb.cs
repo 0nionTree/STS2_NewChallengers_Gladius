@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(MaterialCardPool))]
 public class DragonOrb() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     // 용옥 - 소재

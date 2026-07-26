@@ -16,7 +16,7 @@ public class ExtremeSpeed() : GladiusCard(1, CardType.Skill, CardRarity.Rare, Ta
 {
     // 신속
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(8m, BlockProps.card),
+        [new BlockVar(10m, BlockProps.card),
         new CardsVar(1)];
 
     //protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -28,25 +28,13 @@ public class ExtremeSpeed() : GladiusCard(1, CardType.Skill, CardRarity.Rare, Ta
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        // 뽑을 카드 더미의 1장 선택
-        List<CardModel> selection = (await CardSelectCmd.FromCombatPile(
-            choiceContext, 
-            PileType.Draw.GetPile(Owner), 
-            Owner, 
-            new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, DynamicVars.Cards.IntValue)
-        )).ToList();
-        // 선택된 카드가 있다면, 반복문을 통해 하나씩 버리기
-        if (selection != null && selection.Count > 0)
-        {
-            foreach (CardModel item in selection)
-            {
-                await CardCmd.Discard(choiceContext, item);
-            }
-        }
+        // 카드 뽑기
+		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(3m);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

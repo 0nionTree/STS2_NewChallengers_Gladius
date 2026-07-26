@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(ArtifactCardPool))]
 public class DragonScale() : GladiusCard(0, CardType.Attack, CardRarity.Token, TargetType.AllEnemies)
 {
     // 용 비늘 - 연성물

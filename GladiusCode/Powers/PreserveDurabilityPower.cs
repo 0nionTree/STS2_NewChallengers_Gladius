@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Gladius;
@@ -36,6 +37,14 @@ public class PreserveDurabilityPower : GladiusPower, IDurabilityProtector
 
         return Task.CompletedTask;
     }
+
+    // 방에서 떠날 시
+    public override Task AfterCombatEnd(CombatRoom room)
+	{
+        DurabilityProtectionManager.Unregister(Owner, this); // 매니저 해제
+
+		return Task.CompletedTask;
+	}
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

@@ -26,7 +26,8 @@ public class ConvergingSwirl() : GladiusCard(1, CardType.Skill, CardRarity.Rare,
         HoverTipFactory.FromKeyword(GladiusKeywords.Material)];
         
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
-		[CardKeyword.Innate];
+		[CardKeyword.Innate,
+        CardKeyword.Exhaust];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

@@ -17,7 +17,7 @@ public class Mine() : GladiusCard(1, CardType.Skill, CardRarity.Basic, TargetTyp
 {
     // 채굴
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(3m, BlockProps.card)];
+        [new BlockVar(4m, BlockProps.card)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Material),
@@ -40,6 +40,6 @@ public class Mine() : GladiusCard(1, CardType.Skill, CardRarity.Basic, TargetTyp
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(2m);
+        DynamicVars.Block.UpgradeValueBy(3m);
     }
 }

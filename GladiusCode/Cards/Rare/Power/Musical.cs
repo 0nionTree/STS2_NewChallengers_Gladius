@@ -12,11 +12,11 @@ using Gladius.GladiusCode;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class Glassblowing() : GladiusCard(2, CardType.Power, CardRarity.Rare, TargetType.Self)
+public class Musical() : GladiusCard(2, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     // 유리 공예
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-        [new PowerVar<GlassblowingPower>(1)];
+        [new PowerVar<MusicalPower>(1)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<TuningShard>(IsUpgraded),
@@ -28,9 +28,9 @@ public class Glassblowing() : GladiusCard(2, CardType.Power, CardRarity.Rare, Ta
         // 파워 획득
 		await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         if (!IsUpgraded)
-		    await PowerCmd.Apply<GlassblowingPower>(choiceContext, Owner.Creature, DynamicVars["GlassblowingPower"].BaseValue, Owner.Creature, this);
+		    await PowerCmd.Apply<MusicalPower>(choiceContext, Owner.Creature, DynamicVars["MusicalPower"].BaseValue, Owner.Creature, this);
         else
-		    await PowerCmd.Apply<GlassblowingPowerUpgraded>(choiceContext, Owner.Creature, DynamicVars["GlassblowingPower"].BaseValue, Owner.Creature, this);
+		    await PowerCmd.Apply<MusicalPowerUpgraded>(choiceContext, Owner.Creature, DynamicVars["MusicalPower"].BaseValue, Owner.Creature, this);
     }
 
     //protected override void OnUpgrade()

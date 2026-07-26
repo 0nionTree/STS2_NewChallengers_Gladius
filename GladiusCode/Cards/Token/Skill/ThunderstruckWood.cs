@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Gladius;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(MaterialCardPool))]
 public class ThunderstruckWood() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     // 벽조목 - 소재

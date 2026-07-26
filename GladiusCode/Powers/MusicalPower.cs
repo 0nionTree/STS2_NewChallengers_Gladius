@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Gladius;
 
-public class GlassblowingPowerUpgraded : GladiusPower
+public class MusicalPower : GladiusPower
 {
     // 회수 - 파워
     public override PowerType Type => PowerType.Buff;
@@ -28,7 +28,6 @@ public class GlassblowingPowerUpgraded : GladiusPower
 			{
 				// 청음편 생성
 				CardModel cardModel = CombatState!.CreateCard<TuningShard>(Owner.Player!);
-                CardCmd.Upgrade(cardModel);
                 cardModel.EnergyCost.SetThisCombat(0);
                 cardModel.AddKeyword(CardKeyword.Ethereal);
 				// 생성한 카드 손으로 가져오기

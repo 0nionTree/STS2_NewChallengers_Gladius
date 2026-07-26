@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df1amnsax4iiu"
-path="res://.godot/imported/persistent_strike.png-0fd58456fdbee797203077ce3c23fdca.ctex"
+uid="uid://bfxoopjh0xsc2"
+path="res://.godot/imported/artifact_frame.png-073291fa939898275f22960e3e936f5c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Gladius/images/card_portraits/big/persistent_strike.png"
-dest_files=["res://.godot/imported/persistent_strike.png-0fd58456fdbee797203077ce3c23fdca.ctex"]
+source_file="res://Gladius/images/frames/artifact_frame.png"
+dest_files=["res://.godot/imported/artifact_frame.png-073291fa939898275f22960e3e936f5c.ctex"]
 
 [params]
 

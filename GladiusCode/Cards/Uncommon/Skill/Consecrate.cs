@@ -8,30 +8,30 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class Consecrate() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public class Consecrate() : GladiusCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     // 축성
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-        [new CardsVar(1)];
+        [new BlockVar(7, ValueProp.Move),
+        new CardsVar(1)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<DragonOrb>(),
         HoverTipFactory.FromPower<DragonAuraPower>()];
+    
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+        [CardKeyword.Sly];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CardPileCmd.Add(await CardSelectCmd.FromHand(
-                prefs: new CardSelectorPrefs(SelectionScreenPrompt, DynamicVars.Cards.IntValue),
-                context: choiceContext,
-                player: Owner,
-                filter: null,
-                source: this),
-            PileType.Draw, CardPilePosition.Bottom);
-        
+        // 방어도 획득
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+
         // 용옥 생성
         CardModel cardModel = CombatState!.CreateCard<DragonOrb>(Owner);
         if (IsUpgraded) // 강화된 상태라면 생성한 카드 강화
