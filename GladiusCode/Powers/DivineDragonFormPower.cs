@@ -22,9 +22,7 @@ public class DivineDragonFormPower : GladiusPower
     public override PowerStackType StackType => PowerStackType.Counter;
 
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Durability),
-        HoverTipFactory.FromPower<PlatingPower>(),
-		HoverTipFactory.Static(StaticHoverTip.Block)];
+        [HoverTipFactory.FromPower<DragonAuraPower>()];
 
     // 용기 수치가 음수로 변동 시 용기 획득
     public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
@@ -38,13 +36,8 @@ public class DivineDragonFormPower : GladiusPower
 		// 변동 수치가 음수라면 용기 획득
         if (amount < 0)
 		{
-			Flash();
-			await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner, Amount, Owner, null);
+            Flash();
+            await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner, Amount, Owner, null);
 		}
-    }
-
-    public void Flashing()
-    {
-        Flash();
     }
 }

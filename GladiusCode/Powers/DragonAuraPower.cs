@@ -119,7 +119,17 @@ public class DragonAuraPower : GladiusPower
     {
         if (participants.Contains(Owner))
 		{
-            await PowerCmd.Decrement(this);
+
+            // 용기 분출 보유 시 용기 보유량만큼 용기 감소
+            EruptionPower? eruptionPower = Owner.GetPower<EruptionPower>();
+            if (eruptionPower != null && eruptionPower.Amount > 0)
+            {
+                eruptionPower.Flashing();
+                await PowerCmd.Remove(eruptionPower);
+                await PowerCmd.ModifyAmount(choiceContext, this, Amount, null, null);
+            }
+            else
+                await PowerCmd.Decrement(this);
 		}
     }
 }

@@ -59,7 +59,7 @@ public class DismantlingTool() : GladiusCard(1, CardType.Skill, CardRarity.Uncom
 
     protected override void AfterDowngraded()
 	{
-		AfterDowngraded();
+		base.AfterDowngraded();
 		DynamicVars["Durability"].BaseValue += ExtraDurabilityFromDiscard;
 	}
 }

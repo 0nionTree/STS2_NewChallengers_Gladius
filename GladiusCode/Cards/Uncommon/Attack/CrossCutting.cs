@@ -65,7 +65,7 @@ public class CrossCutting() : GladiusCard(1, CardType.Attack, CardRarity.Uncommo
 
     protected override void AfterDowngraded()
 	{
-		AfterDowngraded();
+		base.AfterDowngraded();
 		DynamicVars.Damage.BaseValue += ExtraDamageFromPlays;
 	}
 

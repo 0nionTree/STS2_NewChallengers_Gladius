@@ -43,6 +43,7 @@ public abstract class GladiusCard(
     {
         get
         {
+            if (Owner == null) return false;
             // 손에 있는 카드 목록 확인
             bool result = false;
             var cards = PileType.Hand.GetPile(Owner).Cards;

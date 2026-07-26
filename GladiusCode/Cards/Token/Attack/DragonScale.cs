@@ -90,7 +90,7 @@ public class DragonScale() : GladiusCard(0, CardType.Attack, CardRarity.Token, T
 
     protected override void AfterDowngraded()
 	{
-		AfterDowngraded();
+		base.AfterDowngraded();
 		DynamicVars["CurrentRepeat"].BaseValue += CurrentRepeat;
 	}
 }

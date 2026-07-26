@@ -21,17 +21,17 @@ public class EruptionPower : GladiusPower
     {
         if (participants.Contains(Owner))
 		{
-            Flash();
-            await PowerCmd.Remove(this);
-            await PowerCmd.Remove<DragonAuraPower>(Owner);
-
-            // 용신의 형상 보유 시 용기 1 획득
-            DivineDragonFormPower? divineDragonPower = Owner.GetPower<DivineDragonFormPower>();
-            if (divineDragonPower != null && divineDragonPower.Amount > 0)
+            // 용기 미보유시 자체 소멸
+            if (Owner.GetPower<DragonAuraPower>() == null)
             {
-                divineDragonPower.Flashing();
-                await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner, 1, Owner, null);
+                Flash();
+                await PowerCmd.Remove(this);
             }
 		}
+    }
+
+    public void Flashing()
+    {
+        Flash();
     }
 }

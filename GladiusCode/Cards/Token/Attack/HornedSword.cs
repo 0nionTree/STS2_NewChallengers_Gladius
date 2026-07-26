@@ -55,7 +55,7 @@ public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
 
     protected override void AfterDowngraded()
 	{
-		AfterDowngraded();
+		base.AfterDowngraded();
 		DynamicVars.Damage.BaseValue += ExtraDamageFromPlays;
 	}
 

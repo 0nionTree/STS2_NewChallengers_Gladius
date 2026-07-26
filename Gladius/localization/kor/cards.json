@@ -243,7 +243,7 @@
     "GLADIUS-DRAGON_CLAW.title": "용의 발톱",
     "GLADIUS-VORTEX_SPEAR.description": "피해를 {Damage:diff()} 줍니다.\n다른 [gold]소모품[/gold] 카드를 사용할 때마다, 이 카드의 피해량이 {Increase:diff()} 증가합니다.",
     "GLADIUS-VORTEX_SPEAR.title": "나선 투창",
-    "GLADIUS-SERRATED_DAGGER.description": "이 카드의 내구도 1당 피해를 {Damage:diff()} 줍니다.{InCombat:\n({CurrentRepeat:diff()}번 적중)|}",
+    "GLADIUS-SERRATED_DAGGER.description": "이 카드의 내구도 1당 피해를 {Damage:diff()} 줍니다.{InCombat:\n({CalculatedHits:diff()}번 적중)|}",
     "GLADIUS-SERRATED_DAGGER.title": "톱날 단검",
     "GLADIUS-PURIFYING_LANTERN.description": "피해를 {Damage:diff()} 줍니다.\n[gold]취약[/gold]을 {VulnerablePower:diff()} 부여합니다.",
     "GLADIUS-PURIFYING_LANTERN.title": "정화의 등불"
