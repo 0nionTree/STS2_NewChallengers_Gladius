@@ -33,24 +33,17 @@ public class LightningBlow() : GladiusCard(1, CardType.Attack, CardRarity.Uncomm
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        // 버린 카드 더미의 카드 선택
-        List<CardModel> selection = (await CardSelectCmd.FromCombatPile(choiceContext, PileType.Discard.GetPile(Owner), Owner, new CardSelectorPrefs(CardSelectorPrefs.TransformSelectionPrompt, DynamicVars.Cards.IntValue))).ToList();
-		foreach (CardModel item in selection)
+
+        // 손에 있는 카드 벽조목으로 변화
+        CardModel? cardModel = (await CardSelectCmd.FromHand(prefs: new CardSelectorPrefs(CardSelectorPrefs.TransformSelectionPrompt, DynamicVars.Cards.IntValue), context: choiceContext, player: Owner, filter: null, source: this)).FirstOrDefault();
+		if (cardModel != null)
 		{
-            // 카드 변화
-			CardPileAddResult? cardPileAddResult = await CardCmd.TransformTo<ThunderstruckWood>(item);
-            // 변화된 카드가 정상적으로 존재하는지 확인
-            if (cardPileAddResult.HasValue)
-            {
-                CardModel cardModel = cardPileAddResult.Value.cardAdded;
-                // 이 카드가 강화되어있다면 변화한 카드 강화
-                if (IsUpgraded)
-                {
-                    CardCmd.Upgrade(cardModel);
-                }
-                // 카드 손으로 가져오기
-                await CardPileCmd.Add(cardModel, PileType.Hand);
-            }
+			CardModel cardModel2 = CombatState!.CreateCard<ThunderstruckWood>(Owner);
+			if (IsUpgraded)
+			{
+				CardCmd.Upgrade(cardModel2);
+			}
+			await CardCmd.Transform(cardModel, cardModel2);
 		}
     }
 

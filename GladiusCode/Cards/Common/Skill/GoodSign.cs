@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Models;
 using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.Models.Enchantments;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace Gladius;
 
@@ -16,6 +17,9 @@ namespace Gladius;
 public class GoodSign() : GladiusCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     // 길조
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new CardsVar(1)];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<ThunderstruckWood>(IsUpgraded),
         HoverTipFactory.FromKeyword(GladiusKeywords.Material),
@@ -23,15 +27,24 @@ public class GoodSign() : GladiusCard(1, CardType.Skill, CardRarity.Common, Targ
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        CardModel? cardModel = (await CardSelectCmd.FromHand(prefs: new CardSelectorPrefs(CardSelectorPrefs.TransformSelectionPrompt, 1), context: choiceContext, player: Owner, filter: null, source: this)).FirstOrDefault();
-		if (cardModel != null)
+        // 버린 카드 더미의 카드 선택
+        List<CardModel> selection = (await CardSelectCmd.FromCombatPile(choiceContext, PileType.Discard.GetPile(Owner), Owner, new CardSelectorPrefs(CardSelectorPrefs.TransformSelectionPrompt, DynamicVars.Cards.IntValue))).ToList();
+		foreach (CardModel item in selection)
 		{
-			CardModel cardModel2 = CombatState!.CreateCard<ThunderstruckWood>(Owner);
-			if (IsUpgraded)
-			{
-				CardCmd.Upgrade(cardModel2);
-			}
-			await CardCmd.Transform(cardModel, cardModel2);
+            // 카드 변화
+			CardPileAddResult? cardPileAddResult = await CardCmd.TransformTo<ThunderstruckWood>(item);
+            // 변화된 카드가 정상적으로 존재하는지 확인
+            if (cardPileAddResult.HasValue)
+            {
+                CardModel cardModel = cardPileAddResult.Value.cardAdded;
+                // 이 카드가 강화되어있다면 변화한 카드 강화
+                if (IsUpgraded)
+                {
+                    CardCmd.Upgrade(cardModel);
+                }
+                // 카드 손으로 가져오기
+                await CardPileCmd.Add(cardModel, PileType.Hand);
+            }
 		}
     }
 

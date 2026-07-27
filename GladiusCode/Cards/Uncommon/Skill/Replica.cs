@@ -51,7 +51,6 @@ public class Replica() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, Tar
 			{
 				CardModel card = cardModel.CreateClone();
                 DurabilityExtensions.SetDurability(card, DynamicVars["Durability"].IntValue);
-                card.AddKeyword(CardKeyword.Ethereal);
 				await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
 			}
         }

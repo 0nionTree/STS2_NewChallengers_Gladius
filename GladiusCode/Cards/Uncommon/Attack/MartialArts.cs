@@ -17,7 +17,7 @@ public class MartialArts() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon
 {
     // 연계 무술
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(5m, DamageProps.card),
+        [new DamageVar(6m, DamageProps.card),
         new PowerVar<PreserveDurabilityPower>(1m)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -38,6 +38,6 @@ public class MartialArts() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(4m);
+        DynamicVars.Damage.UpgradeValueBy(3m);
     }
 }

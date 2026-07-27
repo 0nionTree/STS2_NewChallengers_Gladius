@@ -33,7 +33,7 @@ public class Steel() : GladiusCard(2, CardType.Skill, CardRarity.Token, TargetTy
         if (artifactCard != null)
         {
             // 내구도 증가
-            artifactCard.GetDurability().CurrentDurability += DynamicVars["Durability"].IntValue;
+            DurabilityExtensions.VarianceDurability(artifactCard, DynamicVars["Durability"].IntValue);
         }
     }
 

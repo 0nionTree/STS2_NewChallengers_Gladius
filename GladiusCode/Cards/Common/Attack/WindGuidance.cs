@@ -18,7 +18,7 @@ public class WindGuidance() : GladiusCard(1, CardType.Attack, CardRarity.Common,
 {
     // 바람의 인도
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(10m, DamageProps.card)];
+        [new DamageVar(11m, DamageProps.card)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<WindStone>(IsUpgraded),

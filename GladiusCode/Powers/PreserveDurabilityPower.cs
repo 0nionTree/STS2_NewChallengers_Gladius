@@ -20,13 +20,43 @@ public class PreserveDurabilityPower : GladiusPower, IDurabilityProtector
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
+    private CardModel? _applyCard;
+
     public bool IsProtectionActive() => true;
 
     // 파워 획득 시
     public override Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
     {
         DurabilityProtectionManager.Register(target, this); // 매니저 등록
+        // 증가시킨 카드가 존재하는지
+        if (cardSource == null)
+            return Task.CompletedTask;
 
+        // 증가시킨 카드를 저장
+        _applyCard = cardSource;
+
+        return Task.CompletedTask;
+    }
+
+    // 이 파워 수치를 증가시킨 카드를 저장
+    public override Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    {
+        // 변동한 파워가 이 파워인지
+        if (power != this)
+			return Task.CompletedTask;
+        // 변동한 파워 소유자가 이 파워 소유자인지
+		if (power.Owner != Owner)
+			return Task.CompletedTask;
+		// 변동 수치가 양수인지
+        if (amount > 0)
+            return Task.CompletedTask;
+        // 증가시킨 카드가 존재하는지
+        if (cardSource == null)
+            return Task.CompletedTask;
+            
+        // 증가시킨 카드를 저장
+        _applyCard = cardSource;
+        
         return Task.CompletedTask;
     }
 
@@ -46,12 +76,16 @@ public class PreserveDurabilityPower : GladiusPower, IDurabilityProtector
 		return Task.CompletedTask;
 	}
 
+    // 카드 사용 이후 수치 감소
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card.GetDurability().isDurable)
+        // 사용한 카드가 파워 획득시킨 카드가 아니며, 소모품 카드라면 파워 감소
+        if (cardPlay.Card != _applyCard && cardPlay.Card.GetDurability().isDurable)
         {
             await PowerCmd.Decrement(this);
         }
+        // 저장한 카드 초기화
+        _applyCard = null;
     }
 
     // 턴 종료 시 제거
@@ -61,5 +95,6 @@ public class PreserveDurabilityPower : GladiusPower, IDurabilityProtector
 		{
             await PowerCmd.Remove(this);
 		}
+        _applyCard = null;
     }
 }

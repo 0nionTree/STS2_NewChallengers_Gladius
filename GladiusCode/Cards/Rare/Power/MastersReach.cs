@@ -11,7 +11,7 @@ using Gladius.GladiusCode;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class MastersReach() : GladiusCard(2, CardType.Power, CardRarity.Rare, TargetType.Self)
+public class MastersReach() : GladiusCard(3, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     // 달인의 간격
     protected override IEnumerable<DynamicVar> CanonicalVars => 

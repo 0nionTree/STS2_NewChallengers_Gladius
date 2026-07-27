@@ -15,7 +15,7 @@ using MegaCrit.Sts2.Core.Models.Relics;
 namespace Gladius.GladiusCode.Patches
 {
     // =========================================================================
-    // [효과 1 최적화] UI 렌더링 상태를 추적하는 전역 플래그
+    // UI 렌더링 상태를 추적하는 전역 플래그
     // =========================================================================
     public static class CardTextRenderState
     {
@@ -24,11 +24,16 @@ namespace Gladius.GladiusCode.Patches
     }
 
     // =========================================================================
-    // [UI 패치] 카드 내구도 아이콘 표시 & 보존 키워드 텍스트 렌더링 방지
+    // [UI 패치] 카드 내구도 아이콘 표시
     // =========================================================================
     [HarmonyPatch(typeof(NCard), "UpdateVisuals")]
     public static class DurableCardUIPatch
     {
+        private static Texture2D? _cachedNormalIcon = null;
+        private static Texture2D? _cachedProtectedIcon = null;
+
+        private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<NCard, TextureRect> _uiCache = new();
+
         [HarmonyPrefix]
         public static void Prefix()
         {
@@ -42,20 +47,17 @@ namespace Gladius.GladiusCode.Patches
             // 카드 UI 렌더링 종료 시 플래그 끔 (원래 상태 복구)
             CardTextRenderState.IsGeneratingDescription = false;
 
-            Control? cardContainer = __instance.GetNodeOrNull<Control>("CardContainer");
-            if (cardContainer == null) return;
-
             CardModel cardModel = __instance.Model!;
+            bool isDurable = cardModel.GetDurability().isDurable;
 
-            if (cardModel.GetDurability().isDurable) 
+            if (!_uiCache.TryGetValue(__instance, out TextureRect? durIcon)) 
             {
-                bool isProtected = false;
-                if (!__instance.Model!.IsCanonical && cardModel.Owner?.Creature?.Powers != null)
-                {
-                    isProtected = DurabilityProtectionManager.IsProtected(cardModel.Owner.Creature);
-                }
+                if (!isDurable) return;
 
-                TextureRect? durIcon = cardContainer.GetNodeOrNull<TextureRect>("DurabilityIcon");
+                Control? cardContainer = __instance.GetNodeOrNull<Control>("CardContainer");
+                if (cardContainer == null) return;
+
+                durIcon = cardContainer.GetNodeOrNull<TextureRect>("DurabilityIcon");
                 Label? durLabel = null;
 
                 if (durIcon == null)
@@ -74,7 +76,8 @@ namespace Gladius.GladiusCode.Patches
                     durIcon.Position = new Vector2(-125, -230);
                     
                     durIcon.ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize;
-                    durIcon.Texture = GD.Load<Texture2D>("res://Gladius/images/durability_icon.png");
+                    
+                    durIcon.Texture = _cachedNormalIcon;
 
                     durLabel = new Label();
                     durLabel.Name = "DurabilityLabel";
@@ -97,29 +100,33 @@ namespace Gladius.GladiusCode.Patches
                     durIcon.AddChild(durLabel);
                     cardContainer.AddChild(durIcon);
                 }
-                else
-                {
-                    durLabel = durIcon.GetNode<Label>("DurabilityLabel");
-                }
 
+                // 만든(혹은 찾은) UI 노드를 캐시에 등록해 다음 호출부터는 검색하지 않음
+                _uiCache.Add(__instance, durIcon);
+            }
+
+            // UI 업데이트
+            if (isDurable)
+            {
                 durIcon.Visible = true;
 
-                // 내구도 감소 면역 상태일 경우
-                if (isProtected)
+                bool isProtected = false;
+                if (!__instance.Model!.IsCanonical && cardModel.Owner?.Creature?.Powers != null)
                 {
-                    // 내구도가 보호받을 때 사용할 새 이미지 경로 (미리 폴더에 넣어두세요)
-                    durIcon.Texture = GD.Load<Texture2D>("res://Gladius/images/durability_icon_protected.png");
-                }
-                else
-                {
-                    // 기존 일반 내구도 이미지
-                    durIcon.Texture = GD.Load<Texture2D>("res://Gladius/images/durability_icon.png");
+                    isProtected = DurabilityProtectionManager.IsProtected(cardModel.Owner.Creature);
                 }
 
-                // 표시할 내구도 : 기본적으론 현재 내구도
+                _cachedNormalIcon ??= GD.Load<Texture2D>("res://Gladius/images/durability_icon.png");
+                _cachedProtectedIcon ??= GD.Load<Texture2D>("res://Gladius/images/durability_icon_protected.png");
+
+                // 텍스처 재할당 비용 최소화
+                durIcon.Texture = isProtected ? _cachedProtectedIcon : _cachedNormalIcon;
+
+                // 캐싱된 아이콘의 자식 노드를 바로 가져옴
+                Label durLabel = durIcon.GetNode<Label>("DurabilityLabel");
+
                 int displayDurability = cardModel.GetDurability().CurrentDurability;
-                // 카드가 사용 중인 카드 파일에 있다면 사용 전 내구도 표시
-                if (cardModel.Pile != null && cardModel.Pile!.Type == PileType.Play)
+                if (cardModel.Pile != null && cardModel.Pile.Type == PileType.Play)
                     displayDurability = cardModel.GetDurability().WasDurability;
 
                 if (displayDurability > 0)
@@ -133,11 +140,8 @@ namespace Gladius.GladiusCode.Patches
             }
             else
             {
-                TextureRect? durIcon = cardContainer.GetNodeOrNull<TextureRect>("DurabilityIcon");
-                if (durIcon != null)
-                {
-                    durIcon.Visible = false;
-                }
+                // 내구도 부여 효과가 사라졌을 때 숨김 처리
+                durIcon.Visible = false;
             }
         }
     }
@@ -167,7 +171,7 @@ namespace Gladius.GladiusCode.Patches
     }
 
     // =========================================================================
-    // [효과 1] 턴 종료 시 패 유지
+    // 턴 종료 시 패 유지
     // =========================================================================
     [HarmonyPatch(typeof(CardModel), "get_ShouldRetainThisTurn")]
     public static class MaterializedShouldRetainPatch
@@ -187,7 +191,7 @@ namespace Gladius.GladiusCode.Patches
     }
 
     // =========================================================================
-    // [효과 2] 카드를 '확정적으로 사용'할 때만 내구도를 1 차감합니다. 
+    // 카드를 '확정적으로 사용'할 때만 내구도를 1 차감
     // =========================================================================
     [HarmonyPatch(typeof(CardModel), nameof(CardModel.OnPlayWrapper))]
     public static class DurableCardDeductPatch
@@ -246,7 +250,7 @@ namespace Gladius.GladiusCode.Patches
     }
 
     // =========================================================================
-    // [효과 3] 카드의 목적지를 결정합니다.
+    // 카드의 목적지를 결정
     // =========================================================================
     [HarmonyPatch(typeof(CardModel), "GetResultPileTypeForCardPlay")]
     public static class MaterializedPlayPatch
@@ -281,6 +285,10 @@ namespace Gladius.GladiusCode.Patches
             }
         }
     }
+    
+    // =========================================================================
+    // 고대 존재의 유물로 인한 카드 및 유물 교체
+    // =========================================================================
     // 오로바스의 ArchaicTooth 클래스의 TranscendenceUpgrades 프로퍼티의 Getter를 패치 타겟으로 지정합니다.
     [HarmonyPatch(typeof(ArchaicTooth), "get_TranscendenceUpgrades")]
     public static class ArchaicToothTranscendencePatch
@@ -295,7 +303,6 @@ namespace Gladius.GladiusCode.Patches
             __result.Add(ModelDb.Card<Mine>().Id, ModelDb.Card<Engraving>());
         }
     }
-
     // 오로바스의 TouchOfOrobas 클래스의 TranscendenceUpgrades 프로퍼티의 Getter를 패치 타겟으로 지정합니다.
     [HarmonyPatch(typeof(TouchOfOrobas), "get_RefinementUpgrades")]
     public static class TouchOfOrobasTranscendencePatch
@@ -308,6 +315,27 @@ namespace Gladius.GladiusCode.Patches
 
             // 채굴 -> 세공
             __result.Add(ModelDb.Relic<MineralPouch>().Id, ModelDb.Relic<IngotCase>());
+        }
+    }
+
+    // =========================================================================
+    // 카드의 목적지를 결정
+    // =========================================================================
+    [HarmonyPatch(typeof(CardModel), nameof(CardModel.CreateClone))]
+    public static class CloneDurabilityPatch
+    {
+        [HarmonyPostfix]
+        public static void Postfix(CardModel __instance, ref CardModel __result)
+        {
+            var mainDurability = __instance.GetDurability();
+            var copyDurability = __result.GetDurability();
+
+            if (!mainDurability.isDurable) return;
+
+            copyDurability.isDurable = mainDurability.isDurable;
+            copyDurability.BaseDurability = mainDurability.BaseDurability;
+            copyDurability.CurrentDurability = mainDurability.CurrentDurability;
+            copyDurability.WasDurability = mainDurability.CurrentDurability;
         }
     }
 }

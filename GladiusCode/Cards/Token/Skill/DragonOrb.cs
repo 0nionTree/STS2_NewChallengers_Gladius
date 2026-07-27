@@ -18,7 +18,7 @@ public class DragonOrb() : GladiusCard(1, CardType.Skill, CardRarity.Token, Targ
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new IntVar("DragonAuraPower", 2),
+        [new IntVar("DragonAuraPower", 1),
         new IntVar("AlchemyDragonAuraPower", 2)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>

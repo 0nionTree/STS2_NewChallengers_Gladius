@@ -32,6 +32,6 @@ public class Grinding() : GladiusCard(1, CardType.Power, CardRarity.Uncommon, Ta
 
     protected override void OnUpgrade()
     {
-        DynamicVars["GrindingPower"].UpgradeValueBy(2);
+        DynamicVars["GrindingPower"].UpgradeValueBy(1);
     }
 }

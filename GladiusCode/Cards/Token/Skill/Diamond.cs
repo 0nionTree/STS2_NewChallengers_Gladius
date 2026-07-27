@@ -20,7 +20,7 @@ public class Diamond() : GladiusCard(1, CardType.Skill, CardRarity.Token, Target
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new IntVar("AdroitAmount", 3m),
+        [new IntVar("AdroitAmount", 4m),
         new BlockVar(6m, BlockProps.card)];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -44,7 +44,7 @@ public class Diamond() : GladiusCard(1, CardType.Skill, CardRarity.Token, Target
 
     protected override void OnUpgrade()
     {
-        DynamicVars["AdroitAmount"].UpgradeValueBy(1m);
+        DynamicVars["AdroitAmount"].UpgradeValueBy(2m);
         DynamicVars.Block.UpgradeValueBy(3m);
     }
 }

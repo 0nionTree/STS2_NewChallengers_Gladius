@@ -14,7 +14,7 @@ public class WheelKick() : GladiusCard(1, CardType.Attack, CardRarity.Common, Ta
 {
     // 돌려차기
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(9m, DamageProps.card)];
+        [new DamageVar(10m, DamageProps.card)];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[CardKeyword.Ethereal];
@@ -22,13 +22,13 @@ public class WheelKick() : GladiusCard(1, CardType.Attack, CardRarity.Common, Ta
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 여러 적 공격
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!)
 			.WithHitFx("vfx/vfx_attack_blunt", null, "heavy_attack.mp3")
 			.Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(4m);
+        DynamicVars.Damage.UpgradeValueBy(3m);
     }
 }

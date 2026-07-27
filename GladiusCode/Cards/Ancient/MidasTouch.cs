@@ -12,7 +12,7 @@ using BaseLib.Extensions;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class MidasTouch() : GladiusCard(2, CardType.Power, CardRarity.Ancient, TargetType.Self)
+public class MidasTouch() : GladiusCard(3, CardType.Power, CardRarity.Ancient, TargetType.Self)
 {
     // 미다스의 손
     protected override IEnumerable<DynamicVar> CanonicalVars => 
@@ -31,6 +31,7 @@ public class MidasTouch() : GladiusCard(2, CardType.Power, CardRarity.Ancient, T
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Power<MidasTouchPower>().UpgradeValueBy(1);
+        EnergyCost.UpgradeBy(-1);
+        //DynamicVars.Power<MidasTouchPower>().UpgradeValueBy(1);
     }
 }

@@ -18,13 +18,14 @@ public class DragonClaw() : GladiusCard(1, CardType.Attack, CardRarity.Token, Ta
 {
     // 용 발톱 - 연성물
     public override bool IsDurable => true;
-    public override int BaseDurability => 1;
+    public override int BaseDurability => 2;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new CalculationBaseVar(10m),
-		new ExtraDamageVar(2m),
+        [new CalculationBaseVar(4m),
+		new ExtraDamageVar(1m),
 		new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => 
-            card.Owner.Creature?.GetPowerAmount<DragonAuraPower>() ?? 0)
+            card.Owner.Creature?.GetPowerAmount<DragonAuraPower>() ?? 0),
+        new IntVar("HitCount", 2)
 	    ];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
@@ -39,14 +40,14 @@ public class DragonClaw() : GladiusCard(1, CardType.Attack, CardRarity.Token, Ta
         // 대상 확인
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         // 피해량 계산 및 이펙트 출력
-        await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target)
+        await DamageCmd.Attack(DynamicVars.CalculatedDamage).WithHitCount(DynamicVars["HitCount"].IntValue).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.CalculationBase.UpgradeValueBy(2m);
+        DynamicVars.CalculationBase.UpgradeValueBy(1m);
         DynamicVars.ExtraDamage.UpgradeValueBy(1m);
     }
 }

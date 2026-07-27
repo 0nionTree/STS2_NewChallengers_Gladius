@@ -16,7 +16,7 @@ public class Reshape() : GladiusCard(1, CardType.Power, CardRarity.Rare, TargetT
 {
     // 재구성
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-        [new PowerVar<ReshapePower>(1)];
+        [new PowerVar<ReshapePower>(2)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Durability),
