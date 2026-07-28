@@ -191,36 +191,74 @@ namespace Gladius.GladiusCode.Patches
     }
 
     // =========================================================================
-    // 카드를 '확정적으로 사용'할 때만 내구도를 1 차감
+    // OnPlay에서 카드 효과 실행 시작 시 내구도를 1 차감
+    // =========================================================================
+    [HarmonyPatch] // 단일 타겟 지정 대신 TargetMethods를 사용합니다.
+    public static class RealTimeDurabilityDeductPatch
+    {
+        // 부모 클래스뿐만 아니라, 오버라이드(재정의)된 모든 OnPlay 메서드를 찾아서 패치 타겟으로 지정합니다.
+        public static IEnumerable<MethodBase> TargetMethods()
+        {
+            // 원본 게임 어셈블리와 현재 모드 어셈블리(Gladius)의 모든 클래스 타입을 가져옵니다.
+            var allTypes = typeof(CardModel).Assembly.GetTypes()
+                           .Concat(Assembly.GetExecutingAssembly().GetTypes());
+
+            foreach (var type in allTypes)
+            {
+                // CardModel을 상속받은 커스텀 카드 또는 기본 카드인지 확인
+                if (type.IsSubclassOf(typeof(CardModel)))
+                {
+                    // 해당 클래스 내부에서 직접 재정의(Override)한 OnPlay 메서드만 정확히 찾습니다.
+                    var method = type.GetMethod("OnPlay", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+                    
+                    if (method != null)
+                    {
+                        yield return method; // 찾은 모든 OnPlay에 패치를 예약합니다.
+                    }
+                }
+            }
+        }
+
+        // 위의 TargetMethods로 모인 수백 개의 OnPlay 메서드 직전에 이 코드가 실행됩니다.
+        [HarmonyPrefix]
+        public static bool Prefix(CardModel __instance, ref Task __result)
+        {
+            var durabilityData = __instance.GetDurability();
+
+            // 내구도가 존재하는 카드라면 로직 개입
+            if (durabilityData != null && durabilityData.isDurable)
+            {
+                // 1. 이미 내구도가 0 이하라면? 카드 효과(원본 OnPlay) 발동을 강제로 막습니다.
+                if (durabilityData.CurrentDurability <= 0)
+                {
+                    __result = Task.CompletedTask; // Task 에러 방지용 더미 완료 반환
+                    return false; // 원본 함수 스킵 (헛스윙 처리)
+                }
+
+                // 2. 내구도 차감 전 보호(파워 등) 여부 확인
+                if (__instance.Owner?.Creature != null && DurabilityProtectionManager.GetProtectionStacks(__instance.Owner.Creature) > 0)
+                {
+                    DurabilityProtectionManager.ConsumeOneProtectionStack(__instance.Owner.Creature);
+                }
+                else
+                {
+                    // 보호 횟수가 없다면 내구도를 실시간으로 1 차감합니다.
+                    durabilityData.CurrentDurability = Math.Max(0, durabilityData.CurrentDurability - 1);
+                    durabilityData.WasDurability = durabilityData.CurrentDurability;
+                }
+            }
+
+            // 내구도가 충분하거나 내구도 카드가 아니면 정상적으로 카드 효과 발동
+            return true;
+        }
+    }
+
+    // =========================================================================
+    // OnPlayWrapper가 끝난 뒤, 모든 내구도가 소진된 카드의 내구도 초기화
     // =========================================================================
     [HarmonyPatch(typeof(CardModel), nameof(CardModel.OnPlayWrapper))]
     public static class DurableCardDeductPatch
     {
-        [HarmonyPrefix]
-        public static void Prefix(CardModel __instance)
-        {
-            var durabilityData = __instance.GetDurability();
-
-            // 내구도가 존재하는 카드인지 확인
-            if (durabilityData.isDurable)
-            {
-                // 사용 전 내구도 저장
-                durabilityData.WasDurability = durabilityData.CurrentDurability;
-
-                // 내구도 감소 체크
-                bool isProtected = false;
-
-                // 보유한 내구도 감소 무효 파워 확인
-                if (__instance.Owner?.Creature != null)
-                {
-                    isProtected = DurabilityProtectionManager.IsProtected(__instance.Owner.Creature);
-                }
-
-                // 최종적으로 내구도 감소 체크 후 내구도 감소
-                if (!isProtected)
-                    durabilityData.CurrentDurability = Math.Max(0, durabilityData.CurrentDurability - 1);
-            }
-        }
         [HarmonyPostfix]
         public static void Postfix(CardModel __instance, ref Task __result)
         {
@@ -242,15 +280,23 @@ namespace Gladius.GladiusCode.Patches
             if (durabilityData != null && durabilityData.isDurable)
             {
                 if (durabilityData.CurrentDurability == 0)
-                    durabilityData.WasDurability = durabilityData.BaseDurability;
-                else
-                    durabilityData.WasDurability = durabilityData.CurrentDurability;
+                {
+                    if (__instance.Keywords.Contains(GladiusKeywords.Artifact))
+                    {
+                        durabilityData.CurrentDurability = durabilityData.BaseDurability;
+                        durabilityData.WasDurability = durabilityData.BaseDurability;
+                    }
+                    else
+                    {
+                        DurabilityExtensions.ResetDurability(__instance);
+                    }
+                }
             }
         }
     }
-
+    
     // =========================================================================
-    // 카드의 목적지를 결정
+    // 카드의 소모될 내구도를 미리 계산하여 목적지 결정
     // =========================================================================
     [HarmonyPatch(typeof(CardModel), "GetResultPileTypeForCardPlay")]
     public static class MaterializedPlayPatch
@@ -258,30 +304,38 @@ namespace Gladius.GladiusCode.Patches
         [HarmonyPostfix]
         public static void Postfix(CardModel __instance, ref PileType __result)
         {
-            // 카드 사용이 끝난 뒤 내구도가 존재하는 카드라면
-            if (__instance.GetDurability().isDurable)
+            var durabilityData = __instance.GetDurability();
+
+            if (durabilityData != null && durabilityData.isDurable)
             {
-                // 현재 내구도에 따라 보낼 카드 더미 변경
-                // 현재 내구도가 0이라면 소멸 후 내구도 복구
-                if (__instance.GetDurability().CurrentDurability <= 0)
+                // 1. 현재 적용된 '내구도 보호'의 총 횟수(스택)를 가져옵니다. 
+                // (※ DurabilityProtectionManager에 스택을 int로 반환하는 메서드를 새로 만들어주세요)
+                int protectionStacks = 0;
+                if (__instance.Owner?.Creature != null)
+                {
+                    protectionStacks = DurabilityProtectionManager.GetProtectionStacks(__instance.Owner.Creature);
+                }
+
+                // 2. 카드의 총 발동 횟수 계산 (기본 1회 + 마법/강화 재사용 횟수)
+                int totalPlays = 1 + __instance.GetEnchantedReplayCount();
+
+                // 3. 이번 사용으로 '실제로 차감될' 예상 내구도 계산 
+                // (총 발동 횟수에서 보호받는 횟수를 뺍니다. 단, 0보단 작아질 수 없음)
+                int expectedDeduction = Math.Max(0, totalPlays - protectionStacks);
+
+                // 4. 카드 사용 완료 시점의 '예상 내구도' 계산
+                int predictedDurability = durabilityData.CurrentDurability - expectedDeduction;
+
+                // 5. 사용 후 내구도가 0 이하가 될 예정이라면 소멸로 예약
+                if (predictedDurability <= 0)
                 {
                     __result = PileType.Exhaust;
-                    // 연성물 카드라면 
-                    if (__instance.Keywords.Contains(GladiusKeywords.Artifact))
-                        __instance.GetDurability().CurrentDurability = __instance.GetDurability().BaseDurability;
-                    // 연성물 카드가 아니라면(별도의 효과로 내구도를 부여받았다면)
-                    else
-                    {
-                        DurabilityExtensions.ResetDurability(__instance);
-                    }
                 }
-                // 현재 내구도가 0이 아니라면 버리지 않고 손으로 다시 가져옴
-                else if (__result == PileType.Discard)
+                // 소멸하지 않을 경우, 손으로 돌아옴
+                else
                 {
-                    __result = PileType.Hand; 
+                    __result = PileType.Hand;
                 }
-                // 사용 전 내구도 초기화
-                //__instance.GetDurability().WasDurability = __instance.GetDurability().CurrentDurability;
             }
         }
     }
@@ -300,7 +354,7 @@ namespace Gladius.GladiusCode.Patches
             // 여기에 Gladius의 기본 카드와 이에 대응하는 고대 카드 매핑을 추가합니다.
 
             // 채굴 -> 세공
-            __result.Add(ModelDb.Card<Mine>().Id, ModelDb.Card<Engraving>());
+            __result.Add(ModelDb.Card<SwordGirding>().Id, ModelDb.Card<Oath>());
         }
     }
     // 오로바스의 TouchOfOrobas 클래스의 TranscendenceUpgrades 프로퍼티의 Getter를 패치 타겟으로 지정합니다.
@@ -319,7 +373,7 @@ namespace Gladius.GladiusCode.Patches
     }
 
     // =========================================================================
-    // 카드의 목적지를 결정
+    // 카드 복사본 생성 시 내구도 정보도 복사
     // =========================================================================
     [HarmonyPatch(typeof(CardModel), nameof(CardModel.CreateClone))]
     public static class CloneDurabilityPatch

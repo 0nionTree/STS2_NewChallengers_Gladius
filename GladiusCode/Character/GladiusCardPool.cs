@@ -132,7 +132,7 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<DivineDragonForm>(),
             ModelDb.Card<Musical>(),
             // 고대 카드
-            ModelDb.Card<Engraving>(),
+            ModelDb.Card<Oath>(),
             ModelDb.Card<MidasTouch>(),
             // 멀티플레이 카드
             ModelDb.Card<WeaponSupply>(),

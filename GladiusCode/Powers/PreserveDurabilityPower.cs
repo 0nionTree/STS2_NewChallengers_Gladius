@@ -20,9 +20,7 @@ public class PreserveDurabilityPower : GladiusPower, IDurabilityProtector
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    private CardModel? _applyCard;
-
-    public bool IsProtectionActive() => true;
+    //private CardModel? _applyCard;
 
     // 파워 획득 시
     public override Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
@@ -33,7 +31,7 @@ public class PreserveDurabilityPower : GladiusPower, IDurabilityProtector
             return Task.CompletedTask;
 
         // 증가시킨 카드를 저장
-        _applyCard = cardSource;
+        //_applyCard = cardSource;
 
         return Task.CompletedTask;
     }
@@ -55,7 +53,7 @@ public class PreserveDurabilityPower : GladiusPower, IDurabilityProtector
             return Task.CompletedTask;
             
         // 증가시킨 카드를 저장
-        _applyCard = cardSource;
+        //_applyCard = cardSource;
         
         return Task.CompletedTask;
     }
@@ -75,7 +73,7 @@ public class PreserveDurabilityPower : GladiusPower, IDurabilityProtector
 
 		return Task.CompletedTask;
 	}
-
+/*
     // 카드 사용 이후 수치 감소
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -86,7 +84,7 @@ public class PreserveDurabilityPower : GladiusPower, IDurabilityProtector
         }
         // 저장한 카드 초기화
         _applyCard = null;
-    }
+    }*/
 
     // 턴 종료 시 제거
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
@@ -95,6 +93,19 @@ public class PreserveDurabilityPower : GladiusPower, IDurabilityProtector
 		{
             await PowerCmd.Remove(this);
 		}
-        _applyCard = null;
+        //_applyCard = null;
+    }
+
+    public bool IsProtectionActive() => true;
+
+    public int GetProtectionStacks()
+    {
+        return Amount;
+    }
+
+    public async void ConsumeOneStack()
+    {
+        // 스택 1 감소
+        await PowerCmd.Decrement(this);
     }
 }

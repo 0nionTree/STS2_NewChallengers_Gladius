@@ -43,6 +43,7 @@ public sealed class ArtifactCardPool : CustomCardPoolModel
 		return
         [
             ModelDb.Card<HornedSword>(),
+            ModelDb.Card<TwinDragonHorns>(),
 			ModelDb.Card<DragonScale>(),
 			ModelDb.Card<ShoulderGuards>(),
 			ModelDb.Card<SerratedDagger>(),

@@ -211,8 +211,8 @@
 
     "Ancient":"Ancient",
 
-    "GLADIUS-ENGRAVING.description": "[gold]방어도[/gold]를 {Block:diff()} 얻습니다.\n[gold]{IfUpgraded:show:청음편+|청음편}[/gold]을 1장\n[gold]손[/gold]으로 가져옵니다.",
-    "GLADIUS-ENGRAVING.title": "세공",
+    "GLADIUS-OATH.description": "[gold]{IfUpgraded:show:쌍룡각+|쌍룡각}[/gold]을 1장\n[gold]연성[/gold]합니다.\n그 카드에 [gold]재사용[/gold]을 1 추가합니다.",
+    "GLADIUS-OATH.title": "맹세",
     "GLADIUS-MIDAS_TOUCH.description": "[gold]소모품[/gold]이 아닌 공격 카드를\n뽑을 때마다, 그 카드를\n비용이 1 {energyPrefix:energyIcons(1)} 감소한\n[gold]내구도[/gold] {MidasTouchPower:diff()}의 [gold]소모품[/gold]으로\n[gold]연성[/gold]합니다.",
     "GLADIUS-MIDAS_TOUCH.title": "미다스의 손",
 
@@ -231,15 +231,17 @@
 
     "Artifact":"Artifact",
 
-    "GLADIUS-HORNED_SWORD.description": "피해를 {Damage:diff()} 줍니다.\n이번 전투 동안 이 카드의 피해량이 {Increase:diff()} 증가합니다.",
+    "GLADIUS-HORNED_SWORD.description": "피해를 {Damage:diff()} 줍니다.",
     "GLADIUS-HORNED_SWORD.title": "용각 검",
+    "GLADIUS-TWIN_DRAGON_HORNS.description": "피해를 {Damage:diff()}만큼 줍니다.\n이번 전투 동안 이 카드의 피해량이 {Increase:diff()} 증가합니다.",
+    "GLADIUS-TWIN_DRAGON_HORNS.title": "쌍룡각",
     "GLADIUS-DRAGON_SCALE.description": "{TargetType:choose(AllEnemies):모든 적에게 피해를 {Damage:diff()} 줍니다.|피해를 {Damage:diff()} 만큼 ({CurrentRepeat:diff()}번 줍니다.)}",
     "GLADIUS-DRAGON_SCALE.title": "용 비늘",
     "GLADIUS-SHOULDER_GUARDS.description": "피해를 {Damage:diff()} 줍니다.\n[gold]방어도[/gold]를 {Block:diff()} 얻습니다.\n내 턴 시작 시, [gold]손[/gold]에 있는 이 카드의 [gold]내구도[/gold]가 {Durability:diff()} 증가합니다.",
     "GLADIUS-SHOULDER_GUARDS.title": "견갑",
     "GLADIUS-RITUAL_PLUMB.description": "피해를 {Damage:diff()} 줍니다.\n[gold]내구도[/gold]가 1이라면, 두 배의 피해를 줍니다.",
     "GLADIUS-RITUAL_PLUMB.title": "의례 추",
-    "GLADIUS-DRAGON_CLAW.description": "피해를 {CalculatedDamage:diff()} 줍니다.\n보유한 [gold]용기[/gold]마다 피해량이 {ExtraDamage:diff()} 증가합니다.",
+    "GLADIUS-DRAGON_CLAW.description": "피해를 {CalculatedDamage:diff()}만큼 {HitCount:diff()}번 줍니다.\n보유한 [gold]용기[/gold]마다 피해량이 {ExtraDamage:diff()} 증가합니다.",
     "GLADIUS-DRAGON_CLAW.title": "용의 발톱",
     "GLADIUS-VORTEX_SPEAR.description": "피해를 {Damage:diff()} 줍니다.\n다른 [gold]소모품[/gold] 카드를 사용할 때마다, 이 카드의 피해량이 {Increase:diff()} 증가합니다.",
     "GLADIUS-VORTEX_SPEAR.title": "나선 투창",

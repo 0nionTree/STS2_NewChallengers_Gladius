@@ -211,8 +211,8 @@
 
     "Ancient":"Ancient",
 
-    "GLADIUS-ENGRAVING.description": "Gain {Block:diff()} [gold]Block[/gold].\nAdd a [gold]{IfUpgraded:show:Tuning Shard+|Tuning Shard}[/gold] into your [gold]Hand[/gold].",
-    "GLADIUS-ENGRAVING.title": "Engraving",
+    "GLADIUS-OATH.description": "[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Twin Dragon Horns+|Twin Dragon Horns}[/gold].\nAdd 1 [gold]Replay[/gold] to that card.",
+    "GLADIUS-OATH.title": "Oath",
     "GLADIUS-MIDAS_TOUCH.description": "Whenever you draw a non-[gold]Durable[/gold] Attack, reduce its cost by 1 and [gold]Alchemy[/gold] it into a [gold]Durable[/gold] card with {MidasTouchPower:diff()} [gold]Durability[/gold]",
     "GLADIUS-MIDAS_TOUCH.title": "Midas Touch",
 
@@ -231,20 +231,25 @@
 
     "Artifact":"Artifact",
 
-    "GLADIUS-HORNED_SWORD.description": "Deal {Damage:diff()} damage.\nIncrease this card's damage by {Increase:diff()} this combat.",
+    "GLADIUS-HORNED_SWORD.description": "Deal {Damage:diff()} damage.",
     "GLADIUS-HORNED_SWORD.title": "Horned Sword",
+    "GLADIUS-TWIN_DRAGON_HORNS.description": "Deal {Damage:diff()} damage.\nIncrease this card's damage by {Increase:diff()} this combat.",
+    "GLADIUS-TWIN_DRAGON_HORNS.title": "Twin Dragon Horns",
     "GLADIUS-DRAGON_SCALE.description": "Deal {Damage:diff()} damage{TargetType:choose(AllEnemies): to ALL enemies| {CurrentRepeat:diff()} {CurrentRepeat:plural:time|times}}.",
     "GLADIUS-DRAGON_SCALE.title": "Dragon Scale",
     "GLADIUS-SHOULDER_GUARDS.description": "Deal {Damage:diff()} damage.\nGain {Block:diff()} [gold]Block[/gold].\nAt the start of your turn, if this is in your [gold]Hand[/gold], it gains {Durability:diff()} [gold]Durability[/gold].",
     "GLADIUS-SHOULDER_GUARDS.title": "Shoulder Guards",
     "GLADIUS-RITUAL_PLUMB.description": "Deal {Damage:diff()} damage.\nIf [gold]Durability[/gold] is 1, deal double damage.",
     "GLADIUS-RITUAL_PLUMB.title": "Ritual Plumb",
-    "GLADIUS-DRAGON_CLAW.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:diff()} additional damage for each [gold]Dragon Aura[/gold] you have.",
+    "GLADIUS-DRAGON_CLAW.description": "Deal {CalculatedDamage:diff()} damage twice.\nDeals {ExtraDamage:diff()} additional damage for each [gold]Dragon Aura[/gold] you have.",
     "GLADIUS-DRAGON_CLAW.title": "DragonClaw",
     "GLADIUS-VORTEX_SPEAR.description": "Deal {Damage:diff()} damage.\nWhenever you play another [gold]Durable[/gold] card, increase this card's damage by {Increase:diff()}",
     "GLADIUS-VORTEX_SPEAR.title": "Vortex Spear",
     "GLADIUS-SERRATED_DAGGER.description": "Deal {Damage:diff()} damage for each Durability on this card.{InCombat:\n(Hits {CurrentRepeat:diff()} {CurrentRepeat:plural:time|times})|}",
     "GLADIUS-SERRATED_DAGGER.title": "Serrated Dagger",
     "GLADIUS-PURIFYING_LANTERN.description": "Deal {Damage:diff()} damage.\nApply {VulnerablePower:diff()} [gold]Vulnerable[/gold].",
-    "GLADIUS-PURIFYING_LANTERN.title": "Purifying Lantern"
+    "GLADIUS-PURIFYING_LANTERN.title": "Purifying Lantern",
+
+    "GLADIUS-TEST_ARTIFACT.description": "noting",
+    "GLADIUS-TEST_ARTIFACT.title": "TestArtifact"
 }

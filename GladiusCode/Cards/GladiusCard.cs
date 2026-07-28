@@ -37,6 +37,7 @@ public abstract class GladiusCard(
     public virtual int BaseDurability => 0;
     public virtual bool IsRequiredMaterial => false;
     public virtual bool IsRequiredDurable => false;
+    public virtual int ReplayCount => 0;
 
     // 카드 사용에 소재 또는 내구도가 존재하는 카드가 필요하다면, 조건 불만족 시 붉은 테두리로 표시
     protected override bool ShouldGlowRedInternal
