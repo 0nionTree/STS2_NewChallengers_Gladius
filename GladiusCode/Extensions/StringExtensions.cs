@@ -64,9 +64,24 @@ public static class StringExtensions
         return Path.Join(MainFile.ResPath, "images", "relics", "big", "relic.png");
     }
 
+    public static string CharacterPath(this string path)
+    {
+        return Path.Join(MainFile.ResPath, "images", "character", path);
+    }
+    
     public static string CharacterUiPath(this string path)
     {
         return Path.Join(MainFile.ResPath, "images", "charui", path);
+    }
+
+    public static string UiPath(this string path)
+    {
+        return Path.Join(MainFile.ResPath, "images", "ui", path);
+    }
+
+    public static string ScenesPath(this string path)
+    {
+        return Path.Join(MainFile.ResPath, "scenes", path);
     }
 
     public static string EnchantmentImagePath(this string path)

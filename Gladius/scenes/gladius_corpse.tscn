@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbeiy2o482r1c"]
+
+[ext_resource type="Texture2D" uid="uid://dutgy231j8x33" path="res://Gladius/images/character/Gladius_corpse.png" id="1"]
+
+[node name="TheCursedCorpse" type="Node2D"]
+
+[node name="TheCursedCorpse" type="TextureRect" parent="."]
+offset_left = -219.0
+offset_top = -354.0
+offset_right = 214.0
+offset_bottom = 54.0
+texture = ExtResource("1")
+expand_mode = 1

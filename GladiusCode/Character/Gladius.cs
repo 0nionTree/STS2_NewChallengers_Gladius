@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
 using Godot;
+using BaseLib.Patches.UI;
 
 namespace Gladius.GladiusCode.Character;
 
@@ -53,8 +54,39 @@ public class Gladius : PlaceholderCharacterModel
             return icon;
         }
     }
-    public override string CustomIconTexturePath => "character_icon_char_name.png".CharacterUiPath();
-    public override string CustomCharacterSelectIconPath => "char_select_char_name.png".CharacterUiPath();
-    public override string CustomCharacterSelectLockedIconPath => "char_select_char_name_locked.png".CharacterUiPath();
-    public override string CustomMapMarkerPath => "map_marker_char_name.png".CharacterUiPath();
+    // 캐릭터 아이콘
+    public override string CustomIconTexturePath => "character_icon_gladius.png".CharacterUiPath();
+    public override string CustomIconOutlineTexturePath => "character_icon_gladius_outline.png".CharacterUiPath();
+    // 캐릭터 선택 초상화
+    public override string CustomCharacterSelectIconPath => "char_select_gladius.png".CharacterUiPath();
+    public override string CustomCharacterSelectLockedIconPath => "char_select_gladius_locked.png".CharacterUiPath();
+    // 캐릭터 맵 마커
+    public override string CustomMapMarkerPath => "map_marker_gladius.png".CharacterUiPath();
+
+    // 냠냠 쿠키
+    /*
+    RelicIconData YummyCookie = new RelicIconData(
+        ".png".RelicImagePath(),
+        ".png".RelicImagePath(),
+        ".png".RelicImagePath()
+    );
+    public override RelicIconData CustomYummyCookie => YummyCookie;
+    */
+
+    // 멀티플레이 손 - 가리키기, 바위, 가위, 보
+    public override string CustomArmPointingTexturePath => "multiplayer_hand_gladius_point.png".CharacterPath();
+    public override string CustomArmRockTexturePath => "multiplayer_hand_gladius_rock.png".CharacterPath();
+    public override string CustomArmScissorsTexturePath => "multiplayer_hand_gladius_scissor.png".CharacterPath();
+    public override string CustomArmPaperTexturePath => "multiplayer_hand_gladius_paper.png".CharacterPath();
+
+    // 에너지 카운터 씬
+    public override string CustomEnergyCounterPath => "gladius_energy_counter.tscn".ScenesPath();
+    // 선택창 배경 씬
+    public override string CustomCharacterSelectBg => "char_select_bg_gladius.tscn".ScenesPath();
+
+    // 캐릭터 비주얼 씬
+    public override string CustomVisualPath => "gladius_visual.tscn".ScenesPath();
+    public override string CustomMerchantAnimPath => "gladius_merchant.tscn".ScenesPath();
+    public override string CustomRestSiteAnimPath => "gladius_rest_site.tscn".ScenesPath();
+    //public override string CustomCorpseAnimPath => "gladius_corpse.tscn".ScenesPath();
 }

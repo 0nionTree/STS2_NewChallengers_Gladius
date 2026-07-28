@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cts2bgcursed1"]
+
+[ext_resource type="Texture2D" uid="uid://72nf2of3sd0u" path="res://Gladius/images/charui/char_select_bg_gladius.png" id="1"]
+
+[node name="CharSelectBg" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 471.0
+offset_top = 115.0
+offset_right = 2213.5999
+offset_bottom = 1239.0
+texture = ExtResource("1")
+expand_mode = 1
