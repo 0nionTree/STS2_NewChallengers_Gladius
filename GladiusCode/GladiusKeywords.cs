@@ -24,4 +24,12 @@ public static class GladiusKeywords
 	[CustomEnum("Durability")]
 	[KeywordProperties(AutoKeywordPosition.None, true)]
 	public static CardKeyword Durability;
+	
+	[CustomEnum("Screening")]
+	[KeywordProperties(AutoKeywordPosition.None, true)]
+	public static CardKeyword Screening;
+	
+	[CustomEnum("Fall")]
+	[KeywordProperties(AutoKeywordPosition.None, true)]
+	public static CardKeyword Fall;
 }

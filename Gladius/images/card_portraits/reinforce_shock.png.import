@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dunvbxf746ieu"
-path="res://.godot/imported/rainforce_shock.png-3fc6985858b00be2ebf538f80963b92a.ctex"
+uid="uid://duo6h8u1imwyu"
+path="res://.godot/imported/reinforce_shock.png-f910bb6543fff6992f17512bce5d4611.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Gladius/images/card_portraits/rainforce_shock.png"
-dest_files=["res://.godot/imported/rainforce_shock.png-3fc6985858b00be2ebf538f80963b92a.ctex"]
+source_file="res://Gladius/images/card_portraits/reinforce_shock.png"
+dest_files=["res://.godot/imported/reinforce_shock.png-f910bb6543fff6992f17512bce5d4611.ctex"]
 
 [params]
 

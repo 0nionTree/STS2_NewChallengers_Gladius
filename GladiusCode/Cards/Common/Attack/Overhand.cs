@@ -6,8 +6,6 @@ using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
-using MegaCrit.Sts2.Core.CardSelection;
-using MegaCrit.Sts2.Core.Models;
 
 namespace Gladius;
 
@@ -16,7 +14,9 @@ public class Overhand() : GladiusCard(1, CardType.Attack, CardRarity.Common, Tar
 {
     // 내려치기
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(9m, DamageProps.card), new CardsVar(1)];
+        [new DamageVar(9m, DamageProps.card),
+        new IntVar("Screening", 1),
+        new CardsVar(1)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -26,21 +26,8 @@ public class Overhand() : GladiusCard(1, CardType.Attack, CardRarity.Common, Tar
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        // 뽑을 카드 더미의 n장 선택
-        List<CardModel> selection = (await CardSelectCmd.FromCombatPile(
-            choiceContext, 
-            PileType.Draw.GetPile(Owner), 
-            Owner, 
-            new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 1)
-        )).ToList();
-        // 선택된 카드가 있다면, 반복문을 통해 하나씩 버리기
-        if (selection != null && selection.Count > 0)
-        {
-            foreach (CardModel item in selection)
-            {
-                await CardCmd.Discard(choiceContext, item);
-            }
-        }
+        // 선별
+        await Screening(choiceContext, DynamicVars["Screening"].IntValue);
         // 카드 뽑기
 		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
     }

@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
@@ -84,6 +85,9 @@ public abstract class GladiusCard(
     }
 
     public virtual async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard){}
+    
+    // cardModel은 버리기를 실행시킨 카드
+    public virtual async Task Fall(PlayerChoiceContext choiceContext, CardModel cardModel){}
 
     /// <summary>
     /// 연성 : 소재(Material) 키워드가 존재하는 카드를 선택하여 지정된 연성물(Artifact) 카드로 변환(Transform) 시킨다.
@@ -173,6 +177,32 @@ public abstract class GladiusCard(
             TalkCmd.Play(locString, Owner.Creature, VfxColor.White);
         }
         
+        return null;
+    }
+
+    public async Task<IEnumerable<CardModel>?> Screening(PlayerChoiceContext choiceContext, int num)
+    {
+        IEnumerable<CardModel> cardOptions = PileType.Draw.GetPile(Owner).Cards.ToList()
+            .StableShuffle(Owner.RunState.Rng.CombatCardSelection).Take(num * 2);
+        // 뽑을 카드 더미의 무작위 선별*2장 제시, 절반까지 선택
+		List<CardModel> selection = (await CardSelectCmd.FromCombatPile(choiceContext,
+            PileType.Draw.GetPile(Owner), Owner, new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 0, num),
+            (CardModel c) => cardOptions.Contains(c))).ToList();
+        // 선택된 카드가 있다면, 반복문을 통해 하나씩 버리기
+        if (selection != null && selection.Count > 0)
+        {
+            foreach (CardModel item in selection)
+            {
+                // 해당 카드가 추락 키워드를 보유하고 있다면 해당 효과 발동
+                if (item is GladiusCard gladiusCard && gladiusCard.Keywords.Contains(GladiusKeywords.Fall))
+                {
+                    await gladiusCard.Fall(choiceContext, this);
+                }
+                // 버린 카드 더미로 이동(Discard()함수를 사용하지 않아 '교활' 키워드 미발동)
+                await CardPileCmd.Add(item, PileType.Discard, CardPilePosition.Top);
+            }
+            return selection;
+        }
         return null;
     }
 }
