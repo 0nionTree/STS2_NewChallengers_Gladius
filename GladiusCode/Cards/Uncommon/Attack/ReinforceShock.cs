@@ -16,7 +16,7 @@ using MegaCrit.Sts2.Core.Nodes.Vfx;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class RainforceShock() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+public class ReinforceShock() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     // 충격요법
     public override bool IsRequiredDurable => true;

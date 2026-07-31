@@ -22,7 +22,7 @@ point_count = 5
 offsets = PackedFloat32Array(0.261231, 0.647255, 0.821549)
 colors = PackedColorArray(0, 0, 0, 0, 0.47292382, 0.4273071, 1.92523e-07, 0.305882, 0.6635503, 0.57344854, 0, 1)
 
-[node name="CardTrailTheCursed" type="Node2D"]
+[node name="CardTrailGladius" type="Node2D"]
 show_behind_parent = true
 script = ExtResource("1")
 

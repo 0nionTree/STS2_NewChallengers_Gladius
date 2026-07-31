@@ -83,8 +83,8 @@
     "GLADIUS-FILL_UP.title": "Fill Up",
     "GLADIUS-CROSS_CUTTING.description": "Deal {Damage:diff()} damage {HitCount:diff()} {HitCount:plural:time|times}.\n[gold]Sly[/gold]: increase this card's\ndamage by {Increase:diff()} this combat\nand put it on bottom of your\n[gold]Draw Pile[/gold].",
     "GLADIUS-CROSS_CUTTING.title": "Cross Cutting",
-    "GLADIUS-RAINFORCE_SHOCK.description": "Deal {Damage:diff()} damage.\nIncrease [gold]Durability[/gold] of an [gold]Durable[/gold] card in your [gold]Hand[/gold] by {Durability:diff()}.",
-    "GLADIUS-RAINFORCE_SHOCK.title": "Rainforce Shock",
+    "GLADIUS-REINFORCE_SHOCK.description": "Deal {Damage:diff()} damage.\nIncrease [gold]Durability[/gold] of an [gold]Durable[/gold] card in your [gold]Hand[/gold] by {Durability:diff()}.",
+    "GLADIUS-REINFORCE_SHOCK.title": "Reinforce Shock",
     "GLADIUS-ALCHEMIC_BURST.description": "Deal {CalculatedDamage:diff()} damage.\nDeals {ExtraDamage:inverseDiff()} additional damage for each [gold]Artifact[/gold] card in your [gold]Hand[/gold].",
     "GLADIUS-ALCHEMIC_BURST.title": "Alchemic Burst",
     "GLADIUS-LIGHTNING_BLOW.description": "Deal {Damage:diff()} damage.\nChoose a card in your [gold]Hand[/gold] to [gold]Transform[/gold] into [gold]{IfUpgraded:show:Thunderstruck Wood+|Thunderstruck Wood}[/gold].",
@@ -176,7 +176,7 @@
     "GLADIUS-KEYBOARD.selectionScreenPrompt": "Choose up to {Cards:diff()} cards to [gold]Discard[/gold].",
     "GLADIUS-KEYBOARD.title": "Keyboard",
     "GLADIUS-STORM_EARTH_AND_FIRE.description": "Add a [gold]{IfUpgraded:show:Wind Stone+|Wind Stone}[/gold], [gold]{IfUpgraded:show:Diamond+|Diamond}[/gold], and [gold]{IfUpgraded:show:Dragon Orb+|Dragon Orb}[/gold] into your [gold]Hand[/gold]. They cost 0 until played.",
-    "GLADIUS-STORM_EARTH_AND_FIRE.title": "Storm, Eerth and Fire",
+    "GLADIUS-STORM_EARTH_AND_FIRE.title": "Storm, Earth and Fire",
     "GLADIUS-FAMILIAR.description": "[gold]Alchemy[/gold] {Cards:diff()} non-[gold]Durable[/gold] {Cards:plural:card|cards} in your [gold]Hand[/gold] into [gold]Artifact[/gold] cards with {Durability:diff()} [gold]Durability[/gold].",
     "GLADIUS-FAMILIAR.selectionScreenPrompt": "Choose {Amount} {Amount:plural:card|cards} to add [gold]Artifact[/gold] and [gold]Durability[/gold].",
     "GLADIUS-FAMILIAR.title": "Familiar",
@@ -242,7 +242,7 @@
     "GLADIUS-RITUAL_PLUMB.description": "Deal {Damage:diff()} damage.\nIf [gold]Durability[/gold] is 1, deal double damage.",
     "GLADIUS-RITUAL_PLUMB.title": "Ritual Plumb",
     "GLADIUS-DRAGON_CLAW.description": "Deal {CalculatedDamage:diff()} damage twice.\nDeals {ExtraDamage:diff()} additional damage for each [gold]Dragon Aura[/gold] you have.",
-    "GLADIUS-DRAGON_CLAW.title": "DragonClaw",
+    "GLADIUS-DRAGON_CLAW.title": "Dragon Claw",
     "GLADIUS-VORTEX_SPEAR.description": "Deal {Damage:diff()} damage.\nWhenever you play another [gold]Durable[/gold] card, increase this card's damage by {Increase:diff()}",
     "GLADIUS-VORTEX_SPEAR.title": "Vortex Spear",
     "GLADIUS-SERRATED_DAGGER.description": "Deal {Damage:diff()} damage for each Durability on this card.{InCombat:\n(Hits {CurrentRepeat:diff()} {CurrentRepeat:plural:time|times})|}",
@@ -250,6 +250,6 @@
     "GLADIUS-PURIFYING_LANTERN.description": "Deal {Damage:diff()} damage.\nApply {VulnerablePower:diff()} [gold]Vulnerable[/gold].",
     "GLADIUS-PURIFYING_LANTERN.title": "Purifying Lantern",
 
-    "GLADIUS-TEST_ARTIFACT.description": "noting",
+    "GLADIUS-TEST_ARTIFACT.description": "nothing",
     "GLADIUS-TEST_ARTIFACT.title": "TestArtifact"
 }
