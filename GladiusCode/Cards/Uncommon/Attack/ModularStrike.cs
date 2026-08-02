@@ -16,9 +16,9 @@ using Gladius.GladiusCode;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class PreciseStrike() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+public class ModularStrike() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
-    // 정확한 타격
+    // 조립식 타격
     private bool _AlchemyComplet = false;
 
     protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };

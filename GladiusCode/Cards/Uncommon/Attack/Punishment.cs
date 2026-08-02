@@ -19,7 +19,7 @@ public class Punishment() : GladiusCard(0, CardType.Attack, CardRarity.Uncommon,
     // 응징
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new CalculationBaseVar(4m),
-        new ExtraDamageVar(3m),
+        new ExtraDamageVar(4m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) => 
             CombatManager.Instance.History.CardPlaysFinished.Count((CardPlayFinishedEntry e) => 
             e.HappenedThisTurn(card.CombatState) && 

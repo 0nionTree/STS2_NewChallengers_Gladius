@@ -33,7 +33,7 @@ public class MidasTouchPower : GladiusPower
 
         if (CombatState != null)
         {
-            await AlchemyEventDispatcher.DispatchAlchemyTriggered(CombatState, card, null, Owner.Player, choiceContext, false);
+            await GladiusEventDispatcher.DispatchAlchemyTriggered(CombatState, card, null, Owner.Player, choiceContext, false);
         }
 
 		return;

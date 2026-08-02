@@ -1,6 +1,7 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using Gladius.GladiusCode.Extensions;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -42,5 +43,15 @@ public abstract class GladiusPower : CustomPowerModel
     public virtual Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator, PlayerChoiceContext choiceContext, bool isFirstThisTurn)
     {
         return Task.CompletedTask; 
+    }
+    // 선별 실행 시 카드 선택 완료 직후 자동으로 실행되는 함수
+    public virtual Task OnScreeningPerformed(IEnumerable<CardModel>? remain, IEnumerable<CardModel>? falls, Player owner, PlayerChoiceContext choiceContext)
+    {
+        return Task.CompletedTask;
+    }
+    // 선별 실행 시 카드 파일 이동 이후 자동으로 실행되는 함수
+    public virtual Task OnScreenedCardsMoved(CardModel cardModel, bool isRemain, Player owner, PlayerChoiceContext choiceContext)
+    {
+        return Task.CompletedTask;
     }
 }

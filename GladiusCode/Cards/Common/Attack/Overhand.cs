@@ -6,6 +6,8 @@ using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.HoverTips;
+using Gladius.GladiusCode;
 
 namespace Gladius;
 
@@ -14,9 +16,12 @@ public class Overhand() : GladiusCard(1, CardType.Attack, CardRarity.Common, Tar
 {
     // 내려치기
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(9m, DamageProps.card),
+        [new DamageVar(8m, DamageProps.card),
         new IntVar("Screening", 1),
         new CardsVar(1)];
+        
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Screening)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -27,14 +32,14 @@ public class Overhand() : GladiusCard(1, CardType.Attack, CardRarity.Common, Tar
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         // 선별
-        await Screening(choiceContext, DynamicVars["Screening"].IntValue);
+        await ScreeningManager.Screening(CombatState, choiceContext, Owner, DynamicVars["Screening"].IntValue);
         // 카드 뽑기
 		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(3m);
-        DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars["Screening"].UpgradeValueBy(1);
     }
 }

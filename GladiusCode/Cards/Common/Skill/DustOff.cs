@@ -6,6 +6,8 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.HoverTips;
+using Gladius.GladiusCode;
 
 namespace Gladius;
 
@@ -16,13 +18,16 @@ public class DustOff() : GladiusCard(1, CardType.Skill, CardRarity.Common, Targe
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new BlockVar(7m, BlockProps.card),
         new IntVar("Screening", 1)];
+        
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Screening)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 방어도 획득
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
         // 선별
-        await Screening(choiceContext, DynamicVars["Screening"].IntValue);
+        await ScreeningManager.Screening(CombatState, choiceContext, Owner, DynamicVars["Screening"].IntValue);
     }
 
     protected override void OnUpgrade()

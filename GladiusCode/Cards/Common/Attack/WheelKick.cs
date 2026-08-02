@@ -29,6 +29,6 @@ public class WheelKick() : GladiusCard(1, CardType.Attack, CardRarity.Common, Ta
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(3m);
+        DynamicVars.Damage.UpgradeValueBy(4m);
     }
 }

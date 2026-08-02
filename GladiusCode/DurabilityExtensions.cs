@@ -158,7 +158,7 @@ public static class DurabilityExtensions
         // 연성 훅 보내기
         if (combatState != null)
         {
-            await AlchemyEventDispatcher.DispatchAlchemyTriggered(combatState, targetCard, null, creater, choiceContext, isFirstAlchemyThisTurn);
+            await GladiusEventDispatcher.DispatchAlchemyTriggered(combatState, targetCard, null, creater, choiceContext, isFirstAlchemyThisTurn);
         }
     } 
 }

@@ -17,10 +17,11 @@ public class Uppercut() : GladiusCard(2, CardType.Attack, CardRarity.Common, Tar
 {
     // 올려치기
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(12m, DamageProps.card)];
+        [new DamageVar(16m, DamageProps.card),
+        new CardsVar(2)];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(CardKeyword.Retain)];
+    //protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    //    [];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -31,18 +32,17 @@ public class Uppercut() : GladiusCard(2, CardType.Attack, CardRarity.Common, Tar
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         // 버린 카드 더미의 카드 선택
-        CardModel? cardModel = (await CardSelectCmd.FromCombatPile(prefs: new CardSelectorPrefs(SelectionScreenPrompt, 1), context: choiceContext, pile: PileType.Discard.GetPile(Owner), player: Owner)).FirstOrDefault();
-		if (cardModel != null)
+        IEnumerable<CardModel>? cards = await CardSelectCmd.FromCombatPile(prefs: new CardSelectorPrefs(SelectionScreenPrompt, 0, DynamicVars.Cards.IntValue), context: choiceContext, pile: PileType.Discard.GetPile(Owner), player: Owner);
+		if (cards != null && cards.Any())
 		{
-            // 선택한 카드에 이번 턴 보존 추가
-            cardModel.GiveSingleTurnRetain();
-            // 선택한 카드 손에 넣기
-			await CardPileCmd.Add(cardModel, PileType.Hand);
+            foreach (CardModel card in cards)
+                // 선택한 카드를 차례로 뽑을 카드 더미 아래로 이동
+			    await CardPileCmd.Add(card, PileType.Draw, CardPilePosition.Bottom);
 		}
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(4m);
+        DynamicVars.Damage.UpgradeValueBy(6m);
     }
 }

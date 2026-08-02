@@ -20,7 +20,7 @@ public class CrossCutting() : GladiusCard(1, CardType.Attack, CardRarity.Uncommo
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(6m, DamageProps.card),
-		new DynamicVar("Increase", 3m),
+		new DynamicVar("Increase", 2m),
         new IntVar("HitCount", 2)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -43,24 +43,19 @@ public class CrossCutting() : GladiusCard(1, CardType.Attack, CardRarity.Uncommo
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 대상 확인 후 단일 공격
+        // 대상 확인
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+        // 피해량만큼 HitCount회 공격
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(2).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-    }
-
-    public override async Task AfterCardDiscarded(PlayerChoiceContext choiceContext, CardModel card)
-    {
-        if (card != this)
-		    return;
-        
-        await CardPileCmd.Add(this, PileType.Draw, CardPilePosition.Bottom);
-
+            
+        // 피해량 증가
 		DynamicVars.Damage.BaseValue += DynamicVars["Increase"].BaseValue;
 		ExtraDamageFromPlays += DynamicVars["Increase"].BaseValue;
-
-        return;
+    
+        // 뽑을 카드 더미 아래로 이동
+        await CardPileCmd.Add(this, PileType.Draw, CardPilePosition.Bottom);
     }
 
     protected override void AfterDowngraded()
@@ -71,7 +66,6 @@ public class CrossCutting() : GladiusCard(1, CardType.Attack, CardRarity.Uncommo
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
         DynamicVars["Increase"].UpgradeValueBy(2m);
     }
 }
