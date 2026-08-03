@@ -17,7 +17,7 @@ public class DuelingStance() : GladiusCard(1, CardType.Skill, CardRarity.Common,
 {
     // 털어내기
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(7m, BlockProps.card),
+        [new BlockVar(6m, BlockProps.card),
         new PowerVar<DragonAuraPower>(1)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -33,7 +33,7 @@ public class DuelingStance() : GladiusCard(1, CardType.Skill, CardRarity.Common,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(3m);
+        DynamicVars.Block.UpgradeValueBy(1m);
         DynamicVars["DragonAuraPower"].UpgradeValueBy(1m);
     }
 }

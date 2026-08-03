@@ -23,10 +23,11 @@ namespace Gladius
 
     public static class ScreeningManager
     {
-        public static async Task Screening(ICombatState? combatState, PlayerChoiceContext choiceContext, Player owner, int num)
+        public static async Task<(IEnumerable<CardModel>? remains, IEnumerable<CardModel>? falls)> Screening(ICombatState? combatState, PlayerChoiceContext choiceContext, Player owner, int num)
         {
             // 전투 중이 아니라면 종료
-            if (combatState == null) return;
+            if (combatState == null)
+                return (Enumerable.Empty<CardModel>(), Enumerable.Empty<CardModel>());
 
             IEnumerable<CardModel>? remains = null;
             IEnumerable<CardModel>? falls = null;
@@ -82,7 +83,7 @@ namespace Gladius
                 foreach (CardModel item in remains)
                 {
                     // 뽑을 카드 더미 위로 이동
-                    await CardPileCmd.Add(item, PileType.Draw, CardPilePosition.Top);
+                    await CardPileCmd.Add(item, PileType.Draw, CardPilePosition.Top, null, true);
                     // 잔류 카드로서 훅 송신
                     await GladiusEventDispatcher.DispatchScreenedCardsMoved(combatState, item, true, owner, choiceContext);
                 }
@@ -99,7 +100,7 @@ namespace Gladius
                     await GladiusEventDispatcher.DispatchScreenedCardsMoved(combatState, item, false, owner, choiceContext);
                 }
             }
-            return;
+        return (remains ?? null, falls ?? null);
         }
     }
 }

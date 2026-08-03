@@ -18,8 +18,6 @@ namespace Gladius;
 public class Guideline() : GladiusCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     // 길잡이
-    public override bool IsRequiredDurable => true;
-
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new IntVar("Screening", 1),
         /*new CardsVar(1)*/];

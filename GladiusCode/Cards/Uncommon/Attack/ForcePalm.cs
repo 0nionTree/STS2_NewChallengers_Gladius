@@ -21,23 +21,12 @@ public class ForcePalm() : GladiusCard(0, CardType.Attack, CardRarity.Uncommon, 
 	protected override bool HasEnergyCostX => true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new CalculationBaseVar(2m),
-        new ExtraDamageVar(8m),
-        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) =>
-            {
-                int value = card.Owner.PlayerCombatState!.Energy;
-                bool hasChemicalX = card.Owner.Relics.OfType<ChemicalX>().Any();
-                int finalValue = value + (hasChemicalX?2:0);
-                return finalValue;
-            }
-        ),
-        new DamageVar(0m, DamageProps.card)
-        ];
+        [new DamageVar(10m, DamageProps.card)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 소모된 X에 비례하여 대미지 재계산
-        DynamicVars.Damage.BaseValue = DynamicVars.ExtraDamage.IntValue * ResolveEnergyXValue();
+        DynamicVars.Damage.BaseValue *= ResolveEnergyXValue();
         // 대상 확인 후 단일 공격
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
@@ -47,7 +36,6 @@ public class ForcePalm() : GladiusCard(0, CardType.Attack, CardRarity.Uncommon, 
 
     protected override void OnUpgrade()
     {
-        DynamicVars.CalculationBase.UpgradeValueBy(2m);
-        DynamicVars.ExtraDamage.UpgradeValueBy(2m);
+        DynamicVars.Damage.UpgradeValueBy(2m);
     }
 }

@@ -21,7 +21,7 @@ public class BattleDrum() : GladiusCard(1, CardType.Attack, CardRarity.Rare, Tar
     public override bool IsRequiredMaterial => true;
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(5m, DamageProps.card)];
+        [new DamageVar(6m, DamageProps.card)];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<RitualPlumb>(IsUpgraded), 

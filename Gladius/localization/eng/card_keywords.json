@@ -11,6 +11,8 @@
     "GLADIUS-DURABILITY.title": "Durable",
     "GLADIUS-SCREENING.description": "Choose up to half of the cards equal to twice your [gold]Screening[/gold] from your [gold]Draw Pile[/gold] and discard them.",
     "GLADIUS-SCREENING.title": "Screening",
-    "GLADIUS-FALL.description": "If this card is discarded from your [gold]Draw Pile[/gold], execute this effect.",
+    "GLADIUS-REMAIN.description": "Kept on top of your [gold]Draw Pile[/gold] during [gold]Screening[/gold].",
+    "GLADIUS-REMAIN.title": "Remain",
+    "GLADIUS-FALL.description": "Discarded during [gold]Screening[/gold]",
     "GLADIUS-FALL.title": "Fall"
 }

@@ -10,20 +10,19 @@ using MegaCrit.Sts2.Core.Models;
 using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using Gladius.GladiusCode.History;
 
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class AlchemicBurst() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+public class DragonTornado() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
-    // 연성 파열
+    // 용의 회오리
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new CalculationBaseVar(8m),
-        new ExtraDamageVar(4m),
-        new CalculatedDamageVar(ValueProp.Move).WithMultiplier(delegate(CardModel card, Creature? _)
-		{
-			return PileType.Hand.GetPile(card.Owner).Cards.Count(c => c.Keywords.Contains(GladiusKeywords.Artifact));
-		})
+        [new CalculationBaseVar(6m),
+        new ExtraDamageVar(2m),
+        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) =>
+        DragonAuraHistory.GetDragonAuraConsumedAmountThisCombat(card.Owner))
         ];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -40,7 +39,6 @@ public class AlchemicBurst() : GladiusCard(1, CardType.Attack, CardRarity.Uncomm
 
     protected override void OnUpgrade()
     {
-        DynamicVars.CalculationBase.UpgradeValueBy(2m);
-        DynamicVars.ExtraDamage.UpgradeValueBy(2m);
+        DynamicVars.ExtraDamage.UpgradeValueBy(1m);
     }
 }

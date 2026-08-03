@@ -7,6 +7,7 @@ using Gladius.GladiusCode.Character;
 using MegaCrit.Sts2.Core.HoverTips;
 using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Entities.Players;
 
 namespace Gladius;
 
@@ -17,10 +18,12 @@ public class IngotMaking() : GladiusCard(1, CardType.Skill, CardRarity.Common, T
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Material),
         HoverTipFactory.FromCard<Steel>(IsUpgraded),
-        HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
+        HoverTipFactory.FromKeyword(GladiusKeywords.Durability),
+        HoverTipFactory.FromKeyword(GladiusKeywords.Remain),
+        HoverTipFactory.FromKeyword(GladiusKeywords.Fall)];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords =>
-        [CardKeyword.Sly];
+    //public override IEnumerable<CardKeyword> CanonicalKeywords =>
+    //    [];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -33,6 +36,15 @@ public class IngotMaking() : GladiusCard(1, CardType.Skill, CardRarity.Common, T
         // 생성한 카드 손으로 가져오기
         await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, Owner);
 		await Cmd.Wait(0.2f);
+    }
+
+    // 선별 실행 시 카드 파일 이동 이후 자동으로 실행되는 함수
+    public override async Task OnScreenedCardsMoved(CardModel cardModel, bool isRemain, Player owner, PlayerChoiceContext choiceContext)
+    {
+        if (cardModel == this && owner == Owner)
+        {
+            await CardCmd.AutoPlay(choiceContext, this, null);
+        }
     }
 
     protected override void OnUpgrade()

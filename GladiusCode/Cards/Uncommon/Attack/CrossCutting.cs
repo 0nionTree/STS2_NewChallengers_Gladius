@@ -23,8 +23,8 @@ public class CrossCutting() : GladiusCard(1, CardType.Attack, CardRarity.Uncommo
 		new DynamicVar("Increase", 2m),
         new IntVar("HitCount", 2)];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(CardKeyword.Sly)];
+    //protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    //    [];
 
     //public override IEnumerable<CardKeyword> CanonicalKeywords => [];
 

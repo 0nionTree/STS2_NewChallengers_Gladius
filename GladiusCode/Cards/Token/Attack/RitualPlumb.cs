@@ -21,7 +21,7 @@ public class RitualPlumb() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
     public override int BaseDurability => 2;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(10m, DamageProps.card)];
+        [new DamageVar(12m, DamageProps.card)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[GladiusKeywords.Artifact,

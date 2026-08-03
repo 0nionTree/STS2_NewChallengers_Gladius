@@ -29,6 +29,10 @@ public static class GladiusKeywords
 	[KeywordProperties(AutoKeywordPosition.None, true)]
 	public static CardKeyword Screening;
 	
+	[CustomEnum("Remain")]
+	[KeywordProperties(AutoKeywordPosition.None, true)]
+	public static CardKeyword Remain;
+	
 	[CustomEnum("Fall")]
 	[KeywordProperties(AutoKeywordPosition.None, true)]
 	public static CardKeyword Fall;

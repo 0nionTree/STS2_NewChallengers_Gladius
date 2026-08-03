@@ -5,10 +5,9 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
+using Gladius.GladiusCode;
 
 namespace Gladius;
 
@@ -17,30 +16,30 @@ public class Consecrate() : GladiusCard(2, CardType.Skill, CardRarity.Uncommon, 
 {
     // 축성
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-        [new BlockVar(7, ValueProp.Move),
-        new CardsVar(1)];
+        [new CardsVar(2)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<DragonOrb>(),
+        HoverTipFactory.FromKeyword(GladiusKeywords.Material),
         HoverTipFactory.FromPower<DragonAuraPower>()];
     
-    public override IEnumerable<CardKeyword> CanonicalKeywords =>
-        [CardKeyword.Sly];
+    //public override IEnumerable<CardKeyword> CanonicalKeywords =>
+    //    [];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 방어도 획득
-        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-
         // 용옥 생성
-        CardModel cardModel = CombatState!.CreateCard<DragonOrb>(Owner);
-        if (IsUpgraded) // 강화된 상태라면 생성한 카드 강화
+        for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
         {
-            CardCmd.Upgrade(cardModel);
+            CardModel cardModel = CombatState!.CreateCard<DragonOrb>(Owner);
+            if (IsUpgraded) // 강화된 상태라면 생성한 카드 강화
+            {
+                CardCmd.Upgrade(cardModel);
+            }
+            // 생성한 카드 손으로 가져오기
+            await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, Owner);
+            await Cmd.Wait(0.2f);
         }
-        // 생성한 카드 손으로 가져오기
-        await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, Owner);
-		await Cmd.Wait(0.2f);
     }
 
     // protected override void OnUpgrade()

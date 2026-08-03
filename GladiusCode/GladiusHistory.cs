@@ -121,4 +121,152 @@ namespace Gladius.GladiusCode.History
             _alchemiesThisTurn = 0;
         }
     }
+
+    // 선별 기록
+    public static class ScreeningHistory
+    {
+        private static int _lastScreeningTurnNumber = -1;
+        private static PlayerCombatState? _lastScreeningPlayerCombat = null;
+
+        private static int _screeningsThisTurn = 0;
+        private static int _screeningsThisCombat = 0;
+        private static int _screenedRemainsThisTurn = 0;
+        private static int _screenedRemainsThisCombat = 0;
+
+        /// <summary>
+        /// 선별(Screening) 실행 시 기록을 업데이트합니다.
+        /// </summary>
+        public static void RecordScreening(Player player, int remainsCount = 0)
+        {
+            if (player?.PlayerCombatState == null) return;
+
+            int currentTurn = player.PlayerCombatState.TurnNumber;
+            PlayerCombatState playerCombatState = player.PlayerCombatState;
+
+            // 턴이 바뀌면 턴 카운터 초기화
+            if (currentTurn != _lastScreeningTurnNumber)
+            {
+                _lastScreeningTurnNumber = currentTurn;
+                _screeningsThisTurn = 0;
+                _screenedRemainsThisTurn = 0;
+            }
+
+            // 전투가 바뀌면 전투 카운터 초기화
+            if (_lastScreeningPlayerCombat == null || _lastScreeningPlayerCombat != playerCombatState)
+            {
+                _lastScreeningPlayerCombat = playerCombatState;
+                _screeningsThisCombat = 0;
+                _screenedRemainsThisCombat = 0;
+            }
+
+            _screeningsThisTurn++;
+            _screeningsThisCombat++;
+            _screenedRemainsThisTurn += remainsCount;
+            _screenedRemainsThisCombat += remainsCount;
+        }
+
+        public static int GetScreeningsThisTurn(Player player)
+        {
+            if (player?.PlayerCombatState == null) return 0;
+            if (player.PlayerCombatState.TurnNumber != _lastScreeningTurnNumber) return 0;
+            return _screeningsThisTurn;
+        }
+
+        public static int GetScreeningsThisCombat(Player player)
+        {
+            if (player?.PlayerCombatState == null) return 0;
+            if (_lastScreeningPlayerCombat != player.PlayerCombatState) return 0;
+            return _screeningsThisCombat;
+        }
+
+        public static int GetScreenedRemainsThisTurn(Player player)
+        {
+            if (player?.PlayerCombatState == null) return 0;
+            if (player.PlayerCombatState.TurnNumber != _lastScreeningTurnNumber) return 0;
+            return _screenedRemainsThisTurn;
+        }
+
+        public static int GetScreenedRemainsThisCombat(Player player)
+        {
+            if (player?.PlayerCombatState == null) return 0;
+            if (_lastScreeningPlayerCombat != player.PlayerCombatState) return 0;
+            return _screenedRemainsThisCombat;
+        }
+    }
+    // 용기 소모 기록
+    public static class DragonAuraHistory
+    {
+        private static int _lastAuraConsumeTurnNumber = -1;
+        private static PlayerCombatState? _lastAuraConsumePlayerCombat = null;
+
+        // 용기 소모 횟수
+        private static int _auraConsumesThisTurn = 0;
+        private static int _auraConsumesThisCombat = 0;
+        // 용기 소모량
+        private static int _auraConsumedAmountThisTurn = 0;
+        private static int _auraConsumedAmountThisCombat = 0;
+
+        /// <summary>
+        /// Dragon Aura의 Amount가 소모된 횟수와 총량 기록
+        /// </summary>
+        public static void RecordDragonAuraConsumed(Player player, int consumedAmount)
+        {
+            if (player?.PlayerCombatState == null) return;
+
+            int currentTurn = player.PlayerCombatState.TurnNumber;
+            PlayerCombatState playerCombatState = player.PlayerCombatState;
+
+            // 마지막으로 기록한 턴과 현재 턴이 다르면 기록 초기화
+            if (currentTurn != _lastAuraConsumeTurnNumber)
+            {
+                _lastAuraConsumeTurnNumber = currentTurn;
+                _auraConsumesThisTurn = 0;
+                _auraConsumedAmountThisTurn = 0;
+            }
+
+            // 마지막으로 기록한 전투와 현재 전투가 다르면 기록 초기화
+            if (_lastAuraConsumePlayerCombat == null || _lastAuraConsumePlayerCombat != playerCombatState)
+            {
+                _lastAuraConsumePlayerCombat = playerCombatState;
+                _auraConsumesThisCombat = 0;
+                _auraConsumedAmountThisCombat = 0;
+            }
+
+            // 소모 횟수 누적
+            _auraConsumesThisTurn++;
+            _auraConsumesThisCombat++;
+            // 소모량 누적
+            _auraConsumedAmountThisTurn += consumedAmount;
+            _auraConsumedAmountThisCombat += consumedAmount;
+        }
+
+        // 이번 턴 용기 소모 횟수 반환
+        public static int GetDragonAuraConsumesThisTurn(Player player)
+        {
+            if (player?.PlayerCombatState == null) return 0;
+            if (player.PlayerCombatState.TurnNumber != _lastAuraConsumeTurnNumber) return 0;
+            return _auraConsumesThisTurn;
+        }
+        // 이번 전투 용기 소모 횟수 반환
+        public static int GetDragonAuraConsumesThisCombat(Player player)
+        {
+            if (player?.PlayerCombatState == null) return 0;
+            if (_lastAuraConsumePlayerCombat != player.PlayerCombatState) return 0;
+            return _auraConsumesThisCombat;
+        }
+        // 이번 턴 용기 소모량 반환
+        public static int GetDragonAuraConsumedAmountThisTurn(Player player)
+        {
+            if (player?.PlayerCombatState == null) return 0;
+            if (player.PlayerCombatState.TurnNumber != _lastAuraConsumeTurnNumber) return 0;
+            return _auraConsumedAmountThisTurn;
+        }
+        // 이번 전투 용기 소모량 반환
+        public static int GetDragonAuraConsumedAmountThisCombat(Player player)
+        {
+            if (player?.PlayerCombatState == null) return 0;
+            if (_lastAuraConsumePlayerCombat != player.PlayerCombatState) return 0;
+            return _auraConsumedAmountThisCombat;
+        }
+    }
 }

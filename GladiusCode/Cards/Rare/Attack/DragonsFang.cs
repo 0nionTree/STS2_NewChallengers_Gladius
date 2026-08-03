@@ -15,7 +15,7 @@ public class DragonsFang() : GladiusCard(0, CardType.Attack, CardRarity.Rare, Ta
 {
     // 용의 이빨
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(12m, DamageProps.card),
+        [new DamageVar(9m, DamageProps.card),
         new PowerVar<DragonAuraPower>(2),
         new CardsVar(1)];
 

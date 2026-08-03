@@ -70,7 +70,7 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<FillUp>(),
             ModelDb.Card<CrossCutting>(),
             ModelDb.Card<ReinforceShock>(),
-            ModelDb.Card<AlchemicBurst>(),
+            ModelDb.Card<DragonTornado>(),
             ModelDb.Card<LightningBlow>(),
             ModelDb.Card<ShoulderTackle>(),
             ModelDb.Card<ModularStrike>(),

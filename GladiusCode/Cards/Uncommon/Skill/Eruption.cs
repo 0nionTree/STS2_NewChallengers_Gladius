@@ -23,7 +23,7 @@ public class Eruption() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, Ta
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 용기 분출 획득
-		await PowerCmd.Apply<EruptionPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
+		await PowerCmd.Apply<EruptionPower>(choiceContext, Owner.Creature, DynamicVars["DragonAuraPower"].IntValue, Owner.Creature, this);
         // 용기 획득
 		await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, DynamicVars["DragonAuraPower"].IntValue, Owner.Creature, this);
     }

@@ -26,7 +26,7 @@ public class Condensation() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon
     {
         // 다음 턴 카드 버리기
 		await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-		await PowerCmd.Apply<DiscardDrawPileNextTurnPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+		await PowerCmd.Apply<ScreeningNextTurnPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -40,6 +40,6 @@ public class Overhand() : GladiusCard(1, CardType.Attack, CardRarity.Common, Tar
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2m);
-        DynamicVars["Screening"].UpgradeValueBy(1);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

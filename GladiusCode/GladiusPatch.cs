@@ -244,12 +244,23 @@ namespace Gladius.GladiusCode.Patches
                 {
                     // 보호 횟수가 없다면 내구도를 실시간으로 1 차감합니다.
                     durabilityData.CurrentDurability = Math.Max(0, durabilityData.CurrentDurability - 1);
-                    durabilityData.WasDurability = durabilityData.CurrentDurability;
                 }
             }
 
             // 내구도가 충분하거나 내구도 카드가 아니면 정상적으로 카드 효과 발동
             return true;
+        }
+    
+        [HarmonyPostfix]
+        public static void Postfix(CardModel __instance, ref Task __result)
+        {
+            var durabilityData = __instance.GetDurability();
+
+            // 내구도가 존재하는 카드라면 사용 전 내구도를 현재 내구도로 변경
+            if (durabilityData != null && durabilityData.isDurable)
+            {
+                durabilityData.WasDurability = durabilityData.CurrentDurability;
+            }
         }
     }
 

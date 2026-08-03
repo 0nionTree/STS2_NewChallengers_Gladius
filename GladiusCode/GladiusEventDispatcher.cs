@@ -8,7 +8,8 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using Gladius.GladiusCode.Powers;
 using Gladius.GladiusCode.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Entities.Cards; // IterateCombatHookListeners가 있는 네임스페이스 (경로에 맞게 수정 필요)
+using MegaCrit.Sts2.Core.Entities.Cards;
+using Gladius.GladiusCode.History; // IterateCombatHookListeners가 있는 네임스페이스 (경로에 맞게 수정 필요)
 
 namespace Gladius;
 
@@ -63,6 +64,10 @@ public static class GladiusEventDispatcher
     // 선별이 작동하면
     public static async Task DispatchScreeningPerformed(ICombatState combatState, IEnumerable<CardModel>? remains, IEnumerable<CardModel>? falls, Player owner, PlayerChoiceContext choiceContext)
     {
+        // 선별 발생 및 remain 카드 수 기록
+        int remainCount = remains?.Count() ?? 0;
+        ScreeningHistory.RecordScreening(owner, remainCount);
+        
         if (IterateHooksMethod == null) return;
         var listeners = (IEnumerable<AbstractModel>?)IterateHooksMethod.Invoke(null, new object[] { combatState });
         if (listeners == null) return;
@@ -109,6 +114,34 @@ public static class GladiusEventDispatcher
             else if (model is GladiusRelic gRelic)
             {
                 await gRelic.OnScreenedCardsMoved(cardModel, isRemain, owner, choiceContext);
+                model.InvokeExecutionFinished();
+            }
+        }
+    }
+    public static async Task DispatchConsumDragonAura(ICombatState combatState, CardModel cardModel, int amount, Player owner, PlayerChoiceContext choiceContext)
+    {
+        // 용기 소모 기록
+        DragonAuraHistory.RecordDragonAuraConsumed(owner, amount);
+
+        if (IterateHooksMethod == null) return;
+        var listeners = (IEnumerable<AbstractModel>?)IterateHooksMethod.Invoke(null, new object[] { combatState });
+        if (listeners == null) return;
+
+        foreach (var model in listeners)
+        {
+            if (model is GladiusCard gCard)
+            {
+                await gCard.OnConsumDragonAura(cardModel, amount, owner, choiceContext);
+                model.InvokeExecutionFinished();
+            }
+            else if (model is GladiusPower gPower)
+            {
+                await gPower.OnConsumDragonAura(cardModel, amount, owner, choiceContext);
+                model.InvokeExecutionFinished();
+            }
+            else if (model is GladiusRelic gRelic)
+            {
+                await gRelic.OnConsumDragonAura(cardModel, amount, owner, choiceContext);
                 model.InvokeExecutionFinished();
             }
         }

@@ -8,7 +8,6 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
-using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
@@ -90,6 +89,11 @@ public abstract class GladiusCard(
     }
     // 선별 실행 시 카드 파일 이동 이후 자동으로 실행되는 함수
     public virtual Task OnScreenedCardsMoved(CardModel cardModel, bool isRemain, Player owner, PlayerChoiceContext choiceContext)
+    {
+        return Task.CompletedTask;
+    }
+    // 공격 카드 사용이 끝나 용기가 소모되면 자동으로 실행되는 함수
+    public virtual Task OnConsumDragonAura(CardModel cardModel, int amount, Player player, PlayerChoiceContext choiceContext)
     {
         return Task.CompletedTask;
     }

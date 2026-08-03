@@ -40,4 +40,9 @@ public abstract class GladiusRelic : CustomRelicModel
     {
         return Task.CompletedTask;
     }
+    // 공격 카드 사용이 끝나 용기가 소모되면 자동으로 실행되는 함수
+    public virtual Task OnConsumDragonAura(CardModel cardModel, int amount, Player player, PlayerChoiceContext choiceContext)
+    {
+        return Task.CompletedTask;
+    }
 }
