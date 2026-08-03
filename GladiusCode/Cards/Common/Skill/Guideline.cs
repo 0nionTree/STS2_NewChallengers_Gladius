@@ -35,6 +35,6 @@ public class Guideline() : GladiusCard(0, CardType.Skill, CardRarity.Common, Tar
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars["Screening"].UpgradeValueBy(1);
     }
 }

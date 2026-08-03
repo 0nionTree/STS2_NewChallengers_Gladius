@@ -34,7 +34,8 @@ public class FallingPetals() : GladiusCard(1, CardType.Attack, CardRarity.Rare, 
 		}
 	}
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Sly];
+    //public override IEnumerable<CardKeyword> CanonicalKeywords => 
+    //    [];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

@@ -12,7 +12,7 @@ using Gladius.GladiusCode;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class Consecrate() : GladiusCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public class Consecrate() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     // 축성
     protected override IEnumerable<DynamicVar> CanonicalVars => 

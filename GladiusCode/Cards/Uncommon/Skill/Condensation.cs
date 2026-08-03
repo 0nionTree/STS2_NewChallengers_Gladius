@@ -16,7 +16,7 @@ public class Condensation() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon
 {
     // 응축
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-        [new CardsVar(2)];
+        [new IntVar("Screening", 2)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<DragonAuraPower>(),
@@ -24,13 +24,12 @@ public class Condensation() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 다음 턴 카드 버리기
-		await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-		await PowerCmd.Apply<ScreeningNextTurnPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+        // 다음 턴 카드 선별 및 용기 획득
+		await PowerCmd.Apply<ScreeningNextTurnPower>(choiceContext, Owner.Creature, DynamicVars["Screening"].IntValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars["Screening"].UpgradeValueBy(1);
     }
 }
