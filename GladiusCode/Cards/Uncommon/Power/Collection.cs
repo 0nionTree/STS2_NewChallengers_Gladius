@@ -6,18 +6,20 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using Gladius.GladiusCode;
 
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
 public class Collection() : GladiusCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    // 응축
+    // 회수
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-        [new PowerVar<CollectionPower>(2)];
+        [new PowerVar<CollectionPower>(3)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.Static(StaticHoverTip.Block)];
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Screening),
+        HoverTipFactory.FromKeyword(GladiusKeywords.Remain)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

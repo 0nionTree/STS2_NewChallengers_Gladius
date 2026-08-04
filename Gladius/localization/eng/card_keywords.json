@@ -9,7 +9,7 @@
     "GLADIUS-ALCHEMY.title": "Alchemy",
     "GLADIUS-DURABILITY.description": "return to your [gold]Hand[/gold]",
     "GLADIUS-DURABILITY.title": "Durable",
-    "GLADIUS-SCREENING.description": "Choose up to half of the cards equal to twice your [gold]Screening[/gold] from your [gold]Draw Pile[/gold] and discard them.",
+    "GLADIUS-SCREENING.description": "Look at the bottom cards of your [gold]Draw Pile[/gold] equal to twice [gold]Screening[/gold].\nChoose half of them to put on top of your [gold]Draw Pile[/gold] and discard the rest",
     "GLADIUS-SCREENING.title": "Screening",
     "GLADIUS-REMAIN.description": "Kept on top of your [gold]Draw Pile[/gold] during [gold]Screening[/gold].",
     "GLADIUS-REMAIN.title": "Remain",

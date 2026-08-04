@@ -96,7 +96,7 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<Adversity>(),
             // 고급 파워 카드
             ModelDb.Card<Collection>(),
-            ModelDb.Card<SlagExplosion>(),
+            ModelDb.Card<Saving>(),
             ModelDb.Card<Grinding>(),
             ModelDb.Card<Reactor>(),
             ModelDb.Card<DragonsProtection>(),

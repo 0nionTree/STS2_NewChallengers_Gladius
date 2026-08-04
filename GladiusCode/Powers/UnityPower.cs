@@ -1,4 +1,4 @@
-using Gladius.GladiusCode.Powers;
+/*using Gladius.GladiusCode.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -51,4 +51,4 @@ public class UnityPower : GladiusPower
             await PowerCmd.Remove(this);
         }
     }
-}
+}*/

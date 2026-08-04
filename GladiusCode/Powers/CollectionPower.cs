@@ -1,11 +1,9 @@
 using Gladius.GladiusCode.Powers;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -17,13 +15,18 @@ public class CollectionPower : GladiusPower
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    // 카드를 버린 뒤 방어도 획득
-    public override async Task AfterCardDiscarded(PlayerChoiceContext choiceContext, CardModel card)
-	{
-        if (card.Owner.Creature == Owner)
+    // 잔류한 카드마다 무작위 적에게 피해
+    public override async Task OnScreenedCardsMoved(CardModel cardModel, bool isRemain, Player owner, PlayerChoiceContext choiceContext)
+    {
+        if (owner == Owner.Player && isRemain)
         {
-			Flash();
-			await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Unpowered, null);
+			IReadOnlyList<Creature> hittableEnemies = CombatState.HittableEnemies;
+			if (hittableEnemies.Count != 0)
+			{
+				Creature? target = Owner.Player!.RunState.Rng.CombatTargets.NextItem(hittableEnemies);
+				Flash();
+				await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), target!, Amount, ValueProp.Unpowered, Owner, null);
+			}
         }
-	}
+    }
 }

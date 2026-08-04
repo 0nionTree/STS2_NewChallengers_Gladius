@@ -6,8 +6,8 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using Gladius.GladiusCode.Character;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.HoverTips;
+using Gladius.GladiusCode;
 
 namespace Gladius;
 
@@ -16,25 +16,27 @@ public class ExtremeSpeed() : GladiusCard(1, CardType.Skill, CardRarity.Rare, Ta
 {
     // 신속
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(10m, BlockProps.card),
-        new CardsVar(1)];
+        [new BlockVar(7m, BlockProps.card),
+        new IntVar("Screening", 1)];
 
-    //protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-    //    [];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Screening)];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
-        [CardKeyword.Sly];
+        [CardKeyword.Innate];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        // 방어도 획득
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        // 카드 뽑기
-		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
+        // 선별
+        await ScreeningManager.Screening(CombatState, choiceContext, Owner, DynamicVars["Screening"].IntValue);
+        // 뽑을 카드 더미 아래로 이동
+        await CardPileCmd.Add(this, PileType.Draw, CardPilePosition.Bottom);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(3m);
-        DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars.Block.UpgradeValueBy(2m);
     }
 }

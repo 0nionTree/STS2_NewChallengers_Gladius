@@ -17,7 +17,7 @@ public class EarthenRampart() : GladiusCard(2, CardType.Skill, CardRarity.Uncomm
 {
     // 대지 연성
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(12m, BlockProps.card)];
+        [new BlockVar(12m, ValueProp.Move)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Material),

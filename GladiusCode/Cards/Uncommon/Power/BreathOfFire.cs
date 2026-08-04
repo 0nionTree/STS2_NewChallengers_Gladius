@@ -30,6 +30,6 @@ public class BreathOfFire() : GladiusCard(1, CardType.Power, CardRarity.Uncommon
 
     protected override void OnUpgrade()
     {
-        DynamicVars["DragonAuraPower"].UpgradeValueBy(2);
+        DynamicVars["DragonAuraPower"].UpgradeValueBy(1);
     }
 }

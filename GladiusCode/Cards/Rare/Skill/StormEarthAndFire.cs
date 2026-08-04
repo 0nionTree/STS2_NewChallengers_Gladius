@@ -41,8 +41,6 @@ public class StormEarthAndFire() : GladiusCard(1, CardType.Skill, CardRarity.Rar
         {
             if (IsUpgraded) // 강화된 상태라면 생성한 카드 강화
                 CardCmd.Upgrade(cardModel);
-            // 카드 비용 감소
-            cardModel.EnergyCost.SetUntilPlayed(0);
             // 생성한 카드 손으로 가져오기
             await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, Owner);
 		    await Cmd.Wait(0.1f);

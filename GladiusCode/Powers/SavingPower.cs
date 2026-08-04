@@ -9,27 +9,22 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Gladius;
 
-public class SlagExplosionPower : GladiusPower
+public class SavingPower : GladiusPower
 {
-    // 잔여물 폭발 - 파워
+    // 절약 - 파워
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    // 연성 시 무작위 대상 피해
+    // 연성 시 방어도 획득
     public override async Task OnAlchemyTriggered(CardModel artifact, CardModel metarial, Player? creator, PlayerChoiceContext choiceContext, bool isFirstThisTurn)
     {
 		// 연성 실행자가 파워 보유자가 아니라면 종료
 		if (creator != Owner.Player) return;
 
-        if (!(Amount <= 0m))
+        if (Amount > 0)
 		{
-			IReadOnlyList<Creature> hittableEnemies = CombatState.HittableEnemies;
-			if (hittableEnemies.Count != 0)
-			{
-				Creature? target = Owner.Player!.RunState.Rng.CombatTargets.NextItem(hittableEnemies);
-				Flash();
-				await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), target!, Amount, ValueProp.Unpowered, Owner, null);
-			}
+			Flash();
+			await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Unpowered, null);
 		}
     }
 }
