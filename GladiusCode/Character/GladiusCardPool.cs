@@ -130,7 +130,7 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<Reshape>(),
             ModelDb.Card<Samsara>(),
             ModelDb.Card<DivineDragonForm>(),
-            ModelDb.Card<Musical>(),
+            ModelDb.Card<AuraSaturation>(),
             // 고대 카드
             ModelDb.Card<Oath>(),
             ModelDb.Card<MidasTouch>(),

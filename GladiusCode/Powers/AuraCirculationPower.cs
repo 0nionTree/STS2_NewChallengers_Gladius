@@ -28,8 +28,8 @@ public class AuraCirculationPower : GladiusPower
 
         PowerModel? dragonAura = Owner.GetPower<DragonAuraPower>();
 
-        // 스택이 1 이상인지 확인하여 결과 저장
-        _wasDragonAuraActive = dragonAura != null && dragonAura.Amount > 0;
+        // 스택이 소모량 이상인지 확인하여 결과 저장
+        _wasDragonAuraActive = dragonAura != null && dragonAura.Amount >= dragonAura.DynamicVars["ConsumAmount"].IntValue;
         
         return Task.CompletedTask;
     }

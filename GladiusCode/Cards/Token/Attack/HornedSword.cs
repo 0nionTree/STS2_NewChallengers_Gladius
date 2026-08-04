@@ -15,53 +15,33 @@ namespace Gladius;
 public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
 	// 용각 검 - 연성물
-	//private const string _increaseKey = "Increase";
-
-	//private decimal _extraDamageFromPlays;
-
     public override bool IsDurable => true;
     public override int BaseDurability => 3;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(9m, DamageProps.card),
-		/*new DynamicVar("Increase", 2m)*/];
+        [new DamageVar(8m, DamageProps.card),
+		new PowerVar<DragonAuraPower>(1)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[GladiusKeywords.Artifact,
 		GladiusKeywords.Durability];
-/*
-    private decimal ExtraDamageFromPlays
-	{
-		get
-		{
-			return _extraDamageFromPlays;
-		}
-		set
-		{
-			AssertMutable();
-			_extraDamageFromPlays = value;
-		}
-	}
-*/
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromPower<DragonAuraPower>()];
+		
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+		// 대상 지정 후 공격
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(choiceContext);
-		//DynamicVars.Damage.BaseValue += DynamicVars["Increase"].BaseValue;
-		//ExtraDamageFromPlays += DynamicVars["Increase"].BaseValue;
+		// 용기 획득
+		await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, DynamicVars["DragonAuraPower"].IntValue, Owner.Creature, this);
     }
-/*
-    protected override void AfterDowngraded()
-	{
-		base.AfterDowngraded();
-		DynamicVars.Damage.BaseValue += ExtraDamageFromPlays;
-	}
-*/
+	
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2m);
-        //DynamicVars["Increase"].UpgradeValueBy(1m);
     }
 }

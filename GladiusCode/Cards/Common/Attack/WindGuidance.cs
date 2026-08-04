@@ -23,7 +23,7 @@ public class WindGuidance() : GladiusCard(1, CardType.Attack, CardRarity.Common,
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<WindStone>(IsUpgraded),
         HoverTipFactory.FromKeyword(GladiusKeywords.Material),
-        ..HoverTipFactory.FromEnchantment<Swift>(IsUpgradable?1:2)];
+        ..HoverTipFactory.FromEnchantment<TailWind>(IsUpgradable?1:2)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

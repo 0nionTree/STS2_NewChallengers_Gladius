@@ -12,7 +12,7 @@ using Gladius.GladiusCode;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class ExtremeSpeed() : GladiusCard(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
+public class ExtremeSpeed() : GladiusCard(0, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     // 신속
     protected override IEnumerable<DynamicVar> CanonicalVars =>

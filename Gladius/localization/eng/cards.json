@@ -3,7 +3,7 @@
 
     "GLADIUS-WROUGHT_IRON.description": "Gain {Block:diff()} [gold]Block[/gold].\n[gold]Alchemy[/gold] with this Gain {AlchemyBlock:diff()} [gold]Block[/gold].",
     "GLADIUS-WROUGHT_IRON.title": "Wrought Iron",
-    "GLADIUS-WIND_STONE.description": "Draw {Cards:diff()} {Cards:plural:card|cards}.\n[gold]Alchemy[/gold] with this [gold]Enchants[/gold] the [gold]Artifact[/gold] with [purple]Swift[/purple] [blue]{SwiftAmount:diff()}[/blue].",
+    "GLADIUS-WIND_STONE.description": "Draw {Cards:diff()} {Cards:plural:card|cards}.\n[gold]Alchemy[/gold] with this [gold]Enchants[/gold] the [gold]Artifact[/gold] with [purple]TailWind[/purple] [blue]{TailWindAmount:diff()}[/blue].",
     "GLADIUS-WIND_STONE.title": "Wind Stone",
     "GLADIUS-THUNDERSTRUCK_WOOD.description": "Gain {Energy:energyIcons()}.\n[gold]Alchemy[/gold] with this [gold]Enchants[/gold] the [gold]Artifact[/gold] with [purple]Sown[/purple] [blue]{SownAmount:diff()}[/blue].",
     "GLADIUS-THUNDERSTRUCK_WOOD.title": "Thunderstruck Wood",
@@ -193,7 +193,7 @@
     "GLADIUS-CONCUSSION.title": "Concussion",
     "GLADIUS-CULLING.description": "At the start of your turn, [gold]Screening[/gold] {CullingPower:diff()}.",
     "GLADIUS-CULLING.title": "Culling",
-    "GLADIUS-AURA_CIRCULATION.description": "Whenever you play an Attack, if you have [gold]Dragon Aura[/gold], gain {AuraCirculationPower:diff()} [gold]Strength[/gold].",
+    "GLADIUS-AURA_CIRCULATION.description": "Whenever you consumed [gold]Dragon Aura[/gold], gain {AuraCirculationPower:diff()} [gold]Strength[/gold].",
     "GLADIUS-AURA_CIRCULATION.title": "Aura Circulation",
     "GLADIUS-IMPERIAL_SCALE.description": "[gold]Alchemy[/gold] a [gold]Dragon Scale[/gold].\n[gold]Dragon Scale[/gold] now deals damage to a single enemy and hits {ImperialScalePower:diff()} additional time.",
     "GLADIUS-IMPERIAL_SCALE.title": "Imperial Scale",
@@ -203,16 +203,16 @@
     "GLADIUS-RESHAPE.title": "Reshape",
     "GLADIUS-SAMSARA.description": "Whenever you [gold]Alchemy[/gold], create a [gold]Ethereal[/gold] and 1 [gold]Durability[/gold] copy into your [gold]Hand[/gold].{IfUpgraded:show:\nThat cost 0 until played.|}",
     "GLADIUS-SAMSARA.title": "Samsara",
-    "GLADIUS-DIVINE_DRAGON_FORM.description": "{IfUpgraded:show:Gain {DragonAuraPower:diff()} [gold]Dragon Aura[/gold].\n|}Whenever you lose [gold]Dragon Aura[/gold], gain {DivineDragonFormPower:diff()} [gold]Dragon Aura[/gold].",
+    "GLADIUS-DIVINE_DRAGON_FORM.description": "Reduce [gold]Dragon Aura[/gold] consumption\nby {DivineDragonFormPower:diff()}.",
     "GLADIUS-DIVINE_DRAGON_FORM.title": "Divine Dragon Form",
-    "GLADIUS-MUSICAL.description": "Whenever you discard a card, Add a [gold]{IfUpgraded:show:Tuning Shard+|Tuning Shard}[/gold] into your [gold]Hand[/gold] with [gold]Ethereal[/gold].\nThat cost 0 until played.",
-    "GLADIUS-MUSICAL.title": "Musical",
+    "GLADIUS-AURA_SATURATION.description": "{IfUpgraded:show:Gain {DragonAuraPower:diff} [gold]Dragon Aura[/gold].\n|}If you have 4 or more [gold]Dragon Aura[/gold], damage bonus from [gold]Dragon Aura[/gold] is increased by 50%.",
+    "GLADIUS-AURA_SATURATION.title": "Aura Saturation",
 
     "Ancient":"Ancient",
 
     "GLADIUS-OATH.description": "[gold]Alchemy[/gold] a [gold]{IfUpgraded:show:Twin Dragon Horns+|Twin Dragon Horns}[/gold].\nAdd 1 [gold]Replay[/gold] to that card.",
     "GLADIUS-OATH.title": "Oath",
-    "GLADIUS-MIDAS_TOUCH.description": "Whenever you draw a non-[gold]Durable[/gold] Attack, reduce its cost by 1 and [gold]Alchemy[/gold] it into a [gold]Durable[/gold] card with {MidasTouchPower:diff()} [gold]Durability[/gold]",
+    "GLADIUS-MIDAS_TOUCH.description": "Whenever you draw a non-[gold]Durable[/gold] Attack, [gold]Alchemy[/gold] it into a [gold]Durable[/gold] card with {MidasTouchPower:diff()} [gold]Durability[/gold].",
     "GLADIUS-MIDAS_TOUCH.title": "Midas Touch",
 
     "MultyPlay":"MultyPlay",
@@ -230,9 +230,9 @@
 
     "Artifact":"Artifact",
 
-    "GLADIUS-HORNED_SWORD.description": "Deal {Damage:diff()} damage.",
+    "GLADIUS-HORNED_SWORD.description": "Deal {Damage:diff()} damage.\nGain {DragonAuraPower:diff()} [gold]Dragon Aura[/gold].",
     "GLADIUS-HORNED_SWORD.title": "Horned Sword",
-    "GLADIUS-TWIN_DRAGON_HORNS.description": "Deal {Damage:diff()} damage.\nIncrease this card's damage by {Increase:diff()} this combat.",
+    "GLADIUS-TWIN_DRAGON_HORNS.description": "Deal {Damage:diff()} damage.\nGain {DragonAuraPower:diff()} [gold]Dragon Aura[/gold].",
     "GLADIUS-TWIN_DRAGON_HORNS.title": "Twin Dragon Horns",
     "GLADIUS-DRAGON_SCALE.description": "Deal {Damage:diff()} damage{TargetType:choose(AllEnemies): to ALL enemies| {CurrentRepeat:diff()} {CurrentRepeat:plural:time|times}}.",
     "GLADIUS-DRAGON_SCALE.title": "Dragon Scale",

@@ -17,7 +17,7 @@ public class WroughtIron() : GladiusCard(1, CardType.Skill, CardRarity.Token, Ta
 {
     // 연철 - 소재
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(5, BlockProps.card),
+        [new BlockVar(4, BlockProps.card),
         new BlockVar("AlchemyBlock", 3, ValueProp.Unpowered)];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];

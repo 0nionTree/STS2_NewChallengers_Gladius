@@ -16,7 +16,7 @@ public class MidasTouch() : GladiusCard(3, CardType.Power, CardRarity.Ancient, T
 {
     // 미다스의 손
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-        [new PowerVar<MidasTouchPower>(1)];
+        [new PowerVar<MidasTouchPower>(2)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Durability),

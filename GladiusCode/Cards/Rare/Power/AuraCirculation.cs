@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class AuraCirculation() : GladiusCard(2, CardType.Power, CardRarity.Rare, TargetType.Self)
+public class AuraCirculation() : GladiusCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     // 용기 순환
     protected override IEnumerable<DynamicVar> CanonicalVars => 

@@ -60,7 +60,7 @@ public class DragonScale() : GladiusCard(0, CardType.Attack, CardRarity.Token, T
 	}
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(5m, DamageProps.card),
+        [new DamageVar(6m, DamageProps.card),
         new IntVar("CurrentRepeat", 1)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>

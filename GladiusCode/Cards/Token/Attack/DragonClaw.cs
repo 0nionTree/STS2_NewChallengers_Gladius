@@ -47,7 +47,6 @@ public class DragonClaw() : GladiusCard(1, CardType.Attack, CardRarity.Token, Ta
 
     protected override void OnUpgrade()
     {
-        DynamicVars.CalculationBase.UpgradeValueBy(1m);
         DynamicVars.ExtraDamage.UpgradeValueBy(1m);
     }
 }

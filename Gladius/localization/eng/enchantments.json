@@ -1,5 +1,8 @@
 {
   "GLADIUS-SHRAPNEL.description": "Deal [blue]{Damage:diff()}[/blue] damage to a random enemy.",
   "GLADIUS-SHRAPNEL.extraCardText": "Deal {Damage:diff()} damage to a random enemy.",
-  "GLADIUS-SHRAPNEL.title": "Shrapnel"
+  "GLADIUS-SHRAPNEL.title": "Shrapnel",
+  "GLADIUS-TAIL_WIND.description": "Draw [blue]{Cards:diff()}[/blue] {Cards:plural:cards|card}.",
+  "GLADIUS-TAIL_WIND.extraCardText": "Draw {Cards:diff()} {Cards:plural:cards|card}.",
+  "GLADIUS-TAIL_WIND.title": "Tail Wind"
 }

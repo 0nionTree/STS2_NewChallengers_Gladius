@@ -11,7 +11,7 @@ using Gladius.GladiusCode;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class ImperialScale() : GladiusCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
+public class ImperialScale() : GladiusCard(2, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     // 역린
     public override bool IsRequiredMaterial => true;
@@ -35,6 +35,7 @@ public class ImperialScale() : GladiusCard(1, CardType.Power, CardRarity.Rare, T
 
     protected override void OnUpgrade()
     {
-        DynamicVars["ImperialScalePower"].UpgradeValueBy(1);
+        EnergyCost.UpgradeBy(-1);
+        //DynamicVars["ImperialScalePower"].UpgradeValueBy(1);
     }
 }

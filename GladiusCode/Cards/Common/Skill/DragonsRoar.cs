@@ -15,7 +15,7 @@ public class DragonsRoar() : GladiusCard(1, CardType.Skill, CardRarity.Common, T
 {
     // 용의 문양
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new IntVar("DragonAuraPower", 2m),
+        [new PowerVar<DragonAuraPower>(2),
         new CardsVar(1)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>

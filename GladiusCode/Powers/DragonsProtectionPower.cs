@@ -1,10 +1,8 @@
 using Gladius.GladiusCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Gladius;
@@ -15,8 +13,8 @@ public class DragonsProtectionPower : GladiusPower
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    // 공격 직전에 켜진 용기의 수치를 기록할 변수
-    private int _wasDragonAuraAmount = 0;
+    // 용기 보유 확인용
+    private bool _wasDragonAuraActive = false;
 
     // 공격 카드 사용 직전에 용기를 보유하고 있는지 확인
     public override Task BeforeCardPlayed(CardPlay cardPlay)
@@ -26,10 +24,10 @@ public class DragonsProtectionPower : GladiusPower
         if (cardPlay.Card.Type != CardType.Attack)
             return Task.CompletedTask;
 
-        PowerModel? dragonAura = Owner.GetPower<DragonAuraPower>();
+        var dragonAura = Owner.GetPower<DragonAuraPower>();
 
-        // 스택을 확인하여 결과 저장
-        _wasDragonAuraAmount = dragonAura != null ? dragonAura.Amount : 0;
+        // 용기를 소모량 이상 보유 여부 저장
+        _wasDragonAuraActive = dragonAura != null && dragonAura.Amount >= dragonAura.DynamicVars["ConsumAmount"].IntValue;
         
         return Task.CompletedTask;
     }
@@ -37,7 +35,7 @@ public class DragonsProtectionPower : GladiusPower
     // 공격 카드 사용 직후 방어도 획득
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (_wasDragonAuraAmount <= 0)
+        if (!_wasDragonAuraActive)
             return;
         if (cardPlay.Card.Owner != Owner.Player)
             return;
@@ -46,10 +44,9 @@ public class DragonsProtectionPower : GladiusPower
         
         Flash();
         // 방어도 획득
-        int blockValue = Amount * _wasDragonAuraAmount;
-        await CreatureCmd.GainBlock(Owner, blockValue, ValueProp.Unpowered, null);
+        await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Unpowered, null);
         
         // 처리 후 다음 체크를 위해 초기화
-        _wasDragonAuraAmount = 0;
+        _wasDragonAuraActive = false;
     }
 }

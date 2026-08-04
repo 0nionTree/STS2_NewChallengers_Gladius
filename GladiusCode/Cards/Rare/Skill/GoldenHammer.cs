@@ -15,7 +15,7 @@ using MegaCrit.Sts2.Core.Nodes.Vfx;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class GoldenHammer() : GladiusCard(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
+public class GoldenHammer() : GladiusCard(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     // 황금 망치
     public override bool IsRequiredDurable => true;

@@ -19,18 +19,18 @@ public class WindStone() : GladiusCard(1, CardType.Skill, CardRarity.Token, Targ
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new IntVar("SwiftAmount", 1m), new CardsVar(1)];
+        [new IntVar("TailWindAmount", 1m), new CardsVar(1)];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 
         HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
-        ..HoverTipFactory.FromEnchantment<Swift>(DynamicVars["SwiftAmount"].IntValue)];
+        ..HoverTipFactory.FromEnchantment<TailWind>(DynamicVars["TailWindAmount"].IntValue)];
 
     public override async Task Material(PlayerChoiceContext choiceContext, CardModel artifactCard)
     {
         if (artifactCard != null)
         {
-            CardCmd.Enchant<Swift>(artifactCard, DynamicVars["SwiftAmount"].IntValue);
+            CardCmd.Enchant<TailWind>(artifactCard, DynamicVars["TailWindAmount"].IntValue);
         }
     }
 
@@ -42,7 +42,7 @@ public class WindStone() : GladiusCard(1, CardType.Skill, CardRarity.Token, Targ
 
     protected override void OnUpgrade()
     {
-        DynamicVars["SwiftAmount"].UpgradeValueBy(1m);
+        DynamicVars["TailWindAmount"].UpgradeValueBy(1m);
         DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

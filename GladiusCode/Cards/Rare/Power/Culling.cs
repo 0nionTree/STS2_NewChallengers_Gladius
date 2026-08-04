@@ -13,7 +13,7 @@ public class Culling() : GladiusCard(1, CardType.Power, CardRarity.Rare, TargetT
 {
     // 선별
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-        [new PowerVar<CullingPower>(1)];
+        [new PowerVar<CullingPower>(2)];
 
     //protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     //    [];
