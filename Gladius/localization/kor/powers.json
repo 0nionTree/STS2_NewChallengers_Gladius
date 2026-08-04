@@ -1,6 +1,6 @@
 {
     "GLADIUS-DRAGON_AURA_POWER.description": "다음 공격이 [gold]용기[/gold]를 2 소모하여 피해량이 50% 증가합니다.",
-    "GLADIUS-DRAGON_AURA_POWER.smartDescription": "{OnPlayer:|[gold]{OwnerName}[/gold]의 }다음 공격이 [gold]용기[/gold]를 {ConsumAmount} 소모하여 [blue]{TotalBonus}%[/blue] 증가합니다.",
+    "GLADIUS-DRAGON_AURA_POWER.smartDescription": "{OnPlayer:|[gold]{OwnerName}[/gold]의 }다음 공격이 [gold]용기[/gold]를 {ConsumAmount} 소모하여 피해량이 [blue]{TotalBonus}%[/blue] 증가합니다.",
     "GLADIUS-DRAGON_AURA_POWER.title": "용기",
     "GLADIUS-SCREENING_NEXT_TURN_POWER.description": "다음 턴 시작 시, [gold]선별[/gold] 2. [gold]잔류[/gold]한 카드 수만큼 [gold]용기[/gold]를 얻습니다.",
     "GLADIUS-SCREENING_NEXT_TURN_POWER.smartDescription": "다음 턴 시작 시, [gold]선별[/gold] {Amount}. [gold]잔류[/gold]한 카드 수만큼 [gold]용기[/gold]를 얻습니다.",
