@@ -11,13 +11,14 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
 public class Cleanup() : GladiusCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
-    // 정리
+    // 뒷정리
     public override bool IsRequiredMaterial => true;
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -43,9 +44,15 @@ public class Cleanup() : GladiusCard(0, CardType.Skill, CardRarity.Common, Targe
         {
             // 소재 카드를 소멸 (Exhaust) 처리
             await CardCmd.Exhaust(choiceContext, cardModel);
+            // 방어도 획득
+            await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
         }
-        // 방어도 획득
-        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+        else
+        {
+            // 소재가 없다고 안내 문구 출력
+            LocString locString = new LocString("combat_messages", "MATERIALS_MISSING");
+            TalkCmd.Play(locString, Owner.Creature, VfxColor.White);
+        }
     }
 
     protected override void OnUpgrade()

@@ -24,12 +24,13 @@ public class BreathOfFire() : GladiusCard(1, CardType.Power, CardRarity.Uncommon
     {
         // 파워 획득
 		await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-		await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, DynamicVars["DragonAuraPower"].BaseValue, Owner.Creature, this);
+        if (IsUpgraded)
+		    await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, DynamicVars["DragonAuraPower"].BaseValue, Owner.Creature, this);
 		await PowerCmd.Apply<BreathOfFirePower>(choiceContext, Owner.Creature, DynamicVars["BreathOfFirePower"].BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["DragonAuraPower"].UpgradeValueBy(1);
+        //DynamicVars["DragonAuraPower"].UpgradeValueBy(1);
     }
 }

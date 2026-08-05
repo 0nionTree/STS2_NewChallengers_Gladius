@@ -22,7 +22,7 @@ public class AlchemicStrike() : GladiusCard(1, CardType.Attack, CardRarity.Commo
     protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Strike };
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(6m, DamageProps.card)];
+        [new DamageVar(9m, DamageProps.card)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<DragonScale>(IsUpgraded), 
@@ -56,6 +56,6 @@ public class AlchemicStrike() : GladiusCard(1, CardType.Attack, CardRarity.Commo
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars.Damage.UpgradeValueBy(3m);
     }
 }

@@ -20,6 +20,9 @@ public class DragonsWrath() : GladiusCard(1, CardType.Skill, CardRarity.Rare, Ta
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<DragonAuraPower>()];
 
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+        [CardKeyword.Exhaust];
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 용기 획득

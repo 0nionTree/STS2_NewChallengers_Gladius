@@ -136,7 +136,7 @@
     
     "GLADIUS-COLLECTION.description": "Whenever you [gold]Remain[/gold] a card, deal {CollectionPower:diff()} damage a random enemy.",
     "GLADIUS-COLLECTION.title": "Collection",
-    "GLADIUS-SAVING.description": "Whenever you [gold]Alchemy[/gold], gain [blue]{SavingPower:diff()}[/blue] [gold]Block[/gold].",
+    "GLADIUS-SAVING.description": "Whenever you [gold]Alchemy[/gold], gain {SavingPower:diff()} [gold]Block[/gold].",
     "GLADIUS-SAVING.title": "Saving",
     "GLADIUS-GRINDING.description": "Whenever you [gold]Alchemy[/gold] an un[gold]Enchanted[/gold] [gold]Artifact[/gold] card, [gold]Enchant[/gold] it with [blue]{GrindingPower:diff()}[/blue] [purple]Sharp[/purple].",
     "GLADIUS-GRINDING.title": "Grinding",
@@ -144,7 +144,7 @@
     "GLADIUS-REACTOR.title": "Reactor",
     "GLADIUS-DRAGONS_PROTECTION.description": "Whenever you consumed [gold]Dragon Aura[/gold], gain {DragonsProtectionPower:diff()} [gold]Block[/gold].",
     "GLADIUS-DRAGONS_PROTECTION.title": "Dragon's Protection",
-    "GLADIUS-BREATH_OF_FIRE.description": "Gain {DragonAuraPower:diff()} [gold]Dragon Aura[/gold].\nAt the start of your turn, gain {BreathOfFirePower:diff()} [gold]Dragon Aura[/gold].",
+    "GLADIUS-BREATH_OF_FIRE.description": "{IfUpgraded:show:Gain {DragonAuraPower:diff()} [gold]Dragon Aura[/gold].\n|}At the start of your turn, gain {BreathOfFirePower:diff()} [gold]Dragon Aura[/gold].",
     "GLADIUS-BREATH_OF_FIRE.title": "Breath of Fire",
     "GLADIUS-THUNDER_CLOUD.description": "At the end of your turn, [gold]Transform[/gold] up to {ThunderCloudPower:diff()} {ThunderCloudPower:plural:card|cards} into [gold]{IfUpgraded:show:Thunderstruck Wood+|Thunderstruck Wood}[/gold] in your [gold]Hand[/gold].",
     "GLADIUS-THUNDER_CLOUD.title": "Thunder Cloud",
