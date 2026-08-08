@@ -4,10 +4,10 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.Entities.Cards;
 
 namespace Gladius;
 
@@ -16,15 +16,15 @@ public class Hardener() : GladiusCode.Relics.GladiusRelic {
     public override RelicRarity Rarity => RelicRarity.Uncommon;
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(3, ValueProp.Unpowered)];
+        [new BlockVar(2, ValueProp.Unpowered)];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<DragonAuraPower>()];
+    //protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    //    [];
 
-	// 연성 시 방어도 획득
-	public override async Task OnAlchemyTriggered(CardModel artifact, CardModel material, Player? creator, PlayerChoiceContext choiceContext, bool isFirstThisTurn)
+    // 소모품 카드 사용 시 방어도 획득
+    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-		if (creator == Owner)
+		if (cardPlay.Card.Owner == Owner && cardPlay.Card.GetDurability().isDurable)
 		{
 			Flash();
 			await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, null);

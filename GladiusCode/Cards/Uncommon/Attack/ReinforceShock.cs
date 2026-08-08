@@ -64,7 +64,7 @@ public class ReinforceShock() : GladiusCard(1, CardType.Attack, CardRarity.Uncom
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars.Damage.UpgradeValueBy(1m);
         DynamicVars["Durability"].UpgradeValueBy(1);
     }
 }

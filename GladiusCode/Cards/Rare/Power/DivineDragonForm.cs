@@ -24,6 +24,7 @@ public class DivineDragonForm() : GladiusCard(3, CardType.Power, CardRarity.Rare
         // 파워 획득
 		await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 		await PowerCmd.Apply<DivineDragonFormPower>(choiceContext, Owner.Creature, DynamicVars["DivineDragonFormPower"].BaseValue, Owner.Creature, this);
+		await PowerCmd.Apply<BreathOfFirePower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

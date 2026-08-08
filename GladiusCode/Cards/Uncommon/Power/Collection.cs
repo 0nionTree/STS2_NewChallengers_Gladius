@@ -15,7 +15,7 @@ public class Collection() : GladiusCard(1, CardType.Power, CardRarity.Uncommon, 
 {
     // 회수
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-        [new PowerVar<CollectionPower>(3)];
+        [new PowerVar<CollectionPower>(4)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Screening),
@@ -30,6 +30,6 @@ public class Collection() : GladiusCard(1, CardType.Power, CardRarity.Uncommon, 
 
     protected override void OnUpgrade()
     {
-        DynamicVars["CollectionPower"].UpgradeValueBy(1);
+        DynamicVars["CollectionPower"].UpgradeValueBy(2);
     }
 }

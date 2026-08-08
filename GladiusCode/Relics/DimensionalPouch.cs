@@ -13,16 +13,15 @@ using Gladius.GladiusCode;
 namespace Gladius;
 
 [BaseLib.Utils.Pool(typeof(GladiusRelicPool))]
-public class IngotCase() : GladiusCode.Relics.GladiusRelic {
+public class DimensionalPouch() : GladiusCode.Relics.GladiusRelic {
     public override RelicRarity Rarity => RelicRarity.Ancient;
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new CardsVar(2)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<Steel>(), 
-		HoverTipFactory.FromKeyword(GladiusKeywords.Material),
-		HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
+        [HoverTipFactory.FromCard<WroughtIron>(true), 
+		HoverTipFactory.FromKeyword(GladiusKeywords.Material)];
 
     public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
 	{
@@ -31,7 +30,9 @@ public class IngotCase() : GladiusCode.Relics.GladiusRelic {
 			List<CardModel> list = new List<CardModel>();
 			for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
 			{
-				list.Add(Owner.Creature.CombatState!.CreateCard<Steel>(Owner));
+				var card = combatState.CreateCard<WroughtIron>(Owner);
+				CardCmd.Upgrade(card);
+				list.Add(card);
 			}
 			await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, Owner);
 		}

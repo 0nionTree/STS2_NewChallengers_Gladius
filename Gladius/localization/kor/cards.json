@@ -119,7 +119,7 @@
     "GLADIUS-CONSECRATE.title": "축성",
     "GLADIUS-REPLICA.description": "[gold]연성물[/gold] 카드를 1장\n선택합니다.\n그 카드의 [gold]내구도[/gold] {Durability:diff()}인 \n복사본을 {Cards:diff()}장\n생성합니다.",
     "GLADIUS-REPLICA.title": "모조품",
-    "GLADIUS-WHAT_IS_THIS.description": "[gold]방어도[/gold]를 {Block:diff()} 얻습니다.\n무작위{IfUpgraded:show: [gold] 강화된[/gold]|} [gold]소재[/gold] 카드를 1장\n[gold]손[/gold]으로 가져옵니다.",
+    "GLADIUS-WHAT_IS_THIS.description": "[gold]방어도[/gold]를 {Block:diff()} 얻습니다.\n무작위{IfUpgraded:show: [gold]강화된[/gold]|} [gold]소재[/gold] 카드를 1장\n[gold]손[/gold]으로 가져옵니다.",
     "GLADIUS-WHAT_IS_THIS.title": "이게 뭐지??",
     "GLADIUS-EXORCISM_RITUAL.description": "[gold]정화의 등불[/gold]을 1장\n[gold]연성[/gold]합니다.{IfUpgraded:show:\n그 카드의 [gold]내구도[/gold]가 {Durability:diff()} 증가합니다.|}",
     "GLADIUS-EXORCISM_RITUAL.title": "퇴마 의식",
@@ -161,7 +161,7 @@
     "GLADIUS-BATTLE_DRUM.title": "개전의 북",
     "GLADIUS-GOLDEN_PATH.description": "모든 적에게\n피해를 {Damage:diff()} 줍니다.\n이번 전투 동안 [gold]연성[/gold]한\n카드 1장당 비용이 {energyPrefix:energyIcons(2)}\n감소합니다.",
     "GLADIUS-GOLDEN_PATH.title": "황금의 궤적",
-    "GLADIUS-ORDAIN.description": "피해를 {CalculatedDamage:diff()} 줍니다.\n이번 전투동안 [gold]잔류[/gold]한\n카드 1장당 피해량이 {ExtraDamage:diff()}\n증가합니다.",
+    "GLADIUS-ORDAIN.description": "[gold]선별[/gold] {Screening:diff()}.\n피해를 {CalculatedDamage:diff()} 줍니다.\n이번 전투동안 [gold]잔류[/gold]한\n카드 1장당 피해량이 {ExtraDamage:diff()}\n증가합니다.",
     "GLADIUS-ORDAIN.title": "점지",
 
     "GLADIUS-DRAGONS_WRATH.description": "보유한 [gold]용기[/gold]마다\n[gold]용기[/gold]를 1 얻습니다.",
@@ -205,7 +205,7 @@
     "GLADIUS-SAMSARA.title": "윤회",
     "GLADIUS-AURA_SATURATION.description": "{IfUpgraded:show:[gold]용기[/gold]를 {DragonAuraPower:diff()} 얻습니다.\n|}[gold]용기[/gold]가 4 이상일 때,\n[gold]용기[/gold]로 증가하는 피해량이\n50% 증가합니다.",
     "GLADIUS-AURA_SATURATION.title": "용기 포화",
-    "GLADIUS-DIVINE_DRAGON_FORM.description": "[gold]용기[/gold]의 소모량이\n{DivineDragonFormPower:diff()} 감소합니다.",
+    "GLADIUS-DIVINE_DRAGON_FORM.description": "[gold]용기[/gold]의 소모량이\n{DivineDragonFormPower:diff()} 감소합니다.\n내 턴 시작 시, [gold]용기[/gold]를 1 얻습니다.",
     "GLADIUS-DIVINE_DRAGON_FORM.title": "용신의 형상",
 
     "Ancient":"Ancient",

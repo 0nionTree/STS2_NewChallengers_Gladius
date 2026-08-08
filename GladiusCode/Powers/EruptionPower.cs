@@ -22,7 +22,7 @@ public class EruptionPower : GladiusPower
     {
         // 감소한 용기 스택만큼 이 디버프 스택 감소
         if (player == Owner.Player)
-            await PowerCmd.ModifyAmount(choiceContext, this, amount, null, null);
+            await PowerCmd.ModifyAmount(choiceContext, this, -amount, null, null);
     }
 
     // 턴 종료 시 남은 스택만큼 용기 손실
@@ -38,7 +38,7 @@ public class EruptionPower : GladiusPower
                 Flash();
                 // 용기 스택이 이 디버프 스택보다 높거나 같다면, 이 디버프 스택만큼 용기 스택 감소
                 if (dragonAuraPower.Amount >= Amount)
-                    await PowerCmd.ModifyAmount(choiceContext, dragonAuraPower, Amount, null, null);
+                    await PowerCmd.ModifyAmount(choiceContext, dragonAuraPower, -Amount, null, null);
                 // 용기 스택이 적다면 용기 제거
                 else
                     await PowerCmd.Remove(dragonAuraPower);

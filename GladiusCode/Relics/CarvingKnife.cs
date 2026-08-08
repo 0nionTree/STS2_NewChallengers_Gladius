@@ -22,30 +22,17 @@ public class CarvingKnife() : GladiusCode.Relics.GladiusRelic {
     public override RelicRarity Rarity => RelicRarity.Shop;
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new CardsVar(3)];
+        [new IntVar("Screening", 3)];
 
-    //protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-    //    [];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Screening)];
 
 	public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
 	{
 		if (player == Owner && Owner.PlayerCombatState!.TurnNumber == 1)
 		{
-			// 뽑을 카드 더미의 n장 선택
-			List<CardModel> selection = (await CardSelectCmd.FromCombatPile(
-				choiceContext, 
-				PileType.Draw.GetPile(Owner), 
-				Owner, 
-				new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, DynamicVars.Cards.IntValue)
-			)).ToList();
-			// 선택된 카드가 있다면, 반복문을 통해 하나씩 버리기
-			if (selection != null && selection.Count > 0)
-			{
-				foreach (CardModel item in selection)
-				{
-					await CardCmd.Discard(choiceContext, item);
-				}
-			}
+			// 선별
+			await ScreeningManager.Screening(combatState, choiceContext, Owner, DynamicVars["Screening"].IntValue);
 		}
 	}
 }

@@ -17,7 +17,7 @@ public class GladiusRelicPool : CustomRelicPoolModel
         return
         [
             ModelDb.Relic<MineralPouch>(),
-            ModelDb.Relic<IngotCase>(),
+            ModelDb.Relic<DimensionalPouch>(),
             ModelDb.Relic<DragonScroll>(),
             ModelDb.Relic<PaperDragon>(),
             ModelDb.Relic<Hardener>(),

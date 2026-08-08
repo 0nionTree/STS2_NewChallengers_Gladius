@@ -379,7 +379,7 @@ namespace Gladius.GladiusCode.Patches
             // 여기에 Gladius의 기본 유물과 이에 대응하는 고대 유물 매핑을 추가합니다.
 
             // 채굴 -> 세공
-            __result.Add(ModelDb.Relic<MineralPouch>().Id, ModelDb.Relic<IngotCase>());
+            __result.Add(ModelDb.Relic<MineralPouch>().Id, ModelDb.Relic<DimensionalPouch>());
         }
     }
 

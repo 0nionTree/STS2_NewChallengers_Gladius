@@ -43,6 +43,7 @@ public class IngotMaking() : GladiusCard(1, CardType.Skill, CardRarity.Common, T
     {
         if (cardModel == this && owner == Owner)
         {
+            await Cmd.Wait(0.2f);
             await CardCmd.AutoPlay(choiceContext, this, null);
         }
     }

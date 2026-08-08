@@ -66,6 +66,6 @@ public class CrossCutting() : GladiusCard(1, CardType.Attack, CardRarity.Uncommo
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Increase"].UpgradeValueBy(2m);
+        DynamicVars["Increase"].UpgradeValueBy(1m);
     }
 }
