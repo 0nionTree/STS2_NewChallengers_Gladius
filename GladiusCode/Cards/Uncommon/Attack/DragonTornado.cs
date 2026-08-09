@@ -26,7 +26,7 @@ public class DragonTornado() : GladiusCard(1, CardType.Attack, CardRarity.Uncomm
         ];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact)];
+        [HoverTipFactory.FromPower<DragonAuraPower>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

@@ -13,10 +13,6 @@ public static class GladiusKeywords
 	[KeywordProperties(AutoKeywordPosition.Before, true)]
 	public static CardKeyword Material;
 	
-	[CustomEnum("DragonAura")]
-	[KeywordProperties(AutoKeywordPosition.Before, true)]
-	public static CardKeyword DragonAura;
-	
 	[CustomEnum("Alchemy")]
 	[KeywordProperties(AutoKeywordPosition.Before, true)]
 	public static CardKeyword Alchemy;

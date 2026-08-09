@@ -24,11 +24,11 @@ public class Gladius : PlaceholderCharacterModel
         ModelDb.Card<StrikeGladius>(),
         ModelDb.Card<StrikeGladius>(),
         ModelDb.Card<StrikeGladius>(),
-        ModelDb.Card<DefendGladius>(),
-        ModelDb.Card<DefendGladius>(),
-        ModelDb.Card<DefendGladius>(),
-        ModelDb.Card<DefendGladius>(),
         ModelDb.Card<SwordGirding>(),
+        ModelDb.Card<DefendGladius>(),
+        ModelDb.Card<DefendGladius>(),
+        ModelDb.Card<DefendGladius>(),
+        ModelDb.Card<DefendGladius>(),
         ModelDb.Card<Mine>()
     ];
 

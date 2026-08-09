@@ -9,6 +9,7 @@ using Gladius.GladiusCode.Character;
 using MegaCrit.Sts2.Core.HoverTips;
 using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Enchantments;
 
 namespace Gladius;
 
@@ -21,7 +22,8 @@ public class EarthenRampart() : GladiusCard(2, CardType.Skill, CardRarity.Uncomm
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Material),
-        HoverTipFactory.FromCard<Diamond>()];
+        HoverTipFactory.FromCard<Diamond>(IsUpgraded),
+        ..HoverTipFactory.FromEnchantment<Adroit>(IsUpgraded?6:4)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

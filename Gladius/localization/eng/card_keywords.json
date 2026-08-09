@@ -1,8 +1,6 @@
 {
     "GLADIUS-ARTIFACT.description": "not discarded at the end of turn.",
     "GLADIUS-ARTIFACT.title": "Artifact",
-    "GLADIUS-DRAGONAURA.description": "Tooltip",
-    "GLADIUS-DRAGONAURA.title": "DragonAura",
     "GLADIUS-MATERIAL.description": "Tooltip",
     "GLADIUS-MATERIAL.title": "Material",
     "GLADIUS-ALCHEMY.description": "Choose a [gold]Material[/gold] card in your [gold]Hand[/gold] to [gold]Transform[/gold] into [gold]Artifact[/gold] card.",

@@ -17,10 +17,10 @@ public class Bestow() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, Targ
 	public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new IntVar("DragonAuraPower", 3m)];
+        [new IntVar("DragonAuraPower", 4m)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.DragonAura)];
+        [HoverTipFactory.FromPower<DragonAuraPower>()];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[CardKeyword.Retain];

@@ -25,7 +25,8 @@ public class Cleanup() : GladiusCard(0, CardType.Skill, CardRarity.Common, Targe
         [new BlockVar(9m, BlockProps.card)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Material)];
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Material),
+        HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

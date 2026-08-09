@@ -19,8 +19,8 @@ public class Condensation() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon
         [new IntVar("Screening", 2)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<DragonAuraPower>(),
-        EnergyHoverTip];
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Screening),
+        HoverTipFactory.FromPower<DragonAuraPower>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

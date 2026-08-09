@@ -23,7 +23,7 @@ public class GoldenPath() : GladiusCard(8, CardType.Attack, CardRarity.Rare, Tar
         new EnergyVar(2)];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(GladiusKeywords.Artifact)];
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

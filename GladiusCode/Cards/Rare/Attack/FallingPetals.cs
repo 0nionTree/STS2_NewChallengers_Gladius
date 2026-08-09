@@ -70,5 +70,6 @@ public class FallingPetals() : GladiusCard(1, CardType.Attack, CardRarity.Rare, 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars["Increase"].UpgradeValueBy(1m);
     }
 }

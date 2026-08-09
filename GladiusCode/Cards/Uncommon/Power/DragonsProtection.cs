@@ -14,7 +14,7 @@ public class DragonsProtection() : GladiusCard(1, CardType.Power, CardRarity.Unc
 {
     // 용의 수호
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-        [new PowerVar<DragonsProtectionPower>(3)];
+        [new PowerVar<DragonsProtectionPower>(4)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<DragonAuraPower>(),
@@ -29,6 +29,6 @@ public class DragonsProtection() : GladiusCard(1, CardType.Power, CardRarity.Unc
 
     protected override void OnUpgrade()
     {
-        DynamicVars["DragonsProtectionPower"].UpgradeValueBy(1);
+        DynamicVars["DragonsProtectionPower"].UpgradeValueBy(6);
     }
 }

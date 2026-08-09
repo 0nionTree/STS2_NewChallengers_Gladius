@@ -31,8 +31,6 @@ public class OverInputPower : GladiusPower
     {
 		// 연성 실행자가 파워 보유자가 아니라면 종료
 		if (creator != Owner.Player) return;
-        // 소재가 없다면 종료
-        if (material == null) return;
         // 첫 번째 연성이 아니라면 종료
         if (!isFirstThisTurn) return;
 
@@ -42,14 +40,25 @@ public class OverInputPower : GladiusPower
 			select c;
 		foreach (Creature item in enumerable)
 		{
-            // 소재를 생성하여 해당 플레이어 손에 추가
-            CardModel? copy = item.Player!.RunState.CreateCard(material.CanonicalInstance, item.Player);
-
-            // 강화 상태 복제
-            if (material.IsUpgraded)
+            CardModel? copy;
+            // 소재가 있는 연성이라면 같은 소재 생성
+            if (material != null)
             {
-                CardCmd.Upgrade(copy);
+                // 소재를 생성하여 해당 플레이어 손에 추가
+                copy = item.Player!.RunState.CreateCard(material.CanonicalInstance, item.Player);
+                // 강화 상태 복제
+                if (material.IsUpgraded)
+                    CardCmd.Upgrade(copy);
             }
+            else
+            {
+                // 소재가 없는 연성이라면 진흙 생성
+                copy = item.Player!.RunState.CreateCard<Clay>(item.Player);
+            }
+            // 여전히 소재가 없다면 진흙 생성
+            if (copy == null)
+                copy = item.Player!.RunState.CreateCard<Clay>(item.Player);
+                
 			await CardPileCmd.AddGeneratedCardToCombat(copy, PileType.Hand, Owner.Player);
 
             GladiusCard gladiusCard = (GladiusCard)copy;

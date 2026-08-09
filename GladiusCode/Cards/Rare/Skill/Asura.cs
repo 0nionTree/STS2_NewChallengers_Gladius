@@ -39,7 +39,7 @@ public class Asura() : GladiusCard(2, CardType.Skill, CardRarity.Rare, TargetTyp
         if (card != null)
 		{
             if (IsUpgraded)
-                // 선택된 카드의 내구도 증가
+                // 강화되있다면 선택된 카드의 내구도 증가
                 await DurabilityExtensions.VarianceDurability(card, DynamicVars["Durability"].IntValue, choiceContext);
 
             // 선택된 카드의 내구도가 남아있다면 계속해서 재사용
@@ -52,8 +52,5 @@ public class Asura() : GladiusCard(2, CardType.Skill, CardRarity.Rare, TargetTyp
 		}
     }
 
-    protected override void OnUpgrade()
-    {
-        DynamicVars["Durability"].UpgradeValueBy(1);
-    }
+    //protected override void OnUpgrade()
 }

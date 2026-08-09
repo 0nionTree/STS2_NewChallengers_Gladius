@@ -9,8 +9,8 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Models;
 using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Models.Enchantments;
 
 namespace Gladius;
 
@@ -24,7 +24,8 @@ public class LightningBlow() : GladiusCard(1, CardType.Attack, CardRarity.Uncomm
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<ThunderstruckWood>(),
-        HoverTipFactory.FromKeyword(GladiusKeywords.Material)];
+        HoverTipFactory.FromKeyword(GladiusKeywords.Material),
+        ..HoverTipFactory.FromEnchantment<Sown>(IsUpgraded?2:1)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
