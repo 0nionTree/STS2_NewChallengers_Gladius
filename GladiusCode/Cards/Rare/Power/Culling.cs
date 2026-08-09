@@ -5,6 +5,8 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.HoverTips;
+using Gladius.GladiusCode;
 
 namespace Gladius;
 
@@ -15,8 +17,8 @@ public class Culling() : GladiusCard(1, CardType.Power, CardRarity.Rare, TargetT
     protected override IEnumerable<DynamicVar> CanonicalVars => 
         [new PowerVar<CullingPower>(2)];
 
-    //protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-    //    [];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Screening)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

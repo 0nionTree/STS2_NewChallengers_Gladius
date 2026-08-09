@@ -195,7 +195,7 @@
     "GLADIUS-CULLING.title": "추방",
     "GLADIUS-AURA_CIRCULATION.description": "[gold]용기[/gold]를 소모할 때마다,\n[gold]힘[/gold]을 {AuraCirculationPower:diff()} 얻습니다.",
     "GLADIUS-AURA_CIRCULATION.title": "용기 순환",
-    "GLADIUS-IMPERIAL_SCALE.description": "[gold]용 비늘[/gold]을 1장 [gold]연성[/gold]합니다.\n이제 [gold]용 비늘[/gold]이\n적 하나에게만 피해를\n주며 {ImperialScalePower:diff()}번 추가로\n적중합니다.",
+    "GLADIUS-IMPERIAL_SCALE.description": "[gold]용 비늘[/gold]을 1장 [gold]연성[/gold]합니다.\n이제 [gold]용 비늘[/gold]이 적\n하나에게만 피해를 주며\n{ImperialScalePower:diff()}번 추가로 적중합니다.",
     "GLADIUS-IMPERIAL_SCALE.title": "역린",
     "GLADIUS-CONTEMPLATION.description": "전투 종료 시,\n[gold]묘약[/gold] 포션 보상을\n추가로 얻습니다.",
     "GLADIUS-CONTEMPLATION.title": "사색",
