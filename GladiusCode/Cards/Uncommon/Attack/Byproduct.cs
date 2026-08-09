@@ -18,7 +18,7 @@ public class Byproduct() : GladiusCard(2, CardType.Attack, CardRarity.Uncommon, 
 {
     // 부산물
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(12m, DamageProps.card),
+        [new DamageVar(8m, DamageProps.card),
         new CardsVar(1)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -26,11 +26,10 @@ public class Byproduct() : GladiusCard(2, CardType.Attack, CardRarity.Uncommon, 
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 대상 확인 후 단일 공격
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
+        // 모든 적에게 피해
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!)
+			.WithHitFx("vfx/vfx_attack_blunt", null, "heavy_attack.mp3")
+			.Execute(choiceContext);
         
         // 카드 뽑기
 		await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
@@ -54,7 +53,7 @@ public class Byproduct() : GladiusCard(2, CardType.Attack, CardRarity.Uncommon, 
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(1m);
+        DynamicVars.Damage.UpgradeValueBy(2m);
         DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

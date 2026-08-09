@@ -18,7 +18,7 @@ public class DragonsMirror() : GladiusCard(1, CardType.Skill, CardRarity.Uncommo
     // 용의 거울
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new IntVar("Screening", 1),
-        new CardsVar(2)];
+        new CardsVar(3)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips => 
         [HoverTipFactory.FromKeyword(GladiusKeywords.Screening)];

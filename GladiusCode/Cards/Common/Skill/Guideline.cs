@@ -20,7 +20,7 @@ public class Guideline() : GladiusCard(0, CardType.Skill, CardRarity.Common, Tar
     // 길잡이
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new IntVar("Screening", 1),
-        /*new CardsVar(1)*/];
+        new CardsVar(1)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Screening)];
@@ -30,7 +30,7 @@ public class Guideline() : GladiusCard(0, CardType.Skill, CardRarity.Common, Tar
         // 선별
         await ScreeningManager.Screening(CombatState, choiceContext, Owner, DynamicVars["Screening"].IntValue);
         // 카드 뽑기
-        //await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
+        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
     }
 
     protected override void OnUpgrade()
