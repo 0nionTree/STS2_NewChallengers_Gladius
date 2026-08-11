@@ -223,6 +223,9 @@ namespace Gladius.GladiusCode.Patches
         [HarmonyPrefix]
         public static bool Prefix(CardModel __instance, ref Task __result)
         {
+            // 복사본이라면 종료
+            if (__instance.IsClone) return true;
+
             var durabilityData = __instance.GetDurability();
 
             // 내구도가 존재하는 카드라면 로직 개입
@@ -327,17 +330,14 @@ namespace Gladius.GladiusCode.Patches
                     protectionStacks = DurabilityProtectionManager.GetProtectionStacks(__instance.Owner.Creature);
                 }
 
-                // 2. 카드의 총 발동 횟수 계산 (기본 1회 + 마법/강화 재사용 횟수)
-                int totalPlays = 1 + __instance.GetEnchantedReplayCount();
-
-                // 3. 이번 사용으로 '실제로 차감될' 예상 내구도 계산 
+                // 2. 이번 사용으로 '실제로 차감될' 예상 내구도 계산 
                 // (총 발동 횟수에서 보호받는 횟수를 뺍니다. 단, 0보단 작아질 수 없음)
-                int expectedDeduction = Math.Max(0, totalPlays - protectionStacks);
+                int expectedDeduction = Math.Max(0, 1 - protectionStacks);
 
-                // 4. 카드 사용 완료 시점의 '예상 내구도' 계산
+                // 3. 카드 사용 완료 시점의 '예상 내구도' 계산
                 int predictedDurability = durabilityData.CurrentDurability - expectedDeduction;
 
-                // 5. 사용 후 내구도가 0 이하가 될 예정이라면 소멸로 예약
+                // 3. 사용 후 내구도가 0 이하가 될 예정이라면 소멸로 예약
                 if (predictedDurability <= 0)
                 {
                     __result = PileType.Exhaust;

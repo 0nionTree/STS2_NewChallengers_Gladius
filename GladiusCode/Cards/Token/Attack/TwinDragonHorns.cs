@@ -16,7 +16,7 @@ public class TwinDragonHorns() : GladiusCard(1, CardType.Attack, CardRarity.Toke
 {
 	// 쌍룡각 - 연성물
     public override bool IsDurable => true;
-    public override int BaseDurability => 8;
+    public override int BaseDurability => 4;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(8m, DamageProps.card),
@@ -39,5 +39,6 @@ public class TwinDragonHorns() : GladiusCard(1, CardType.Attack, CardRarity.Toke
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2m);
+		DynamicVars["DragonAuraPower"].UpgradeValueBy(1);
     }
 }

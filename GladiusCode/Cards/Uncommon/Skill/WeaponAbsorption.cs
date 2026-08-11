@@ -41,10 +41,13 @@ public class WeaponAbsorption() : GladiusCard(1, CardType.Skill, CardRarity.Unco
 
         if (cardModel != null)
         {
-            // 선택한 카드의 내구도만큼 에너지 획득
-		    await PlayerCmd.GainEnergy(cardModel.GetDurability().CurrentDurability, Owner);
+            int durability = cardModel.GetDurability().CurrentDurability;
             // 선택한 카드 소멸
             await CardCmd.Exhaust(choiceContext, cardModel);
+            // 에너지 획득
+		    await PlayerCmd.GainEnergy(durability, Owner);
+            // 카드 뽑기
+            await CardPileCmd.Draw(choiceContext, durability, Owner);
         }
         else
         {

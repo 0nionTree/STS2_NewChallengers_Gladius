@@ -20,6 +20,10 @@ public class Eruption() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, Ta
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<DragonAuraPower>()];
 
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+        [CardKeyword.Retain,
+        CardKeyword.Exhaust];
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 용기 분출 획득
@@ -30,6 +34,6 @@ public class Eruption() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, Ta
 
     protected override void OnUpgrade()
     {
-        AddKeyword(CardKeyword.Retain);
+        RemoveKeyword(CardKeyword.Exhaust);
     }
 }

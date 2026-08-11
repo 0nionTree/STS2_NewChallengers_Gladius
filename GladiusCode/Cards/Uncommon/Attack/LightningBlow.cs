@@ -25,7 +25,7 @@ public class LightningBlow() : GladiusCard(1, CardType.Attack, CardRarity.Uncomm
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<ThunderstruckWood>(),
         HoverTipFactory.FromKeyword(GladiusKeywords.Material),
-        ..HoverTipFactory.FromEnchantment<Sown>(IsUpgraded?2:1)];
+        ..HoverTipFactory.FromEnchantment<Sown>(IsUpgraded?3:2)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

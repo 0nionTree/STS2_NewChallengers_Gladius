@@ -14,7 +14,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace Gladius;
 
 [Pool(typeof(MaterialCardPool))]
-public class TuningShard() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
+public class TuningShard() : GladiusCard(1, CardType.Attack, CardRarity.Token, TargetType.Self)
 {
     // 청음편 - 소재
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];

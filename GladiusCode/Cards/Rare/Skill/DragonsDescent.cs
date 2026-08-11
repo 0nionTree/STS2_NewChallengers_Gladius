@@ -17,7 +17,7 @@ public class DragonsDescent() : GladiusCard(0, CardType.Skill, CardRarity.Rare, 
 	protected override bool HasEnergyCostX => true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => 
-        [new PowerVar<DragonAuraPower>(2m)];
+        [new PowerVar<DragonAuraPower>(3m)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<DragonAuraPower>()];

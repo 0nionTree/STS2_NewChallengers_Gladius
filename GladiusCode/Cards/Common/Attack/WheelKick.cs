@@ -10,11 +10,11 @@ using BaseLib.Utils;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class WheelKick() : GladiusCard(1, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
+public class WheelKick() : GladiusCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 {
     // 돌려차기
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(10m, DamageProps.card)];
+        [new DamageVar(16m, DamageProps.card)];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[CardKeyword.Ethereal];
@@ -29,6 +29,6 @@ public class WheelKick() : GladiusCard(1, CardType.Attack, CardRarity.Common, Ta
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(4m);
+        DynamicVars.Damage.UpgradeValueBy(6m);
     }
 }

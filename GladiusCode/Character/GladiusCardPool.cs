@@ -79,7 +79,7 @@ public class GladiusCardPool : CustomCardPoolModel
             ModelDb.Card<Wallop>(),
             ModelDb.Card<ForcePalm>(),
             // 고급 스킬 카드
-            ModelDb.Card<Welding>(),
+            ModelDb.Card<Musical>(),
             ModelDb.Card<Ecdysis>(),
             ModelDb.Card<Possession>(),
             ModelDb.Card<Eruption>(),

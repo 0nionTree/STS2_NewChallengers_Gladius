@@ -58,6 +58,6 @@ public class Cleanup() : GladiusCard(0, CardType.Skill, CardRarity.Common, Targe
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(3m);
+        DynamicVars.Block.UpgradeValueBy(5m);
     }
 }

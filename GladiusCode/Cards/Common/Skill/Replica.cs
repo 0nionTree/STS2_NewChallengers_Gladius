@@ -16,7 +16,7 @@ using MegaCrit.Sts2.Core.Nodes.Vfx;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class Replica() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public class Replica() : GladiusCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     // 모조품
     public override bool IsRequiredDurable => true;

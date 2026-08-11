@@ -15,7 +15,7 @@ using MegaCrit.Sts2.Core.Nodes.Vfx;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class Guideline() : GladiusCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
+public class Guideline() : GladiusCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     // 길잡이
     protected override IEnumerable<DynamicVar> CanonicalVars =>

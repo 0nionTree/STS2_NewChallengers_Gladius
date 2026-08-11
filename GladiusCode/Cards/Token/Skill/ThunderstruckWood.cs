@@ -19,7 +19,7 @@ public class ThunderstruckWood() : GladiusCard(1, CardType.Skill, CardRarity.Tok
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new IntVar("SownAmount", 1m), new EnergyVar(1)];
+        [new IntVar("SownAmount", 2m), new EnergyVar(2)];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 

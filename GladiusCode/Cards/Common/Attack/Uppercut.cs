@@ -13,12 +13,12 @@ using MegaCrit.Sts2.Core.HoverTips;
 namespace Gladius;
 
 [Pool(typeof(GladiusCardPool))]
-public class Uppercut() : GladiusCard(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public class Uppercut() : GladiusCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     // 올려치기
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(16m, DamageProps.card),
-        new CardsVar(2)];
+        [new DamageVar(10m, DamageProps.card),
+        new CardsVar(1)];
 
     //protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     //    [];
@@ -43,6 +43,7 @@ public class Uppercut() : GladiusCard(2, CardType.Attack, CardRarity.Common, Tar
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(6m);
+        DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

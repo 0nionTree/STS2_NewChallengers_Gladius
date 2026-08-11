@@ -14,7 +14,7 @@ public class Pulverize() : GladiusCard(2, CardType.Attack, CardRarity.Common, Ta
 {
     // 분쇄
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(20m, DamageProps.card)];
+        [new DamageVar(22m, DamageProps.card)];
     
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -28,6 +28,6 @@ public class Pulverize() : GladiusCard(2, CardType.Attack, CardRarity.Common, Ta
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(8m);
+        DynamicVars.Damage.UpgradeValueBy(6m);
     }
 }
