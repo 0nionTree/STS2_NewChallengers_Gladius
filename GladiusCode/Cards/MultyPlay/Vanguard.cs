@@ -19,7 +19,7 @@ public class Vanguard() : GladiusCard(2, CardType.Attack, CardRarity.Uncommon, T
     public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(8m, DamageProps.card)];
+        [new DamageVar(12m, DamageProps.card)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(StaticHoverTip.Block)];

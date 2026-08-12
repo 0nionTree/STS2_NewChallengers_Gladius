@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 
@@ -14,6 +15,10 @@ public class AuraCirculationPower : GladiusPower
     // 용기 순환 - 파워
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter; 
+	
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromPower<DragonAuraPower>(),
+        HoverTipFactory.FromPower<StrengthPower>()];
 
     // 공격 직전에 용기가 켜져 있었는지 기억할 변수
     private bool _wasDragonAuraActive = false;

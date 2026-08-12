@@ -1,3 +1,4 @@
+using Gladius.GladiusCode;
 using Gladius.GladiusCode.History;
 using Gladius.GladiusCode.Powers;
 using MegaCrit.Sts2.Core.Combat;
@@ -7,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
@@ -19,6 +21,9 @@ public class MastersReachPower : GladiusPower, IDurabilityProtector
     // 달인의 간격 - 파워
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
+	
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(GladiusKeywords.Durability)];
 
     // 이번 턴 남아있는 보호 회수
     private int _currentTurnProtections;

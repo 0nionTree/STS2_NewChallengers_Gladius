@@ -7,7 +7,6 @@ using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Enchantments;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -20,8 +19,9 @@ public class TuningShard() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new IntVar("ShrapnelAmount", 4m),
-        new DamageVar(5m, DamageProps.card)];
+        [new DamageVar(4m, DamageProps.card),
+        new IntVar("HitCount", 2),
+        new IntVar("ShrapnelAmount", 4m)];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 
@@ -40,6 +40,7 @@ public class TuningShard() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
     {
         // 무작위 적에게 피해
 		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+            .WithHitCount(DynamicVars["HitCount"].IntValue)
 			.TargetingRandomOpponents(CombatState!)
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(choiceContext);
@@ -47,7 +48,7 @@ public class TuningShard() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
 
     protected override void OnUpgrade()
     {
+        DynamicVars.Damage.UpgradeValueBy(2m);
         DynamicVars["ShrapnelAmount"].UpgradeValueBy(2m);
-        DynamicVars.Damage.UpgradeValueBy(3);
     }
 }

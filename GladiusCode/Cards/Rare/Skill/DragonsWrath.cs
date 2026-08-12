@@ -4,9 +4,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.HoverTips;
-using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace Gladius;
 
@@ -21,18 +19,23 @@ public class DragonsWrath() : GladiusCard(1, CardType.Skill, CardRarity.Rare, Ta
         [HoverTipFactory.FromPower<DragonAuraPower>()];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
-        [CardKeyword.Exhaust];
+        [CardKeyword.Retain,
+        CardKeyword.Exhaust];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 용기 획득
         var count = Owner.Creature.GetPower<DragonAuraPower>()?.Amount ?? 0;
+        await PowerCmd.Remove<DragonAuraPower>(Owner.Creature);
         if (count > 0)
-		    await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, count, Owner.Creature, this);
+        {
+            count += count;
+		    await PowerCmd.Apply<DragonAuraNextTurnPower>(choiceContext, Owner.Creature, count, Owner.Creature, this);
+        }
     }
 
     protected override void OnUpgrade()
     {
-        AddKeyword(CardKeyword.Retain);
+        RemoveKeyword(CardKeyword.Exhaust);
     }
 }

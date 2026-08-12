@@ -20,7 +20,7 @@ public class ImperialScale() : GladiusCard(2, CardType.Power, CardRarity.Rare, T
         [new PowerVar<ImperialScalePower>(1)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<DragonScale>(),
+        [HoverTipFactory.FromCard<DragonScale>(IsUpgraded),
         HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy),
         HoverTipFactory.FromKeyword(GladiusKeywords.Artifact),
         HoverTipFactory.FromKeyword(GladiusKeywords.Material)];
@@ -30,7 +30,7 @@ public class ImperialScale() : GladiusCard(2, CardType.Power, CardRarity.Rare, T
         // 파워 획득
 		await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 		await PowerCmd.Apply<ImperialScalePower>(choiceContext, Owner.Creature, DynamicVars["ImperialScalePower"].BaseValue, Owner.Creature, this);
-        await Alchemy<DragonScale>(choiceContext, false);
+        await Alchemy<DragonScale>(choiceContext, IsUpgraded);
     }
 
     protected override void OnUpgrade()

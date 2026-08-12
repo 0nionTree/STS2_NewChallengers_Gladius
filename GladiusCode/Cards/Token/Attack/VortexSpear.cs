@@ -21,8 +21,8 @@ public class VortexSpear() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
 	private decimal _extraDamageFromPlays;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(8m, DamageProps.card),
-        new DynamicVar("Increase", 3)];
+        [new DamageVar(10m, DamageProps.card),
+        new DynamicVar("Increase", 4)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[GladiusKeywords.Artifact,
@@ -78,6 +78,6 @@ public class VortexSpear() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2m);
-        DynamicVars["Increase"].UpgradeValueBy(1m);
+        DynamicVars["Increase"].UpgradeValueBy(2m);
     }
 }

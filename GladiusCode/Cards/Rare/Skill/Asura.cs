@@ -42,13 +42,20 @@ public class Asura() : GladiusCard(2, CardType.Skill, CardRarity.Rare, TargetTyp
                 // 강화되있다면 선택된 카드의 내구도 증가
                 await DurabilityExtensions.VarianceDurability(card, DynamicVars["Durability"].IntValue, choiceContext);
 
+            var durability = card.GetDurability();
             // 선택된 카드의 내구도가 남아있다면 계속해서 재사용
-			for (int i = 0; card.GetDurability().CurrentDurability > 0; i++)
+			for (int i = 0; durability.CurrentDurability > 0; i++)
 			{
 				await CardCmd.AutoPlay(choiceContext, card, null);
-                if (card.Pile!.Type == PileType.Exhaust || i >= 99)
+                if (card.Pile!.Type == PileType.Exhaust ||
+                    i >= 99 ||
+                    !CombatState!.HittableEnemies.Any())
                     break;
 			}
+            if (card.Pile!.Type != PileType.Exhaust)
+            {
+                await CardCmd.Exhaust(choiceContext, card);
+            }
 		}
     }
 

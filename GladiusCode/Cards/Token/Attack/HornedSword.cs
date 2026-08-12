@@ -19,7 +19,7 @@ public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
     public override int BaseDurability => 3;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(8m, DamageProps.card),
+        [new DamageVar(9m, DamageProps.card),
 		new PowerVar<DragonAuraPower>(1)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
@@ -42,7 +42,6 @@ public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
 	
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
-		DynamicVars["DragonAuraPower"].UpgradeValueBy(1);
+        DynamicVars.Damage.UpgradeValueBy(3m);
     }
 }

@@ -2,6 +2,7 @@ using Gladius.GladiusCode.Powers;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 
@@ -12,6 +13,9 @@ public class AuraSaturationPower : GladiusPower
     // 용기 포화 - 파워
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
+	
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromPower<DragonAuraPower>()];
 
     // 껍데기 파워. 실질적인 계산은 DragonAuraPower.cs에서
     

@@ -13,13 +13,17 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace Gladius;
 
 [Pool(typeof(MaterialCardPool))]
-public class Steel() : GladiusCard(2, CardType.Skill, CardRarity.Token, TargetType.Self)
+public class Steel() : GladiusCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     // 강철 - 소재
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];
+	public override int MaxUpgradeLevel => 99;
+
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+        [GladiusKeywords.Material,
+        CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(10m, BlockProps.card),
+        [new BlockVar(6m, BlockProps.card),
         new IntVar("Durability", 1)];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -45,7 +49,7 @@ public class Steel() : GladiusCard(2, CardType.Skill, CardRarity.Token, TargetTy
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(6m);
+        DynamicVars.Block.UpgradeValueBy(3m);
         DynamicVars["Durability"].UpgradeValueBy(1);
     }
 }

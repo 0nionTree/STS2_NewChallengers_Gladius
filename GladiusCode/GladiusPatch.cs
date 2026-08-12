@@ -189,7 +189,7 @@ namespace Gladius.GladiusCode.Patches
             }
         }
     }
-
+/*
     // =========================================================================
     // OnPlay에서 카드 효과 실행 시작 시 내구도를 1 차감
     // =========================================================================
@@ -219,12 +219,22 @@ namespace Gladius.GladiusCode.Patches
             }
         }
 
+        private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<CardPlay, object> _processedPlays = new();
+
         // 위의 TargetMethods로 모인 수백 개의 OnPlay 메서드 직전에 이 코드가 실행됩니다.
         [HarmonyPrefix]
-        public static bool Prefix(CardModel __instance, ref Task __result)
+        public static bool Prefix(CardModel __instance, CardPlay cardPlay, ref Task __result)
         {
-            // 복사본이라면 종료
-            if (__instance.IsClone) return true;
+            // 방금 차감한 액션(cardPlay)이 다시 반복(재사용)된 것이라면 차감을 건너뜁니다
+            if (cardPlay != null)
+            {
+                if (_processedPlays.TryGetValue(cardPlay, out _))
+                {
+                    return true; // 이미 장부에 있으므로 내구도 차감 스킵
+                }
+                // 없으면 장부에 등록
+                _processedPlays.Add(cardPlay, new object());
+            }
 
             var durabilityData = __instance.GetDurability();
 
@@ -266,13 +276,46 @@ namespace Gladius.GladiusCode.Patches
             }
         }
     }
-
+*/
     // =========================================================================
     // OnPlayWrapper가 끝난 뒤, 모든 내구도가 소진된 카드의 내구도 초기화
     // =========================================================================
     [HarmonyPatch(typeof(CardModel), nameof(CardModel.OnPlayWrapper))]
     public static class DurableCardDeductPatch
     {
+        [HarmonyPrefix]
+        public static bool Prefix(CardModel __instance, ref Task __result)
+        {
+            var durabilityData = __instance.GetDurability();
+
+            // 내구도 카드가 아니라면 정상 진행
+            if (durabilityData == null || !durabilityData.isDurable) 
+                return true;
+
+            // 1. 이미 내구도가 0 이하인 경우: 카드 사용(OnPlayWrapper) 자체를 취소 (헛스윙 방지)
+            if (durabilityData.CurrentDurability <= 0)
+            {
+                __result = Task.CompletedTask;
+                return false; // 원본 OnPlayWrapper 실행 안 함
+            }
+
+            // 사용 직전 내구도 기록
+            durabilityData.WasDurability = durabilityData.CurrentDurability;
+
+            // 2. OnPlayWrapper 진입 시점에 내구도를 딱 1회만 차감!
+            // (내부에서 OnPlay가 재사용으로 2번, 3번 돌아가도 이 차감은 이미 끝난 상태입니다)
+            if (__instance.Owner?.Creature != null && DurabilityProtectionManager.GetProtectionStacks(__instance.Owner.Creature) > 0)
+            {
+                DurabilityProtectionManager.ConsumeOneProtectionStack(__instance.Owner.Creature);
+            }
+            else
+            {
+                durabilityData.CurrentDurability = Math.Max(0, durabilityData.CurrentDurability - 1);
+            }
+
+            return true; // 정상적으로 카드 효과(OnPlay 및 재사용 루프) 진행
+        }
+
         [HarmonyPostfix]
         public static void Postfix(CardModel __instance, ref Task __result)
         {
@@ -293,7 +336,7 @@ namespace Gladius.GladiusCode.Patches
             var durabilityData = __instance.GetDurability();
             if (durabilityData != null && durabilityData.isDurable)
             {
-                if (durabilityData.CurrentDurability == 0)
+                if (durabilityData.CurrentDurability <= 0)
                 {
                     if (__instance.Keywords.Contains(GladiusKeywords.Artifact))
                     {
@@ -322,23 +365,8 @@ namespace Gladius.GladiusCode.Patches
 
             if (durabilityData != null && durabilityData.isDurable)
             {
-                // 1. 현재 적용된 '내구도 보호'의 총 횟수(스택)를 가져옵니다. 
-                // (※ DurabilityProtectionManager에 스택을 int로 반환하는 메서드를 새로 만들어주세요)
-                int protectionStacks = 0;
-                if (__instance.Owner?.Creature != null)
-                {
-                    protectionStacks = DurabilityProtectionManager.GetProtectionStacks(__instance.Owner.Creature);
-                }
-
-                // 2. 이번 사용으로 '실제로 차감될' 예상 내구도 계산 
-                // (총 발동 횟수에서 보호받는 횟수를 뺍니다. 단, 0보단 작아질 수 없음)
-                int expectedDeduction = Math.Max(0, 1 - protectionStacks);
-
-                // 3. 카드 사용 완료 시점의 '예상 내구도' 계산
-                int predictedDurability = durabilityData.CurrentDurability - expectedDeduction;
-
-                // 3. 사용 후 내구도가 0 이하가 될 예정이라면 소멸로 예약
-                if (predictedDurability <= 0)
+                // 현재 내구도가 0 이하라면 소멸로 예약
+                if (durabilityData.CurrentDurability <= 0)
                 {
                     __result = PileType.Exhaust;
                 }
@@ -364,7 +392,7 @@ namespace Gladius.GladiusCode.Patches
             // __result는 원본 엔진이 반환하려는 딕셔너리입니다.
             // 여기에 Gladius의 기본 카드와 이에 대응하는 고대 카드 매핑을 추가합니다.
 
-            // 채굴 -> 세공
+            // 패검 -> 맹세
             __result.Add(ModelDb.Card<SwordGirding>().Id, ModelDb.Card<Oath>());
         }
     }

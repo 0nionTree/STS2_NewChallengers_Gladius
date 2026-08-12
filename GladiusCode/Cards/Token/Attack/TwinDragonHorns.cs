@@ -19,8 +19,9 @@ public class TwinDragonHorns() : GladiusCard(1, CardType.Attack, CardRarity.Toke
     public override int BaseDurability => 4;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(8m, DamageProps.card),
-		new PowerVar<DragonAuraPower>(1)];
+        [new DamageVar(9m, DamageProps.card),
+		new IntVar("HitCount", 2),
+		new PowerVar<DragonAuraPower>(2)];
 
 	public override IEnumerable<CardKeyword> CanonicalKeywords =>
 		[GladiusKeywords.Artifact,
@@ -30,7 +31,7 @@ public class TwinDragonHorns() : GladiusCard(1, CardType.Attack, CardRarity.Toke
     {
 		// 대상 지정 후 공격
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(DynamicVars["HitCount"].IntValue).FromCard(this).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(choiceContext);
 		// 용기 획득
@@ -38,7 +39,6 @@ public class TwinDragonHorns() : GladiusCard(1, CardType.Attack, CardRarity.Toke
     }
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
-		DynamicVars["DragonAuraPower"].UpgradeValueBy(1);
+        DynamicVars.Damage.UpgradeValueBy(3m);
     }
 }

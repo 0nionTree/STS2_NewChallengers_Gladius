@@ -19,7 +19,8 @@ public class WindStone() : GladiusCard(1, CardType.Skill, CardRarity.Token, Targ
     public override IEnumerable<CardKeyword> CanonicalKeywords => [GladiusKeywords.Material, CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new IntVar("TailWindAmount", 1m), new CardsVar(1)];
+        [new IntVar("TailWindAmount", 1m),
+        new CardsVar(1)];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy), 

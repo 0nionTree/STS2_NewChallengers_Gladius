@@ -22,6 +22,9 @@ public class WeaponAbsorption() : GladiusCard(1, CardType.Skill, CardRarity.Unco
 
     //protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+        [CardKeyword.Exhaust];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Durability),
         EnergyHoverTip];

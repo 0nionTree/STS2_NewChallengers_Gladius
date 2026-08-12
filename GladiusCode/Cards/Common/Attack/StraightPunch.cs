@@ -17,7 +17,7 @@ public class StraightPunch() : GladiusCard(1, CardType.Attack, CardRarity.Common
     // 정권 지르기
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(8m, DamageProps.card),
-        new PowerVar<DragonAuraPower>(1)];
+        new PowerVar<DragonAuraPower>(2)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<DragonAuraPower>()];

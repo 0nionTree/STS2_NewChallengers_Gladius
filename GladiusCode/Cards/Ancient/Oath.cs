@@ -27,8 +27,10 @@ public class Oath() : GladiusCard(1, CardType.Skill, CardRarity.Ancient, TargetT
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         CardModel? a = await Alchemy<TwinDragonHorns>(choiceContext, IsUpgraded);
+        /*
         if (a != null)
             a.BaseReplayCount++;
+        */
     }
 
     //protected override void OnUpgrade()

@@ -19,16 +19,16 @@ public class ThunderCloudPower : GladiusPower
     public override PowerStackType StackType => PowerStackType.Counter;
 
     // 턴 종료 시 카드를 선택하여 벽조목으로 변환
-	public override async Task BeforeFlushLate(PlayerChoiceContext choiceContext, Player player)
+	public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
-		if (player != Owner.Player || !Hook.ShouldFlush(player.Creature.CombatState!, player))
+		if (Owner == null || !participants.Contains(Owner))
 		{
 			return;
 		}
 		List<CardModel> list = (await CardSelectCmd.FromHand(
 			prefs: new CardSelectorPrefs(CardSelectorPrefs.TransformSelectionPrompt, 0, Amount),
 			context: choiceContext,
-			player: Owner.Player,
+			player: Owner.Player!,
 			filter: null,
 			source: this
 			)).ToList();
@@ -38,7 +38,7 @@ public class ThunderCloudPower : GladiusPower
 		}
 		foreach (CardModel item in list)
 		{
-			CardModel cardModel = CombatState!.CreateCard<ThunderstruckWood>(Owner.Player);
+			CardModel cardModel = CombatState!.CreateCard<ThunderstruckWood>(Owner.Player!);
 			await CardCmd.Transform(item, cardModel);
 		}
 	}

@@ -20,9 +20,9 @@ public class DragonTornado() : GladiusCard(1, CardType.Attack, CardRarity.Uncomm
     // 용의 회오리
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new CalculationBaseVar(6m),
-        new ExtraDamageVar(2m),
+        new ExtraDamageVar(4m),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((CardModel card, Creature? _) =>
-        DragonAuraHistory.GetDragonAuraConsumedAmountThisCombat(card.Owner))
+        DragonAuraHistory.GetDragonAuraConsumesThisCombat(card.Owner))
         ];
         
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -39,6 +39,6 @@ public class DragonTornado() : GladiusCard(1, CardType.Attack, CardRarity.Uncomm
 
     protected override void OnUpgrade()
     {
-        DynamicVars.ExtraDamage.UpgradeValueBy(1m);
+        DynamicVars.ExtraDamage.UpgradeValueBy(2m);
     }
 }
