@@ -15,7 +15,7 @@
     "GLADIUS-DRAGON_ORB.title": "Dragon Orb",
     "GLADIUS-DIAMOND.description": "Gain {Block:diff()} [gold]Block[/gold].\n[gold]Alchemy[/gold] with this [gold]Enchants[/gold] the [gold]Artifact[/gold] with [purple]Adroit[/purple] [blue]{AdroitAmount:diff()}[/blue].",
     "GLADIUS-DIAMOND.title": "Diamond",
-    "GLADIUS-TUNING_SHARD.description": "Deal {Damage:diff()} damage a random enemy.\n[gold]Alchemy[/gold] with this [gold]Enchants[/gold] the [gold]Artifact[/gold] with [purple]Shrapnel[/purple] [blue]{ShrapnelAmount:diff()}[/blue].",
+    "GLADIUS-TUNING_SHARD.description": "Deal {Damage:diff()} damage a random enemy {HitCount:diff()} times.\n[gold]Alchemy[/gold] with this [gold]Enchants[/gold] the [gold]Artifact[/gold] with [purple]Shrapnel[/purple] [blue]{ShrapnelAmount:diff()}[/blue].",
     "GLADIUS-TUNING_SHARD.title": "Tuning Shard",
 
     "Basic":"Basic",

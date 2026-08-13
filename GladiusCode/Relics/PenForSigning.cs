@@ -21,7 +21,7 @@ public class PenForSigning() : GladiusCode.Relics.GladiusRelic {
     public override RelicRarity Rarity => RelicRarity.Rare;
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new IntVar("Durability", 3)];
+        [new IntVar("Durability", 2)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(GladiusKeywords.Alchemy),
