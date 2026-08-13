@@ -19,7 +19,7 @@ public class Consecrate() : GladiusCard(1, CardType.Skill, CardRarity.Uncommon, 
         [new CardsVar(2)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<DragonOrb>(),
+        [HoverTipFactory.FromCard<DragonOrb>(IsUpgraded),
         HoverTipFactory.FromKeyword(GladiusKeywords.Material),
         HoverTipFactory.FromPower<DragonAuraPower>()];
     

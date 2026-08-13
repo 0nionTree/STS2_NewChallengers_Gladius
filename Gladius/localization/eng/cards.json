@@ -144,7 +144,7 @@
     "GLADIUS-REACTOR.title": "Reactor",
     "GLADIUS-DRAGONS_PROTECTION.description": "Whenever you consumed [gold]Dragon Aura[/gold], gain {DragonsProtectionPower:diff()} [gold]Block[/gold].",
     "GLADIUS-DRAGONS_PROTECTION.title": "Dragon's Protection",
-    "GLADIUS-BREATH_OF_FIRE.description": "{IfUpgraded:show:Gain {DragonAuraPower:diff()} [gold]Dragon Aura[/gold].\n|}At the start of your turn, gain {BreathOfFirePower:diff()} [gold]Dragon Aura[/gold].",
+    "GLADIUS-BREATH_OF_FIRE.description": "Gain {DragonAuraPower:diff()} [gold]Dragon Aura[/gold].\nAt the start of your turn, gain {BreathOfFirePower:diff()} [gold]Dragon Aura[/gold].",
     "GLADIUS-BREATH_OF_FIRE.title": "Breath of Fire",
     "GLADIUS-THUNDER_CLOUD.description": "At the end of your turn, [gold]Transform[/gold] up to {ThunderCloudPower:diff()} {ThunderCloudPower:plural:card|cards} into [gold]{IfUpgraded:show:Thunderstruck Wood+|Thunderstruck Wood}[/gold] in your [gold]Hand[/gold].",
     "GLADIUS-THUNDER_CLOUD.title": "Thunder Cloud",

@@ -29,6 +29,6 @@ public class DragonsProtection() : GladiusCard(1, CardType.Power, CardRarity.Unc
 
     protected override void OnUpgrade()
     {
-        DynamicVars["DragonsProtectionPower"].UpgradeValueBy(6);
+        DynamicVars["DragonsProtectionPower"].UpgradeValueBy(2);
     }
 }

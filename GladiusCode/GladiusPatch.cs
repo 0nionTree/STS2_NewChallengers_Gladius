@@ -427,8 +427,8 @@ namespace Gladius.GladiusCode.Patches
 
             copyDurability.isDurable = mainDurability.isDurable;
             copyDurability.BaseDurability = mainDurability.BaseDurability;
-            copyDurability.CurrentDurability = mainDurability.CurrentDurability;
-            copyDurability.WasDurability = mainDurability.CurrentDurability;
+            copyDurability.WasDurability = mainDurability.WasDurability;
+            copyDurability.CurrentDurability = mainDurability.WasDurability;
         }
     }
 }
