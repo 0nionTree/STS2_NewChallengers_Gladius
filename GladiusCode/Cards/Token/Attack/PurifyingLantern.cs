@@ -9,6 +9,8 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace Gladius;
 
@@ -36,7 +38,7 @@ public class PurifyingLantern() : GladiusCard(0, CardType.Attack, CardRarity.Tok
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         // 피해량 계산 및 이펙트 출력
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+			.WithHitVfxNode((Creature t) => NFireBurstVfx.Create(t, 0.4f))
             .Execute(choiceContext);
         // 취약 부여
         await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target, DynamicVars.Vulnerable.BaseValue, Owner.Creature, this);

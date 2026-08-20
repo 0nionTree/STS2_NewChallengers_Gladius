@@ -28,7 +28,7 @@ public class Wallop() : GladiusCard(2, CardType.Attack, CardRarity.Uncommon, Tar
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         // 대미지 실행
 		AttackCommand attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-			.WithHitFx("vfx/vfx_attack_slash")
+			.WithHitFx("vfx/vfx_attack_blunt", null, "blunt_attack.mp3")
 			.Execute(choiceContext);
         // 준 피해만큼 방어력 획득
 		await CreatureCmd.GainBlock(Owner.Creature, attackCommand.Results.SelectMany((List<DamageResult> r) => r).Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage), ValueProp.Move, cardPlay);

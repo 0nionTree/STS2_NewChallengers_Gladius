@@ -50,7 +50,7 @@ public class VortexSpear() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         // 피해량 계산 및 이펙트 출력
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_starry_impact")
             .Execute(choiceContext);
     }
 

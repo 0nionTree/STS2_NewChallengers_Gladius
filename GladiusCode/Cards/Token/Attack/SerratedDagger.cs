@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace Gladius;
 
@@ -38,7 +39,8 @@ public class SerratedDagger() : GladiusCard(1, CardType.Attack, CardRarity.Token
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         // 피해량 계산 및 이펙트 출력
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(this.GetDurability().WasDurability).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+			.WithHitVfxNode((Creature t) => NStabVfx.Create(t, facingEnemies: true))
+			.WithHitFx(null, null, "blunt_attack.mp3")
             .Execute(choiceContext);
     }
 

@@ -10,6 +10,7 @@ using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace Gladius;
 
@@ -41,7 +42,7 @@ public class DragonClaw() : GladiusCard(1, CardType.Attack, CardRarity.Token, Ta
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         // 피해량 계산 및 이펙트 출력
         await DamageCmd.Attack(DynamicVars.CalculatedDamage).WithHitCount(DynamicVars["HitCount"].IntValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+			.WithHitVfxNode((Creature t) => NScratchVfx.Create(t, goingRight: true))
             .Execute(choiceContext);
     }
 

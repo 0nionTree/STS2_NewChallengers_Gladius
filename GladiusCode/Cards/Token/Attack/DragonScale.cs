@@ -9,6 +9,10 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
+using Godot;
+using MegaCrit.Sts2.Core.Models.Characters;
+using MegaCrit.Sts2.Core.Commands.Builders;
 
 namespace Gladius;
 
@@ -69,18 +73,22 @@ public class DragonScale() : GladiusCard(0, CardType.Attack, CardRarity.Token, T
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (HasImperialScale)
-        {
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(DynamicVars["CurrentRepeat"].IntValue).FromCard(this).Targeting(cardPlay.Target!)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
-        }
-        else
-        {
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!)
-                .WithHitFx("vfx/vfx_attack_blunt", null, "heavy_attack.mp3")
-                .Execute(choiceContext);
-        }
+		AttackCommand attackCommand = DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(DynamicVars["CurrentRepeat"].IntValue).FromCard(this);
+		if (!HasImperialScale)
+		{
+			Creature? lastEnemy = CombatState!.HittableEnemies.LastOrDefault();
+			attackCommand = attackCommand.TargetingAllOpponents(CombatState).WithHitVfxNode((Creature _) => NShivThrowVfx.Create(Owner.Creature, lastEnemy, Colors.Gold));
+		}
+		else
+		{
+			ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+			attackCommand = attackCommand.Targeting(cardPlay.Target).WithHitVfxNode((Creature t) => NShivThrowVfx.Create(Owner.Creature, t, Colors.Gold));
+		}
+		if (Owner.Character is Silent)
+		{
+			attackCommand.WithAttackerAnim("Shiv", 0.2f);
+		}
+		await attackCommand.Execute(choiceContext);
     }
 
     protected override void OnUpgrade()

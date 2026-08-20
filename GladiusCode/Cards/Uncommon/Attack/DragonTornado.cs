@@ -11,6 +11,11 @@ using Gladius.GladiusCode;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using Gladius.GladiusCode.History;
+using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
+using MegaCrit.Sts2.Core.Helpers;
+using Godot;
 
 namespace Gladius;
 
@@ -32,6 +37,14 @@ public class DragonTornado() : GladiusCard(1, CardType.Attack, CardRarity.Uncomm
     {
         // 대상 확인 후 단일 공격
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+		NCreature? nCreature = NCombatRoom.Instance?.GetCreatureNode(cardPlay.Target);
+		if (nCreature != null)
+		{
+			SfxCmd.Play("event:/sfx/characters/regent/regent_guiding_star");
+			NSmallMagicMissileVfx? nSmallMagicMissileVfx = NSmallMagicMissileVfx.Create(nCreature.GetBottomOfHitbox(), new Color("d15d09"));
+			NCombatRoom.Instance!.CombatVfxContainer.AddChildSafely(nSmallMagicMissileVfx);
+			await Cmd.Wait(nSmallMagicMissileVfx!.WaitTime);
+		}
         await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);

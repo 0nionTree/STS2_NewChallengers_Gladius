@@ -34,7 +34,7 @@ public class ShoulderTackle() : GladiusCard(1, CardType.Attack, CardRarity.Uncom
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         // 피해량 계산 및 이펙트 출력
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_attack_blunt", null, "blunt_attack.mp3")
             .Execute(choiceContext);
         // 손에 Material 키워드를 가진 카드가 하나라도 있는지 확인
         var hand = PileType.Hand.GetPile(Owner);

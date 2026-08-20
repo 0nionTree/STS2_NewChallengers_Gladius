@@ -1,6 +1,14 @@
 {
-  "THE_ARCHITECT.talk.GLADIUS-GLADIUS.0-0r.char": "I am angry at the architect",
+  "THE_ARCHITECT.talk.GLADIUS-GLADIUS.0-0r.char": "If I defeat you, I am free...",
   "THE_ARCHITECT.talk.GLADIUS-GLADIUS.0-0r.next": "Continue",
-  "THE_ARCHITECT.talk.GLADIUS-GLADIUS.0-1r.ancient": "You die",
-  "THE_ARCHITECT.talk.GLADIUS-GLADIUS.0-attack": "Both"
+  "THE_ARCHITECT.talk.GLADIUS-GLADIUS.0-1r.ancient": "Just another demon's slave. Not interested.",
+  "THE_ARCHITECT.talk.GLADIUS-GLADIUS.0-attack": "Attack",
+  "THE_ARCHITECT.talk.GLADIUS-GLADIUS.1-0r.char": "I have lived for a long time... I will challenge you again and again.",
+  "THE_ARCHITECT.talk.GLADIUS-GLADIUS.1-0r.next": "Continue",
+  "THE_ARCHITECT.talk.GLADIUS-GLADIUS.1-1r.ancient": "Foolish and worthless.",
+  "THE_ARCHITECT.talk.GLADIUS-GLADIUS.1-attack": "Attack",
+  "THE_ARCHITECT.talk.GLADIUS-GLADIUS.2-0r.ancient": "How much longer will you continue this foolishness?",
+  "THE_ARCHITECT.talk.GLADIUS-GLADIUS.2-0r.next": "Continue",
+  "THE_ARCHITECT.talk.GLADIUS-GLADIUS.2-1r.char": "Until you die.",
+  "THE_ARCHITECT.talk.GLADIUS-GLADIUS.2-attack": "Attack"
 }

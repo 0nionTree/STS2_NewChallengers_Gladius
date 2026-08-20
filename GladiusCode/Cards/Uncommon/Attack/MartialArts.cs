@@ -29,7 +29,7 @@ public class MartialArts() : GladiusCard(1, CardType.Attack, CardRarity.Uncommon
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         // 피해량 계산 및 이펙트 출력
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_attack_blunt", null, "blunt_attack.mp3")
             .Execute(choiceContext);
         // 내구도 감소 무시 버프 획득
 		await PowerCmd.Apply<PreserveDurabilityPower>(choiceContext, Owner.Creature, DynamicVars.Power<PreserveDurabilityPower>().BaseValue, Owner.Creature, this);

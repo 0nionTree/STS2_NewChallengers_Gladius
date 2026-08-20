@@ -20,6 +20,9 @@ public class RitualPlumb() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
     public override bool IsDurable => true;
     public override int BaseDurability => 2;
 
+    protected override bool ShouldGlowGoldInternal => 
+        this.GetDurability().WasDurability == 1;
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(12m, DamageProps.card)];
 
@@ -29,26 +32,25 @@ public class RitualPlumb() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
         
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        decimal damage = DynamicVars.Damage.BaseValue;
         // 대상 확인
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        // 피해량 계산 및 이펙트 출력
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
+        if (this.GetDurability().WasDurability == 1)
+		{
+			damage *= 2;
+            // 피해량 계산 및 이펙트 출력
+            await DamageCmd.Attack(damage).FromCard(this).Targeting(cardPlay.Target)
+                .WithHitFx("vfx/vfx_heavy_blunt", null, "heavy_attack.mp3")
+                .Execute(choiceContext);
+		}
+        else
+        {
+            // 피해량 계산 및 이펙트 출력
+            await DamageCmd.Attack(damage).FromCard(this).Targeting(cardPlay.Target)
+                .WithHitFx("vfx/vfx_attack_blunt", null, "heavy_attack.mp3")
+                .Execute(choiceContext);
+        }
     }
-
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
-	{
-		if (!(cardSource == this))
-		{
-			return 1m;
-		}
-        if (this.GetDurability().WasDurability != 1)
-		{
-			return 1m;
-		}
-		return 2m;
-	}
 
     protected override void OnUpgrade()
     {

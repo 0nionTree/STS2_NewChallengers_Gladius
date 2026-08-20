@@ -28,7 +28,7 @@ public class ForcePalm() : GladiusCard(0, CardType.Attack, CardRarity.Uncommon, 
         // 대상 확인 후 단일 공격
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue * ResolveEnergyXValue()).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_heavy_blunt", null, "heavy_attack.mp3")
             .Execute(choiceContext);
 	}
 

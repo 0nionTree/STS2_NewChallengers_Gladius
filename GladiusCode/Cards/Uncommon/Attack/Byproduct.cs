@@ -28,7 +28,7 @@ public class Byproduct() : GladiusCard(2, CardType.Attack, CardRarity.Uncommon, 
     {
         // 모든 적에게 피해
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!)
-			.WithHitFx("vfx/vfx_attack_blunt", null, "heavy_attack.mp3")
+			.WithHitFx("vfx/vfx_starry_impact", null, "heavy_attack.mp3")
 			.Execute(choiceContext);
         
         // 카드 뽑기

@@ -34,7 +34,7 @@ public class HornedSword() : GladiusCard(1, CardType.Attack, CardRarity.Token, T
 		// 대상 지정 후 공격
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-			.WithHitFx("vfx/vfx_attack_slash")
+			.WithHitFx("vfx/vfx_giant_horizontal_slash")
 			.Execute(choiceContext);
 		// 용기 획득
 		await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, DynamicVars["DragonAuraPower"].IntValue, Owner.Creature, this);

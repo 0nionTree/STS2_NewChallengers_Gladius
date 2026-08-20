@@ -15,7 +15,7 @@
     "GLADIUS-DRAGON_ORB.title": "용옥",
     "GLADIUS-DIAMOND.description": "[gold]방어도[/gold]를 {Block:diff()} 얻습니다.\n이 카드로 [gold]연성[/gold]한 카드에\n[purple]숙련[/purple]을 [blue]{AdroitAmount:diff()}[/blue] [gold]인챈트[/gold]합니다.",
     "GLADIUS-DIAMOND.title": "금강석",
-    "GLADIUS-TUNING_SHARD.description": "무작위 적에게 피해를 {Damage:diff()}만큼 {HitCount:diff()}번 줍니다.\n이 카드로 [gold]연성[/gold]한 카드에\n[purple]파편[/purple]을 [blue]{ShrapnelAmount:diff()}[/blue] [gold]인챈트[/gold]합니다.",
+    "GLADIUS-TUNING_SHARD.description": "무작위 적에게 피해를\n{Damage:diff()}만큼 {HitCount:diff()}번 줍니다.\n이 카드로 [gold]연성[/gold]한 카드에\n[purple]파편[/purple]을 [blue]{ShrapnelAmount:diff()}[/blue] [gold]인챈트[/gold]합니다.",
     "GLADIUS-TUNING_SHARD.title": "청음편",
 
     "Basic":"Basic",

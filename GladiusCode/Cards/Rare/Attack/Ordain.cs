@@ -39,7 +39,7 @@ public class Ordain() : GladiusCard(2, CardType.Attack, CardRarity.Rare, TargetT
         // 대상 확인 후 단일 공격
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_starry_impact")
             .Execute(choiceContext);
     }
 

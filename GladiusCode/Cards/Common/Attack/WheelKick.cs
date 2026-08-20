@@ -23,7 +23,7 @@ public class WheelKick() : GladiusCard(2, CardType.Attack, CardRarity.Common, Ta
     {
         // 여러 적 공격
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState!)
-			.WithHitFx("vfx/vfx_attack_blunt", null, "heavy_attack.mp3")
+			.WithHitFx("vfx/vfx_heavy_blunt", null, "heavy_attack.mp3")
 			.Execute(choiceContext);
     }
 

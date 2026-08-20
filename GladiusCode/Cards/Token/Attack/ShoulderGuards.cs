@@ -34,7 +34,7 @@ public class ShoulderGuards() : GladiusCard(0, CardType.Attack, CardRarity.Token
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         // 피해량 계산 및 이펙트 출력
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_attack_blunt", null, "blunt_attack.mp3")
             .Execute(choiceContext);
         // 방어도 획득
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);

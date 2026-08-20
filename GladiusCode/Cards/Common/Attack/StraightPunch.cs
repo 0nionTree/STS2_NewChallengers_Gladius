@@ -28,7 +28,7 @@ public class StraightPunch() : GladiusCard(1, CardType.Attack, CardRarity.Common
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         // 피해량 계산 및 이펙트 출력
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_molten_fist", null, "blunt_attack.mp3")
             .Execute(choiceContext);
         // 용기 획득
 		await PowerCmd.Apply<DragonAuraPower>(choiceContext, Owner.Creature, DynamicVars.Power<DragonAuraPower>().BaseValue, Owner.Creature, this);
